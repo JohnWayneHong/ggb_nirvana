@@ -1,0 +1,477 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/ll_me"
+
+    android:focusableInTouchMode="true"
+    android:descendantFocusability="blocksDescendants"
+    android:fillViewport="true">
+
+    <!--  上面不加这三个，会出现CoordinatorLayout嵌套NestedScrollView加载的时候不在最上面-->
+
+    <include layout="@layout/title_public_view"/>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+            <!--
+     Toolbar：
+     由于默认 Toolbar 的标题是居中的，也不方便直接改，于是就不适用
+     Toolbar 自带的 title 属性，自己在其中添加一个 TextView 充当标题
+     注意，一定要加下面两个属性：
+     app:contentInsetStart="0dp"
+     app:contentInsetEnd="0dp"
+     让 Toolbar 两侧没有边距
+     -->
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:id="@+id/ll_healthy_color"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_210"
+                    android:orientation="vertical"
+                    android:background="@drawable/bg_healthy_full"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:paddingTop="@dimen/dimen_10">
+
+                    <com.lihang.ShadowLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="@dimen/dimen_10"
+                        app:hl_cornerRadius="@dimen/dimen_10"
+                        app:hl_shadowColor="#1A000000"
+                        app:hl_shadowLimit="@dimen/dimen_15">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:id="@+id/me_login_clickable"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical"
+                                android:paddingVertical="@dimen/dimen_20"
+                                android:paddingHorizontal="@dimen/dimen_20">
+
+                                <TextView
+                                    android:id="@+id/tv_healthy_date"
+                                    android:text="11月24日"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:textStyle="bold"
+                                    android:textColor="@color/text_main_color"
+                                    android:textSize="@dimen/text_36"/>
+
+                                <TextView
+                                    android:id="@+id/tv_healthy_hours"
+                                    android:text="20:20:12"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="1"
+                                    android:gravity="center_horizontal"
+                                    android:textStyle="bold"
+                                    android:textColor="@color/text_main_color"
+                                    android:textSize="@dimen/text_45"/>
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/dimen_1"
+                                    android:background="@color/light_gray" />
+
+                                <TextView
+                                    android:id="@+id/tv_healthy_name"
+                                    android:text="乖乖熊"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="@dimen/dimen_20"
+                                    android:layout_marginTop="@dimen/dimen_10"
+                                    android:textSize="@dimen/text_12"
+                                    android:textColor="@color/text_main_color"
+                                    android:textStyle="bold"/>
+
+                                <TextView
+                                    android:text="乖乖帮能康码"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="@dimen/dimen_20"
+                                    android:layout_marginTop="@dimen/dimen_10"
+                                    android:layout_gravity="center_horizontal"
+                                    android:textSize="@dimen/text_12"
+                                    android:textColor="@color/text_main_color"
+                                    android:textStyle="bold"/>
+
+                                <ImageView
+                                    android:id="@+id/iv_healthy_bar_code"
+                                    android:layout_width="@dimen/dimen_200"
+                                    android:layout_marginTop="@dimen/dimen_10"
+                                    android:layout_gravity="center_horizontal"
+                                    android:scaleType="fitXY"
+                                    android:layout_height="@dimen/dimen_200"/>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/dimen_40"
+                                    android:orientation="horizontal"
+                                    android:layout_marginTop="@dimen/dimen_10">
+
+                                    <ImageView
+                                        android:layout_width="@dimen/dimen_15"
+                                        android:layout_height="@dimen/dimen_15"
+                                        android:layout_gravity="center_vertical"
+                                        android:src="@drawable/ic__healthy_attention"/>
+
+                                    <TextView
+                                        android:id="@+id/tv_healthy_code_warning"
+                                        android:text="凭此码可在乖乖帮范围内通行，请主动出示"
+                                        android:layout_marginStart="@dimen/dimen_5"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/dimen_40"
+                                        android:gravity="center_vertical"
+                                        android:textSize="@dimen/text_10"/>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/dimen_1"
+                                android:layout_marginHorizontal="@dimen/dimen_15"
+                                android:background="@color/light_gray" />
+
+                        </LinearLayout>
+
+                    </com.lihang.ShadowLayout>
+
+                    <com.lihang.ShadowLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimen_180"
+                        android:paddingHorizontal="@dimen/dimen_10"
+                        app:hl_cornerRadius="@dimen/dimen_10"
+                        app:hl_shadowColor="#1A000000"
+                        app:hl_shadowLimit="@dimen/dimen_15">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:paddingVertical="@dimen/dimen_10"
+                            android:paddingHorizontal="@dimen/dimen_10">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:background="@drawable/bg_healthy_jianbian">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="1"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:id="@+id/tv_healthy_hesuan"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="@dimen/dimen_15"
+                                        android:textSize="@dimen/text_36"
+                                        android:textStyle="bold"
+                                        android:textColor="@color/color_E1E2E7"
+                                        android:text=">3"/>
+
+                                    <TextView
+                                        android:id="@+id/tv_healthy_result"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="@dimen/dimen_15"
+                                        android:paddingTop="@dimen/dimen_10"
+                                        android:layout_gravity="center_horizontal"
+                                        android:textSize="@dimen/text_16"
+                                        android:textStyle="bold"
+                                        android:textColor="@color/color_E1E2E7"
+                                        android:text="天\n阴性"/>
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="@dimen/dimen_100"
+                                    android:layout_height="@dimen/dimen_30"
+                                    android:layout_marginBottom="@dimen/dimen_10"
+                                    android:orientation="horizontal"
+                                    android:layout_gravity="center_horizontal"
+                                    android:gravity="center"
+                                    android:background="@drawable/bg_healthy_board">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textSize="@dimen/text_14"
+                                        android:textStyle="bold"
+                                        android:textColor="@color/color_E1E2E7"
+                                        android:text="核酸检测"/>
+
+                                    <ImageView
+                                        android:layout_width="@dimen/dimen_16"
+                                        android:layout_height="@dimen/dimen_16"
+                                        android:src="@drawable/ic_next" />
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="@dimen/dimen_1"
+                                android:layout_height="match_parent"
+                                android:layout_marginHorizontal="@dimen/dimen_15"
+                                android:background="@color/light_gray" />
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_horizontal"
+                                        android:textSize="@dimen/text_14"
+                                        android:textStyle="bold"
+                                        android:text="行程卡"/>
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center_horizontal"
+                                        android:textSize="@dimen/text_14"
+                                        android:text="查看7天是否到过中高风险地区"/>
+
+                                </LinearLayout>
+
+
+                                <LinearLayout
+                                    android:layout_width="@dimen/dimen_100"
+                                    android:layout_height="@dimen/dimen_30"
+                                    android:layout_marginBottom="@dimen/dimen_10"
+                                    android:orientation="horizontal"
+                                    android:layout_gravity="center_horizontal"
+                                    android:gravity="center"
+                                    android:background="@drawable/bg_healthy_board_2">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textSize="@dimen/text_14"
+                                        android:textStyle="bold"
+                                        android:textColor="@color/color_E1E2E7"
+                                        android:text="立即查看"/>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+
+
+                    </com.lihang.ShadowLayout>
+
+                    <com.lihang.ShadowLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimen_100"
+                        android:paddingHorizontal="@dimen/dimen_10"
+                        app:hl_cornerRadius="@dimen/dimen_10"
+                        app:hl_shadowColor="#1A000000"
+                        app:hl_shadowLimit="@dimen/dimen_15">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:paddingVertical="@dimen/dimen_10"
+                            android:paddingHorizontal="@dimen/dimen_10">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:gravity="center_vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/dimen_15"
+                                    android:textSize="@dimen/text_13"
+                                    android:textStyle="bold"
+                                    android:textColor="@color/text_main_color"
+                                    android:text="最近核酸记录"/>
+
+                                <TextView
+                                    android:id="@+id/tv_healthy_result_2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/dimen_15"
+                                    android:textSize="@dimen/text_13"
+
+                                    android:textStyle="bold"
+                                    android:textColor="@color/color_E1E2E7"
+                                    android:text="无3天之内核酸记录"/>
+
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+                    </com.lihang.ShadowLayout>
+
+                    <com.lihang.ShadowLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimen_160"
+                        android:paddingHorizontal="@dimen/dimen_10"
+                        app:hl_cornerRadius="@dimen/dimen_10"
+                        app:hl_shadowColor="#1A000000"
+                        app:hl_shadowLimit="@dimen/dimen_15">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:paddingVertical="@dimen/dimen_10">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="2">
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical"
+                                    android:gravity="center"
+                                    tools:ignore="NestedWeights">
+
+                                    <ImageView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/dimen_30"
+                                        android:src="@drawable/ic_healthy_bottom_1" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="入帮报备\n登记"
+                                        android:textColor="@color/black_text_color"
+                                        android:textSize="@dimen/text_13"
+                                        android:gravity="center" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical"
+                                    android:gravity="center"
+                                    tools:ignore="NestedWeights">
+
+                                    <ImageView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/dimen_30"
+                                        android:src="@drawable/ic_healthy_bottom_2" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="疫苗接种\n记录"
+                                        android:textColor="@color/black_text_color"
+                                        android:textSize="@dimen/text_13"
+                                        android:gravity="center" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/ll_me_game"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical"
+                                    android:gravity="center"
+                                    tools:ignore="NestedWeights">
+
+                                    <ImageView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/dimen_25"
+                                        android:src="@drawable/ic_healthy_bottom_3" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="核酸检测\n记录"
+                                        android:textColor="@color/black_text_color"
+                                        android:textSize="@dimen/text_13"
+                                        android:gravity="center" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical"
+                                    android:gravity="center"
+                                    tools:ignore="NestedWeights">
+
+                                    <ImageView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/dimen_25"
+                                        android:src="@drawable/ic_healthy_bottom_4" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="核酸采样\n点查询"
+                                        android:textColor="@color/black_text_color"
+                                        android:textSize="@dimen/text_13"
+                                        android:gravity="center" />
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </com.lihang.ShadowLayout>
+
+                </LinearLayout>
+
+            </FrameLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</LinearLayout>

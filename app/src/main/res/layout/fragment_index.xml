@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.ggb.nirvanaclub.view.StatusBarPlaceHolder
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"/>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.ggb.nirvanaclub.view.viewgroup.IndexTopBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_100"
+            android:background="@color/white"
+            android:paddingVertical="@dimen/dimen_5"
+            app:elevation="0dp"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$Behavior">
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="5"
+                app:layout_scrollFlags="scroll|enterAlways">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="@dimen/dimen_10">
+
+                        <LinearLayout
+                            android:id="@+id/ll_index_search"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="8"
+                            android:background="@drawable/index_search_click"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            tools:ignore="NestedWeights">
+
+                            <ImageView
+                                android:layout_width="@dimen/dimen_15"
+                                android:layout_height="@dimen/dimen_15"
+                                android:layout_marginEnd="6dp"
+                                android:src="@mipmap/search" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:singleLine="true"
+                                android:background="@null"
+                                android:hint="@string/fragment_index_top_bar_search_string"
+                                android:textColor="@color/title_main_color"
+                                android:textSize="@dimen/text_15" />
+
+                        </LinearLayout>
+
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="@dimen/dimen_5"
+                            android:layout_weight="1"
+                            android:src="@mipmap/red_packet" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimen_1"
+                        android:layout_marginVertical="@dimen/dimen_5"
+                        android:background="@color/light_gray" />
+                </LinearLayout>
+
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="4">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/index_tags_rv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentStart="true"
+                    android:layout_toStartOf="@+id/ll_index_tags_setting" />
+
+                <LinearLayout
+                    android:id="@+id/ll_index_tags_setting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:background="@drawable/fading_translucent"
+                    android:gravity="center"
+                    android:padding="@dimen/dimen_10">
+
+                    <ImageView
+                        android:layout_width="@dimen/dimen_20"
+                        android:layout_height="@dimen/dimen_20"
+                        android:src="@drawable/ic_index_tags_setting" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </com.ggb.nirvanaclub.view.viewgroup.IndexTopBarLayout>
+
+        <com.ggb.nirvanaclub.view.viewgroup.NestedScrollableHost
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+            <com.ggb.nirvanaclub.view.YesScrollViewPager
+                android:id="@+id/vp_index_article_vp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </com.ggb.nirvanaclub.view.viewgroup.NestedScrollableHost>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</LinearLayout>

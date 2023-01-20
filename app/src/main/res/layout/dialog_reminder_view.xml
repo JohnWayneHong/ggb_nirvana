@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/dimen_300"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/bg_white_full_5">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/dimen_20"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="@dimen/dimen_60"
+            android:layout_height="@dimen/dimen_60"
+            android:src="@mipmap/ic_notice_img"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_20"
+            android:gravity="center"
+            android:textColor="@color/text_main_color"
+            android:textSize="@dimen/text_18"
+            android:text="温馨提示"/>
+
+        <TextView
+            android:id="@+id/tv_reminder_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_20"
+            android:layout_marginLeft="@dimen/dimen_30"
+            android:layout_marginRight="@dimen/dimen_30"
+            android:gravity="center"
+            android:textColor="@color/text_main_color"
+            android:textSize="@dimen/text_15"
+            android:text=""/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_60"
+        android:padding="@dimen/dimen_15"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:id="@+id/tv_cancel"
+            android:layout_width="@dimen/dimen_80"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:background="@drawable/bg_grey_full_5"
+            android:textSize="@dimen/text_13"
+            android:textColor="@color/white"
+            android:text="取消"/>
+
+        <TextView
+            android:id="@+id/tv_confirm"
+            android:layout_width="@dimen/dimen_80"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/dimen_15"
+            android:gravity="center"
+            android:background="@drawable/bg_main_full_5"
+            android:textSize="@dimen/text_13"
+            android:textColor="@color/white"
+            android:text="确定"/>
+
+    </LinearLayout>
+    
+</LinearLayout>

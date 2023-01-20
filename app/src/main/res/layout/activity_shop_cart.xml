@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background"
+    tools:context=".modules.user.ShopCartActivity">
+
+    <include layout="@layout/title_public_view"/>
+
+    <com.scwang.smart.refresh.layout.SmartRefreshLayout
+        android:id="@+id/swipe_refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="@dimen/dimen_1"
+        app:srlPrimaryColor="@color/white"
+        app:srlAccentColor="@color/text_main_color"
+        app:srlEnablePreviewInEditMode="true">
+
+        <com.scwang.smart.refresh.header.ClassicsHeader
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srlAccentColor="@color/text_main_color"
+            app:srlPrimaryColor="@color/transparent"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcy_shop_cart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_50"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_1"
+                android:background="@color/background"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical">
+
+                <LinearLayout
+                    android:id="@+id/ll_all_checked"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:paddingLeft="@dimen/dimen_15"
+                    android:paddingRight="@dimen/dimen_15"
+                    android:gravity="center">
+
+                    <ToggleButton
+                        android:id="@+id/tb_all_checked"
+                        android:layout_width="@dimen/dimen_16"
+                        android:layout_height="@dimen/dimen_16"
+                        android:clickable="false"
+                        android:background="@drawable/selector_check_box"
+                        android:button="@null"
+                        android:textOn=""
+                        android:textOff=""/>
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_14"
+                    android:textColor="@color/title_main_color"
+                    android:text="全选"/>
+
+                <TextView
+                    android:id="@+id/tv_total_money"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dimen_30"
+                    android:textSize="@dimen/text_14"
+                    android:textColor="@color/title_main_color"
+                    android:text="合计：¥0.00"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_shop_confirm"
+            android:layout_width="@dimen/dimen_120"
+            android:layout_height="match_parent"
+            android:background="@color/main_color_1"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_16"
+            android:text="结算"/>
+
+    </LinearLayout>
+
+</LinearLayout>

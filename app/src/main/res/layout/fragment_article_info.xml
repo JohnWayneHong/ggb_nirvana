@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.scwang.smart.refresh.layout.SmartRefreshLayout
+        android:id="@+id/swipe_refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:srlPrimaryColor="@color/white"
+        app:srlAccentColor="@color/text_main_color"
+        app:srlEnablePreviewInEditMode="true"
+        android:paddingBottom="@dimen/dimen_15">
+
+        <com.scwang.smart.refresh.header.MaterialHeader
+            android:id="@+id/mh_article_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+<!--        <com.scwang.smart.refresh.header.ClassicsHeader-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:srlAccentColor="@color/text_main_color"-->
+<!--            app:srlPrimaryColor="@color/transparent"/>-->
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcy_article_info_rv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/light_gray" />
+
+    </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+
+</LinearLayout>

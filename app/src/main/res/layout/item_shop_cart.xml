@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.ggb.nirvanaclub.view.SwipeItemLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:id="@+id/ll_shop_cart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/white">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_10"
+            android:background="@color/background"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dimen_15">
+
+            <LinearLayout
+                android:id="@+id/ll_shop_checked"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingRight="@dimen/dimen_15"
+                android:gravity="center">
+
+                <ToggleButton
+                    android:id="@+id/tb_shop_checked"
+                    android:layout_width="@dimen/dimen_16"
+                    android:layout_height="@dimen/dimen_16"
+                    android:clickable="false"
+                    android:background="@drawable/selector_check_box"
+                    android:button="@null"
+                    android:textOn=""
+                    android:textOff=""/>
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/iv_shop_cart"
+                android:layout_width="@dimen/dimen_90"
+                android:layout_height="@dimen/dimen_90"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="@dimen/dimen_15"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/tv_shop_name"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:maxLines="2"
+                        android:ellipsize="end"
+                        android:textColor="@color/title_main_color"
+                        android:textSize="@dimen/text_15"
+                        android:text="舞新防晒衣男2020夏季男女情侣放杀意沙滩速干"/>
+
+                    <TextView
+                        android:id="@+id/tv_shop_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dimen_40"
+                        android:textSize="@dimen/text_16"
+                        android:textColor="@color/me_banner_end_color"
+                        android:text="¥333.33"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:id="@+id/tv_shop_spec"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="黑色"
+                        android:textColor="@color/color_666666"
+                        android:textSize="@dimen/text_15" />
+
+                    <ImageView
+                        android:id="@+id/iv_shop_sub"
+                        android:layout_width="@dimen/dimen_25"
+                        android:layout_height="@dimen/dimen_25"
+                        android:src="@mipmap/ic_cart_sub"/>
+
+                    <TextView
+                        android:id="@+id/tv_shop_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/dimen_25"
+                        android:paddingLeft="@dimen/dimen_18"
+                        android:paddingRight="@dimen/dimen_18"
+                        android:layout_marginLeft="@dimen/dimen_5"
+                        android:layout_marginRight="@dimen/dimen_5"
+                        android:background="@drawable/bg_grey_line"
+                        android:gravity="center"
+                        android:textSize="@dimen/text_15"
+                        android:textColor="@color/title_main_color"
+                        android:text="1"/>
+
+                    <ImageView
+                        android:id="@+id/iv_shop_add"
+                        android:layout_width="@dimen/dimen_25"
+                        android:layout_height="@dimen/dimen_25"
+                        android:src="@mipmap/ic_cart_add"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="@dimen/dimen_80"
+            android:layout_height="@dimen/dimen_10"
+            android:background="@color/background"/>
+
+        <TextView
+            android:id="@+id/tv_cart_delete"
+            android:layout_width="@dimen/dimen_80"
+            android:layout_height="match_parent"
+            android:background="@color/me_banner_end_color"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_16"
+            android:text="删除"/>
+
+    </LinearLayout>
+
+</com.ggb.nirvanaclub.view.SwipeItemLayout>
+

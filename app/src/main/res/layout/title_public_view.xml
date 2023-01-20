@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/public_title"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dimen_50"
+    android:background="@color/white"
+    app:contentInsetLeft="0dp"
+    app:contentInsetStart="0dp">
+
+    <FrameLayout
+        android:id="@+id/fl_public_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_48">
+
+            <LinearLayout
+                android:id="@+id/ll_public_back"
+                android:layout_width="@dimen/dimen_50"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/dimen_17"
+                    android:layout_height="@dimen/dimen_17"
+                    android:layout_marginLeft="@dimen/dimen_15"
+                    android:src="@mipmap/ic_public_back" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_public_right"
+                android:layout_width="@dimen/dimen_90"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:gravity="center_vertical|right">
+
+                <TextView
+                    android:id="@+id/tv_public_right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/dimen_15"
+                    android:textSize="@dimen/text_13"
+                    android:textColor="@color/main_color"
+                    android:text=""/>
+
+                <TextView
+                    android:id="@+id/tv_public_right_background"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/dimen_15"
+                    android:background="@drawable/bg_main_full_2"
+                    android:paddingLeft="@dimen/dimen_15"
+                    android:paddingRight="@dimen/dimen_15"
+                    android:visibility="gone"
+                    android:paddingTop="@dimen/dimen_5"
+                    android:paddingBottom="@dimen/dimen_5"
+                    android:textSize="@dimen/text_13"
+                    android:textColor="@color/white"
+                    android:text="保存"/>
+
+                <ImageView
+                    android:id="@+id/iv_public_right"
+                    android:visibility="gone"
+                    android:layout_marginRight="@dimen/dimen_15"
+                    android:layout_width="@dimen/dimen_18"
+                    android:layout_height="@dimen/dimen_18"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_public_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textSize="@dimen/text_17"
+                android:textColor="@color/title_main_color"/>
+
+        </RelativeLayout>
+
+    </FrameLayout>
+
+</androidx.appcompat.widget.Toolbar>

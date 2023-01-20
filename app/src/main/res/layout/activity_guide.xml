@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:context=".GuideActivity"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:id="@+id/welcome_root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/welcome" />
+
+            <com.lihang.ShadowLayout
+                android:id="@+id/ll_jump_over"
+                android:layout_marginTop="@dimen/dimen_20"
+                android:layout_marginEnd="@dimen/dimen_20"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_alignParentEnd="true"
+                app:hl_cornerRadius="@dimen/dimen_10"
+                app:hl_layoutBackground="@color/welcome_jump_over_bg">
+
+                <TextView
+                    android:id="@+id/tv_jump_guide"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:gravity="center"
+                    android:paddingLeft="@dimen/dimen_10"
+                    android:paddingRight="@dimen/dimen_10"
+                    android:text="跳过"
+                    android:textColor="@color/white" />
+
+            </com.lihang.ShadowLayout>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:orientation="horizontal"
+            android:background="@color/white"
+            android:paddingHorizontal="@dimen/dimen_20"
+            android:gravity="center">
+
+            <com.lihang.ShadowLayout
+                android:layout_width="@dimen/dimen_50"
+                android:layout_height="@dimen/dimen_50"
+                app:hl_strokeColor="@color/mid_gray"
+                app:hl_strokeWith="@dimen/dimen_1"
+                app:hl_cornerRadius="8dp">
+
+                <ImageView
+                    android:layout_width="@dimen/dimen_40"
+                    android:layout_height="@dimen/dimen_40"
+                    android:layout_gravity="center"
+                    android:src="@mipmap/logo" />
+
+            </com.lihang.ShadowLayout>
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="@dimen/dimen_100"
+                android:src="@mipmap/logo_text" />
+
+            <TextView
+                android:id="@+id/tv_guide_version"
+                android:layout_width="@dimen/dimen_80"
+                android:layout_height="@dimen/dimen_20"
+                android:text="v2.0.14"
+                android:gravity="center_vertical"
+                android:textColor="@color/main_color"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

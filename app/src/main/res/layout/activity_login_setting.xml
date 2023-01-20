@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+
+    android:focusableInTouchMode="true"
+    android:descendantFocusability="blocksDescendants"
+    android:fillViewport="true">
+
+    <include layout="@layout/title_public_view"/>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/me_setting_options_rv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <com.lihang.ShadowLayout
+                    android:id="@+id/sl_me_settings_logout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/dimen_30"
+                    android:paddingHorizontal="@dimen/dimen_20"
+                    android:paddingVertical="@dimen/dimen_10"
+                    app:hl_strokeColor="@color/primary"
+                    app:hl_strokeWith="@dimen/dimen_1">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/me_settings_logout_string"
+                        android:textColor="@color/primary"
+                        android:textSize="@dimen/text_17" />
+
+                </com.lihang.ShadowLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <!-- 登出的加载条 -->
+    <com.ggb.nirvanaclub.view.viewgroup.AvoidDragLayout
+        android:id="@+id/me_settings_shadow"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black_translucent"
+        android:visibility="gone">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.lihang.ShadowLayout
+                android:layout_width="@dimen/dimen_80"
+                android:layout_height="@dimen/dimen_80"
+                android:layout_centerInParent="true"
+                android:padding="@dimen/dimen_20"
+                app:hl_cornerRadius="@dimen/dimen_10"
+                app:hl_layoutBackground="@color/me_settings_logout_shadow_bg">
+
+                <ProgressBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </com.lihang.ShadowLayout>
+
+        </RelativeLayout>
+
+    </com.ggb.nirvanaclub.view.viewgroup.AvoidDragLayout>
+
+</LinearLayout>

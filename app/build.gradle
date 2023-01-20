@@ -1,0 +1,206 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-android-extensions'
+}
+
+static def releaseTime() {
+    return new Date().format("yyyyMMdd", TimeZone.getTimeZone("UTC"))
+}
+
+android {
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+
+    compileSdkVersion 30
+    buildToolsVersion "30.0.3"
+
+    signingConfigs {
+
+        release {
+            keyAlias 'BearHome'
+            keyPassword 'ggbggxggt'
+            storeFile file('../bearBuild.jks')
+            storePassword 'ggbggxggt'
+        }
+
+        //apk命名
+        android.applicationVariants.all { variant ->
+            variant.outputs.all { output ->
+                def outputFile = output.outputFile
+                def fileName
+                if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                    //这里修改apk文件名
+                    fileName = "nirvana-${defaultConfig.versionName}.${defaultConfig.versionCode}-${releaseTime()}.apk"
+                    outputFileName = fileName
+                }
+            }
+        }
+
+    }
+
+    defaultConfig {
+        applicationId "com.ggb.nirvanaclub"
+        minSdkVersion 21
+//        targetSdkVersion 28
+        targetSdkVersion 30
+        versionCode 21
+        versionName "V2.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        ndk {
+            abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a', 'x86'
+        }
+        manifestPlaceholders = [
+                JPUSH_PKGNAME: applicationId,
+                JPUSH_APPKEY : "b0935a121eb9326d4cafaad3", //JPush 上注册的包名对应的 Appkey.
+                JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
+        ]
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+    implementation project(path: ':shadowLibrary')
+    implementation fileTree(dir: 'libs', include: '*.jar')
+    implementation 'com.tencent:mmkv:1.2.12'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation "org.jetbrains.anko:anko-commons:$anko_version"
+    implementation 'androidx.core:core-ktx:1.3.2'
+    implementation 'androidx.appcompat:appcompat:1.3.0-rc01'
+    implementation 'com.google.android.material:material:1.2.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation 'androidx.print:print:1.0.0'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
+    implementation 'androidx.documentfile:documentfile:1.0.1'
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    implementation 'com.github.lzyzsd:jsbridge:1.0.4'
+    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'org.litepal.android:java:3.0.0'
+    implementation "com.geyifeng.immersionbar:immersionbar:3.2.0"
+    implementation 'com.geyifeng.immersionbar:immersionbar-ktx:3.2.0'
+
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.31'
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.1.1"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.2.1"
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
+    implementation 'com.scwang.smart:refresh-layout-kernel:2.0.1'
+    implementation 'com.scwang.smart:refresh-header-classics:2.0.1'
+    implementation 'com.scwang.smart:refresh-header-material:2.0.1'
+    implementation 'com.scwang.smart:refresh-header-two-level:2.0.1'
+    implementation 'org.greenrobot:eventbus:3.1.1'
+    implementation 'com.haibin:calendarview:3.7.1'
+    implementation 'com.github.open-android:WheelPicker:v1.0.0'
+    implementation "org.java-websocket:Java-WebSocket:1.5.1"
+    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
+    implementation 'com.squareup.okio:okio:2.6.0'
+    implementation ('com.lzy.net:okhttputils:1.6.6') {
+        exclude group: 'com.squareup.okhttp3:okhttp:3.10.0'
+    }
+
+    implementation ('io.socket:socket.io-client:0.8.3') {
+        exclude group: 'org.json', module: 'json'
+    }
+    implementation('com.yanzhenjie:permission:2.0.0-rc5') {
+        exclude group: "com.android.support"
+    }
+    implementation 'com.superluo:textbannerview:1.0.5'
+    implementation 'com.youth.banner:banner:1.4.10'
+    implementation 'com.amap.api:location:5.2.0'
+
+    implementation 'com.github.HuanTanSheng:EasyPhotos:3.1.5'
+    implementation 'com.github.guoxiaoxing:phoenix-compress-picture:1.0.15'
+    implementation('com.github.LuckSiege.PictureSelector:picture_library:v2.6.0') {
+        exclude group: "com.android.support"
+    }
+    implementation 'com.journeyapps:zxing-android-embedded:3.0.2@aar'
+    implementation 'com.google.zxing:core:3.3.3'
+    implementation 'com.github.mik3y:usb-serial-for-android:3.4.3'
+
+    //牛蛙呐框架
+    // RecyclerView 实现 item 自动换列排布
+    final def flexbox_version = "3.0.0"
+    // md 解析
+    final def markwon_version = "4.6.2"
+    // 代码块高亮
+    final def prism_version = "2.0.0"
+
+    // RecyclerView 实现 item 自动换列排布
+    implementation "com.google.android.flexbox:flexbox:$flexbox_version"
+    // md 解析
+    implementation "io.noties.markwon:core:$markwon_version"
+    implementation "io.noties.markwon:image-glide:$markwon_version"
+    implementation "io.noties.markwon:recycler:$markwon_version"
+    implementation("io.noties.markwon:syntax-highlight:$markwon_version") {
+        // 排除 prism4j 里的依赖冲突
+        exclude group: "org.jetbrains" , module:"annotations-java5"
+    }
+
+    // 代码块高亮
+    implementation("io.noties:prism4j:$prism_version") {
+        // 排除 prism4j 里的依赖冲突
+        exclude group: "org.jetbrains" , module:"annotations-java5"
+    }
+
+    //logger
+    api 'com.orhanobut:logger:2.1.1'
+    //组件通信
+    api 'org.greenrobot:eventbus:3.1.1'
+    //分包
+    api 'androidx.multidex:multidex:2.0.0'
+    //网络
+    api 'io.reactivex.rxjava2:rxjava:2.1.11'
+    api 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    api 'com.squareup.retrofit2:retrofit:2.4.0'
+    api 'com.squareup.retrofit2:converter-gson:2.4.0'
+    api 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+    api 'com.squareup.okhttp3:okhttp:3.10.0'
+    api 'com.squareup.okio:okio:1.14.0'
+    api 'com.trello.rxlifecycle2:rxlifecycle:2.2.1'
+    // If you want to bind to Android-specific lifecycles
+    api 'com.trello.rxlifecycle2:rxlifecycle-android:2.2.1'
+    // If you want pre-written Activities and Fragments you can subclass as providers
+    api 'com.trello.rxlifecycle2:rxlifecycle-components:2.2.1'
+    api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.31'
+    api 'com.squareup.okhttp3:logging-interceptor:3.4.1'
+
+    implementation 'cn.jiguang.sdk:jpush:3.8.0'
+    implementation 'cn.jiguang.sdk:jcore:2.5.1'
+
+    //动态权限添加？？
+    implementation 'com.github.tbruyelle:rxpermissions:0.9.0'
+
+    //圆形framelayout
+    implementation 'com.flyco.roundview:FlycoRoundView_Lib:1.1.4@aar'
+
+    //RxTool 工具库
+    implementation 'com.github.tamsiree.RxTool:RxUI:2.6.3'
+    implementation 'com.github.tamsiree.RxTool:RxKit:2.6.3'
+}

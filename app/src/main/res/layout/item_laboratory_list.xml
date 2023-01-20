@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cv_laboratory_root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingStart="0dp"
+    android:paddingLeft="0dp"
+    android:paddingEnd="0dp"
+    android:paddingRight="0dp"
+    app:cardCornerRadius="@dimen/dimen_4"
+    app:cardElevation="@dimen/dimen_3">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/White"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/iv_laboratory_imageView"
+            android:layout_width="@dimen/dimen_80"
+            android:layout_height="@dimen/dimen_80"
+            android:layout_margin="@dimen/dimen_10"
+            android:padding="@dimen/dimen_10"
+            android:src="@mipmap/logo_round_1" />
+
+        <com.tamsiree.rxui.view.loading.TTextView
+            android:id="@+id/tv_laboratory_name"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/dimen_10"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="10dp"
+            android:textColor="@color/Black"
+            android:textSize="@dimen/text_12"
+            app:gradient="true"
+            app:height_weight="0.8"
+            app:width_weight="0.6" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

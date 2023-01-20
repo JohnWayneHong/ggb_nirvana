@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <com.ggb.nirvanaclub.view.StatusBarPlaceHolder
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="?attr/actionBarSize" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_80"
+                android:paddingVertical="@dimen/dimen_15"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/message_interaction_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="2"
+                        android:src="@drawable/ic_message_interaction" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimen_20"
+                        android:text="@string/message_interaction_string"
+                        android:textAlignment="center"
+                        android:textColor="@color/black_text_color"
+                        android:textSize="@dimen/text_12" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="2"
+                        android:src="@drawable/ic_message_system" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimen_20"
+                        android:text="@string/message_system_string"
+                        android:textAlignment="center"
+                        android:textColor="@color/black_text_color"
+                        android:textSize="@dimen/text_12" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="2"
+                        android:src="@drawable/ic_message_other" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimen_20"
+                        android:text="@string/message_other_string"
+                        android:textAlignment="center"
+                        android:textColor="@color/black_text_color"
+                        android:textSize="@dimen/text_12" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_10"
+                android:layout_marginVertical="@dimen/dimen_10"
+                android:background="@color/light_gray" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/dimen_15">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:text="@string/message_nirvana_msg_string"
+                    android:textColor="@color/black_text_color"
+                    android:textSize="@dimen/text_14" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:text="@string/message_new_nirvana_msg_string"
+                    android:textColor="@color/primary"
+                    android:textSize="@dimen/text_14" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

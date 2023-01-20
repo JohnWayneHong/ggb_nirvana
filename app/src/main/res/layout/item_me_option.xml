@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <com.lihang.ShadowLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/dimen_10"
+        app:hl_layoutBackground="@color/white"
+        app:hl_layoutBackground_true="@color/light_gray"
+        app:hl_shapeMode="pressed">
+
+        <LinearLayout
+            android:id="@+id/ll_me_option"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:baselineAligned="false"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="@dimen/dimen_5"
+            android:paddingVertical="@dimen/dimen_13">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="9"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/tv_me_option"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/dimen_10"
+                    android:textColor="@color/black_text_color"
+                    android:textSize="@dimen/text_15" />
+
+                <com.lihang.ShadowLayout
+                    android:visibility="gone"
+                    android:id="@+id/user_options_subtitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:hl_cornerRadius="7dp"
+                    app:hl_layoutBackground="@color/me_user_options_subtitle_background">
+
+                    <TextView
+                        android:id="@+id/tv_me_option_subtitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="4dp"
+                        android:paddingVertical="@dimen/dimen_2"
+                        android:textColor="@color/me_user_options_subtitle_text_color"
+                        android:textSize="@dimen/text_9"
+                        tools:ignore="SmallSp" />
+
+                </com.lihang.ShadowLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/dimen_15"
+                    android:layout_height="@dimen/dimen_15"
+                    android:src="@drawable/ic_next" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </com.lihang.ShadowLayout>
+
+</LinearLayout>

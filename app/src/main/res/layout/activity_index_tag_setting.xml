@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".modules.tag.IndexTagSettingActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include layout="@layout/title_public_view"/>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginVertical="@dimen/dimen_20">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/index_tag_text1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:text="@string/index_tag_setting_chosen_title"
+                            android:textSize="@dimen/text_16"
+                            android:textColor="@color/black_text_color"
+                            android:layout_alignParentStart="true"
+                            android:layout_marginStart="@dimen/dimen_20"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:text="@string/index_tag_setting_chosen_tip"
+                            android:textSize="@dimen/text_12"
+                            android:textColor="@color/gray_text_color"
+                            android:layout_toEndOf="@id/index_tag_text1"
+                            android:layout_marginStart="@dimen/dimen_10"/>
+
+                        <Button
+                            android:id="@+id/index_tag_setting_edit_btn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginEnd="@dimen/dimen_20"
+                            android:background="@drawable/index_tag_setting_edit_btn"
+                            android:minWidth="0dp"
+                            android:minHeight="0dp"
+                            android:paddingHorizontal="@dimen/dimen_10"
+                            android:paddingVertical="@dimen/dimen_5"
+                            android:text="@string/index_tag_setting_edit_btn_string"
+                            android:textColor="@color/primary"
+                            android:textSize="@dimen/text_12" />
+
+                    </RelativeLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rcy_index_tag_chosen_rv"
+                        android:nestedScrollingEnabled="false"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_1"
+                    android:background="@color/mid_gray" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginVertical="@dimen/dimen_20">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/index_tag_text2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:text="@string/index_tag_setting_unchosen_title"
+                            android:textSize="@dimen/text_16"
+                            android:textColor="@color/black_text_color"
+                            android:layout_alignParentStart="true"
+                            android:layout_marginStart="@dimen/dimen_20"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:text="@string/index_tag_setting_unchosen_tip"
+                            android:textSize="@dimen/text_12"
+                            android:textColor="@color/gray_text_color"
+                            android:layout_toEndOf="@id/index_tag_text2"
+                            android:layout_marginStart="@dimen/dimen_10"/>
+
+                    </RelativeLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rcy_index_tag_unchosen_rv"
+                        android:nestedScrollingEnabled="false"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

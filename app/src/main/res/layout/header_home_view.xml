@@ -1,0 +1,543 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_285">
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true">
+
+            <RelativeLayout
+                android:id="@+id/rl_step_count"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.ggb.nirvanaclub.view.CircleProgress
+                    android:id="@+id/cp_walk_progress"
+                    android:layout_width="@dimen/dimen_140"
+                    android:layout_height="@dimen/dimen_140"
+                    android:layout_centerInParent="true"
+                    app:antiAlias="true"
+                    app:color_type = "1"
+                    app:arcWidth="@dimen/dimen_10"
+                    app:dottedLineWidth="@dimen/dimen_10"
+                    app:bgArcColor="@color/white"
+                    app:bgArcWidth="@dimen/dimen_1"
+                    app:hintSize="@dimen/dimen_10"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.498"
+                    app:maxValue="100"/>
+
+                <RelativeLayout
+                    android:layout_width="@dimen/dimen_150"
+                    android:layout_height="@dimen/dimen_150"
+                    android:layout_centerInParent="true">
+
+                    <ImageView
+                        android:id="@+id/iv_target_complete"
+                        android:layout_width="@dimen/dimen_45"
+                        android:layout_height="@dimen/dimen_10"
+                        android:visibility="gone"
+                        android:layout_marginTop="@dimen/dimen_50"
+                        android:layout_alignParentRight="true"
+                        android:src="@mipmap/ic_target_complete"/>
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_centerInParent="true"
+                    android:gravity="center_horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/text_main_color"
+                        android:textSize="@dimen/text_13"
+                        android:text="今日步数"/>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/tv_today_step"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            android:textColor="@color/color_E91B1A"
+                            android:textSize="@dimen/text_27"
+                            android:text="0"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="bottom"
+                            android:layout_marginLeft="@dimen/dimen_5"
+                            android:layout_marginBottom="@dimen/dimen_6"
+                            android:textSize="@dimen/text_13"
+                            android:textColor="@color/text_main_color"
+                            android:text="步"/>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tv_target_step"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/text_main_color"
+                        android:textSize="@dimen/text_10"
+                        android:text="今日目标0步"/>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_car_data"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.ggb.nirvanaclub.view.CircleProgress
+                    android:id="@+id/cp_car_progress"
+                    android:layout_width="@dimen/dimen_140"
+                    android:layout_height="@dimen/dimen_140"
+                    android:layout_centerInParent="true"
+                    app:antiAlias="true"
+                    app:arcWidth="@dimen/dimen_10"
+                    app:dottedLineWidth="@dimen/dimen_10"
+                    app:bgArcColor="@color/white"
+                    app:bgArcWidth="@dimen/dimen_1"
+                    app:hintSize="@dimen/dimen_10"
+                    app:color_type = "2"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.498"
+                    app:maxValue="100"/>
+
+                <RelativeLayout
+                    android:layout_width="@dimen/dimen_160"
+                    android:layout_height="@dimen/dimen_160"
+                    android:layout_centerInParent="true">
+
+                    <ImageView
+                        android:id="@+id/iv_car_complete"
+                        android:layout_width="@dimen/dimen_45"
+                        android:layout_height="@dimen/dimen_10"
+                        android:visibility="gone"
+                        android:layout_marginTop="@dimen/dimen_50"
+                        android:layout_alignParentRight="true"
+                        android:src="@mipmap/ic_target_complete"/>
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_centerInParent="true"
+                    android:gravity="center_horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/text_main_color"
+                        android:textSize="@dimen/text_13"
+                        android:text="今日里程"/>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/tv_distances"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            android:textColor="@color/second_color"
+                            android:textSize="@dimen/text_30"
+                            android:text="0"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="bottom"
+                            android:layout_marginLeft="@dimen/dimen_5"
+                            android:layout_marginBottom="@dimen/dimen_8"
+                            android:textSize="@dimen/text_13"
+                            android:textColor="@color/second_color"
+                            android:text="km"/>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tv_target_car"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/text_main_color"
+                        android:textSize="@dimen/text_12"
+                        android:text="今日目标0km"/>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </FrameLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_50"
+            android:layout_marginLeft="@dimen/dimen_15">
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_38"
+                android:background="@drawable/bg_gold_full_3">
+
+                <LinearLayout
+                    android:id="@+id/ll_step_rice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dimen_3"
+                        android:text="今日"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_13" />
+
+                    <TextView
+                        android:id="@+id/tv_step_rice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0.00"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_13"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dimen_3"
+                        android:text="牛币"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_13" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_car_rice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dimen_3"
+                        android:text="今日"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_13" />
+
+                    <TextView
+                        android:id="@+id/tv_car_rice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0.00"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_13"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dimen_3"
+                        android:text="牛币"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_13" />
+
+                </LinearLayout>
+
+            </FrameLayout>
+
+            <ImageView
+                android:layout_width="34dp"
+                android:layout_height="33dp"
+                android:layout_centerHorizontal="true"
+                android:src="@mipmap/ic_home_rice" />
+
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/iv_home_lottery"
+            android:layout_width="@dimen/dimen_40"
+            android:layout_height="@dimen/dimen_40"
+            android:layout_marginTop="@dimen/dimen_60"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/dimen_15"
+            android:src="@mipmap/ic_lottery"/>
+
+        <ImageView
+            android:id="@+id/iv_home_share"
+            android:layout_width="@dimen/dimen_40"
+            android:layout_height="@dimen/dimen_40"
+            android:layout_marginTop="@dimen/dimen_125"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/dimen_15"
+            android:src="@mipmap/ic_home_share"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_60"
+            android:layout_alignParentBottom="true"
+            android:background="@color/white"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="84dp"
+            android:layout_marginLeft="@dimen/dimen_15"
+            android:layout_marginRight="@dimen/dimen_15"
+            android:layout_alignParentBottom="true">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:src="@mipmap/ic_home_round_shade"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/ic_active"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dimen_3"
+                            android:textColor="@color/color_DA66E1"
+                            android:textSize="@dimen/text_13"
+                            android:text="活跃度"/>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tv_user_activity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_12"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/text_18"
+                        android:textColor="@color/title_main_color"
+                        android:text="0"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="@dimen/dimen_1"
+                    android:layout_height="match_parent"
+                    android:background="@color/line"
+                    android:layout_marginTop="@dimen/dimen_20"
+                    android:layout_marginBottom="@dimen/dimen_20"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/ic_contribution"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dimen_3"
+                            android:textColor="@color/color_32C2FE"
+                            android:textSize="@dimen/text_13"
+                            android:text="贡献值"/>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tv_user_contribution"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_12"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/text_18"
+                        android:textColor="@color/title_main_color"
+                        android:text="0"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="@dimen/dimen_1"
+                    android:layout_height="match_parent"
+                    android:background="@color/line"
+                    android:layout_marginTop="@dimen/dimen_20"
+                    android:layout_marginBottom="@dimen/dimen_20"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/ic_total"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dimen_3"
+                            android:textColor="@color/color_F24C10"
+                            android:textSize="@dimen/text_13"
+                            android:text="总牛币"/>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tv_user_rice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_12"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/text_18"
+                        android:textColor="@color/title_main_color"
+                        android:text="0"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/dimen_15">
+
+        <LinearLayout
+            android:id="@+id/ll_home_notice"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_35"
+            android:layout_marginLeft="@dimen/dimen_15"
+            android:layout_marginTop="@dimen/dimen_15"
+            android:layout_marginRight="@dimen/dimen_15"
+            android:gravity="center_vertical"
+            android:visibility="gone"
+            android:background="@color/background">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_15"
+                android:src="@mipmap/ic_announcement" />
+
+            <com.superluo.textbannerlibrary.TextBannerView
+                android:id="@+id/tb_home_notice"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/dimen_15"
+                android:layout_marginRight="@dimen/dimen_15"
+                app:setDirection="bottom_to_top"
+                app:setGravity="left"
+                app:setSingleLine="true"
+                app:setTextColor="@color/color_A0A1A2"
+                app:setTextSize="@dimen/text_12" />
+
+        </LinearLayout>
+
+        <com.youth.banner.Banner
+            android:id="@+id/ban_top_list"
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            android:layout_height="@dimen/dimen_110"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/dimen_15"
+            android:layout_marginRight="@dimen/dimen_15"
+            android:layout_marginTop="@dimen/dimen_15"
+            app:indicator_width="@dimen/dimen_30"
+            app:indicator_height="@dimen/dimen_2"
+            app:indicator_drawable_selected="@drawable/bg_shade_full"
+            app:indicator_drawable_unselected="@drawable/bg_white_full"
+            app:banner_default_image="@mipmap/logo"/>
+
+        <com.youth.banner.Banner
+            android:id="@+id/ban_bottom_list"
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            android:layout_height="@dimen/dimen_80"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/dimen_15"
+            android:layout_marginRight="@dimen/dimen_15"
+            android:layout_marginTop="@dimen/dimen_15"
+            app:indicator_width="@dimen/dimen_30"
+            app:indicator_height="@dimen/dimen_2"
+            app:indicator_drawable_selected="@drawable/bg_shade_full"
+            app:indicator_drawable_unselected="@drawable/bg_white_full"
+            app:banner_default_image="@mipmap/logo"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_15"
+        android:background="@color/background"/>
+
+</LinearLayout>

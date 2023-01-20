@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="MeBanner">
+        <attr name="startColor" format="color" />
+        <attr name="endColor" format="color" />
+        <attr name="startPic" format="reference" />
+        <attr name="startPicSize" format="dimension" />
+        <attr name="endPic" format="reference" />
+        <attr name="endPicSize" format="dimension" />
+        <attr name="picPaddingHor" format="dimension" />
+        <attr name="actionBarHeight" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="CircleImageView">
+        <attr name="civ_border_width" format="dimension"/>
+        <attr name="civ_border_color" format="color"/>
+        <attr name="civ_border_overlay" format="boolean"/>
+        <attr name="civ_fill_color" format="color"/>
+    </declare-styleable>
+
+    <declare-styleable name="CarouselDots">
+        <attr name="dotRadius" format="dimension" />
+        <attr name="dotSelectedColor" format="color" />
+        <attr name="dotUnSelectedColor" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="VerifySeekBar">
+        <attr name="vsb_textSize" format="dimension" />
+        <attr name="vsb_shadowWidth" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="BubbleTextView">
+        <attr name="bbtv_position" format="enum">
+            <enum name="left" value="0" />
+            <enum name="top" value="1" />
+            <enum name="right" value="2" />
+            <enum name="bottom" value="3" />
+        </attr>
+        <attr name="bbtv_arrowSize" format="dimension" />
+        <attr name="bbtv_arrowOffset" format="dimension" />
+        <attr name="bbtv_bgColor" format="color" />
+        <attr name="bbtv_borderRadius" format="dimension" />
+    </declare-styleable>
+
+    <!-- 是否开启抗锯齿 -->
+    <attr name="antiAlias" format="boolean" />
+    <!-- 圆弧起始角度，3点钟方向为0，顺时针递增，小于0或大于360进行取余 -->
+    <attr name="startAngle" format="float" />
+    <!-- 圆弧度数 -->
+    <attr name="sweepAngle" format="float" />
+    <!-- 设置动画时间 -->
+    <attr name="animTime" format="integer" />
+    <!-- 绘制内容的数值 -->
+    <attr name="maxValue" format="float" />
+    <attr name="value" format="float" />
+    <!-- 绘制内容的单位 -->
+    <attr name="unit" format="string|reference" />
+    <attr name="unitSize" format="dimension" />
+    <attr name="unitColor" format="color|reference" />
+    <!-- 绘制内容相应的提示语 -->
+    <attr name="hint" format="string|reference" />
+    <attr name="hintSize" format="dimension" />
+    <attr name="hintColor" format="color|reference" />
+    <!-- 精度，默认为0 -->
+    <attr name="precision" format="integer" />
+    <attr name="valueSize" format="dimension" />
+    <attr name="valueColor" format="color|reference" />
+    <!-- 背景圆弧颜色，默认白色 -->
+    <attr name="bgArcColor" format="color|reference" />
+    <!-- 圆弧宽度 -->
+    <attr name="arcWidth" format="dimension" />
+    <!-- 圆弧颜色， -->
+    <attr name="arcColors" format="color|reference" />
+    <!-- 文字的偏移量 相对于圆半径而言，默认三分之一 -->
+    <attr name="textOffsetPercentInRadius" format="float" />
+    <!-- 背景圆弧宽度 -->
+    <attr name="bgArcWidth" format="dimension" />
+    <!-- 线条数 -->
+    <attr name="dottedLineCount" format="integer" />
+    <!-- 圆弧跟虚线之间的距离 -->
+    <attr name="lineDistance" format="integer" />
+    <!-- 线条宽度 -->
+    <attr name="dottedLineWidth" format="dimension" />
+
+    <attr name="color_type" format="integer" />
+
+    <declare-styleable name="CircleProgressBar">
+        <attr name="antiAlias" />
+        <attr name="startAngle" />
+        <attr name="sweepAngle" />
+        <attr name="animTime" />
+        <attr name="maxValue" />
+        <attr name="value" />
+        <attr name="unit" />
+        <attr name="unitSize" />
+        <attr name="unitColor" />
+        <attr name="hint" />
+        <attr name="hintSize" />
+        <attr name="hintColor" />
+        <attr name="precision" />
+        <attr name="valueSize" />
+        <attr name="valueColor" />
+        <attr name="bgArcColor" />
+        <attr name="arcWidth" />
+        <attr name="arcColors" />
+        <attr name="textOffsetPercentInRadius" />
+        <attr name="bgArcWidth" />
+        <attr name="dottedLineCount" />
+        <attr name="lineDistance" />
+        <attr name="dottedLineWidth" />
+        <attr name="color_type"/>
+    </declare-styleable>
+
+</resources>

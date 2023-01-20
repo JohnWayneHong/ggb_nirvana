@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "artifactType": {
+    "type": "APK",
+    "kind": "Directory"
+  },
+  "applicationId": "com.ggb.nirvanaclub",
+  "variantName": "processReleaseResources",
+  "elements": [
+    {
+      "type": "SINGLE",
+      "filters": [],
+      "versionCode": 21,
+      "versionName": "V2.0",
+      "outputFile": "nirvana-V2.0.21-20230120.apk"
+    }
+  ]
+}

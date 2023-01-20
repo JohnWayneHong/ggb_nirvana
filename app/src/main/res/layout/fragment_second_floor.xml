@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.scwang.smart.refresh.layout.SmartRefreshLayout
+        android:id="@+id/refreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipChildren="false"
+        app:srlAccentColor="@android:color/white">
+
+        <com.scwang.smart.refresh.header.TwoLevelHeader
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <FrameLayout
+                android:id="@+id/second_floor_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:alpha="0"
+                android:background="#fff">
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/tb_subscript_toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_50"
+                    app:contentInsetEnd="0dp"
+                    app:contentInsetStart="0dp"
+                    android:background="@color/white"
+                    android:elevation="@dimen/dimen_1">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:paddingHorizontal="@dimen/dimen_15">
+
+                        <ImageView
+                            android:id="@+id/iv_second_back"
+                            android:layout_width="@dimen/dimen_30"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentStart="true"
+                            android:src="@drawable/ic_nirvana_back" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:text="乖乖乐园"
+                            android:textSize="@dimen/text_17"
+                            android:textColor="@color/black_text_color" />
+
+                        <ImageView
+                            android:id="@+id/iv_second_right"
+                            android:layout_width="@dimen/dimen_22"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentEnd="true"
+                            android:src="@drawable/ic_me_write_dark" />
+
+                    </RelativeLayout>
+
+                </androidx.appcompat.widget.Toolbar>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/app_name"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/ic_bear_question" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/app_name"
+                    android:gravity="center"
+                    android:scaleType="centerCrop"
+                    android:text="乖乖乐园"
+                    android:textColor="#000000" />
+
+            </FrameLayout>
+
+            <com.scwang.smart.refresh.header.ClassicsHeader
+                android:id="@+id/classics"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:srlAccentColor="@color/text_main_color"
+                app:srlPrimaryColor="@color/transparent"/>
+
+        </com.scwang.smart.refresh.header.TwoLevelHeader>
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never">
+
+
+        </androidx.core.widget.NestedScrollView>
+
+    </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+
+</FrameLayout>
