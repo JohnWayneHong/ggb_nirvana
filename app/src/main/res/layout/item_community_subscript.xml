@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cv_laboratory_root"
+    android:layout_width="@dimen/dimen_170"
+    android:layout_marginLeft="@dimen/dimen_10"
+    android:layout_marginRight="@dimen/dimen_10"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="@dimen/dimen_4"
+    app:cardElevation="@dimen/dimen_3">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/White"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <com.ggb.nirvanaclub.view.CircleImageView
+            android:id="@+id/iv_community_subscript_imageView"
+            android:layout_width="@dimen/dimen_80"
+            android:layout_height="@dimen/dimen_80"
+            android:layout_margin="@dimen/dimen_10"
+            android:padding="@dimen/dimen_10"
+            android:src="@mipmap/logo_round_1" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/dimen_5">
+
+            <TextView
+                android:id="@+id/tv_community_subscript_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="@dimen/text_13"
+                android:padding="@dimen/dimen_5"
+                android:singleLine="true"
+                android:text="男女双打"
+                android:textStyle="bold"
+                android:textColor="@color/index_article_info_auth"
+                android:textAllCaps="false"/>
+
+            <TextView
+                android:id="@+id/tv_community_subscript_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="@dimen/text_11"
+                android:padding="@dimen/dimen_5"
+                android:text="发表 %s 粉丝 %s"
+                android:singleLine="true"
+                android:textColor="@color/index_article_info_auth"
+                android:textAllCaps="false"/>
+
+            <TextView
+                android:id="@+id/tv_community_subscript"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="@dimen/text_13"
+                android:padding="@dimen/dimen_10"
+                android:layout_marginBottom="@dimen/dimen_10"
+                android:layout_marginLeft="@dimen/dimen_20"
+                android:layout_marginRight="@dimen/dimen_20"
+                android:text="+关注"
+                android:singleLine="true"
+                android:background="@drawable/selector_tag_item"
+                android:textColor="@color/answer_list_text"
+                android:textAllCaps="false"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

@@ -78,6 +78,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Blog"
         android:usesCleartextTraffic="true"
+
+        android:largeHeap="true"
         xmlns:tools="http://schemas.android.com/tools">
 
         <meta-data
@@ -206,6 +208,11 @@
             android:name=".modules.laboratory.captcha.CaptchaActivity"
             android:screenOrientation="portrait"
             android:requestLegacyExternalStorage="true"
+            android:theme="@style/Theme.Blog"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".modules.login.DevelopSettingActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Blog"
             tools:ignore="LockedOrientationActivity" />
 

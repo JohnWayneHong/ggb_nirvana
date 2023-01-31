@@ -9,6 +9,7 @@
     <string name="index_article_info_readcount_string">阅读</string>
     <string name="index_article_info_commentcount_string">评论</string>
     <string name="index_article_info_likecount_string">赞</string>
+    <string name="index_article_info_dislikecount_string">踩</string>
     <string name="me_login_click_string">点击登录</string>
     <string name="me_login_desc_string">成就你的写作梦想</string>
     <string name="me_article_string">我的文章</string>
@@ -105,5 +106,8 @@
     <string name="crash_error_details_clipboard_label">错误信息</string>
     <string name="crash_error_file">错误日志保存路径</string>
     <string name="crash_file_permission">牛蛙呐需要获取你的存储权限,否则无法使用!</string>
+
+
+    <string name="develop_community_subscript_fans">发表 %s 粉丝 %s</string>
 
 </resources>

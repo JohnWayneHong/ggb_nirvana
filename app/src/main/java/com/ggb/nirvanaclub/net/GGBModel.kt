@@ -54,7 +54,7 @@ class GGBModel :GGBContract.Model{
     }
 
     override fun searchArticleByTime(pager:Int,query:String,other:String): Observable<HttpResult<SearchArticleBean>> {
-        return Api.getDefault(2,true).searchArticleByTime(pager,query,other)
+        return Api.getDefault(2,1).searchArticleByTime(pager,query,other)
     }
 
     override fun likeOrCancelArticle(articleId: String,amILike:Boolean): Observable<HttpResult<Any>> {
@@ -64,4 +64,21 @@ class GGBModel :GGBContract.Model{
                     else C.ARTICLE_LIKE_OFF
         ))
     }
+
+    override fun developGetRandomGirl(): Observable<ThirdHttpResult<List<DevelopRandomGirlListBean>>> {
+        return Api.getDefault(3,3).developGetRandomGirl()
+    }
+
+    override fun communityText(): Observable<ThirdHttpResult<List<DevelopJokesListBean>>> {
+        return Api.getDefault(3,3).communityText()
+    }
+
+    override fun communityPicture(): Observable<ThirdHttpResult<List<DevelopJokesListBean>>> {
+        return Api.getDefault(3,3).communityPicture()
+    }
+
+    override fun communityRecommendSubscript(): Observable<ThirdHttpResult<List<DevelopJokesSubscriptListBean>>> {
+        return Api.getDefault(3,3).communityRecommendSubscript()
+    }
+
 }

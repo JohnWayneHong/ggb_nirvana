@@ -43,7 +43,6 @@ class ArticleActivity : BaseActivity() , GGBContract.View{
         Log.e("TAG", "收到fragment传递过来的id: $articleId")
 
         present.getArticle(articleId)
-        val isLogin = isLoginCheck()
         rsb_article_like.init(this)
     }
 

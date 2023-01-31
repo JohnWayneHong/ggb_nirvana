@@ -18,11 +18,17 @@ object C {
     const val SIGN_SECRET_KEY = "suxiang998866"
     const val QQ_LOGIN_APPLY_ID = "102027954"
 
+
+    const val MXNZP_APP_ID = "iqbtjnsovlbohjqj"
+    const val MXNZP_APP_SECRET = "dDlxajBRbkRFRktZdTFydlhBZXZkUT09"
+
     const val PUBLIC_PAGER_NUMBER = "10"
 
     const val HX_HOST_TYPE = 1
     const val HX_BASE_ADDRESS = "https://nirvana1234.xyz/api/android/"
     const val OLD_BASE_ADDRESS = "https://nirvana1234.xyz/api/"
+    const val THIRD_BASE_ADDRESS = "https://www.mxnzp.com/api/"
+    const val JOKES_BASE_ADDRESS = "http://tools.cretinzp.com/jokes/"
 
     const val ANDROID_UPDATE_CONFIG_ADDRESS = "https://nirvana1234.xyz/apk/latest"
     const val ANDROID_UPDATE_TIMES_ADDRESS = "https://f.m.suning.com/api/ct.do"

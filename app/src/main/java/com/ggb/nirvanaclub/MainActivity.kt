@@ -251,7 +251,7 @@ class MainActivity: BaseActivity() ,ConfigDownloadUtils.OnConfigDownloadComplete
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public fun shakeStepRefresh(event: StepRefreshEvent){
-        (fragments[1] as CommunityFragment).initStep(event.step)
+//        (fragments[1] as CommunityFragment).initStep(event.step)
     }
 
     /**

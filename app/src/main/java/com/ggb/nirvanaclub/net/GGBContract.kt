@@ -18,6 +18,10 @@ interface GGBContract {
         var SAVEUSERTAGS = "saveUserTags"
         var SEARCHARTICLEBYTIME = "searchArticleByTime"
         var LIKEORCANCEL = "likeOrCancel"
+        var GETRANDOMGIRL = "getRandomGirl"
+        var GETJOKESTEXT = "getJokesText"
+        var GETJOKESPICTURE = "getJokesPicture"
+        var GETJOKESRECOMMENDSUBSCRIPT = "getJokesRecommendSubscript"
     }
 
     interface View : BaseView
@@ -33,6 +37,10 @@ interface GGBContract {
         fun saveUserTags(tagId: String):Observable<HttpResult<Any>>
         fun searchArticleByTime(pager:Int,query:String,other:String):Observable<HttpResult<SearchArticleBean>>
         fun likeOrCancelArticle(articleId:String,amILike:Boolean):Observable<HttpResult<Any>>
+        fun developGetRandomGirl():Observable<ThirdHttpResult<List<DevelopRandomGirlListBean>>>
+        fun communityText():Observable<ThirdHttpResult<List<DevelopJokesListBean>>>
+        fun communityPicture():Observable<ThirdHttpResult<List<DevelopJokesListBean>>>
+        fun communityRecommendSubscript():Observable<ThirdHttpResult<List<DevelopJokesSubscriptListBean>>>
     }
 
     interface Present{
@@ -46,5 +54,10 @@ interface GGBContract {
         fun saveUserTags(tagId: String)
         fun searchArticleByTime(pager:Int,query:String,other:String)
         fun likeOrCancelArticle(articleId:String,amILike:Boolean)
+        fun developGetRandomGirl()
+        fun communityText()
+        fun communityPicture()
+        fun communityRecommendSubscript()
+
     }
 }

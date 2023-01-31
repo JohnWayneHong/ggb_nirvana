@@ -66,4 +66,19 @@ public class RegularUtil {
 
     }
 
+    /**
+     *去除前n个字符
+     */
+    public static String truncateHeadString(String origin, int count) {
+        if (origin == null || origin.length() < count) {
+            return null;
+        }
+        char[] arr = origin.toCharArray();
+        char[] ret = new char[arr.length - count];
+        for (int i = 0; i < ret.length; i++) {
+            ret[i] = arr[i + count];
+        }
+        return String.copyValueOf(ret);
+    }
+
 }

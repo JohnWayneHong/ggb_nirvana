@@ -184,4 +184,76 @@ class GGBPresent(baseView: GGBContract.View) :BasePresent<GGBContract.View>(base
             })
     }
 
+    override fun developGetRandomGirl() {
+        model.developGetRandomGirl()
+            .compose(RxSchedulersHelper.io_main())
+            .subscribe(object :ThirdBaseObserver<List<DevelopRandomGirlListBean>>(mContext,true){
+                override fun onSuccess(t: ThirdHttpResult<List<DevelopRandomGirlListBean>>?) {
+                    view.onSuccess(GGBContract.GETRANDOMGIRL,t?.data)
+                }
+
+                override fun onCodeError(t: ThirdHttpResult<List<DevelopRandomGirlListBean>>) {
+                    view.onFailed(t.message,false)
+                }
+
+                override fun onFailure(e: Throwable?, isNetWorkError: Boolean) {
+                    view.onNetError(isNetWorkError,false)
+                }
+            })
+    }
+
+    override fun communityText() {
+        model.communityText()
+            .compose(RxSchedulersHelper.io_main())
+            .subscribe(object :ThirdBaseObserver<List<DevelopJokesListBean>>(mContext,true){
+                override fun onSuccess(t: ThirdHttpResult<List<DevelopJokesListBean>>?) {
+                    view.onSuccess(GGBContract.GETJOKESTEXT,t?.data)
+                }
+
+                override fun onCodeError(t: ThirdHttpResult<List<DevelopJokesListBean>>) {
+                    view.onFailed(t.message,false)
+                }
+
+                override fun onFailure(e: Throwable?, isNetWorkError: Boolean) {
+                    view.onNetError(isNetWorkError,false)
+                }
+            })
+    }
+
+    override fun communityPicture() {
+        model.communityPicture()
+            .compose(RxSchedulersHelper.io_main())
+            .subscribe(object :ThirdBaseObserver<List<DevelopJokesListBean>>(mContext,true){
+                override fun onSuccess(t: ThirdHttpResult<List<DevelopJokesListBean>>?) {
+                    view.onSuccess(GGBContract.GETJOKESPICTURE,t?.data)
+                }
+
+                override fun onCodeError(t: ThirdHttpResult<List<DevelopJokesListBean>>) {
+                    view.onFailed(t.message,false)
+                }
+
+                override fun onFailure(e: Throwable?, isNetWorkError: Boolean) {
+                    view.onNetError(isNetWorkError,false)
+                }
+            })
+    }
+
+    override fun communityRecommendSubscript() {
+        model.communityRecommendSubscript()
+            .compose(RxSchedulersHelper.io_main())
+            .subscribe(object :ThirdBaseObserver<List<DevelopJokesSubscriptListBean>>(mContext,true){
+                override fun onSuccess(t: ThirdHttpResult<List<DevelopJokesSubscriptListBean>>?) {
+                    view.onSuccess(GGBContract.GETJOKESRECOMMENDSUBSCRIPT,t?.data)
+                }
+
+                override fun onCodeError(t: ThirdHttpResult<List<DevelopJokesSubscriptListBean>>) {
+                    view.onFailed(t.message,false)
+                }
+
+                override fun onFailure(e: Throwable?, isNetWorkError: Boolean) {
+                    view.onNetError(isNetWorkError,false)
+                }
+            })
+    }
+
 }

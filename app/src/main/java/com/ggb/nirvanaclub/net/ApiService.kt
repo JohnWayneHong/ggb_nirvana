@@ -52,4 +52,21 @@ interface ApiService {
     //点赞或取消点赞文章
     @PUT("main/article/like/{articleId}")
     fun likeOrCancel(@Path("articleId") articleId: String, @Body order: Map<String, String>): Observable<HttpResult<Any>>
+
+    //获取随机美女图片
+    @GET("image/girl/list/random")
+    fun developGetRandomGirl(): Observable<ThirdHttpResult<List<DevelopRandomGirlListBean>>>
+
+    //获取随机纯文字
+    @POST("home/text")
+    fun communityText(): Observable<ThirdHttpResult<List<DevelopJokesListBean>>>
+
+    //获取随机纯文字
+    @POST("home/pic")
+    fun communityPicture(): Observable<ThirdHttpResult<List<DevelopJokesListBean>>>
+
+    //获取主页的推荐关注数据
+    @POST("home/attention/recommend")
+    fun communityRecommendSubscript(): Observable<ThirdHttpResult<List<DevelopJokesSubscriptListBean>>>
+
 }

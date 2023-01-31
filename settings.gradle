@@ -3,3 +3,4 @@ include ':lib'
 include ':shadowLibrary'
 rootProject.name = "nirvanaClub"
 
+include ':nineLibrary'

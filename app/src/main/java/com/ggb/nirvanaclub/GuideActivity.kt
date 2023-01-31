@@ -103,7 +103,8 @@ class GuideActivity : BaseActivity(),TimeCountUtil.OnCountDownListener {
     }
 
     override fun onTickChange(millisUntilFinished: Long) {
-        tv_jump_guide.text = "跳过"+"("+(millisUntilFinished / 1000).toString() + "s"+")"
+        tv_jump_guide.text = (millisUntilFinished / 1000).toString() + "s"+" | "+"跳过"
+//        tv_jump_guide.text = "跳过"+"("+(millisUntilFinished / 1000).toString() + "s"+")"
     }
 
     override fun OnFinishChanger() {

@@ -47,7 +47,7 @@ android {
         minSdkVersion 21
 //        targetSdkVersion 28
         targetSdkVersion 30
-        versionCode 21
+        versionCode 22
         versionName "V2.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -85,6 +85,7 @@ android {
 
 dependencies {
     implementation project(path: ':shadowLibrary')
+    implementation project(path: ':nineLibrary')
     implementation fileTree(dir: 'libs', include: '*.jar')
     implementation 'com.tencent:mmkv:1.2.12'
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
@@ -203,4 +204,10 @@ dependencies {
     //RxTool 工具库
     implementation 'com.github.tamsiree.RxTool:RxUI:2.6.3'
     implementation 'com.github.tamsiree.RxTool:RxKit:2.6.3'
+
+    //九图框架
+    // -------------------- 以下4个库是必须依赖的 ----------------------------
+//    implementation 'com.github.bingoogolapple:BGAPhotoPicker-Android:2.0.3'
+    implementation 'com.github.bingoogolapple:BGABaseAdapter-Android:2.0.1'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 }

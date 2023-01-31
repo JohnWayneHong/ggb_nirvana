@@ -28,6 +28,7 @@ import com.ggb.nirvanaclub.bean.QQAvatarBean
 import com.ggb.nirvanaclub.bean.UserBean
 import com.ggb.nirvanaclub.constans.C
 import com.ggb.nirvanaclub.event.UserStateChangeEvent
+import com.ggb.nirvanaclub.modules.login.DevelopSettingActivity
 import com.ggb.nirvanaclub.modules.login.LoginActivity
 import com.ggb.nirvanaclub.modules.login.SettingActivity
 import com.ggb.nirvanaclub.modules.scanner.ActivityScannerCode
@@ -70,7 +71,8 @@ class MeFragment :BaseFragment(){
         MeOptionBean("浏览历史" ),
         MeOptionBean("设置" ),
         MeOptionBean("帮助与反馈" ),
-        MeOptionBean("了解更多" )
+        MeOptionBean("了解更多" ),
+        MeOptionBean("开发者模式" )
 
     )
 
@@ -140,6 +142,9 @@ class MeFragment :BaseFragment(){
                     }
                     if (aAdapter?.data?.get(position)?.title == "了解更多"){
                         checkPermission()
+                    }
+                    if (aAdapter?.data?.get(position)?.title == "开发者模式"){
+                        activity?.startActivity<DevelopSettingActivity>()
                     }
 
                 }

@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/dimen_15"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_50"
+            android:orientation="horizontal">
+
+            <com.ggb.nirvanaclub.view.RoundCornerImageView
+                android:id="@+id/rci_community_author"
+                android:layout_width="@dimen/dimen_40"
+                android:layout_height="match_parent"/>
+
+            <Space
+                android:layout_width="@dimen/dimen_5"
+                android:layout_height="match_parent"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_community_authorName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/text_14"
+                    android:text="男女双打"
+                    android:textStyle="bold"
+                    android:textColor="@color/index_article_info_auth"
+                    android:textAllCaps="false"/>
+
+                <TextView
+                    android:id="@+id/tv_community_authorSign"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/text_12"
+                    android:text="实打实的艰苦艰苦"
+                    android:singleLine="true"
+                    android:textColor="@color/index_article_info_auth"
+                    android:textAllCaps="false"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_10"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_community_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textAllCaps="false"
+                android:textSize="@dimen/text_14"
+                android:textColor="@color/index_article_info_content"
+                android:lineSpacingExtra="@dimen/dimen_5"
+                android:ellipsize="end" />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_community_picture_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <cn.bingoogolapple.photopicker.widget.BGANinePhotoLayout
+                android:id="@+id/npl_item_moment_photos"
+                style="@style/MatchWrap"
+                android:layout_marginTop="8dp"
+                app:bga_npl_itemCornerRadius="0dp"
+                app:bga_npl_itemSpanCount="3"
+                app:bga_npl_itemWhiteSpacing="4dp"
+                app:bga_npl_itemWidth="0dp"
+                app:bga_npl_otherWhiteSpacing="64dp"
+                app:bga_npl_placeholderDrawable="@mipmap/bga_pp_ic_holder_light"
+                app:bga_npl_showAsLargeWhenOnlyOne="true"/>
+
+        </RelativeLayout>
+
+        <!--  用了第三方的框架 暂时不用recycleView实现      -->
+<!--        <RelativeLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent">-->
+
+<!--            <androidx.recyclerview.widget.RecyclerView-->
+<!--                android:id="@+id/rcy_community_pic"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:overScrollMode="never"/>-->
+
+<!--        </RelativeLayout>-->
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_10"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <RelativeLayout
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dimen_30">
+
+                <com.tamsiree.rxui.view.likeview.RxShineButton
+                    android:id="@+id/rsb_community_like"
+                    android:layout_width="@dimen/dimen_30"
+                    android:layout_height="@dimen/dimen_30"
+                    android:src="@android:color/darker_gray"
+                    app:allow_random_color="false"
+                    app:big_shine_color="#FF6666"
+                    app:btn_color="@android:color/darker_gray"
+                    app:btn_fill_color="#FF6666"
+                    app:click_animation_duration="200"
+                    app:enable_flashing="false"
+                    app:shine_animation_duration="1500"
+                    app:shine_count="15"
+                    app:shine_distance_multiple="1.5"
+                    app:shine_turn_angle="10"
+                    app:siShape="@mipmap/like_good"
+                    app:small_shine_color="#CC9999"
+                    app:small_shine_offset_angle="20" />
+
+                <!-- 赞 -->
+                <TextView
+                    android:id="@+id/tv_community_likeCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginStart="@dimen/dimen_10"
+                    android:layout_toEndOf="@+id/rsb_community_like"
+                    android:gravity="center_vertical"
+                    android:textAllCaps="false"
+                    android:textColor="@color/index_article_info_pop"
+                    android:textSize="@dimen/text_11"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dimen_30">
+
+                <com.tamsiree.rxui.view.likeview.RxShineButton
+                    android:id="@+id/rsb_community_dislike"
+                    android:layout_width="@dimen/dimen_30"
+                    android:layout_height="@dimen/dimen_30"
+                    android:src="@android:color/darker_gray"
+                    app:allow_random_color="false"
+                    app:big_shine_color="#FF6666"
+                    app:btn_color="@android:color/darker_gray"
+                    app:btn_fill_color="#FF6666"
+                    app:click_animation_duration="200"
+                    app:enable_flashing="false"
+                    app:shine_animation_duration="1500"
+                    app:shine_count="15"
+                    app:shine_distance_multiple="1.5"
+                    app:shine_turn_angle="10"
+                    app:siShape="@mipmap/dislike_notgood"
+                    app:small_shine_color="#CC9999"
+                    app:small_shine_offset_angle="20" />
+
+                <!-- 踩 -->
+                <TextView
+                    android:id="@+id/tv_community_dislikeCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginStart="@dimen/dimen_10"
+                    android:layout_toEndOf="@+id/rsb_community_dislike"
+                    android:gravity="center_vertical"
+                    android:textAllCaps="false"
+                    android:textColor="@color/index_article_info_pop"
+                    android:textSize="@dimen/text_11"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dimen_30">
+
+                <com.tamsiree.rxui.view.likeview.RxShineButton
+                    android:id="@+id/rsb_community_comment"
+                    android:layout_width="@dimen/dimen_30"
+                    android:layout_height="@dimen/dimen_30"
+                    android:src="@android:color/darker_gray"
+                    app:allow_random_color="false"
+                    app:big_shine_color="#FF6666"
+                    app:btn_color="@android:color/darker_gray"
+                    app:btn_fill_color="#FF6666"
+                    app:click_animation_duration="200"
+                    app:enable_flashing="false"
+                    app:shine_animation_duration="1500"
+                    app:shine_count="15"
+                    app:shine_distance_multiple="1.5"
+                    app:shine_turn_angle="10"
+                    app:siShape="@mipmap/comment"
+                    app:small_shine_color="#CC9999"
+                    app:small_shine_offset_angle="20" />
+
+                <!-- 评论 -->
+                <TextView
+                    android:id="@+id/tv_community_commentCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginStart="@dimen/dimen_10"
+                    android:layout_toEndOf="@+id/rsb_community_comment"
+                    android:gravity="center_vertical"
+                    android:textAllCaps="false"
+                    android:textColor="@color/index_article_info_pop"
+                    android:textSize="@dimen/text_11"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dimen_30">
+
+                <com.tamsiree.rxui.view.likeview.RxShineButton
+                    android:id="@+id/rsb_community_share"
+                    android:layout_width="@dimen/dimen_30"
+                    android:layout_height="@dimen/dimen_30"
+                    android:src="@android:color/darker_gray"
+                    app:allow_random_color="false"
+                    app:big_shine_color="#FF6666"
+                    app:btn_color="@android:color/darker_gray"
+                    app:btn_fill_color="#FF6666"
+                    app:click_animation_duration="200"
+                    app:enable_flashing="false"
+                    app:shine_animation_duration="1500"
+                    app:shine_count="15"
+                    app:shine_distance_multiple="1.5"
+                    app:shine_turn_angle="10"
+                    app:siShape="@mipmap/share"
+                    app:small_shine_color="#CC9999"
+                    app:small_shine_offset_angle="20" />
+
+                <!-- 分享 -->
+                <TextView
+                    android:id="@+id/tv_community_shareCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_toEndOf="@+id/rsb_community_share"
+                    android:gravity="center_vertical"
+                    android:layout_marginStart="@dimen/dimen_10"
+                    android:textStyle="bold"
+                    android:textAllCaps="false"
+                    android:textColor="@color/index_article_info_pop"
+                    android:textSize="@dimen/text_11" />
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

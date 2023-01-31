@@ -43,6 +43,7 @@
                     android:gravity="center"
                     android:paddingLeft="@dimen/dimen_10"
                     android:paddingRight="@dimen/dimen_10"
+                    android:textSize="@dimen/text_13"
                     android:text="跳过"
                     android:textColor="@color/white" />
 

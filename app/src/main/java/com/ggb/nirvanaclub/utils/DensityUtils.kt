@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.view.View
 import androidx.fragment.app.Fragment
+import java.util.ArrayList
 
 object DensityUtils {
     /**
@@ -52,4 +53,27 @@ object DensityUtils {
     fun Activity.sp2px(spValue: Float): Int = sp2px(this, spValue)
     fun Fragment.sp2px(spValue: Float): Int = sp2px(requireContext(), spValue)
     fun View.sp2px(spValue: Float): Int = sp2px(context, spValue)
+
+    /**
+     * 分割字符串
+     *
+     * @param str
+     * @return
+     */
+    @JvmStatic
+    fun subStringToList(str: String): List<String> {
+        val result: MutableList<String> = ArrayList()
+        if (str.isNotEmpty()) {
+            val len = str.length
+            if (len <= 1) {
+                result.add(str)
+                return result
+            } else {
+                for (i in 0 until len) {
+                    result.add(str.substring(i, i + 1))
+                }
+            }
+        }
+        return result
+    }
 }

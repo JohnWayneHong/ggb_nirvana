@@ -1,113 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="@color/background">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_300">
-
-        <ImageView
-            android:id="@+id/iv_home_head"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="fitXY"
-            android:src="@mipmap/ic_home_bg_walk" />
-
-
-        <ImageView
-            android:id="@+id/iv_note_type"
-            android:layout_width="@dimen/dimen_40"
-            android:layout_height="@dimen/dimen_40"
-            android:layout_marginBottom="@dimen/dimen_25"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentBottom="true"
-            android:src="@mipmap/ic_people"/>
-
-        <View
-            android:id="@+id/v_status_bar"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_75"
-            android:background="@color/white"
-            android:alpha="0"/>
-
-    </RelativeLayout>
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/tb_home_title"
+    <LinearLayout
+        android:id="@+id/ll_community_title"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_50"
-        app:contentInsetLeft="0dp"
-        app:contentInsetStart="0dp"
-        tools:ignore="MissingConstraints">
+        android:orientation="horizontal">
 
-        <RelativeLayout
-            android:id="@+id/rl_home_title"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_48"
-            android:orientation="horizontal">
-
-            <View
-                android:id="@+id/v_home_title"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/white"
-                android:alpha="0"/>
-
-            <com.ggb.nirvanaclub.view.HomeSelectTitle
-                android:id="@+id/hst_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"/>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dimen_50"
+            android:orientation="horizontal"
+            android:padding="@dimen/dimen_10"
+            android:layout_weight="1">
 
             <TextView
-                android:id="@+id/tv_note_list"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:id="@+id/tv_community_scribe"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:gravity="center"
-                android:paddingLeft="@dimen/dimen_15"
-                android:text="历史步数"
-                android:textColor="@color/white"
-                android:textSize="@dimen/text_13" />
+                android:textColor="@color/text_main_color"
+                android:textStyle="bold"
+                android:textSize="@dimen/text_16"
+                android:text="关注"/>
 
-            <ImageView
-                android:id="@+id/iv_home_sign"
-                android:layout_width="@dimen/dimen_40"
-                android:layout_height="@dimen/dimen_40"
-                android:layout_marginRight="@dimen/dimen_15"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:src="@mipmap/ic_home_sign"/>
+            <TextView
+                android:id="@+id/tv_community_recommend"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textColor="@color/text_main_color"
+                android:textStyle="bold"
+                android:textSize="@dimen/text_16"
+                android:text="推荐"/>
 
-        </RelativeLayout>
+            <TextView
+                android:id="@+id/tv_community_text"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textColor="@color/text_main_color"
+                android:textStyle="bold"
+                android:textSize="@dimen/text_16"
+                android:text="纯文"/>
 
-    </androidx.appcompat.widget.Toolbar>
+            <TextView
+                android:id="@+id/tv_community_picture"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textColor="@color/text_main_color"
+                android:textStyle="bold"
+                android:textSize="@dimen/text_16"
+                android:text="趣图"/>
 
-    <com.scwang.smart.refresh.layout.SmartRefreshLayout
-        android:id="@+id/swipe_refresh_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:srlPrimaryColor="@color/white"
-        android:layout_below="@+id/tb_home_title"
-        app:srlAccentColor="@color/color_3A3A3A"
-        app:srlEnablePreviewInEditMode="true"
-        android:paddingBottom="@dimen/dimen_15">
+            <View
+                android:layout_weight="0.5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
 
-        <com.scwang.smart.refresh.header.ClassicsHeader
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:srlAccentColor="@color/color_3A3A3A"
-            app:srlPrimaryColor="@color/transparent"/>
+        </LinearLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rcy_home_list"
-            android:layout_width="match_parent"
+        <ImageView
+            android:id="@+id/iv_search_community"
+            android:layout_width="@dimen/dimen_45"
             android:layout_height="match_parent"
-            android:overScrollMode="never"/>
+            android:padding="@dimen/dimen_13"
+            android:src="@mipmap/search" />
 
-    </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+    </LinearLayout>
 
-</RelativeLayout>
+    <com.ggb.nirvanaclub.view.NoScrollViewPager
+        android:id="@+id/vp_community"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+</LinearLayout>

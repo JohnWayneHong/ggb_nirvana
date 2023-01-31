@@ -2,61 +2,30 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/background"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
     android:orientation="vertical">
 
-    <LinearLayout
+    <ImageView
+        android:id="@+id/iv_news_img"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/dimen_15"
-        android:layout_marginRight="@dimen/dimen_15"
-        android:padding="@dimen/dimen_15"
-        android:background="@color/white">
+        android:scaleType="center"
+        android:src="@mipmap/logo"/>
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:layout_marginRight="@dimen/dimen_15">
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginLeft="@dimen/dimen_15"-->
+<!--        android:layout_marginRight="@dimen/dimen_15">-->
 
-            <TextView
-                android:id="@+id/tv_new_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:maxLines="2"
-                android:ellipsize="end"
-                android:textSize="@dimen/text_15"
-                android:textColor="@color/title_main_color"
-                android:text="好友累计阶段你需要知道的"/>
+<!--        <ImageView-->
+<!--            android:id="@+id/iv_news_img"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:scaleType="center"-->
+<!--            android:src="@mipmap/logo"/>-->
 
-            <TextView
-                android:id="@+id/tv_news_summery"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimen_15"
-                android:maxLines="2"
-                android:ellipsize="end"
-                android:textSize="@dimen/text_13"
-                android:textColor="@color/title_second_color"
-                android:text="好友累计阶段你需要知道的好友累计阶段你需要知道的好友累计阶段你需要知道的"/>
-
-        </LinearLayout>
-
-        <com.ggb.nirvanaclub.view.RoundImageView
-            android:id="@+id/iv_news_img"
-            android:layout_width="@dimen/dimen_110"
-            android:layout_height="@dimen/dimen_90"
-            android:scaleType="fitXY"
-            android:src="@mipmap/logo"/>
-
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_1"
-        android:background="@color/background"
-        android:layout_marginLeft="@dimen/dimen_15"
-        android:layout_marginRight="@dimen/dimen_15"/>
+<!--    </LinearLayout>-->
 
 </LinearLayout>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <include layout="@layout/title_public_view"/>
+
+    <LinearLayout
+        android:id="@+id/ll_develop_check"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.ggb.nirvanaclub.view.PayPwdInputView
+            android:id="@+id/ppi_develop_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dimen_10"
+            android:layout_marginTop="@dimen/dimen_20"
+            android:inputType="number"
+            app:quick_divideLineWidth="@dimen/dimen_1"
+            app:quick_isPwd="true"
+            app:quick_maxCount="6"
+            app:quick_psdType="bottomLine"
+            app:quick_rectAngle="0dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/ll_develop"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.youth.banner.Banner
+            android:id="@+id/ban_develop_list"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_300"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/dimen_15"
+            android:layout_marginRight="@dimen/dimen_15"
+            android:layout_marginTop="@dimen/dimen_15"
+            app:indicator_width="@dimen/dimen_30"
+            app:indicator_height="@dimen/dimen_2"
+            app:indicator_drawable_selected="@drawable/bg_shade_full"
+            app:indicator_drawable_unselected="@drawable/bg_white_full"
+            app:banner_default_image="@mipmap/logo"/>
+
+        <TextView
+            android:id="@+id/tv_develop_change"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dimen_40"
+            android:layout_marginTop="@dimen/dimen_20"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:textColor="@color/text_main_color"
+            android:textStyle="bold"
+            android:textSize="@dimen/text_20"
+            android:text="换一批"/>
+
+    </LinearLayout>
+
+</LinearLayout>

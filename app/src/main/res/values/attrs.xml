@@ -18,6 +18,24 @@
         <attr name="civ_fill_color" format="color"/>
     </declare-styleable>
 
+    <declare-styleable name="PayPwdInputView">
+        <attr name="quick_maxCount" format="integer" />
+        <attr name="quick_circleColor" format="color" />
+        <attr name="quick_textSize" format="dimension" />
+        <attr name="quick_bottomLineColor" format="color" />
+        <attr name="quick_pwdRadius" format="dimension" />
+        <attr name="quick_divideLineWidth" format="dimension" />
+        <attr name="quick_divideLineColor" format="color" />
+        <attr name="quick_rectAngle" format="dimension" />
+        <attr name="quick_isPwd" format="boolean" />
+        <attr name="quick_autoSize" format="boolean" />
+        <attr name="quick_psdType" format="enum">
+            <enum name="weChat" value="0" />
+            <enum name="bottomLine" value="1" />
+            <enum name="block" value="2" />
+        </attr>
+    </declare-styleable>
+
     <declare-styleable name="CarouselDots">
         <attr name="dotRadius" format="dimension" />
         <attr name="dotSelectedColor" format="color" />

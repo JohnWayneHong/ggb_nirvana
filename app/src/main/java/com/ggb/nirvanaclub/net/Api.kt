@@ -31,11 +31,16 @@ import javax.net.ssl.SSLContext
 import javax.net.ssl.SSLSocketFactory
 import javax.net.ssl.TrustManager
 
-class Api private constructor(hostType: Int,isAddress: Boolean) {
+class Api private constructor(hostType: Int,isAddress: Int) {
     private val retrofit: Retrofit
     private val apiService: ApiService
 
-    private var isAddressOld = false
+    /**
+     * isAddressOld : 1.web通用接口
+     *                2.android 特有api接口
+     *                3.第三方接口
+     */
+    private var isAddressOld = 2
 
     /**
      * 云端响应头拦截器，用来配置缓存策略
@@ -46,8 +51,8 @@ class Api private constructor(hostType: Int,isAddress: Boolean) {
         val cacheControl = request.cacheControl().toString()
         if (!NetUtils.isNetConnected(BaseApplication.instance)) {
             request = request.newBuilder()
-//                .cacheControl(if (TextUtils.isEmpty(cacheControl)) CacheControl.FORCE_NETWORK else CacheControl.FORCE_CACHE)
-                .cacheControl(if (TextUtils.isEmpty(cacheControl)) CacheControl.FORCE_CACHE else CacheControl.FORCE_CACHE)
+                .cacheControl(if (TextUtils.isEmpty(cacheControl)) CacheControl.FORCE_NETWORK else CacheControl.FORCE_CACHE)
+//                .cacheControl(if (TextUtils.isEmpty(cacheControl)) CacheControl.FORCE_CACHE else CacheControl.FORCE_CACHE)
                 .build()
         }
 
@@ -61,8 +66,8 @@ class Api private constructor(hostType: Int,isAddress: Boolean) {
         if (NetUtils.isNetConnected(BaseApplication.instance)) {
             //有网的时候读接口上的@Headers里的配置，你可以在这里进行统一的设置
             originalResponse.newBuilder()
-//                .header("Cache-Control", cacheControl)
-                .header("Cache-Control", "public,$CACHE_CONTROL_AGE")
+                .header("Cache-Control", cacheControl)
+//                .header("Cache-Control", "public,$CACHE_CONTROL_AGE")
                 .removeHeader("Pragma")
                 .build()
         } else {
@@ -85,6 +90,17 @@ class Api private constructor(hostType: Int,isAddress: Boolean) {
         val headerInterceptor = Interceptor{ chain ->
             val build = chain.request().newBuilder()
             build.addHeader("Content-Type", "application/json; charset=utf-8")
+            if (isAddressOld==3){
+                //这里是第三方接口，暂时不用框架请求 用AsyncTask异步任务类去请求
+//                build.addHeader("APP_ID", C.MXNZP_APP_ID)
+//                build.addHeader("APP_SECRET", C.MXNZP_APP_SECRET)
+                build.addHeader("project_token", "A9E915F9F9CF4D06B0C661D1B2E25997")
+                build.addHeader("channel", "cretin_open_api")
+                build.addHeader("token", "cretin_open_api")
+                build.addHeader("uk", "cretin_open_api")
+                build.addHeader("app", "cretin_open_api")
+                build.addHeader("device", "IPHONE 14 PRO MAX")
+            }
 //            build.addHeader("deviceType","sxApp")
 //            build.addHeader("versions", AppUtils.getVersionName(App.instance))
 //            build.addHeader("phoneSystem","Android")
@@ -135,20 +151,32 @@ class Api private constructor(hostType: Int,isAddress: Boolean) {
             .build()
 
         val gson = GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ").serializeNulls().create()
-        retrofit = if (isAddressOld){
-            Retrofit.Builder()
-                .client(okHttpClient)
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .baseUrl(C.OLD_BASE_ADDRESS)
-                .build()
-        }else{
-            Retrofit.Builder()
-                .client(okHttpClient)
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .baseUrl(C.HX_BASE_ADDRESS)
-                .build()
+        retrofit = when (isAddressOld) {
+            1 -> {
+                Retrofit.Builder()
+                    .client(okHttpClient)
+                    .addConverterFactory(GsonConverterFactory.create(gson))
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                    .baseUrl(C.OLD_BASE_ADDRESS)
+                    .build()
+            }
+            2 -> {
+                Retrofit.Builder()
+                    .client(okHttpClient)
+                    .addConverterFactory(GsonConverterFactory.create(gson))
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                    .baseUrl(C.HX_BASE_ADDRESS)
+                    .build()
+            }
+            else -> {
+                Retrofit.Builder()
+                    .client(okHttpClient)
+                    .addConverterFactory(GsonConverterFactory.create(gson))
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+//                    .baseUrl(C.THIRD_BASE_ADDRESS)
+                    .baseUrl(C.JOKES_BASE_ADDRESS)
+                    .build()
+            }
         }
         apiService = retrofit.create(ApiService::class.java)
     }
@@ -211,7 +239,7 @@ class Api private constructor(hostType: Int,isAddress: Boolean) {
         /**
          * @param hostType
          */
-        fun getDefault(hostType: Int = C.HX_HOST_TYPE,isAddress:Boolean = false): ApiService {
+        fun getDefault(hostType: Int = C.HX_HOST_TYPE,isAddress:Int = 2): ApiService {
             var retrofitManager: Api? = sRetrofitManager.get(hostType)
             if (retrofitManager == null) {
                 retrofitManager = Api(hostType,isAddress)
