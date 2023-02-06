@@ -2,6 +2,7 @@ package com.ggb.nirvanaclub.modules
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentPagerAdapter
@@ -27,8 +28,11 @@ import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
+import kotlin.math.min
 
 class IndexFragment :BaseFragment(),GGBContract.View{
+
+    private var mIndex = 0
 
     private var present:GGBPresent?=null
 
@@ -54,7 +58,6 @@ class IndexFragment :BaseFragment(),GGBContract.View{
 
         present?.getTag()
         initEvent()
-
     }
 
     private fun initEvent() {
@@ -95,9 +98,14 @@ class IndexFragment :BaseFragment(),GGBContract.View{
         }
 
         vp_index_article_vp.adapter = object : FragmentPagerAdapter(childFragmentManager){
-            override fun getItem(position: Int): Fragment = fragments[position]
+            override fun getItem(position: Int): Fragment {
+                return fragments[position]
+            }
             override fun getCount(): Int = fragments.size
-            override fun getItemId(position: Int): Long = tagList.get(position).tagId.toLong()
+            override fun getItemId(position: Int): Long {
+                return tagList.get(position).tagId.toLong()
+            }
+
         }
 
         vp_index_article_vp.addOnPageChangeListener(object : ViewPager.OnPageChangeListener{
@@ -110,6 +118,7 @@ class IndexFragment :BaseFragment(),GGBContract.View{
                     fragments[position].refreshData()
                 }
                 articleInfoChange(position)
+                mIndex = position
             }
         })
 

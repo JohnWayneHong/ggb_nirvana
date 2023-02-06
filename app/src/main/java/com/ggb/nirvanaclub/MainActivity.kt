@@ -9,6 +9,8 @@ import android.graphics.Paint
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
+import android.os.Handler
+import android.os.Message
 import android.provider.Settings
 import android.util.Log
 import android.view.Gravity
@@ -24,6 +26,8 @@ import com.ggb.nirvanaclub.base.BaseActivity
 import com.ggb.nirvanaclub.base.BaseFragment
 import com.ggb.nirvanaclub.bean.AppUpdateBean
 import com.ggb.nirvanaclub.bean.AppUpdateListBean
+import com.ggb.nirvanaclub.bean.QQAvatarBean
+import com.ggb.nirvanaclub.bean.UserBean
 import com.ggb.nirvanaclub.constans.C
 import com.ggb.nirvanaclub.event.StepRefreshEvent
 import com.ggb.nirvanaclub.listener.BaseUiListener
@@ -37,6 +41,7 @@ import com.tencent.connect.common.Constants
 import com.tencent.tauth.Tencent
 import com.yanzhenjie.permission.AndPermission
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_me.*
 import kotlinx.android.synthetic.main.fragment_subscription.*
 import kotlinx.android.synthetic.main.home_bottom_tab_button.*
 import org.greenrobot.eventbus.EventBus

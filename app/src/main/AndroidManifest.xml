@@ -211,6 +211,12 @@
             android:theme="@style/Theme.Blog"
             tools:ignore="LockedOrientationActivity" />
         <activity
+            android:name=".modules.laboratory.video.VideoActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Blog"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
             android:name=".modules.login.DevelopSettingActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Blog"

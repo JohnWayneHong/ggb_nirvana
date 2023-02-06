@@ -14,6 +14,8 @@ import android.util.Base64.DEFAULT
 import android.util.Base64.decode
 import android.util.Log
 import android.view.MotionEvent
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.widget.NestedScrollView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
@@ -38,8 +40,10 @@ import com.ggb.nirvanaclub.modules.user.UserInfoActivity
 import com.ggb.nirvanaclub.utils.*
 import com.ggb.nirvanaclub.utils.StatusBarUtils.setBaseStatusBar
 import com.ggb.nirvanaclub.view.MeBanner
+import com.ggb.nirvanaclub.view.RxToast
 import com.google.zxing.integration.android.IntentIntegrator
 import com.gyf.immersionbar.ImmersionBar
+import com.tamsiree.rxui.view.dialog.RxDialogSureCancel
 import com.tencent.mmkv.MMKV
 import com.tencent.open.log.SLog
 import com.yanzhenjie.permission.AndPermission
@@ -70,6 +74,7 @@ class MeFragment :BaseFragment(){
         MeOptionBean("我的专题" ),
         MeOptionBean("浏览历史" ),
         MeOptionBean("设置" ),
+        MeOptionBean("清除缓存" ),
         MeOptionBean("帮助与反馈" ),
         MeOptionBean("了解更多" ),
         MeOptionBean("开发者模式" )
@@ -146,7 +151,17 @@ class MeFragment :BaseFragment(){
                     if (aAdapter?.data?.get(position)?.title == "开发者模式"){
                         activity?.startActivity<DevelopSettingActivity>()
                     }
-
+                    if (position==7){
+                        val cacheSize = CacheDataUtil.getTotalCacheSize(requireContext())
+                        val rxDialog = RxDialogSureCancel(requireContext())
+                        rxDialog.setContent("您要清除缓存文件大小共 $cacheSize")
+                        rxDialog.sureView.setOnClickListener {
+                            CacheDataUtil.clearAllCache(requireContext())
+                            RxToast.success(requireContext(),"清除缓存成功！", Toast.LENGTH_SHORT, true)?.show()
+                            rxDialog.cancel() }
+                        rxDialog.cancelView.setOnClickListener { rxDialog.cancel() }
+                        rxDialog.show()
+                    }
                 }
             }
         }

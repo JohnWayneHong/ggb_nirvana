@@ -8,6 +8,7 @@ import com.chad.library.adapter.base.BaseViewHolder
 import com.ggb.nirvanaclub.R
 import com.ggb.nirvanaclub.bean.MeOptionBean
 import com.ggb.nirvanaclub.bean.SettingBean
+import com.ggb.nirvanaclub.bean.SettingListBean
 import com.lihang.ShadowLayout
 
 class SettingAdapter: BaseQuickAdapter<SettingBean, BaseViewHolder>(R.layout.item_setting) {
@@ -25,7 +26,20 @@ class SettingAdapter: BaseQuickAdapter<SettingBean, BaseViewHolder>(R.layout.ite
             if (it.childSubTitle.isNotEmpty()){
                 tChildSubTitle.text = it.childSubTitle
             }
+            cView?.setOnClickListener {item->
+                listener?.onSelect(it)
+            }
             contentView?.addView(cView)
         }
+    }
+
+    interface OnItemSettingChangeListener{
+        fun onSelect(data: SettingListBean)
+    }
+
+    private var listener : OnItemSettingChangeListener? = null
+
+    fun setOnItemSettingChangeListener(listener : OnItemSettingChangeListener){
+        this.listener = listener
     }
 }

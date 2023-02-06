@@ -26,12 +26,33 @@
 <!--            app:srlAccentColor="@color/text_main_color"-->
 <!--            app:srlPrimaryColor="@color/transparent"/>-->
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rcy_article_info_rv"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/light_gray" />
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcy_article_info_rv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/light_gray" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/floating_action_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="@dimen/dimen_20"
+                android:layout_marginBottom="@dimen/dimen_60"
+                app:borderWidth="0dp"
+                android:backgroundTint="@color/main_color"
+                app:srcCompat="@drawable/ic_arrow_upward_white_24dp" />
+
+        </RelativeLayout>
 
     </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+
+
 
 </LinearLayout>

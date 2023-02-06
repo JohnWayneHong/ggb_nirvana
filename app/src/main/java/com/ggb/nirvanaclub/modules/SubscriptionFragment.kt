@@ -14,6 +14,7 @@ import com.ggb.nirvanaclub.base.BaseFragment
 import com.ggb.nirvanaclub.bean.LaboratoryListBean
 import com.ggb.nirvanaclub.modules.laboratory.captcha.CaptchaActivity
 import com.ggb.nirvanaclub.modules.laboratory.ugame.FullscreenActivity
+import com.ggb.nirvanaclub.modules.laboratory.video.VideoActivity
 import com.ggb.nirvanaclub.modules.user.NirvanaEarnActivity
 import com.gyf.immersionbar.ImmersionBar
 import com.tamsiree.rxkit.RxImageTool
@@ -46,8 +47,8 @@ class SubscriptionFragment :BaseFragment(){
         laboratoryList.add(LaboratoryListBean("牛蛙呐二楼",R.mipmap.ic_bear_question))
         laboratoryList.add(LaboratoryListBean("牛蛙呐WebView",R.mipmap.ic_bear_question))
         laboratoryList.add(LaboratoryListBean("牛蛙呐牛逼验证码",R.mipmap.ic_bear_question))
-        laboratoryList.add(LaboratoryListBean("尚未开发",R.mipmap.ic_bear_question))
-        laboratoryList.add(LaboratoryListBean("尚未开发",R.mipmap.ic_bear_question))
+        laboratoryList.add(LaboratoryListBean("牛蛙呐健康管理",R.mipmap.ic_bear_question))
+        laboratoryList.add(LaboratoryListBean("牛蛙呐视频",R.mipmap.ic_bear_question))
         laboratoryList.add(LaboratoryListBean("尚未开发",R.mipmap.ic_bear_question))
         mAdapter?.setNewData(laboratoryList)
 
@@ -61,6 +62,13 @@ class SubscriptionFragment :BaseFragment(){
             }
             if (mAdapter?.data?.get(position)?.name=="牛蛙呐牛逼验证码"){
                 activity?.startActivity<CaptchaActivity>()
+            }
+            if (mAdapter?.data?.get(position)?.name=="牛蛙呐健康管理"){
+                //TODO 健康管理弹窗
+                activity?.startActivity<CaptchaActivity>()
+            }
+            if (mAdapter?.data?.get(position)?.name=="牛蛙呐视频"){
+                activity?.startActivity<VideoActivity>()
             }
         }
 

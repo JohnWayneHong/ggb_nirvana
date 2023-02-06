@@ -1,12 +1,11 @@
 package com.ggb.nirvanaclub.modules.article
 
 import android.annotation.SuppressLint
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
-import android.view.Gravity
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.ggb.nirvanaclub.R
 import com.ggb.nirvanaclub.adapter.IndexArticleInfoPagingAdapter
 import com.ggb.nirvanaclub.base.BaseFragment
@@ -16,6 +15,7 @@ import com.ggb.nirvanaclub.net.GGBPresent
 import kotlinx.android.synthetic.main.fragment_article_info.*
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
+
 
 class ArticleInfoFragment :BaseFragment(),GGBContract.View{
 
@@ -60,6 +60,39 @@ class ArticleInfoFragment :BaseFragment(),GGBContract.View{
         swipe_refresh_layout.setOnRefreshListener {
             getNewsList(true,false)
         }
+        floating_action_btn.setOnClickListener {
+            rcy_article_info_rv.run {
+                if (LinearLayoutManager(activity).findFirstVisibleItemPosition() > 20) {
+                    scrollToPosition(0)
+                } else {
+                    smoothScrollToPosition(0)
+                }
+            }
+        }
+        rcy_article_info_rv.addOnScrollListener(object :RecyclerView.OnScrollListener(){
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                val offsetY = recyclerView.computeVerticalScrollOffset()
+
+//                Log.e("当前坐标=============》", "dx: " + dx + ",  dy: " + dy+ ",  offsetY: " + offsetY)
+
+                val al = offsetY / 600f * 0xff
+                if (dy <= 0) {
+                    if (floating_action_btn.visibility !== View.VISIBLE) {
+                        floating_action_btn.visibility = View.VISIBLE
+                    }
+                } else {
+                    if (floating_action_btn.visibility !== View.GONE) {
+                        floating_action_btn.visibility = View.GONE
+                    }
+                }
+
+            }
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+            }
+        })
+
     }
 
     private fun getNewsList(isRefreshList: Boolean,isShow:Boolean){

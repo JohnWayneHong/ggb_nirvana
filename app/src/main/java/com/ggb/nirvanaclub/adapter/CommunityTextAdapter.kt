@@ -4,6 +4,7 @@ import android.Manifest
 import android.os.Environment
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -57,6 +58,8 @@ class CommunityTextAdapter : BaseQuickAdapter<DevelopJokesListBean, BaseViewHold
             helper?.getView<BGANinePhotoLayout>(R.id.npl_item_moment_photos)?.setDelegate(this)
             helper?.getView<BGANinePhotoLayout>(R.id.npl_item_moment_photos)?.data = decodeString
         }
+
+        helper?.addOnClickListener(R.id.ll_community_content)
 
     }
 

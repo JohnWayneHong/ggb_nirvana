@@ -6,6 +6,7 @@
     android:orientation="vertical">
 
     <LinearLayout
+        android:id="@+id/ll_community_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -17,10 +18,17 @@
             android:layout_height="@dimen/dimen_50"
             android:orientation="horizontal">
 
-            <com.ggb.nirvanaclub.view.RoundCornerImageView
+
+            <cn.bingoogolapple.photopicker.widget.BGAImageView
                 android:id="@+id/rci_community_author"
                 android:layout_width="@dimen/dimen_40"
-                android:layout_height="match_parent"/>
+                android:layout_height="wrap_content"
+                app:bga_iv_cornerRadius="@dimen/dimen_10"/>
+
+<!--            <com.ggb.nirvanaclub.view.RoundCornerImageView-->
+<!--                android:id="@+id/rci_community_author"-->
+<!--                android:layout_width="@dimen/dimen_40"-->
+<!--                android:layout_height="match_parent"/>-->
 
             <Space
                 android:layout_width="@dimen/dimen_5"
@@ -56,6 +64,18 @@
 
             </LinearLayout>
 
+            <TextView
+                android:id="@+id/tv_community_subscript"
+                android:layout_width="@dimen/dimen_50"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:textSize="@dimen/text_14"
+                android:text="+关注"
+                android:textStyle="bold"
+                android:textColor="@color/main_color"
+                android:textAllCaps="false"/>
+
         </LinearLayout>
 
         <Space
@@ -86,12 +106,13 @@
             <cn.bingoogolapple.photopicker.widget.BGANinePhotoLayout
                 android:id="@+id/npl_item_moment_photos"
                 style="@style/MatchWrap"
-                android:layout_marginTop="8dp"
-                app:bga_npl_itemCornerRadius="0dp"
+                android:layout_marginTop="@dimen/dimen_8"
+                app:bga_npl_itemCornerRadius="@dimen/dimen_10"
                 app:bga_npl_itemSpanCount="3"
-                app:bga_npl_itemWhiteSpacing="4dp"
+                app:bga_npl_itemWhiteSpacing="@dimen/dimen_4"
                 app:bga_npl_itemWidth="0dp"
-                app:bga_npl_otherWhiteSpacing="64dp"
+                app:bga_npl_isExpand="false"
+                app:bga_npl_otherWhiteSpacing="@dimen/dimen_64"
                 app:bga_npl_placeholderDrawable="@mipmap/bga_pp_ic_holder_light"
                 app:bga_npl_showAsLargeWhenOnlyOne="true"/>
 

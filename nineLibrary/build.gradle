@@ -2,11 +2,11 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 
 android {
-    compileSdkVersion 28 as int
+    compileSdkVersion 30 as int
 
     defaultConfig {
         minSdkVersion 14 as int
-        targetSdkVersion 28 as int
+        targetSdkVersion 30 as int
         consumerProguardFiles 'consumer-proguard-rules.pro'
     }
 

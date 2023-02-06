@@ -14,6 +14,7 @@ import android.graphics.Paint
 import android.os.Handler
 import android.view.View
 import com.ggb.nirvanaclub.base.BaseActivity
+import com.ggb.nirvanaclub.config.LogConfigData
 import com.ggb.nirvanaclub.constans.C
 import com.ggb.nirvanaclub.utils.AppUtils
 import com.ggb.nirvanaclub.utils.TimeCountUtil
@@ -37,13 +38,18 @@ class GuideActivity : BaseActivity(),TimeCountUtil.OnCountDownListener {
         time = TimeCountUtil(3000, 1000)
         time?.setOnCountDownListener(this)
         time?.start()
-        Handler().postDelayed({
+        if(LogConfigData.ISDEBUG){
+            startActivity<MainActivity>()
+        }else{
+            Handler().postDelayed({
 //            AppStatusManager.getInstance().setAppStatus(AppStatus.STATUS_NORMAL)
-            if (!isJump){
-                startActivity<MainActivity>()
-                finish()
-            }
-        },3000)
+                if (!isJump){
+                    startActivity<MainActivity>()
+                    finish()
+                }
+            },3000)
+        }
+
 
         tv_guide_version.text = "${AppUtils.getVersionName(this)}.${AppUtils.getAppVersionCode(this)}"
 

@@ -1,9 +1,12 @@
 package com.ggb.nirvanaclub.modules.login
 
+import android.preference.Preference
+import android.preference.PreferenceActivity
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ggb.nirvanaclub.App
+import com.ggb.nirvanaclub.MainActivity
 import com.ggb.nirvanaclub.R
 import com.ggb.nirvanaclub.adapter.MeOptionAdapter
 import com.ggb.nirvanaclub.adapter.SettingAdapter
@@ -13,7 +16,9 @@ import com.ggb.nirvanaclub.bean.SettingListBean
 import com.ggb.nirvanaclub.bean.UserBean
 import com.ggb.nirvanaclub.constans.C
 import com.ggb.nirvanaclub.event.UserStateChangeEvent
+import com.ggb.nirvanaclub.modules.user.NirvanaEarnActivity
 import com.ggb.nirvanaclub.net.GGBContract
+import com.ggb.nirvanaclub.utils.CacheDataUtil
 import com.ggb.nirvanaclub.utils.NetUtils
 import com.ggb.nirvanaclub.utils.showToast
 import com.ggb.nirvanaclub.view.RxToast
@@ -21,9 +26,11 @@ import com.gyf.immersionbar.ImmersionBar
 import kotlinx.android.synthetic.main.activity_login_setting.*
 import kotlinx.android.synthetic.main.fragment_me.*
 import org.greenrobot.eventbus.EventBus
+import org.jetbrains.anko.defaultSharedPreferences
+import org.jetbrains.anko.startActivity
 import org.litepal.LitePal
 
-class SettingActivity : BaseActivity() , GGBContract.View{
+class SettingActivity : BaseActivity(), GGBContract.View{
 
     private var mAdapter : SettingAdapter?=null
 
@@ -50,6 +57,19 @@ class SettingActivity : BaseActivity() , GGBContract.View{
             EventBus.getDefault().post(UserStateChangeEvent(2))
             finish()
         }
+//        mAdapter?.setOnItemChildClickListener { adapter, view, position ->
+//            if (mAdapter?.data?.get(position)?.title=="其他"){
+//                startActivity<NirvanaEarnActivity>()
+//            }
+//        }
+
+        mAdapter?.setOnItemSettingChangeListener(object :SettingAdapter.OnItemSettingChangeListener{
+            override fun onSelect(data:SettingListBean) {
+                if (data.childTitle=="分享牛蛙呐"){
+                    startActivity<NirvanaEarnActivity>()
+                }
+            }
+        })
     }
 
     private fun initSettingData(){

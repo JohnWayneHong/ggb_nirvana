@@ -1,8 +1,12 @@
 package com.ggb.nirvanaclub.modules.laboratory.captcha
 
 import android.graphics.drawable.Drawable
+import android.view.ViewGroup
+import android.view.ViewTreeObserver
+import android.widget.FrameLayout
 import android.widget.SeekBar
 import android.widget.Toast
+import cn.jzvd.JzvdStd
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.transition.Transition
