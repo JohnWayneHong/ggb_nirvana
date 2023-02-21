@@ -2,6 +2,7 @@ package com.ggb.nirvanaclub.net
 
 import com.ggb.nirvanaclub.bean.*
 import com.ggb.nirvanaclub.constans.C
+import com.ggb.nirvanaclub.utils.RsaEncryptionUtils
 import io.reactivex.Observable
 import okhttp3.MediaType
 import okhttp3.RequestBody
@@ -18,23 +19,38 @@ class GGBModel :GGBContract.Model{
         return Api.getDefault().sendCode(phone)
     }
 
-    override fun login(account:String,password:String,type:Int): Observable<HttpResult<Any>> {
+    override fun login(account:String,password:String): Observable<HttpResult<Any>> {
         val jsonObject = JSONObject()
         try {
+            //新地址，密码需要加密传输
             jsonObject.put("account", account)
-            jsonObject.put("password", password)
-            jsonObject.put("type", type)
+            jsonObject.put("password", RsaEncryptionUtils().rsaEncode(password))
+            jsonObject.put("rememberMe", true)
         } catch (e: JSONException) {
             e.printStackTrace()
         }
 
         val json = jsonObject.toString()
         val body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json)
-        return Api.getDefault().login(body)
+        return Api.getDefault(0,0).login(body)
+
     }
 
-    override fun info(type: Int): Observable<HttpResult<SimpleUserInfo>> {
-        return Api.getDefault().info(type)
+    override fun loginOut(): Observable<HttpResult<Any>> {
+        val jsonObject = JSONObject()
+        try {
+
+        } catch (e: JSONException) {
+            e.printStackTrace()
+        }
+        val json = jsonObject.toString()
+        val body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json)
+        return Api.getDefault(0,0).loginOut(body)
+
+    }
+
+    override fun info(): Observable<HttpResult<SimpleUserInfo>> {
+        return Api.getDefault(0,0).info()
     }
 
     override fun getTagAll(): Observable<HttpResult<List<IndexTagBean>>> {

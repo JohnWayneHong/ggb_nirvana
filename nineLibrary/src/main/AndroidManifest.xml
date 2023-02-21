@@ -12,6 +12,7 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/BGAPPTheme"
+            android:hardwareAccelerated="false"
             android:windowSoftInputMode="stateAlwaysHidden" />
 
         <!--图片选择界面-->

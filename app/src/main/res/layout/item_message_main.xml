@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:id="@+id/rl_message_main"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dimen_80">
+
+    <com.ggb.nirvanaclub.view.CircleImageView
+        android:id="@+id/civ_message_main_head"
+        android:layout_width="@dimen/dimen_50"
+        android:layout_height="@dimen/dimen_50"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/dimen_13"
+        android:src="@mipmap/ic_bear_question" />
+
+    <TextView
+        android:id="@+id/tv_message_main_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dimen_80"
+        android:layout_marginTop="@dimen/dimen_15"
+        android:text=""
+        android:textColor="@color/text_main_color"
+        android:textSize="@dimen/text_14" />
+
+    <TextView
+        android:id="@+id/tv_message_main_content"
+        android:layout_marginTop="@dimen/dimen_45"
+        android:layout_marginLeft="@dimen/dimen_80"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textColor="@color/text_second_color"
+        android:textSize="@dimen/text_13" />
+
+    <View
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_width="@dimen/dimen_280"
+        android:background="@color/light_gray"
+        android:layout_height="1dp"/>
+
+    <View
+        android:id="@+id/v_message_main_new"
+        android:layout_marginRight="@dimen/dimen_20"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        style="@style/NoticeSpot"/>
+
+</RelativeLayout>

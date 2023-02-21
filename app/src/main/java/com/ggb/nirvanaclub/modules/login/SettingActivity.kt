@@ -18,6 +18,7 @@ import com.ggb.nirvanaclub.constans.C
 import com.ggb.nirvanaclub.event.UserStateChangeEvent
 import com.ggb.nirvanaclub.modules.user.NirvanaEarnActivity
 import com.ggb.nirvanaclub.net.GGBContract
+import com.ggb.nirvanaclub.net.GGBPresent
 import com.ggb.nirvanaclub.utils.CacheDataUtil
 import com.ggb.nirvanaclub.utils.NetUtils
 import com.ggb.nirvanaclub.utils.showToast
@@ -31,6 +32,8 @@ import org.jetbrains.anko.startActivity
 import org.litepal.LitePal
 
 class SettingActivity : BaseActivity(), GGBContract.View{
+
+    private lateinit var present: GGBPresent
 
     private var mAdapter : SettingAdapter?=null
 
@@ -48,14 +51,17 @@ class SettingActivity : BaseActivity(), GGBContract.View{
         initSettingData()
     }
 
+    override fun beForSetContentView() {
+        present = GGBPresent(this)
+    }
+
     override fun initEvent() {
-        sl_me_settings_logout.setOnClickListener {
+        floating_login_out_btn.setOnClickListener {
             if (!NetUtils.isNetConnected(this)){
                 RxToast.error(this,"网络出差了。。。", Toast.LENGTH_SHORT, true)?.show()
                 return@setOnClickListener
             }
-            EventBus.getDefault().post(UserStateChangeEvent(2))
-            finish()
+            present.loginOut()
         }
 //        mAdapter?.setOnItemChildClickListener { adapter, view, position ->
 //            if (mAdapter?.data?.get(position)?.title=="其他"){
@@ -101,13 +107,21 @@ class SettingActivity : BaseActivity(), GGBContract.View{
         )
         mAdapter?.setNewData(options)
         if (C.USER_ID.isEmpty()){
-            sl_me_settings_logout.visibility = View.GONE
+            floating_login_out_btn.visibility = View.GONE
         }else{
-            sl_me_settings_logout.visibility = View.VISIBLE
+            floating_login_out_btn.visibility = View.VISIBLE
         }
     }
 
     override fun onSuccess(flag: String?, data: Any?) {
+        flag?.let {
+            when (flag) {
+                GGBContract.LOGINOUT -> {
+                    EventBus.getDefault().post(UserStateChangeEvent(2))
+                    finish()
+                }
+            }
+        }
     }
 
     override fun onFailed(string: String?, isRefreshList: Boolean) {

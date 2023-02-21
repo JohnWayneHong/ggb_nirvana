@@ -6,12 +6,16 @@ import android.graphics.ColorMatrixColorFilter
 import android.graphics.Paint
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
+import cn.jpush.im.android.api.JMessageClient
+import cn.jpush.im.android.api.event.ContactNotifyEvent
 import com.ggb.nirvanaclub.App
 import com.ggb.nirvanaclub.GuideActivity
 import com.ggb.nirvanaclub.R
 import com.ggb.nirvanaclub.constans.C
 import com.ggb.nirvanaclub.utils.AppStatus
 import com.ggb.nirvanaclub.utils.AppStatusManager
+import com.ggb.nirvanaclub.view.RxToast
 import com.gyf.immersionbar.ImmersionBar
 import kotlinx.android.synthetic.main.title_public_view.*
 
@@ -40,7 +44,8 @@ abstract class BaseActivity: MyBaseActivity() {
         initEvent()
         initTitle()
 //        initBlack()
-
+        //订阅接收消息,子类只要重写onEvent就能收到消息
+        JMessageClient.registerEventReceiver(this)
     }
 
     private fun initTitle(){
@@ -138,6 +143,24 @@ abstract class BaseActivity: MyBaseActivity() {
         super.onDestroy()
         activityStatus = C.ACTIVITY_RECYCLE_DESTROY
         loadingDialog?.dismiss()
+        //        //注销消息接收
+        JMessageClient.unRegisterEventReceiver(this)
+    }
+
+
+    fun onEvent(event: ContactNotifyEvent) {
+        if (event.type == ContactNotifyEvent.Type.invite_received) {
+            var has = false
+            for (i in C.friendApply.indices) {
+                if (C.friendApply[i].fromUsername == event.fromUsername) {
+                    has = true
+                }
+            }
+            if (!has) {
+                C.friendApply.add(event)
+                RxToast.info(this, "收到了好友邀请！", Toast.LENGTH_SHORT)?.show()
+            }
+        }
     }
 
 }

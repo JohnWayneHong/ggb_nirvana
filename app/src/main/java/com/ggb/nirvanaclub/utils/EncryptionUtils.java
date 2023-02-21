@@ -6,8 +6,11 @@ import android.util.Base64;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.security.KeyFactory;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.interfaces.RSAPublicKey;
+import java.security.spec.X509EncodedKeySpec;
 import java.util.zip.GZIPOutputStream;
 
 import javax.crypto.Cipher;
@@ -248,7 +251,4 @@ public class EncryptionUtils {
         gzip.close();
         return Base64.encodeToString(out.toByteArray(),Base64.DEFAULT);
     }
-
-
-
 }

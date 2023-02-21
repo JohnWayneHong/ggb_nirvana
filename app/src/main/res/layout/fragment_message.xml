@@ -1,24 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <ScrollView
+    <com.scwang.smart.refresh.layout.SmartRefreshLayout
+        android:id="@+id/swipe_refresh_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:srlPrimaryColor="@color/white"
+        app:srlAccentColor="@color/text_main_color"
+        app:srlEnablePreviewInEditMode="true"
+        android:paddingBottom="@dimen/dimen_15">
+
+        <com.scwang.smart.refresh.header.MaterialHeader
+            android:id="@+id/mh_message_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <com.ggb.nirvanaclub.view.StatusBarPlaceHolder
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/tb_message_main"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="?attr/actionBarSize" />
+                android:layout_height="@dimen/dimen_50"
+                app:contentInsetLeft="0dp"
+                app:contentInsetStart="0dp"
+                tools:ignore="MissingConstraints">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_48"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="@dimen/dimen_40"
+                        android:layout_height="match_parent"
+                        android:padding="@dimen/dimen_10" />
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="@string/message_title_bar_string"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/text_16"/>
+
+                    <View
+                        android:layout_width="@dimen/dimen_40"
+                        android:layout_height="match_parent"
+                        android:padding="@dimen/dimen_13" />
+
+                </LinearLayout>
+
+            </androidx.appcompat.widget.Toolbar>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -50,6 +91,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/ll_message_main_friend_list"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -72,6 +114,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/ll_message_main_friend"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -115,17 +158,24 @@
                     android:textSize="@dimen/text_14" />
 
                 <TextView
+                    android:id="@+id/tv_message_add"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:text="@string/message_new_nirvana_msg_string"
+                    android:text="@string/message_add_friend_string"
                     android:textColor="@color/primary"
                     android:textSize="@dimen/text_14" />
 
             </RelativeLayout>
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_message_content_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:overScrollMode="never"/>
+
         </LinearLayout>
 
-    </ScrollView>
+    </com.scwang.smart.refresh.layout.SmartRefreshLayout>
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</LinearLayout>

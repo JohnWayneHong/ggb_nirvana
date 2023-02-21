@@ -6,11 +6,13 @@ import android.app.Application
 import android.content.Context
 import android.content.pm.ApplicationInfo
 import cn.jpush.android.api.JPushInterface
+import cn.jpush.im.android.api.JMessageClient
 import com.didichuxing.doraemonkit.DoraemonKit
 import com.ggb.nirvanaclub.app.BaseApplication
 import com.ggb.nirvanaclub.config.LogConfigData
 import com.ggb.nirvanaclub.constans.C
 import com.ggb.nirvanaclub.manager.ServiceTimeManager
+import com.ggb.nirvanaclub.receiver.NotificationClickEventReceiver
 import com.ggb.nirvanaclub.utils.CrashHandler
 import com.ggb.nirvanaclub.utils.SharedPreferencesUtil
 import com.ggb.nirvanaclub.utils.rxutils.RxTool
@@ -58,6 +60,16 @@ class App: BaseApplication(){
         JPushInterface.setDebugMode(true)
         JPushInterface.init(this)
         SharedPreferencesUtil.putCommonString(this,"RegistrationID", JPushInterface.getRegistrationID(this))
+
+        //JMessage
+        JMessageClient.setDebugMode(true)
+        //开启消息记录漫游
+        JMessageClient.init(this,true)
+
+
+        //注册Notification点击的接收器
+        val notificationClickEventReceiver = NotificationClickEventReceiver(this)
+
 
         LogConfigData.ISDEBUG = isApkInDebug()
 

@@ -4,6 +4,23 @@ package com.ggb.nirvanaclub.bean
  * 基础用户信息
  */
 data class SimpleUserInfo(
+
+    /**
+     * 新版本 用户信息
+     */
+    val id: String,
+    val account: String,
+    val birth: String,
+    val company: String,
+    val job: String,
+    val status: String,
+//    val status: Enum<UserInfoStatus>,
+
+    val mobile: String,
+    val createTime: String,
+    //个人简介
+    val sign: String,
+    val unread: String,
     val nickName: String,
     val photo: String,
     /**
@@ -31,4 +48,17 @@ data class SimpleUserInfo(
      * TODO
      */
     val nbCount: Float
+)
+
+enum class UserInfoStatus(
+    val focusing: String,
+    /**
+     */
+    val vacation: String,
+    /**
+     */
+    val workingFromHome: String,
+    /**
+     */
+    val sick: String
 )

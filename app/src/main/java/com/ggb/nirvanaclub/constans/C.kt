@@ -1,5 +1,6 @@
 package com.ggb.nirvanaclub.constans
 
+import cn.jpush.im.android.api.event.ContactNotifyEvent
 import com.ggb.nirvanaclub.bean.IndexTagBean
 
 object C {
@@ -9,6 +10,9 @@ object C {
     var IS_LOGIN = false
     var IS_SIGN_REQUEST = false
     var userTag: ArrayList<IndexTagBean> = arrayListOf<IndexTagBean>()
+
+    //好友申请列表
+    var friendApply : ArrayList<ContactNotifyEvent> = arrayListOf<ContactNotifyEvent>()
 
     fun setUserTag(userTag:List<IndexTagBean>){
         this.userTag.clear()
@@ -27,6 +31,7 @@ object C {
     const val HX_HOST_TYPE = 1
     const val HX_BASE_ADDRESS = "https://nirvana1234.xyz/api/android/"
     const val OLD_BASE_ADDRESS = "https://nirvana1234.xyz/api/"
+    const val NIRVANA_BASE_ADDRESS = "https://nirvana1234.xyz"
     const val THIRD_BASE_ADDRESS = "https://www.mxnzp.com/api/"
     const val JOKES_BASE_ADDRESS = "http://tools.cretinzp.com/jokes/"
 
@@ -65,6 +70,29 @@ object C {
     const val ACTIVITY_RECYCLE_PAUSE = 4
     const val ACTIVITY_RECYCLE_STOP = 5
     const val ACTIVITY_RECYCLE_DESTROY = 6
+
+    //    Chat
+    const val REQUEST_CODE_ONE = 10086
+    const val REQUEST_CODE_TWO = 10087
+    const val REQUEST_CODE_THREE = 10088
+    const val SCROLL_BOTTOM = 10089
+    const val REQUEST_CODE_FOUR = 10090
+    const val HIDEN_BOTTOM = 10091
+    const val SHOW_BOTTOM = 10092
+
+    const val SINGLE = 0
+    const val GROUP = 1
+    const val TYPE = "TYPE"
+    const val DATA = "DATA"
+    const val DATA_TWO = "DATA_TWO"
+
+    const val RED_PACKEGE = "RED_PACKEGE"
+    const val ADDRESS = "ADDRESS"
+    const val CARD = "CARD"
+    const val INVITATION = "INVITATION"
+    const val VIDEO_PHONE = "VIDEO_PHONE"
+    const val NEW_MESSAGE = "NEW_MESSAGE"
+
 
     /************************************Article****************************************/
     /**

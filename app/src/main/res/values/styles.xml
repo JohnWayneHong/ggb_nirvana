@@ -51,4 +51,22 @@
         <item name="android:windowExitAnimation">@anim/fade_out</item>
     </style>
 
+    <!-- 聊天的消息-文字   -->
+    <style name="TextTime">
+        <item name="android:layout_marginBottom">@dimen/dimen_10</item>
+        <item name="android:layout_marginTop">@dimen/dimen_10</item>
+        <item name="android:textSize">@dimen/text_11</item>
+        <item name="android:textColor">@color/text_second_color</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <!--  消息红点     -->
+    <style name="NoticeSpot">
+        <item name="android:background">@drawable/bg_main_full_5</item>
+        <item name="android:layout_width">@dimen/dimen_10</item>
+        <item name="android:layout_height">@dimen/dimen_10</item>
+    </style>
+
 </resources>

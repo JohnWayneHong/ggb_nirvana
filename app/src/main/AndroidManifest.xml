@@ -42,6 +42,8 @@
     <uses-permission android:name="android.permission.ACCESSNETWORKSTATE" />
     <uses-permission android:name="android.permission.REQUESTINSTALLPACKAGES" />
     <uses-permission android:name="android.permission.NFC" />
+<!--    麦克风-->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission
         android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
         tools:ignore="ProtectedPermissions" />
@@ -64,6 +66,13 @@
 
     <!-- 重启桌面权限   -->
     <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
+
+    <!--  JMessage新增  -->
+    <permission
+        android:name="com.ggb.nirvanaclub.permission.JPUSH_MESSAGE"
+        android:protectionLevel="signature" /> <!-- Required -->
+    <uses-permission android:name="com.ggb.nirvanaclub.permission.JPUSH_MESSAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
 
     <application
         android:name=".App"
@@ -123,6 +132,7 @@
             android:theme="@style/Theme.Blog"
             android:launchMode="singleTask"
             android:windowSoftInputMode="adjustResize|stateHidden"
+            android:requestLegacyExternalStorage="true"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".modules.login.LoginActivity"
@@ -219,6 +229,31 @@
         <activity
             android:name=".modules.login.DevelopSettingActivity"
             android:screenOrientation="portrait"
+            android:theme="@style/Theme.Blog"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".modules.message.MessageAddFriendActivity"
+            android:screenOrientation="portrait"
+            android:requestLegacyExternalStorage="true"
+            android:theme="@style/Theme.Blog"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".modules.message.MessageFriendListActivity"
+            android:screenOrientation="portrait"
+            android:requestLegacyExternalStorage="true"
+            android:theme="@style/Theme.Blog"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".modules.message.MessageChatActivity"
+            android:screenOrientation="portrait"
+            android:requestLegacyExternalStorage="true"
+            android:theme="@style/Theme.Blog"
+            tools:ignore="LockedOrientationActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity
+            android:name=".modules.message.MessageUserInfoActivity"
+            android:screenOrientation="portrait"
+            android:requestLegacyExternalStorage="true"
             android:theme="@style/Theme.Blog"
             tools:ignore="LockedOrientationActivity" />
 
@@ -401,6 +436,25 @@
                 <action android:name="cn.jiguang.user.service.action" />
             </intent-filter>
         </service> <!-- since 3.5.6 新增华硕通道 -->
+
+        <!-- JMessage新增   -->
+        <!-- 这个Service要继承JCommonService -->
+        <service
+            android:name=".service.IMService"
+            android:process=":pushcore">
+            <intent-filter>
+                <action android:name="cn.jiguang.user.service.action" />
+            </intent-filter>
+        </service> <!-- Required SDK核心功能 -->
+
+        <provider
+            android:name="cn.jpush.im.android.helpers.ipc.IMProvider"
+            android:authorities="${applicationId}.IMProvider"
+            android:exported="false" /> <!-- Required JMessage SDK核心功能 -->
+        <receiver
+            android:name="cn.jpush.im.android.helpers.IMReceiver"
+            android:enabled="true"
+            android:exported="false" /> <!-- since JCore 1.8.0 option 可选项。用于同一设备中不同应用的 jiguang 服务相互拉起的功能。 -->
 
     </application>
 

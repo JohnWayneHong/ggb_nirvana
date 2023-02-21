@@ -8,9 +8,18 @@ class UserBean: LitePalSupport(){
     var id: Long = 0
     var userId: String = ""
     var userName: String = ""
+    var usercreateTime: String = ""
+    var account: String = ""
+    var userImg: String = ""
+    var userSign: String = ""
+    var userBirth: String = ""
+    var userCompany: String = ""
+    var userJob: String = ""
+    var userStatus: String  = ""
+//    var userStatus: Enum<UserInfoStatus>  = UserInfoStatus.valueOf("focusing")
+
     var userLoginType: Int = 0 //1qq登录 3 手机邮箱登录
     var userPhone: String = ""
-    var userImg: String = ""
     var userLevelName: String = ""
     var sex: String = ""
     var address: String = ""

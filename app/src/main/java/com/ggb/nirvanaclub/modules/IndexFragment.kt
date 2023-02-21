@@ -1,9 +1,8 @@
 package com.ggb.nirvanaclub.modules
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,6 +17,7 @@ import com.ggb.nirvanaclub.event.TagChangeEvent
 import com.ggb.nirvanaclub.modules.article.ArticleInfoFragment
 import com.ggb.nirvanaclub.modules.article.SearchArticleActivity
 import com.ggb.nirvanaclub.modules.login.LoginActivity
+import com.ggb.nirvanaclub.modules.message.MessageChatActivity
 import com.ggb.nirvanaclub.modules.tag.IndexTagSettingActivity
 import com.ggb.nirvanaclub.net.GGBContract
 import com.ggb.nirvanaclub.net.GGBPresent
@@ -28,7 +28,6 @@ import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
-import kotlin.math.min
 
 class IndexFragment :BaseFragment(),GGBContract.View{
 
@@ -76,6 +75,13 @@ class IndexFragment :BaseFragment(),GGBContract.View{
         ll_index_search.setOnClickListener {
             Log.e("TAG", "RegistrationID=============>: "+JPushInterface.getRegistrationID(context) )
             activity?.startActivity<SearchArticleActivity>()
+        }
+        iv_test.setOnClickListener {
+            val myIntent = Intent(activity, MessageChatActivity::class.java)
+            myIntent.putExtra(C.TYPE, C.SINGLE)
+            myIntent.putExtra(C.DATA,"野熊")
+            myIntent.putExtra(C.DATA_TWO, "能能")
+            startActivity(myIntent)
         }
     }
 

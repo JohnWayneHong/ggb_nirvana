@@ -129,4 +129,31 @@
         <attr name="color_type"/>
     </declare-styleable>
 
+    <!-- 聊天气泡ui   -->
+    <declare-styleable name="QMUILinkTextView">
+        <attr name="qmui_linkBackgroundColor" format="color"/>
+        <attr name="qmui_linkTextColor" format="color"/>
+    </declare-styleable>
+
+    <!-- 聊天ui布局   -->
+    <declare-styleable name="EmoticonsIndicatorView">
+        <attr name="bmpNomal" format="reference" />
+        <attr name="bmpSelect" format="reference" />
+    </declare-styleable>
+
+    <!-- 气泡ImageView   -->
+    <declare-styleable name="BubbleImageView">
+        <attr name="bubble_arrowTop" format="dimension|reference" />
+        <attr name="bubble_arrowWidth" format="dimension|reference" />
+        <attr name="bubble_arrowHeight" format="dimension|reference" />
+        <attr name="bubble_arrowOffset" format="dimension|reference" />
+        <attr name="bubble_angle" format="dimension|reference" />
+        <attr name="bubble_arrowLocation" format="enum">
+            <enum name="left" value="0" />
+            <enum name="right" value="1" />
+        </attr>
+        <attr name="bubble_showText" format="boolean" />
+        <attr name="bubble_showShadow" format="boolean" />
+    </declare-styleable>
+
 </resources>

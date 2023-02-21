@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_time"
+        style="@style/TextTime"/>
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.ggb.nirvanaclub.view.CircleImageView
+            android:id="@+id/iv_head"
+            android:layout_width="@dimen/dimen_48"
+            android:layout_height="@dimen/dimen_48"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/dimen_13"
+            android:src="@mipmap/ic_bear_question" />
+
+        <RelativeLayout
+            android:id="@+id/bubble_rl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dimen_10"
+            android:layout_toLeftOf="@+id/iv_head"
+            android:background="@drawable/rc_ic_bubble_right"
+            android:clickable="true"
+            android:minHeight="@dimen/dimen_48">
+
+            <com.ggb.nirvanaclub.view.emojitextview.EmojiconTextView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:focusable="false"
+                android:gravity="center|left"
+                android:lineSpacingExtra="@dimen/dimen_2"
+                android:maxWidth="@dimen/dimen_200"
+                android:paddingRight="@dimen/dimen_4"
+                android:textColor="@color/text_main_color"
+                android:textSize="@dimen/text_13"
+                app:qmui_linkBackgroundColor="@color/light_gray"
+                app:qmui_linkTextColor="#3399ff" />
+
+
+        </RelativeLayout>
+
+        <ProgressBar
+            android:id="@+id/pb"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dimen_10"
+            android:layout_toLeftOf="@+id/bubble_rl"
+            android:layout_width="@dimen/dimen_20"
+            android:layout_height="@dimen/dimen_20" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_5"/>
+
+</LinearLayout>

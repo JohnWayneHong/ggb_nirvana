@@ -66,6 +66,7 @@ public class BGAPhotoPageAdapter extends PagerAdapter {
             }
         });
 
+        //图片显示,图片目前还是url
         BGAImage.display(imageView, R.mipmap.bga_pp_ic_holder_dark, mPreviewPhotos.get(position), BGAPhotoPickerUtil.getScreenWidth(), BGAPhotoPickerUtil.getScreenHeight());
 
         return imageView;

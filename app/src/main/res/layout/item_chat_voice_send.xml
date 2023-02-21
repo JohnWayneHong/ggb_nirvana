@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_time"
+        style="@style/TextTime"/>
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.ggb.nirvanaclub.view.CircleImageView
+            android:id="@+id/iv_head"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/dimen_13"
+            android:layout_width="@dimen/dimen_48"
+            android:layout_height="@dimen/dimen_48"
+            android:src="@mipmap/ic_bear_question" />
+
+        <LinearLayout
+            android:id="@+id/ll_content"
+            android:background="@drawable/rc_ic_bubble_right"
+            android:padding="@dimen/dimen_10"
+            android:layout_toLeftOf="@+id/iv_head"
+            android:layout_marginRight="@dimen/dimen_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxWidth="@dimen/dimen_200"
+            android:minHeight="@dimen/dimen_48"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="1dp"/>
+
+            <TextView
+                android:id="@+id/tv"
+                android:text="1232312312''"
+                android:layout_gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_main_color"
+                android:textSize="@dimen/text_13"/>
+
+            <ImageView
+                android:id="@+id/iv_voice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/dimen_10"
+                android:layout_marginRight="@dimen/dimen_10"
+                android:background="@drawable/audio_animation_right_list"/>
+
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/pb"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dimen_10"
+            android:layout_toLeftOf="@+id/ll_content"
+            android:layout_width="@dimen/dimen_20"
+            android:layout_height="@dimen/dimen_20"
+            android:visibility="invisible" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_5"/>
+
+</LinearLayout>

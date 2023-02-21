@@ -70,11 +70,13 @@
                         </LinearLayout>
 
                         <ImageView
+                            android:id="@+id/iv_test"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_marginStart="@dimen/dimen_5"
                             android:layout_weight="1"
                             android:src="@mipmap/red_packet" />
+
                     </LinearLayout>
 
                     <View

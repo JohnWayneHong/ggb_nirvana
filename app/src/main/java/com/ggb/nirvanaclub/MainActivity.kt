@@ -9,8 +9,6 @@ import android.graphics.Paint
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
-import android.os.Handler
-import android.os.Message
 import android.provider.Settings
 import android.util.Log
 import android.view.Gravity
@@ -19,21 +17,21 @@ import android.widget.Toast
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentPagerAdapter
-import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager.widget.ViewPager
-import androidx.viewpager2.adapter.FragmentStateAdapter
+import cn.jpush.im.android.api.JMessageClient
+import cn.jpush.im.api.BasicCallback
 import com.ggb.nirvanaclub.base.BaseActivity
 import com.ggb.nirvanaclub.base.BaseFragment
 import com.ggb.nirvanaclub.bean.AppUpdateBean
 import com.ggb.nirvanaclub.bean.AppUpdateListBean
-import com.ggb.nirvanaclub.bean.QQAvatarBean
-import com.ggb.nirvanaclub.bean.UserBean
 import com.ggb.nirvanaclub.constans.C
 import com.ggb.nirvanaclub.event.StepRefreshEvent
 import com.ggb.nirvanaclub.listener.BaseUiListener
 import com.ggb.nirvanaclub.modules.*
-import com.ggb.nirvanaclub.service.StepCalculationService
-import com.ggb.nirvanaclub.utils.*
+import com.ggb.nirvanaclub.utils.APKRefreshDownload
+import com.ggb.nirvanaclub.utils.AppUtils
+import com.ggb.nirvanaclub.utils.ConfigDownloadUtils
+import com.ggb.nirvanaclub.utils.SharedPreferencesUtil
 import com.ggb.nirvanaclub.view.RxToast
 import com.ggb.nirvanaclub.view.dialog.ApkUpdateDialog
 import com.ggb.nirvanaclub.view.dialog.OpenAuthorityDialog
@@ -41,8 +39,6 @@ import com.tencent.connect.common.Constants
 import com.tencent.tauth.Tencent
 import com.yanzhenjie.permission.AndPermission
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_me.*
-import kotlinx.android.synthetic.main.fragment_subscription.*
 import kotlinx.android.synthetic.main.home_bottom_tab_button.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -78,6 +74,7 @@ class MainActivity: BaseActivity() ,ConfigDownloadUtils.OnConfigDownloadComplete
 //        initWriteStorage()
 //        initFragment()
         setCrashStorage()
+        checkTalkPermission()
         EventBus.getDefault().register(this)
 
         iu = BaseUiListener(App.mTencent)
@@ -132,13 +129,46 @@ class MainActivity: BaseActivity() ,ConfigDownloadUtils.OnConfigDownloadComplete
         })
     }
 
+    private fun initJMessageLogin(){
+        val userName = SharedPreferencesUtil.getUserString(this,"UserIDToJMessage")
+        val userPassword = SharedPreferencesUtil.getUserString(this,"UserPasswordToJMessage")
+
+        if (!userName.isNullOrEmpty()&&!userPassword.isNullOrEmpty()){
+            //登录
+            JMessageClient.login(userName, userPassword, object : BasicCallback() {
+                override fun gotResult(i: Int, s: String) {
+                    if(i==0){
+                        Log.e("TAG", "JMessage登录成功！！！！: ")
+                    }else{
+                        Log.e("TAG", "JMessage登录失败！！！！========>！: "+s )
+
+                    }
+                }
+            })
+        }
+    }
+
+    /**
+     * 防止当ViewPager所属Activity被Destroy（非主动finish）后重新初始化过程中，此时新创建的Fragment实例并不会在ViewPager中显示。
+     */
+    private fun instantiateFragment(viewPager: ViewPager, position: Int, defaultResult: Fragment): Fragment {
+        val tag = "android:switcher:" + viewPager.id + ":" + position
+        val fragment = supportFragmentManager.findFragmentByTag(tag)
+        return fragment ?: defaultResult
+    }
+
     private fun initFragment(){
         fragments.clear()
-        fragments.add(IndexFragment.newInstance())
-        fragments.add(CommunityFragment.newInstance())
-        fragments.add(SubscriptionFragment.newInstance())
-        fragments.add(MessageFragment.newInstance())
-        fragments.add(MeFragment.newInstance())
+        fragments.add(instantiateFragment(vp_home,0,IndexFragment.newInstance()) as BaseFragment)
+        fragments.add(instantiateFragment(vp_home,1,CommunityFragment.newInstance()) as BaseFragment)
+        fragments.add(instantiateFragment(vp_home,2,SubscriptionFragment.newInstance()) as BaseFragment)
+        fragments.add(instantiateFragment(vp_home,3,MessageFragment.newInstance()) as BaseFragment)
+        fragments.add(instantiateFragment(vp_home,4,MeFragment.newInstance()) as BaseFragment)
+//        fragments.add(IndexFragment.newInstance())
+//        fragments.add(CommunityFragment.newInstance())
+//        fragments.add(SubscriptionFragment.newInstance())
+//        fragments.add(MessageFragment.newInstance())
+//        fragments.add(MeFragment.newInstance())
 
         vp_home.adapter = object : FragmentPagerAdapter(supportFragmentManager){
             override fun getItem(position: Int): Fragment = fragments[position]
@@ -182,6 +212,8 @@ class MainActivity: BaseActivity() ,ConfigDownloadUtils.OnConfigDownloadComplete
         }
         select(0)
 
+        //初始化JMessage
+        initJMessageLogin()
     }
 
     private fun select(position:Int) {
@@ -295,6 +327,23 @@ class MainActivity: BaseActivity() ,ConfigDownloadUtils.OnConfigDownloadComplete
             .start()
     }
 
+    /**
+     * 打开麦克风权限，不然聊天没法使用
+     */
+    @SuppressLint("MissingPermission")
+    private fun checkTalkPermission(){
+        AndPermission.with(this)
+            .runtime()
+            .permission(Manifest.permission.RECORD_AUDIO)
+            .onGranted { permissions ->
+
+            }
+            .onDenied { permissions ->
+                toast(R.string.talk_permission).setGravity(Gravity.CENTER, 0, 0)
+            }
+            .start()
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         //腾讯QQ回调
@@ -359,6 +408,14 @@ class MainActivity: BaseActivity() ,ConfigDownloadUtils.OnConfigDownloadComplete
         intent.setDataAndType(data, "application/vnd.android.package-archive")
         startActivity(intent)
         finish()
+    }
+
+    fun setNew(isNew: Boolean){
+        if(isNew){
+            v_new_dialog.visibility = View.VISIBLE
+        }else{
+            v_new_dialog.visibility = View.INVISIBLE
+        }
     }
 
     override fun onComplete(isComplete: Boolean) {

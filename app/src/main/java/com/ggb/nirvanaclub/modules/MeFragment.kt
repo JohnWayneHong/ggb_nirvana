@@ -2,6 +2,7 @@ package com.ggb.nirvanaclub.modules
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -10,21 +11,20 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.os.Message
-import android.util.Base64.DEFAULT
-import android.util.Base64.decode
 import android.util.Log
 import android.view.MotionEvent
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.widget.NestedScrollView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
+import cn.jpush.im.android.api.JMessageClient
+import cn.jpush.im.api.BasicCallback
 import com.ggb.nirvanaclub.App
+import com.ggb.nirvanaclub.MainActivity
 import com.ggb.nirvanaclub.R
 import com.ggb.nirvanaclub.adapter.MeBannerAdapter
 import com.ggb.nirvanaclub.adapter.MeOptionAdapter
 import com.ggb.nirvanaclub.base.BaseFragment
-import com.ggb.nirvanaclub.bean.HealthyBean
 import com.ggb.nirvanaclub.bean.MeOptionBean
 import com.ggb.nirvanaclub.bean.QQAvatarBean
 import com.ggb.nirvanaclub.bean.UserBean
@@ -38,10 +38,7 @@ import com.ggb.nirvanaclub.modules.user.HealthyActivity
 import com.ggb.nirvanaclub.modules.user.ShopCartActivity
 import com.ggb.nirvanaclub.modules.user.UserInfoActivity
 import com.ggb.nirvanaclub.utils.*
-import com.ggb.nirvanaclub.utils.StatusBarUtils.setBaseStatusBar
-import com.ggb.nirvanaclub.view.MeBanner
 import com.ggb.nirvanaclub.view.RxToast
-import com.google.zxing.integration.android.IntentIntegrator
 import com.gyf.immersionbar.ImmersionBar
 import com.tamsiree.rxui.view.dialog.RxDialogSureCancel
 import com.tencent.mmkv.MMKV
@@ -57,7 +54,7 @@ import org.json.JSONException
 import org.json.JSONObject
 import org.litepal.LitePal
 import java.io.ByteArrayOutputStream
-import java.lang.Byte.decode
+import java.io.File
 import java.util.*
 
 
@@ -216,16 +213,61 @@ class MeFragment :BaseFragment(){
                 LitePal.deleteAll(UserBean::class.java)
                 iv_me_user_avatar.setImageDrawable(resources.getDrawable(R.drawable.ic_login_img))
                 tv_me_user_nickname.text = resources.getString(R.string.me_login_click_string)
+
+                //JMessage退出登录
+                JMessageClient.logout()
+                SharedPreferencesUtil.clearUserData(context)
+                App.context.getSharedPreferences("cookies",Context.MODE_PRIVATE).all.forEach {
+                    App.context.getSharedPreferences("cookies", Context.MODE_PRIVATE).edit().apply {
+                        remove(it.key)
+                        apply()
+                    }
+                }
+
             }
-            3 ->{
+            3 -> {
                 val user = LitePal.findLast(UserBean::class.java)
                 tv_me_user_nickname.text = user.userName
 //                iv_me_user_avatar.setImageBitmap(Base64ToBitmapUtil.base64ToBitmap(user.userImg))
-                ImageLoaderUtil().displayHeadImage(context,user.userImg,iv_me_user_avatar)
+                ImageLoaderUtil().displayHeadImage(context, user.userImg, iv_me_user_avatar)
 
                 C.USER_ID = user.userId
                 C.IS_LOGIN = user.isLogin
                 loginType = 3
+
+                //JMessage头像，获取用户头像下载
+                val avatarRunnable = Runnable {
+                    val bitmap: Bitmap?
+                    try {
+                        if (user.userImg.startsWith("http")){
+                            bitmap = TencentUtil.getbitmap(user.userImg)
+                            Log.e("TAG", "JMessage====线程里了获取头像===Http的头像: $bitmap")
+                        }else{
+                            bitmap = Base64ToBitmapUtil.base64ToBitmap(user.userImg)
+                            Log.e("TAG", "JMessage====线程里了获取头像===base64的头像: $bitmap")
+                        }
+                        BitmapToFile.saveFile(bitmap, user.userId)
+                    } catch (e: JSONException) {
+                        SLog.e("TAG", "JMessage====线程里了获取头像Exception : " + e.message)
+                    }
+                }
+                val avatarThread = Thread(avatarRunnable)
+                avatarThread.start()
+
+                //更新头像信息
+                val PHOTO_PATH = "/sdcard/Android/data/com.ggb.nirvanaclub" + "/picture/" + user.userId
+
+                Handler().postDelayed({
+                    JMessageClient.updateUserAvatar(File(PHOTO_PATH), object : BasicCallback() {
+                        override fun gotResult(p0: Int, p1: String?) {
+                            if (p0 == 0) {
+                                Log.e("TAG", "JMessage===更新头像成功=====》: ")
+                            } else {
+                                Log.e("TAG", "JMessage===更新头像失败=====》: "+p1)
+                            }
+                        }
+                    })
+                },5000)
             }
         }
 

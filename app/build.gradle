@@ -16,7 +16,7 @@ android {
         abortOnError false
     }
 
-    compileSdkVersion 30
+    compileSdkVersion 31
     buildToolsVersion "30.0.3"
 
     signingConfigs {
@@ -48,7 +48,7 @@ android {
         minSdkVersion 21
 //        targetSdkVersion 28
         targetSdkVersion 30
-        versionCode 23
+        versionCode 29
         versionName "V3.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -128,7 +128,8 @@ dokitExt {
 dependencies {
     implementation project(path: ':shadowLibrary')
     implementation project(path: ':nineLibrary')
-    implementation fileTree(dir: 'libs', include: '*.jar')
+//    implementation fileTree(dir: 'libs', include: '*.jar')
+    implementation fileTree(dir: 'libs', include: ["*.jar","*.aar"])
     implementation 'com.tencent:mmkv:1.2.12'
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation "org.jetbrains.anko:anko-commons:$anko_version"
@@ -153,7 +154,7 @@ dependencies {
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.31'
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.1.1"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.2.1"
-    implementation 'com.github.bumptech.glide:glide:4.9.0'
+//    implementation 'com.github.bumptech.glide:glide:4.9.0'
     implementation 'com.scwang.smart:refresh-layout-kernel:2.0.1'
     implementation 'com.scwang.smart:refresh-header-classics:2.0.1'
     implementation 'com.scwang.smart:refresh-header-material:2.0.1'
@@ -235,6 +236,8 @@ dependencies {
     api 'com.squareup.okhttp3:logging-interceptor:3.4.1'
 
     implementation 'cn.jiguang.sdk:jpush:3.8.0'
+    implementation 'cn.jiguang.sdk:jmessage:2.9.0'  // 此处以JMessage 2.9.0 版本为例。
+    api 'cn.jiguang.sdk:jmrtc:1.0.2'  // 此处以jmrtc 1.0.2 版本为例
     implementation 'cn.jiguang.sdk:jcore:2.5.1'
 
     //动态权限添加？？
@@ -260,4 +263,10 @@ dependencies {
 
     //高度自定义的安卓视频框架
     implementation 'cn.jzvd:jiaozivideoplayer:7.5.0'
+
+    //ImageView预览，用于聊天消息发送图片的预览
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+    implementation 'com.github.bumptech.glide:okhttp3-integration:4.11.0'
+    implementation 'com.github.SherlockGougou:BigImageViewPager:androidx-7.1.4'
 }

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/input_extend"
+    android:orientation="vertical">
+
+    <include layout="@layout/ic_spitview_horizontal" />
+
+    <com.ggb.nirvanaclub.modules.keyboard.widget.EmoticonsFuncView
+        android:id="@+id/view_epv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/view_eiv"
+        android:orientation="vertical" />
+
+    <com.ggb.nirvanaclub.modules.keyboard.widget.EmoticonsIndicatorView
+        android:id="@+id/view_eiv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/view_spit"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/dimen_10" />
+
+    <include
+        android:id="@+id/view_spit"
+        layout="@layout/ic_spitview_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_1"
+        android:layout_above="@+id/view_etv" />
+
+    <com.ggb.nirvanaclub.modules.keyboard.widget.EmoticonsToolBarView
+        android:id="@+id/view_etv"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_32"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical" />
+</RelativeLayout>

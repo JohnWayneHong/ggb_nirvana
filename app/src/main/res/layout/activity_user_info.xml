@@ -198,6 +198,7 @@
                             android:layout_height="@dimen/dimen_35"/>
 
                         <ImageView
+                            android:id="@+id/iv_user_info_code"
                             android:layout_marginStart="@dimen/dimen_10"
                             android:layout_width="@dimen/dimen_45"
                             android:layout_height="@dimen/dimen_45"

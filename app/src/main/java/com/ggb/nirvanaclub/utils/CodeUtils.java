@@ -174,7 +174,7 @@ public class CodeUtils {
      * @param logoBitmap  logo图片
      * @param logoPercent 百分比 (用于调整logo图片在原图片中的显示大小, 取值范围[0,1] )  建议使用0.2F百分比过大可能导致二维码扫描失败。
      */
-    private static Bitmap addLogo(Bitmap srcBitmap, Bitmap logoBitmap, float logoPercent) {
+    public static Bitmap addLogo(Bitmap srcBitmap, Bitmap logoBitmap, float logoPercent) {
         if (srcBitmap == null) {
             return null;
         }

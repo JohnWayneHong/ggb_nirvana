@@ -36,7 +36,8 @@ class Api private constructor(hostType: Int,isAddress: Int) {
     private val apiService: ApiService
 
     /**
-     * isAddressOld : 1.web通用接口
+     * isAddressOld : 0.Nirvana全新地址接口
+     *                1.web通用接口
      *                2.android 特有api接口
      *                3.第三方接口
      */
@@ -58,10 +59,11 @@ class Api private constructor(hostType: Int,isAddress: Int) {
 
         val originalResponse = chain.proceed(request)
         if(originalResponse.code() != 200){
-            App.instance.runOnUiThread {
-                RxToast.error(App.instance,"服务器异常！", Toast.LENGTH_LONG, true)?.show()
-//                App.instance.toast("服务器异常").setGravity(Gravity.CENTER, 0, 0)
-            }
+//            App.instance.runOnUiThread {
+////                RxToast.error(App.instance,"服务器异常！", Toast.LENGTH_LONG, true)?.show()
+//            }
+            Log.e("TAG", ": 服务器返回码错误==>${originalResponse.code()}" )
+
         }
         if (NetUtils.isNetConnected(BaseApplication.instance)) {
             //有网的时候读接口上的@Headers里的配置，你可以在这里进行统一的设置
@@ -101,11 +103,18 @@ class Api private constructor(hostType: Int,isAddress: Int) {
                 build.addHeader("app", "cretin_open_api")
                 build.addHeader("device", "IPHONE 14 PRO MAX")
             }
+            if (isAddressOld==0){
+//                build.addHeader("set-cookie",
+//
+//                )
+//                build.addHeader("set-ggb", "ggx")
+            }
 //            build.addHeader("deviceType","sxApp")
 //            build.addHeader("versions", AppUtils.getVersionName(App.instance))
 //            build.addHeader("phoneSystem","Android")
             chain.proceed(build.build())
         }
+
 
         val okHttpClient = OkHttpClient.Builder()
             .readTimeout(READ_TIME_OUT.toLong(), TimeUnit.MILLISECONDS)
@@ -152,6 +161,14 @@ class Api private constructor(hostType: Int,isAddress: Int) {
 
         val gson = GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ").serializeNulls().create()
         retrofit = when (isAddressOld) {
+            0 -> {
+                Retrofit.Builder()
+                    .client(okHttpClient)
+                    .addConverterFactory(GsonConverterFactory.create(gson))
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                    .baseUrl(C.NIRVANA_BASE_ADDRESS)
+                    .build()
+            }
             1 -> {
                 Retrofit.Builder()
                     .client(okHttpClient)

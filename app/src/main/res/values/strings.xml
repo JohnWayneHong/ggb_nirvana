@@ -55,10 +55,11 @@
     <string name="article_like_unlogin_warning_string">您当前还未登录</string>
     <string name="message_title_bar_string">消息</string>
     <string name="message_interaction_string">互动消息</string>
-    <string name="message_system_string">系统消息</string>
-    <string name="message_other_string">其他提醒</string>
+    <string name="message_system_string">通讯录</string>
+    <string name="message_other_string">新朋友</string>
     <string name="message_nirvana_msg_string">牛信</string>
     <string name="message_new_nirvana_msg_string">新牛信</string>
+    <string name="message_add_friend_string">添加新朋友</string>
     <string name="message_interaction_article_string">原文</string>
     <string name="message_interaction_comment_reply_btn_string">回复</string>
     <string name="list_end_string"><![CDATA[- o((>ω< ))o 我是有底线的 -]]></string>
@@ -106,8 +107,18 @@
     <string name="crash_error_details_clipboard_label">错误信息</string>
     <string name="crash_error_file">错误日志保存路径</string>
     <string name="crash_file_permission">牛蛙呐需要获取你的存储权限,否则无法使用!</string>
+    <string name="talk_permission">牛蛙呐需要获取你的麦克风权限,否则无法使用聊天功能!</string>
 
 
     <string name="develop_community_subscript_fans">发表 %s 粉丝 %s</string>
+
+    <!-- 聊天   -->
+    <string name="jmui_monday">周一</string>
+    <string name="jmui_tuesday">周二</string>
+    <string name="jmui_wednesday">周三</string>
+    <string name="jmui_thursday">周四</string>
+    <string name="jmui_friday">周五</string>
+    <string name="jmui_saturday">周六</string>
+    <string name="jmui_sunday">周日</string>
 
 </resources>

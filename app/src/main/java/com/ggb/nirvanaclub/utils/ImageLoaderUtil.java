@@ -1,5 +1,6 @@
 package com.ggb.nirvanaclub.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -15,12 +16,14 @@ import androidx.annotation.Nullable;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.DecodeFormat;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 import com.ggb.nirvanaclub.R;
+import com.ggb.nirvanaclub.bean.ChatImageBean;
 
 import java.io.ByteArrayOutputStream;
 
@@ -170,6 +173,80 @@ public class ImageLoaderUtil {
                 })
                 .into(imageView);
     }
+
+    /**
+     * 聊天页面的加载图片用法
+     * @param mActivity
+     * @param url
+     * @param placeholder
+     * @param imageView
+     */
+    public void loadImage(Activity mActivity, String url, int placeholder, ImageView imageView) {
+        if (mActivity == null || mActivity.isDestroyed() || mActivity.isFinishing()) {
+            return;
+        }
+
+        RequestOptions glideoptions = new RequestOptions()
+                .centerCrop()
+                .format(DecodeFormat.PREFER_RGB_565)
+                .placeholder(placeholder)
+                .error(placeholder)
+                .diskCacheStrategy(DiskCacheStrategy.RESOURCE);
+
+        Glide.with(mActivity).load(url).apply(glideoptions).into(imageView);
+    }
+
+
+
+
+    public final static int IMAGE_MAX_SIZE_DP = 150;
+    /**
+     * 聊天图片的在页面的压缩 缩略图
+     * @param context 上下文
+     * @param largeWidth   图片原解析的宽度
+     * @param largeHeight  图片原解析的高度
+//     * @param thumbnailImageHeight 压缩后的高度
+//     * @param thumbnailImageWidth 压缩后的宽度
+     */
+    public static ChatImageBean calculaThumhSize(Context context, int largeWidth, int largeHeight){
+
+//        if (thumbnailImageHeight > 0){
+//            return new ChatImageBean(0f,0f);
+//        }
+
+        int IMAGE_MAX_SIZE = (int)ViewUtil.Dp2px(context,IMAGE_MAX_SIZE_DP);
+
+        float thumhWidth;
+        float thumhHeight;
+
+        if (largeHeight < largeWidth) {
+            // 图片很扁
+            if (largeWidth < IMAGE_MAX_SIZE){
+                // 图片很扁，但是宽度依然小于150dp
+                thumhWidth = largeWidth;
+                thumhHeight = largeHeight;
+            } else {
+                thumhWidth = IMAGE_MAX_SIZE;
+                thumhHeight = largeHeight * IMAGE_MAX_SIZE / largeWidth;
+            }
+        } else {
+            // 图片很长
+            if (largeHeight < IMAGE_MAX_SIZE){
+                // 图片很扁，但是宽度依然小于150dp
+                thumhWidth = largeWidth;
+                thumhHeight = largeHeight;
+            } else {
+                thumhHeight = IMAGE_MAX_SIZE;
+                thumhWidth = largeWidth * IMAGE_MAX_SIZE / largeHeight;
+            }
+        }
+
+        return new ChatImageBean(thumhHeight,thumhWidth);
+//        this.thumbnailImageHeight = thumhHeight;
+//        this.thumbnailImageWidth = thumhWidth;
+    }
+
+
 
     // Drawable转换成Bitmap
     public static Bitmap drawable2Bitmap(Drawable drawable) {

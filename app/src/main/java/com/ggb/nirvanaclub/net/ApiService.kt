@@ -15,13 +15,17 @@ interface ApiService {
     @POST("sys/phoneCode")
     fun sendCode(@Body phone : String):Observable<HttpResult<SimpleUserInfo>>
 
-    //用户登录
-    @POST("sys/login")
+    //用户登出
+    @POST("/v2/api/user/login")
     fun login(@Body body: RequestBody):Observable<HttpResult<Any>>
 
+    //用户登录
+    @POST("/v2/api/user/logout")
+    fun loginOut(@Body body: RequestBody):Observable<HttpResult<Any>>
+
     //获取基础用户信息
-    @GET("sys/info/{type}")
-    fun info(@Path("type") type: Int) : Observable<HttpResult<SimpleUserInfo>>
+    @GET("/v2/api/user/myinfo")
+    fun info() : Observable<HttpResult<SimpleUserInfo>>
 
     //查询所有的标签
     @GET("main/tag/all")

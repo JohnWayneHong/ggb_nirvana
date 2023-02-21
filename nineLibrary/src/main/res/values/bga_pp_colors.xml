@@ -5,7 +5,7 @@
     <!-- 导航栏的颜色 -->
     <color name="bga_pp_navigationBarColor">@android:color/black</color>
     <!-- Toolbar的颜色 -->
-    <color name="bga_pp_colorPrimary">#303D42</color>
+    <color name="bga_pp_colorPrimary">#FFEC6F5A</color>
     <!-- 图片选择器库里所有Activity界面的背景色 -->
     <color name="bga_pp_activity_bg">#1A1A1A</color>
     <!-- 文字颜色 -->

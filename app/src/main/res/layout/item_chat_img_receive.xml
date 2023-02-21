@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/dimen_13"
+    android:paddingBottom="@dimen/dimen_13">
+
+    <TextView
+        android:id="@+id/tv_time"
+        style="@style/TextTime"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <com.ggb.nirvanaclub.view.CircleImageView
+        android:id="@+id/iv_head"
+        android:layout_marginLeft="@dimen/dimen_13"
+        android:layout_width="@dimen/dimen_48"
+        android:layout_height="@dimen/dimen_48"
+        android:src="@mipmap/ic_bear_question" />
+
+        <com.ggb.nirvanaclub.view.emojitextview.BubbleImageView
+            android:id="@+id/iv"
+            android:layout_marginLeft="@dimen/dimen_8"
+            android:layout_toRightOf="@id/iv_head"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:maxHeight="@dimen/dimen_150"
+            android:scaleType="fitCenter"
+            app:bubble_angle="@dimen/dimen_4"
+            app:bubble_arrowHeight="0dp"
+            app:bubble_arrowLocation="left"
+            app:bubble_arrowOffset="-3.5dp"
+            app:bubble_arrowTop="@dimen/dimen_20"
+            app:bubble_arrowWidth="0dp"
+            android:src="@mipmap/ic_bear_question"/>
+
+        <!-- 尖嘴效果： app:bubble_arrowHeight="3dp"  app:bubble_arrowWidth="6dp"-->
+
+        <ProgressBar
+            android:visibility="invisible"
+            android:id="@+id/pb"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dimen_10"
+            android:layout_toRightOf="@+id/iv"
+            android:layout_width="@dimen/dimen_20"
+            android:layout_height="@dimen/dimen_20" />
+
+    </RelativeLayout>
+
+</LinearLayout>

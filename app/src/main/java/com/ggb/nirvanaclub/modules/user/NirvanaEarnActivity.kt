@@ -55,7 +55,7 @@ class NirvanaEarnActivity : BaseActivity() {
 
     }
 
-
+    @SuppressLint("MissingPermission")
     private fun checkDownloadPermission(){
         AndPermission.with(this)
             .runtime()

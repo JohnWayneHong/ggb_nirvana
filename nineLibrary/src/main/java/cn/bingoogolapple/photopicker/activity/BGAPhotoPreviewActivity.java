@@ -18,11 +18,14 @@ package cn.bingoogolapple.photopicker.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.core.view.ViewCompat;
 import androidx.viewpager.widget.ViewPager;
 import androidx.core.view.ViewPropertyAnimatorListenerAdapter;
+
+import android.os.Environment;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -134,7 +137,15 @@ public class BGAPhotoPreviewActivity extends BGAPPToolbarActivity implements Pho
 
     @Override
     protected void processLogic(Bundle savedInstanceState) {
-        mSavePhotoDir = (File) getIntent().getSerializableExtra(EXTRA_SAVE_PHOTO_DIR);
+//        mSavePhotoDir = (File) getIntent().getSerializableExtra(EXTRA_SAVE_PHOTO_DIR);
+        String path = "";
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R){
+            path = Environment.DIRECTORY_PICTURES + File.separator + "GGBScreen";
+        }else {
+            path = Environment.getExternalStorageDirectory().getPath() + "/GGBScreen/";
+        }
+        File fl = new File(path);
+        mSavePhotoDir = fl;
         if (mSavePhotoDir != null && !mSavePhotoDir.exists()) {
             mSavePhotoDir.mkdirs();
         }

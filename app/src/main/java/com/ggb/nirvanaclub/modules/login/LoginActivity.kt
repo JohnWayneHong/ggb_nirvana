@@ -5,20 +5,20 @@ import android.graphics.Typeface
 import android.os.Build
 import android.text.Spannable
 import android.text.SpannableString
-import android.text.TextPaint
-import android.text.method.LinkMovementMethod
-import android.text.style.ClickableSpan
 import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
 import android.util.Log
-import android.view.Gravity
 import android.view.View
+import android.widget.Toast
 import androidx.core.content.ContextCompat
-import androidx.navigation.Navigation.findNavController
+import cn.jpush.im.android.api.JMessageClient
+import cn.jpush.im.android.api.model.UserInfo
+import cn.jpush.im.api.BasicCallback
 import com.ggb.nirvanaclub.App
-import com.ggb.nirvanaclub.MainActivity
 import com.ggb.nirvanaclub.R
 import com.ggb.nirvanaclub.base.BaseActivity
+import com.ggb.nirvanaclub.bean.DevelopJokesBean
+import com.ggb.nirvanaclub.bean.OnCodeIsNot200
 import com.ggb.nirvanaclub.bean.SimpleUserInfo
 import com.ggb.nirvanaclub.bean.UserBean
 import com.ggb.nirvanaclub.constans.C
@@ -27,9 +27,11 @@ import com.ggb.nirvanaclub.listener.BaseUiListener
 import com.ggb.nirvanaclub.modules.user.PrivacyProtocolActivity
 import com.ggb.nirvanaclub.net.GGBContract
 import com.ggb.nirvanaclub.net.GGBPresent
-import com.ggb.nirvanaclub.utils.RegularUtil
-import com.ggb.nirvanaclub.utils.TimeCountUtil
-import com.ggb.nirvanaclub.utils.showToast
+import com.ggb.nirvanaclub.utils.*
+import com.ggb.nirvanaclub.view.RxToast
+import com.google.gson.Gson
+import com.google.gson.JsonObject
+import com.google.gson.reflect.TypeToken
 import com.gyf.immersionbar.ImmersionBar
 import com.tencent.connect.common.Constants
 import com.tencent.tauth.Tencent
@@ -39,8 +41,7 @@ import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import org.jetbrains.anko.startActivity
-
-import org.jetbrains.anko.toast
+import org.litepal.LitePal
 
 class LoginActivity : BaseActivity() ,GGBContract.View,TimeCountUtil.OnCountDownListener{
 
@@ -56,8 +57,9 @@ class LoginActivity : BaseActivity() ,GGBContract.View,TimeCountUtil.OnCountDown
 
     /**
      * 登录方式，默认是手机验证码登录
+     * 新版本尚未实现，暂时默认账户登录
      */
-    private var loginType = LoginType.CODE
+    private var loginType = LoginType.PWD
     private lateinit var codeSpannableString: SpannableString
     private lateinit var pwdSpannableString: SpannableString
 
@@ -86,23 +88,25 @@ class LoginActivity : BaseActivity() ,GGBContract.View,TimeCountUtil.OnCountDown
 
     override fun initEvent(){
         tv_user_login_change_type.setOnClickListener {
-            loginType = if (loginType == LoginType.CODE) LoginType.PWD else LoginType.CODE
-            when(loginType){
-                LoginType.CODE->{
-                    rl_login_account.visibility = View.GONE
-                    rl_user_login_pwd.visibility = View.GONE
-                    rl_login_mobile.visibility = View.VISIBLE
-                    rl_login_mobile_code.visibility = View.VISIBLE
-                    tv_user_login_change_type.text = resources.getString(R.string.me_user_login_title_pwd_string)
-                }
-                LoginType.PWD->{
-                    rl_login_account.visibility = View.VISIBLE
-                    rl_user_login_pwd.visibility = View.VISIBLE
-                    rl_login_mobile.visibility = View.GONE
-                    rl_login_mobile_code.visibility = View.GONE
-                    tv_user_login_change_type.text = resources.getString(R.string.me_user_login_title_code_string)
-                }
-            }
+            RxToast.info("牛蛙呐系统升级中，暂时无法使用手机登录，请谅解~")
+
+//            loginType = if (loginType == LoginType.CODE) LoginType.PWD else LoginType.CODE
+//            when(loginType){
+//                LoginType.CODE->{
+//                    rl_login_account.visibility = View.GONE
+//                    rl_user_login_pwd.visibility = View.GONE
+//                    rl_login_mobile.visibility = View.VISIBLE
+//                    rl_login_mobile_code.visibility = View.VISIBLE
+//                    tv_user_login_change_type.text = resources.getString(R.string.me_user_login_title_pwd_string)
+//                }
+//                LoginType.PWD->{
+//                    rl_login_account.visibility = View.VISIBLE
+//                    rl_user_login_pwd.visibility = View.VISIBLE
+//                    rl_login_mobile.visibility = View.GONE
+//                    rl_login_mobile_code.visibility = View.GONE
+//                    tv_user_login_change_type.text = resources.getString(R.string.me_user_login_title_code_string)
+//                }
+//            }
             setMustReadText()
         }
         iv_user_login_qq.setOnClickListener {
@@ -166,7 +170,8 @@ class LoginActivity : BaseActivity() ,GGBContract.View,TimeCountUtil.OnCountDown
                             resources.getString(R.string.mobile_error).showToast()
                             return@setOnClickListener
                         }
-                        present.login(et_user_login_mobile.text.toString(),user_login_code.text.toString(),-1)
+                        //后续加接口
+//                        present.login(et_user_login_mobile.text.toString(),user_login_code.text.toString())
                     }
                     LoginType.PWD -> {
                         if (et_user_login_account.text.isEmpty()){
@@ -181,7 +186,7 @@ class LoginActivity : BaseActivity() ,GGBContract.View,TimeCountUtil.OnCountDown
                             resources.getString(R.string.account_error).showToast()
                             return@setOnClickListener
                         }
-                        present.login(et_user_login_account.text.toString(),user_login_pwd.text.toString(),-2)
+                        present.login(et_user_login_account.text.toString(),user_login_pwd.text.toString())
                     }
                 }
             }else{
@@ -280,7 +285,7 @@ class LoginActivity : BaseActivity() ,GGBContract.View,TimeCountUtil.OnCountDown
         flag?.let {
             when (flag) {
                 GGBContract.LOGIN -> {
-                    present.info(-1)
+                    present.info()
                 }
                 GGBContract.SENDCODE -> {
                     time?.start()
@@ -291,13 +296,67 @@ class LoginActivity : BaseActivity() ,GGBContract.View,TimeCountUtil.OnCountDown
                     Log.e("TAG", "用户信息 名称是--->: "+data.nickName )
                     Log.e("TAG", "用户头像--->: "+data.photo )
                     val userBean = UserBean()
-                    userBean.userImg = data.photo
+                    userBean.userId = data.id
                     userBean.userName = data.nickName
-                    userBean.userId = data.nickName
+                    userBean.usercreateTime = data.createTime
+                    userBean.account = data.account
+                    userBean.userImg = data.photo
+                    userBean.userSign = if (!data.sign.isNullOrEmpty()) data.sign else ""
+                    userBean.userBirth = if (!data.birth.isNullOrEmpty()) data.birth else ""
+                    userBean.userStatus = if (!data.status.isNullOrEmpty()) data.status else ""
+
                     userBean.userLoginType = 3
                     userBean.isLogin = true
                     userBean.save()
                     EventBus.getDefault().post(UserStateChangeEvent(3))
+                    SharedPreferencesUtil.putUserString(this,"UserIDToJMessage", data.id)
+                    SharedPreferencesUtil.putUserString(this,"UserPasswordToJMessage", data.id)
+
+                    val user = LitePal.findLast(UserBean::class.java)
+
+                    Log.e("TAG", "onSuccess: "+user.userId )
+
+                    JMessageClient.register(data.id,data.id,object : BasicCallback(){
+                        //统一JMessage注册用户，无论是否注册过，只要登录的用户就注册JMessage
+                        override fun gotResult(p0: Int, p1: String?) {
+                            if(p0==0){
+                                Log.e("TAG", "JMessage===注册成功=====》: " )
+                            }else{
+                                if (p1 != null) {
+                                    Log.e("TAG", "JMessage===注册失败=====》: "+p1 )
+                                }
+                            }
+                            //登录JMessage
+                            JMessageClient.login(data.id,data.id,object :BasicCallback(){
+                                override fun gotResult(p0: Int, p1: String?) {
+                                    if (p0==0){
+                                        RxToast.success(this@LoginActivity, "登录成功！", Toast.LENGTH_SHORT)?.show()
+                                        Log.e("TAG", "JMessage===登录成功=====》: " )
+
+                                        //登录成功更新用户信息
+                                        val userInfo = JMessageClient.getMyInfo()
+                                        userInfo.nickname = userBean.userName
+
+                                        JMessageClient.updateMyInfo(UserInfo.Field.nickname,userInfo,object :BasicCallback(){
+                                            override fun gotResult(p0: Int, p1: String?) {
+                                                if(p0 == 0){
+                                                    Log.e("TAG", "JMessage===更新昵称成功=====》: " )
+                                                }
+                                            }
+                                        })
+                                    }else{
+                                        if (p1 != null) {
+                                            RxToast.error(this@LoginActivity, p1, Toast.LENGTH_SHORT)?.show()
+                                            Log.e("TAG", "JMessage===登录失败=====》: "+p1 )
+                                        }
+                                    }
+                                }
+
+                            })
+
+                        }
+                    })
+
                     finish()
                 }
                 else -> {
@@ -309,12 +368,13 @@ class LoginActivity : BaseActivity() ,GGBContract.View,TimeCountUtil.OnCountDown
 
 
     override fun onFailed(string: String?,isRefreshList:Boolean) {
-        toast(string!!).setGravity(Gravity.CENTER, 0, 0)
+        val errorBean = Gson().fromJson<OnCodeIsNot200>(string, object : TypeToken<OnCodeIsNot200>() {}.type)
+        RxToast.error(errorBean.message)
     }
 
     override fun onNetError(boolean: Boolean,isRefreshList:Boolean) {
         if(boolean){
-            toast("请检查网络连接").setGravity(Gravity.CENTER, 0, 0)
+            RxToast.warning("请检查网络连接")
         }
     }
 

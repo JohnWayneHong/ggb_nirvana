@@ -15,7 +15,7 @@
             android:id="@+id/iv_logo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"/>
+            android:layout_marginBottom="@dimen/dimen_12"/>
 
         <TextView
             android:id="@+id/tv_title"
@@ -27,7 +27,7 @@
             android:paddingRight="3dp"
             android:text="Android的起源"
             android:textColor="@color/teal_700"
-            android:textSize="18dp"
+            android:textSize="@dimen/text_18"
             android:textStyle="bold"/>
 
         <TextView
@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:gravity="center"
-            android:maxHeight="200dp"
+            android:maxHeight="@dimen/dimen_200"
             android:text="Android"
             android:textColor="@color/text_main_color" />
 

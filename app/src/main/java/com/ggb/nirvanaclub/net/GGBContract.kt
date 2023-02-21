@@ -11,6 +11,7 @@ interface GGBContract {
         var GETTAG = "getTag"
         var GETTAGALL = "getTagAll"
         var LOGIN = "login"
+        var LOGINOUT = "loginOut"
         var SENDCODE = "sendCode"
         var INFO = "info"
         var ARTICLEINFO = "articleInfo"
@@ -29,8 +30,9 @@ interface GGBContract {
     interface Model{
         fun getTag():Observable<HttpResult<List<IndexTagBean>>>
         fun sendCode(phone:String): Observable<HttpResult<SimpleUserInfo>>
-        fun login(account:String,password:String,type:Int):Observable<HttpResult<Any>>
-        fun info(type:Int):Observable<HttpResult<SimpleUserInfo>>
+        fun login(account:String,password:String):Observable<HttpResult<Any>>
+        fun loginOut():Observable<HttpResult<Any>>
+        fun info():Observable<HttpResult<SimpleUserInfo>>
         fun getTagAll():Observable<HttpResult<List<IndexTagBean>>>
         fun pageArticleByTag(tagId:String,page:Int,pageSize:Int):Observable<HttpResult<IndexArticleInfoBean>>
         fun getArticle(articleId:String):Observable<HttpResult<ArticleContentBean>>
@@ -46,8 +48,9 @@ interface GGBContract {
     interface Present{
         fun getTag()
         fun sendCode(phone:String)
-        fun login(account:String,password:String,type:Int)
-        fun info(type:Int)
+        fun login(account:String,password:String)
+        fun loginOut()
+        fun info()
         fun getTagAll()
         fun pageArticleByTag(tagId:String,page:Int,pageSize:Int)
         fun getArticle(articleId:String)

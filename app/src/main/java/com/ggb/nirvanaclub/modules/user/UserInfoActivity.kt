@@ -17,6 +17,7 @@ import com.ggb.nirvanaclub.base.BaseFragment
 import com.ggb.nirvanaclub.bean.UserBean
 import com.ggb.nirvanaclub.bean.UserInfoFakeBean
 import com.ggb.nirvanaclub.constans.C
+import com.ggb.nirvanaclub.modules.message.MessageUserInfoActivity
 import com.ggb.nirvanaclub.utils.DensityUtils
 import com.ggb.nirvanaclub.utils.GlideEngine
 import com.ggb.nirvanaclub.utils.ImageLoaderUtil
@@ -26,6 +27,7 @@ import com.luck.picture.lib.PictureSelector
 import com.luck.picture.lib.config.PictureConfig
 import com.luck.picture.lib.config.PictureMimeType
 import kotlinx.android.synthetic.main.activity_user_info.*
+import org.jetbrains.anko.startActivity
 import org.litepal.LitePal
 
 class UserInfoActivity : BaseActivity() {
@@ -108,6 +110,9 @@ class UserInfoActivity : BaseActivity() {
         mAdapter?.setOnItemClickListener { adapter, view, position ->
             mAdapter?.selectItem(position)
             articleInfoChange(position)
+        }
+        iv_user_info_code.setOnClickListener {
+            startActivity<MessageUserInfoActivity>()
         }
     }
 

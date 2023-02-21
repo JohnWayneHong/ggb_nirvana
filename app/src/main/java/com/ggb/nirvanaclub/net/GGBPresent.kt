@@ -3,6 +3,7 @@ package com.ggb.nirvanaclub.net
 import com.ggb.nirvanaclub.base.BasePresent
 import com.ggb.nirvanaclub.bean.*
 import com.ggb.nirvanaclub.rx.RxSchedulersHelper
+import retrofit2.HttpException
 
 class GGBPresent(baseView: GGBContract.View) :BasePresent<GGBContract.View>(baseView),GGBContract.Present{
 
@@ -42,8 +43,8 @@ class GGBPresent(baseView: GGBContract.View) :BasePresent<GGBContract.View>(base
             })
     }
 
-    override fun login(account: String, password: String, type: Int) {
-        model.login(account,password, type)
+    override fun login(account: String, password: String) {
+        model.login(account,password)
             .compose(RxSchedulersHelper.io_main())
             .subscribe(object : BaseObserver<Any>(mContext,true){
                 override fun onSuccess(t: HttpResult<Any>?) {
@@ -53,14 +54,47 @@ class GGBPresent(baseView: GGBContract.View) :BasePresent<GGBContract.View>(base
                 override fun onCodeError(t: HttpResult<Any>) {
                     view.onFailed(t.message,false)
                 }
-                override fun onFailure(e: Throwable?, isNetWorkError: Boolean) {
-                    view.onNetError(isNetWorkError,false)
+                override fun onFailure(e: Throwable, isNetWorkError: Boolean) {
+                    //处理Retrofit中如何取得状态码非200（出现错误）
+                    if (e is HttpException){
+                        val body = e.response().errorBody()
+                        if (body != null) {
+                            view.onFailed(body.string(),false)
+                        }
+                    }else{
+                        view.onNetError(isNetWorkError,false)
+                    }
                 }
             })
     }
 
-    override fun info(type: Int) {
-        model.info(type)
+    override fun loginOut() {
+        model.loginOut()
+            .compose(RxSchedulersHelper.io_main())
+            .subscribe(object : BaseObserver<Any>(mContext,true){
+                override fun onSuccess(t: HttpResult<Any>?) {
+                    view.onSuccess(GGBContract.LOGINOUT,t?.data)
+                }
+
+                override fun onCodeError(t: HttpResult<Any>) {
+                    view.onFailed(t.message,false)
+                }
+                override fun onFailure(e: Throwable, isNetWorkError: Boolean) {
+                    //处理Retrofit中如何取得状态码非200（出现错误）
+                    if (e is HttpException){
+                        val body = e.response().errorBody()
+                        if (body != null) {
+                            view.onFailed(body.string(),false)
+                        }
+                    }else{
+                        view.onNetError(isNetWorkError,false)
+                    }
+                }
+            })
+    }
+
+    override fun info() {
+        model.info()
             .compose(RxSchedulersHelper.io_main())
             .subscribe(object : BaseObserver<SimpleUserInfo>(mContext,true){
                 override fun onSuccess(t: HttpResult<SimpleUserInfo>?) {

@@ -37,7 +37,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="牛蛙呐牛逼验证码"
+                    android:text="牛蛙呐牛逼视频"
                     android:textStyle="bold"
                     android:textSize="@dimen/text_16"/>
 

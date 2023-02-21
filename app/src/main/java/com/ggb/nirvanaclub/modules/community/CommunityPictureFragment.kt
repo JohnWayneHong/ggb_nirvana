@@ -1,6 +1,7 @@
 package com.ggb.nirvanaclub.modules.community
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.Message
 import android.util.Log
@@ -75,6 +76,7 @@ class CommunityPictureFragment : BaseFragment(), GGBContract.View{
         }
     }
 
+    @SuppressLint("MissingPermission")
     private fun checkDownloadPermission(){
         AndPermission.with(this)
             .runtime()
