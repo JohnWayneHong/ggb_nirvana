@@ -5,6 +5,7 @@ import android.graphics.ColorMatrix
 import android.graphics.ColorMatrixColorFilter
 import android.graphics.Paint
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import cn.jpush.im.android.api.JMessageClient
@@ -145,6 +146,18 @@ abstract class BaseActivity: MyBaseActivity() {
         loadingDialog?.dismiss()
         //        //注销消息接收
         JMessageClient.unRegisterEventReceiver(this)
+    }
+
+    /**
+     * 用于WebContent的返回按钮的事件，系统的返回键
+     */
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
 

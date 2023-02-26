@@ -97,4 +97,20 @@ class GGBModel :GGBContract.Model{
         return Api.getDefault(3,3).communityRecommendSubscript()
     }
 
+    override fun communityAndroid(pager: Int): Observable<PlayAndroidHttpResult<CommunityAndroidBean>> {
+        return Api.getDefault(4,4).communityAndroid(pager)
+    }
+
+    override fun communitySquare(pager: Int): Observable<PlayAndroidHttpResult<CommunityAndroidBean>> {
+        return Api.getDefault(4,4).communitySquare(pager)
+    }
+
+    override fun communityKnowledge(): Observable<PlayAndroidHttpResult<List<CommunityKnowledgeBean>>> {
+        return Api.getDefault(4,4).communityKnowledgeTree()
+    }
+
+    override fun communityNavigation(): Observable<PlayAndroidHttpResult<List<CommunityNavigationBean>>> {
+        return Api.getDefault(4,4).communityNavigation()
+    }
+
 }

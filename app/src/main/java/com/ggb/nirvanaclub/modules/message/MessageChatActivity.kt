@@ -36,10 +36,11 @@ import com.ggb.nirvanaclub.modules.message.audio2.AudioPlayManager
 import com.ggb.nirvanaclub.modules.message.audio2.IAudioPlayListener
 import com.ggb.nirvanaclub.net.GGBContract
 import com.ggb.nirvanaclub.net.GGBPresent
+import com.ggb.nirvanaclub.view.linktextview.QMUILinkTextView
 import com.luck.picture.lib.PictureSelector
 import com.luck.picture.lib.config.PictureConfig
 import com.yanzhenjie.permission.AndPermission
-import kotlinx.android.synthetic.main.activity_chat2.*
+import kotlinx.android.synthetic.main.activity_chat.*
 import org.jetbrains.anko.toast
 import java.io.File
 
@@ -68,7 +69,7 @@ class MessageChatActivity : MessageChatInputActivity(), GGBContract.View{
 
     override fun getTitleType() =  PublicTitleData(C.TITLE_CUSTOM)
 
-    override fun getLayoutResource(): Int = R.layout.activity_chat2
+    override fun getLayoutResource(): Int = R.layout.activity_chat
 
     override fun beForSetContentView() {
         present = GGBPresent(this)
@@ -116,6 +117,7 @@ class MessageChatActivity : MessageChatInputActivity(), GGBContract.View{
         //语音设置
         checkTalkPermission()
         initInputView()
+        mAdapter.setOnLinkClickListener(mOnLinkClickListener)
     }
 
     private fun initTop(){
@@ -462,6 +464,26 @@ class MessageChatActivity : MessageChatInputActivity(), GGBContract.View{
     override fun onSendBtnClick(content: String) {
         //发送文字或者表情包
         sendTextMessage(content)
+    }
+
+    private val mOnLinkClickListener: QMUILinkTextView.OnLinkClickListener = object : QMUILinkTextView.OnLinkClickListener {
+        override fun onTelLinkClick(phoneNumber: String?) {
+            val dialog = MessageTextDialog(this@MessageChatActivity)
+            dialog.initPhoneView(this@MessageChatActivity, phoneNumber)
+            dialog.show()
+        }
+
+        override fun onMailLinkClick(mailAddress: String?) {
+            val dialog = MessageTextDialog(this@MessageChatActivity)
+            dialog.initEmailView(this@MessageChatActivity, mailAddress)
+            dialog.show()
+        }
+
+        override fun onWebUrlLinkClick(url: String?) {
+            val dialog = MessageTextDialog(this@MessageChatActivity)
+            dialog.initWebView(this@MessageChatActivity, url)
+            dialog.show()
+        }
     }
 
 

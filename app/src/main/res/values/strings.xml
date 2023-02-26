@@ -108,6 +108,7 @@
     <string name="crash_error_file">错误日志保存路径</string>
     <string name="crash_file_permission">牛蛙呐需要获取你的存储权限,否则无法使用!</string>
     <string name="talk_permission">牛蛙呐需要获取你的麦克风权限,否则无法使用聊天功能!</string>
+    <string name="data_not_belong">该数据暂时不属于牛蛙呐站内资源!</string>
 
 
     <string name="develop_community_subscript_fans">发表 %s 粉丝 %s</string>
@@ -120,5 +121,26 @@
     <string name="jmui_friday">周五</string>
     <string name="jmui_saturday">周六</string>
     <string name="jmui_sunday">周日</string>
+
+    <string name="no_data">暂无数据</string>
+    <string name="no_network">网络异常</string>
+    <string name="no_network_tip">请检查网络后点击重新加载</string>
+    <string name="data_error">数据获取失败</string>
+    <string name="network_unavailable_tip">网络连接不可用,请检查网络设置!</string>
+
+    <!-- 玩安卓首页 -->
+    <string name="collect_success">收藏成功</string>
+    <string name="cancel_collect_success">已取消收藏</string>
+    <string name="new_fresh">新</string>
+    <string name="top_tip">置顶</string>
+
+    <!-- Menu Action -->
+    <string name="action_search">搜索</string>
+    <string name="action_share">分享</string>
+    <string name="action_like">收藏</string>
+    <string name="action_browser">用浏览器打开</string>
+    <string name="share_article_url">%1$s分享【%2$s】：%3$s</string>
+    <string name="login_tint">请先登录</string>
+
 
 </resources>

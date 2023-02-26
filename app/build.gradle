@@ -48,7 +48,7 @@ android {
         minSdkVersion 21
 //        targetSdkVersion 28
         targetSdkVersion 30
-        versionCode 29
+        versionCode 30
         versionName "V3.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -128,6 +128,7 @@ dokitExt {
 dependencies {
     implementation project(path: ':shadowLibrary')
     implementation project(path: ':nineLibrary')
+    implementation project(path: ':lib_multiple_view')
 //    implementation fileTree(dir: 'libs', include: '*.jar')
     implementation fileTree(dir: 'libs', include: ["*.jar","*.aar"])
     implementation 'com.tencent:mmkv:1.2.12'
@@ -232,7 +233,6 @@ dependencies {
     api 'com.trello.rxlifecycle2:rxlifecycle-android:2.2.1'
     // If you want pre-written Activities and Fragments you can subclass as providers
     api 'com.trello.rxlifecycle2:rxlifecycle-components:2.2.1'
-    api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.31'
     api 'com.squareup.okhttp3:logging-interceptor:3.4.1'
 
     implementation 'cn.jiguang.sdk:jpush:3.8.0'
@@ -269,4 +269,10 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
     implementation 'com.github.bumptech.glide:okhttp3-integration:4.11.0'
     implementation 'com.github.SherlockGougou:BigImageViewPager:androidx-7.1.4'
+
+    //玩安卓的webcontent
+    implementation 'com.just.agentweb:agentweb:4.0.2'
+
+    //二级联动的RecycleView
+    implementation 'com.kunminx.linkage:linkage-recyclerview:2.7.0'
 }

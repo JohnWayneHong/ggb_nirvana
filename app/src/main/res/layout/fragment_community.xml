@@ -7,84 +7,93 @@
     android:orientation="vertical"
     android:background="@color/background">
 
-    <LinearLayout
-        android:id="@+id/ll_community_title"
+<!--    <LinearLayout-->
+<!--        android:id="@+id/ll_community_title"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="@dimen/dimen_50"-->
+<!--        android:orientation="horizontal">-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="@dimen/dimen_50"-->
+<!--            android:orientation="horizontal"-->
+<!--            android:padding="@dimen/dimen_10"-->
+<!--            android:layout_weight="1">-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/tv_community_scribe"-->
+<!--                android:layout_weight="1"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:gravity="center"-->
+<!--                android:textColor="@color/text_main_color"-->
+<!--                android:textStyle="bold"-->
+<!--                android:textSize="@dimen/text_16"-->
+<!--                android:text="关注"/>-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/tv_community_recommend"-->
+<!--                android:layout_weight="1"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:gravity="center"-->
+<!--                android:textColor="@color/text_main_color"-->
+<!--                android:textStyle="bold"-->
+<!--                android:textSize="@dimen/text_16"-->
+<!--                android:text="推荐"/>-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/tv_community_text"-->
+<!--                android:layout_weight="1"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:gravity="center"-->
+<!--                android:textColor="@color/text_main_color"-->
+<!--                android:textStyle="bold"-->
+<!--                android:textSize="@dimen/text_16"-->
+<!--                android:text="纯文"/>-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/tv_community_picture"-->
+<!--                android:layout_weight="1"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:gravity="center"-->
+<!--                android:textColor="@color/text_main_color"-->
+<!--                android:textStyle="bold"-->
+<!--                android:textSize="@dimen/text_16"-->
+<!--                android:text="趣图"/>-->
+
+<!--            <View-->
+<!--                android:layout_weight="0.5"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"/>-->
+
+<!--        </LinearLayout>-->
+
+<!--        <ImageView-->
+<!--            android:id="@+id/iv_search_community"-->
+<!--            android:layout_width="@dimen/dimen_45"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:padding="@dimen/dimen_13"-->
+<!--            android:src="@mipmap/search" />-->
+
+<!--    </LinearLayout>-->
+
+    <com.tamsiree.rxui.view.tablayout.TGlideTabLayout
+        android:id="@+id/rxTool_community_title"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_50"
-        android:orientation="horizontal">
+        android:layout_height="@dimen/dimen_48"
+        android:background="@color/main_color"
+        app:indicator_corner_radius="@dimen/dimen_2"
+        app:indicator_height="@dimen/dimen_4"
+        app:indicator_width="@dimen/dimen_4" />
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="@dimen/dimen_50"
-            android:orientation="horizontal"
-            android:padding="@dimen/dimen_10"
-            android:layout_weight="1">
-
-            <TextView
-                android:id="@+id/tv_community_scribe"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:textColor="@color/text_main_color"
-                android:textStyle="bold"
-                android:textSize="@dimen/text_16"
-                android:text="关注"/>
-
-            <TextView
-                android:id="@+id/tv_community_recommend"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:textColor="@color/text_main_color"
-                android:textStyle="bold"
-                android:textSize="@dimen/text_16"
-                android:text="推荐"/>
-
-            <TextView
-                android:id="@+id/tv_community_text"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:textColor="@color/text_main_color"
-                android:textStyle="bold"
-                android:textSize="@dimen/text_16"
-                android:text="纯文"/>
-
-            <TextView
-                android:id="@+id/tv_community_picture"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:textColor="@color/text_main_color"
-                android:textStyle="bold"
-                android:textSize="@dimen/text_16"
-                android:text="趣图"/>
-
-            <View
-                android:layout_weight="0.5"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"/>
-
-        </LinearLayout>
-
-        <ImageView
-            android:id="@+id/iv_search_community"
-            android:layout_width="@dimen/dimen_45"
-            android:layout_height="match_parent"
-            android:padding="@dimen/dimen_13"
-            android:src="@mipmap/search" />
-
-    </LinearLayout>
-
-    <com.ggb.nirvanaclub.view.NoScrollViewPager
+    <com.ggb.nirvanaclub.view.YesScrollViewPager
         android:id="@+id/vp_community"
         android:layout_width="match_parent"
         android:layout_height="0dp"

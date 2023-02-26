@@ -23,6 +23,10 @@ interface GGBContract {
         var GETJOKESTEXT = "getJokesText"
         var GETJOKESPICTURE = "getJokesPicture"
         var GETJOKESRECOMMENDSUBSCRIPT = "getJokesRecommendSubscript"
+        var COMMUNITYANDROID = "communityAndroid"
+        var COMMUNITYSQUARE = "communitySquare"
+        var COMMUNITYKNOWLEDGE = "communityKnowledge"
+        var COMMUNITYNAVIGATION = "communityNavigation"
     }
 
     interface View : BaseView
@@ -43,6 +47,10 @@ interface GGBContract {
         fun communityText():Observable<ThirdHttpResult<List<DevelopJokesListBean>>>
         fun communityPicture():Observable<ThirdHttpResult<List<DevelopJokesListBean>>>
         fun communityRecommendSubscript():Observable<ThirdHttpResult<List<DevelopJokesSubscriptListBean>>>
+        fun communityAndroid(pager: Int):Observable<PlayAndroidHttpResult<CommunityAndroidBean>>
+        fun communitySquare(pager: Int):Observable<PlayAndroidHttpResult<CommunityAndroidBean>>
+        fun communityKnowledge():Observable<PlayAndroidHttpResult<List<CommunityKnowledgeBean>>>
+        fun communityNavigation():Observable<PlayAndroidHttpResult<List<CommunityNavigationBean>>>
     }
 
     interface Present{
@@ -61,6 +69,10 @@ interface GGBContract {
         fun communityText()
         fun communityPicture()
         fun communityRecommendSubscript()
+        fun communityAndroid(pager: Int)
+        fun communitySquare(pager: Int)
+        fun communityKnowledge()
+        fun communityNavigation()
 
     }
 }

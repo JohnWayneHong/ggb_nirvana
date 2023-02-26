@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.ggb.nirvanaclub.view.viewgroup.WebContainer xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/wc_android_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <include layout="@layout/community_toolbar" />
+
+    <!--<include layout="@layout/container" />-->
+
+</com.ggb.nirvanaclub.view.viewgroup.WebContainer>

@@ -129,7 +129,6 @@ class MessageFragment :BaseFragment(){
                 val userInfo = list[position].targetInfo as UserInfo
 
                 val myIntent = Intent(activity,MessageChatActivity::class.java)
-//                val myIntent = Intent(activity,MessageChatActivity::class.java)
                 myIntent.putExtra(C.TYPE, C.SINGLE)
                 myIntent.putExtra(C.DATA,userInfo.userName)
                 myIntent.putExtra(C.DATA_TWO, MessageChatUtils.getName(userInfo))
@@ -137,7 +136,6 @@ class MessageFragment :BaseFragment(){
             }else{
                 val groupInfo = list[position].targetInfo as GroupInfo
                 val myIntent = Intent(activity, MessageChatActivity::class.java)
-//                val myIntent = Intent(activity,MessageChatActivity::class.java)
                 myIntent.putExtra(C.TYPE, C.GROUP)
                 myIntent.putExtra(C.DATA,groupInfo.groupID)
                 myIntent.putExtra(C.DATA_TWO,groupInfo.groupName)

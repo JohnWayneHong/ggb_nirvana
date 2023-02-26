@@ -4,3 +4,4 @@ include ':shadowLibrary'
 rootProject.name = "nirvanaClub"
 
 include ':nineLibrary'
+include ':lib_multiple_view'

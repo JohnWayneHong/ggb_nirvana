@@ -55,10 +55,10 @@ class ArticleInfoFragment :BaseFragment(),GGBContract.View{
             activity?.startActivity<ArticleActivity>(Pair("articleId",mAdapter?.getItem(position)?.articleId))
         }
         mAdapter?.setOnLoadMoreListener {
-            getNewsList(false,false)
+            getNewsList(false)
         }
         swipe_refresh_layout.setOnRefreshListener {
-            getNewsList(true,false)
+            getNewsList(true)
         }
         floating_action_btn.setOnClickListener {
             rcy_article_info_rv.run {
@@ -95,7 +95,7 @@ class ArticleInfoFragment :BaseFragment(),GGBContract.View{
 
     }
 
-    private fun getNewsList(isRefreshList: Boolean,isShow:Boolean){
+    private fun getNewsList(isRefreshList: Boolean){
         if(isRefreshList){
             pager = 1
             mAdapter?.loadMoreComplete()

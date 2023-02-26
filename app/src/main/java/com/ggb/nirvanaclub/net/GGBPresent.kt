@@ -290,4 +290,76 @@ class GGBPresent(baseView: GGBContract.View) :BasePresent<GGBContract.View>(base
             })
     }
 
+    override fun communityAndroid(pager: Int) {
+        model.communityAndroid(pager)
+            .compose(RxSchedulersHelper.io_main())
+            .subscribe(object :PlayAndroidBaseObserver<CommunityAndroidBean>(mContext,true){
+                override fun onSuccess(t: PlayAndroidHttpResult<CommunityAndroidBean>?) {
+                    view.onSuccess(GGBContract.COMMUNITYANDROID,t?.data)
+                }
+
+                override fun onCodeError(t: PlayAndroidHttpResult<CommunityAndroidBean>) {
+                    view.onFailed(t.message,false)
+                }
+
+                override fun onFailure(e: Throwable?, isNetWorkError: Boolean) {
+                    view.onNetError(isNetWorkError,false)
+                }
+            })
+    }
+
+    override fun communitySquare(pager: Int) {
+        model.communitySquare(pager)
+            .compose(RxSchedulersHelper.io_main())
+            .subscribe(object :PlayAndroidBaseObserver<CommunityAndroidBean>(mContext,true){
+                override fun onSuccess(t: PlayAndroidHttpResult<CommunityAndroidBean>?) {
+                    view.onSuccess(GGBContract.COMMUNITYSQUARE,t?.data)
+                }
+
+                override fun onCodeError(t: PlayAndroidHttpResult<CommunityAndroidBean>) {
+                    view.onFailed(t.message,false)
+                }
+
+                override fun onFailure(e: Throwable?, isNetWorkError: Boolean) {
+                    view.onNetError(isNetWorkError,false)
+                }
+            })
+    }
+
+    override fun communityKnowledge() {
+        model.communityKnowledge()
+            .compose(RxSchedulersHelper.io_main())
+            .subscribe(object :PlayAndroidBaseObserver<List<CommunityKnowledgeBean>>(mContext,true){
+                override fun onSuccess(t: PlayAndroidHttpResult<List<CommunityKnowledgeBean>>?) {
+                    view.onSuccess(GGBContract.COMMUNITYKNOWLEDGE,t?.data)
+                }
+
+                override fun onCodeError(t: PlayAndroidHttpResult<List<CommunityKnowledgeBean>>) {
+                    view.onFailed(t.message,false)
+                }
+
+                override fun onFailure(e: Throwable?, isNetWorkError: Boolean) {
+                    view.onNetError(isNetWorkError,false)
+                }
+            })
+    }
+
+    override fun communityNavigation() {
+        model.communityNavigation()
+            .compose(RxSchedulersHelper.io_main())
+            .subscribe(object :PlayAndroidBaseObserver<List<CommunityNavigationBean>>(mContext,true){
+                override fun onSuccess(t: PlayAndroidHttpResult<List<CommunityNavigationBean>>?) {
+                    view.onSuccess(GGBContract.COMMUNITYNAVIGATION,t?.data)
+                }
+
+                override fun onCodeError(t: PlayAndroidHttpResult<List<CommunityNavigationBean>>) {
+                    view.onFailed(t.message,false)
+                }
+
+                override fun onFailure(e: Throwable?, isNetWorkError: Boolean) {
+                    view.onNetError(isNetWorkError,false)
+                }
+            })
+    }
+
 }

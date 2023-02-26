@@ -76,13 +76,6 @@ class IndexFragment :BaseFragment(),GGBContract.View{
             Log.e("TAG", "RegistrationID=============>: "+JPushInterface.getRegistrationID(context) )
             activity?.startActivity<SearchArticleActivity>()
         }
-        iv_test.setOnClickListener {
-            val myIntent = Intent(activity, MessageChatActivity::class.java)
-            myIntent.putExtra(C.TYPE, C.SINGLE)
-            myIntent.putExtra(C.DATA,"野熊")
-            myIntent.putExtra(C.DATA_TWO, "能能")
-            startActivity(myIntent)
-        }
     }
 
     private fun initTag(){

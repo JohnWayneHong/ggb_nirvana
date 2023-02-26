@@ -13,7 +13,9 @@ import io.reactivex.schedulers.Schedulers;
 public class RxSchedulersHelper {
     public static <T> ObservableTransformer<T, T> io_main() {
         return upstream ->
+                //子线程进行Http访问
                 upstream.subscribeOn(Schedulers.io())
+                        //UI线程处理返回接口
                         .observeOn(AndroidSchedulers.mainThread());
     }
 

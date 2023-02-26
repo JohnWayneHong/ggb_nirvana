@@ -69,4 +69,84 @@
         <item name="android:layout_height">@dimen/dimen_10</item>
     </style>
 
+    <!-- 自定义loading dialog -->
+    <style name="LoadingDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <!-- 是否浮现在activity之上 -->
+        <item name="android:windowIsTranslucent">true</item>
+        <!-- 半透明 -->
+        <item name="android:windowNoTitle">true</item>
+        <!-- 无标题 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!-- 背景透明
+        <item name="android:backgroundDimEnabled">false</item>
+        -->
+        <!-- 模糊 -->
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <!-- 聊天webView标题栏背景 -->
+    <style name="activityContainerStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:fitsSystemWindows">true</item>
+        <item name="android:background">@color/light_gray</item>
+    </style>
+    <!-- 标题栏背景 -->
+    <style name="titleBackGroundStyle">
+        <item name="android:id">@id/title_layout</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/dimen_48</item>
+        <item name="android:background">@color/navigation_color</item>
+    </style>
+    <!-- 标题返回按钮 -->
+    <style name="titleBackStyle">
+        <item name="android:id">@id/back</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:src">@drawable/picture_icon_back_arrow</item>
+        <item name="android:paddingLeft">20dp</item>
+        <item name="android:paddingRight">30dp</item>
+        <item name="android:scaleType">center</item>
+    </style>
+    <!-- 标题栏文字 -->
+    <style name="titleTextStyle">
+        <item name="android:textColor">@color/text_main_color</item>
+        <item name="android:id">@id/title</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerInParent">true</item>
+    </style>
+    <style name="progressBarHorizontal_color" parent="android:Widget.ProgressBar.Horizontal">
+        <item name="android:indeterminateOnly">false</item>
+        <item name="android:progressDrawable">@drawable/progress_color_horizontal</item>
+    </style>
+    <style name="LineStyle">
+        <item name="android:background">@color/divider_color</item>
+        <item name="android:layout_height">0.5dp</item>
+        <item name="android:layout_width">fill_parent</item>
+    </style>
+
+    <!--  玩安卓的RecycleView  -->
+    <style name="RecyclerViewStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:scrollbarSize">@dimen/dimen_2</item>
+        <item name="android:scrollbars">vertical</item>
+    </style>
+
+    <!-- WebContent的Toolbar   -->
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <!-- 设置Toolbar标题字体的大小 -->
+    <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">@dimen/text_18</item>
+    </style>
+
+
 </resources>

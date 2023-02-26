@@ -73,4 +73,25 @@ interface ApiService {
     @POST("home/attention/recommend")
     fun communityRecommendSubscript(): Observable<ThirdHttpResult<List<DevelopJokesSubscriptListBean>>>
 
+    //获取主页的推荐关注数据
+    @GET("article/list/{pager}/json")
+    fun communityAndroid(@Path("pager") page :Int): Observable<PlayAndroidHttpResult<CommunityAndroidBean>>
+
+    //获取主页的推荐关注数据
+    @GET("user_article/list/{pager}/json")
+    fun communitySquare(@Path("pager") page :Int): Observable<PlayAndroidHttpResult<CommunityAndroidBean>>
+
+    /**
+     * 获取知识体系
+     * http://www.wanandroid.com/tree/json
+     */
+    @GET("tree/json")
+    fun communityKnowledgeTree(): Observable<PlayAndroidHttpResult<List<CommunityKnowledgeBean>>>
+
+    /**
+     * 导航数据
+     * http://www.wanandroid.com/navi/json
+     */
+    @GET("navi/json")
+    fun communityNavigation(): Observable<PlayAndroidHttpResult<List<CommunityNavigationBean>>>
 }

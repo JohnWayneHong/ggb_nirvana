@@ -10,9 +10,9 @@
     {
       "type": "SINGLE",
       "filters": [],
-      "versionCode": 22,
-      "versionName": "V2.0",
-      "outputFile": "nirvana-V2.0.22-20230128.apk"
+      "versionCode": 30,
+      "versionName": "V3.0",
+      "outputFile": "nirvana-V3.0.30-20230221.apk"
     }
   ]
 }

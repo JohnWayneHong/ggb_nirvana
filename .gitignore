@@ -1,6 +1,7 @@
 *.iml
 .gradle
 /local.properties
+/.idea/jarRepositories.xml
 /.idea/caches
 /.idea/libraries
 /.idea/modules.xml
@@ -15,3 +16,4 @@
 local.properties
 bearBuild.jks
 .idea/
+/nineLibrary/build/

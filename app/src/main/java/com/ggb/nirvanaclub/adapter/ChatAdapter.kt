@@ -3,11 +3,11 @@ package com.ggb.nirvanaclub.adapter
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.graphics.Bitmap
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.TextView
 import cn.jpush.im.android.api.callback.DownloadCompletionCallback
 import cn.jpush.im.android.api.callback.GetAvatarBitmapCallback
 import cn.jpush.im.android.api.content.ImageContent
@@ -21,19 +21,19 @@ import com.chad.library.adapter.base.BaseMultiItemQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.ggb.nirvanaclub.R
 import com.ggb.nirvanaclub.bean.ChatBean
-import com.ggb.nirvanaclub.bean.ChatImageBean
 import com.ggb.nirvanaclub.utils.ImageLoaderUtil
 import com.ggb.nirvanaclub.utils.TimeFormat
 import com.ggb.nirvanaclub.utils.ViewUtil
 import com.ggb.nirvanaclub.view.emojitextview.BubbleImageView
+import com.ggb.nirvanaclub.view.emojitextview.EmojiconTextView
+import com.ggb.nirvanaclub.view.linktextview.QMUILinkTextView
 import com.tencent.open.log.SLog
-import org.json.JSONException
 import java.io.File
 import java.text.NumberFormat
 
 class ChatAdapter(data: List<ChatBean>) : BaseMultiItemQuickAdapter<ChatBean, BaseViewHolder>(data) {
 
-    var playVoiceIndex = -1
+    private var mOnLinkClickListener: QMUILinkTextView.OnLinkClickListener? = null
 
     init {
 
@@ -67,6 +67,10 @@ class ChatAdapter(data: List<ChatBean>) : BaseMultiItemQuickAdapter<ChatBean, Ba
 //        addItemType(ChatBean.VIDEO_PHONE_RECEIVE, R.layout.item_chat_text_receive)
 //        //消息撤回
 //        addItemType(ChatBean.RETRACT, R.layout.item_chat_retract)
+    }
+
+    fun setOnLinkClickListener(mOnLinkClickListener: QMUILinkTextView.OnLinkClickListener) {
+        this.mOnLinkClickListener = mOnLinkClickListener
     }
 
     @SuppressLint("ResourceType", "CutPasteId")
@@ -104,10 +108,11 @@ class ChatAdapter(data: List<ChatBean>) : BaseMultiItemQuickAdapter<ChatBean, Ba
             }
         }
         when (helper.itemViewType) {
-            ChatBean.TEXT_SEND, ChatBean.TEXT_RECEIVE -> helper.setText(
-                R.id.tv,
-                (item.message.content as TextContent).text
-            )
+            ChatBean.TEXT_SEND, ChatBean.TEXT_RECEIVE -> {
+                helper.setText(R.id.etv_chat_tv, (item.message.content as TextContent).text)
+                helper.itemView.findViewById<EmojiconTextView>(R.id.etv_chat_tv).setOnLinkClickListener(mOnLinkClickListener)
+                helper.itemView.findViewById<EmojiconTextView>(R.id.etv_chat_tv).setNeedForceEventToParent(true)
+            }
             ChatBean.IMG_SEND, ChatBean.IMG_RECEIVE -> {
                 //设置是否显示文字进度
                 helper.getView<BubbleImageView>(R.id.iv).setProgressVisible(false)

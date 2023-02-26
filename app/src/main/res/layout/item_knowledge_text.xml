@@ -1,0 +1,15 @@
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tv_knowledge_item_name"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/index_tag_setting_item_btn"
+    android:layout_margin="@dimen/dimen_5"
+    android:paddingTop="@dimen/dimen_5"
+    android:paddingBottom="@dimen/dimen_5"
+    android:paddingLeft="@dimen/dimen_16"
+    android:paddingRight="@dimen/dimen_16"
+    android:textStyle="bold"
+    android:textColor="@color/text_main_color"
+    android:textSize="@dimen/text_12">
+
+</TextView>

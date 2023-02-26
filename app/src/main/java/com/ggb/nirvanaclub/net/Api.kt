@@ -185,13 +185,20 @@ class Api private constructor(hostType: Int,isAddress: Int) {
                     .baseUrl(C.HX_BASE_ADDRESS)
                     .build()
             }
+            3 -> {
+                Retrofit.Builder()
+                    .client(okHttpClient)
+                    .addConverterFactory(GsonConverterFactory.create(gson))
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                    .baseUrl(C.JOKES_BASE_ADDRESS)
+                    .build()
+            }
             else -> {
                 Retrofit.Builder()
                     .client(okHttpClient)
                     .addConverterFactory(GsonConverterFactory.create(gson))
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-//                    .baseUrl(C.THIRD_BASE_ADDRESS)
-                    .baseUrl(C.JOKES_BASE_ADDRESS)
+                    .baseUrl(C.PLAY_ANDROID_ADDRESS)
                     .build()
             }
         }
