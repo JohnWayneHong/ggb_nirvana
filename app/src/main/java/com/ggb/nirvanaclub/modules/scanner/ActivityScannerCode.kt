@@ -27,6 +27,7 @@ import com.ggb.nirvanaclub.utils.rxutils.RxBeepTool.playBeep
 import com.ggb.nirvanaclub.utils.rxutils.RxPhotoTool.openLocalImage
 import com.ggb.nirvanaclub.utils.rxutils.RxQrBarTool.decodeFromPhoto
 import com.ggb.nirvanaclub.utils.rxutils.RxTool.ScaleUpDowm
+import com.ggb.nirvanaclub.view.RxToast
 import com.ggb.nirvanaclub.view.RxToast.success
 import com.ggb.nirvanaclub.view.dialog.ScannerCodeResultDialog
 import com.google.zxing.*
@@ -274,7 +275,9 @@ class ActivityScannerCode : BaseActivity() {
                     }
                 } else {
                     if (mScanerListener == null) {
-                        error("图片识别失败.")
+                        RxToast.warning("图片未检测到二维码")
+
+//                        error("图片识别失败.")
                     } else {
                         mScanerListener?.onFail("From to Picture", "图片识别失败")
                     }

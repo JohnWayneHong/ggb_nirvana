@@ -3,10 +3,8 @@ package com.ggb.nirvanaclub.modules.user
 import android.Manifest
 import android.annotation.SuppressLint
 import android.graphics.Color
-import android.os.Build
 import android.os.Handler
 import android.os.Message
-import android.view.Gravity
 import android.view.View
 import com.ggb.nirvanaclub.R
 import com.ggb.nirvanaclub.base.BaseActivity
@@ -38,7 +36,6 @@ class NirvanaEarnActivity : BaseActivity() {
         if(C.USER_DOWNLOAD_URL.isNotEmpty()){
             iv_user_code.setImageBitmap(CodeUtils.createQRCodeBitmap(C.USER_DOWNLOAD_URL, Color.rgb(18,148,248)))
         }
-
 
         ll_public_back.setOnClickListener {
             finish()

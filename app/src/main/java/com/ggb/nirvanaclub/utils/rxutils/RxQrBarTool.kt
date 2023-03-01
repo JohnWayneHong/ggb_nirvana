@@ -2,6 +2,7 @@ package com.ggb.nirvanaclub.utils.rxutils
 
 import android.graphics.Bitmap
 import android.graphics.Matrix
+import android.util.Log
 import com.google.zxing.*
 import com.google.zxing.common.HybridBinarizer
 import java.util.*
@@ -36,7 +37,6 @@ object RxQrBarTool {
                 PRODUCT_FORMATS.add(BarcodeFormat.UPC_E)
                 PRODUCT_FORMATS.add(BarcodeFormat.EAN_13)
                 PRODUCT_FORMATS.add(BarcodeFormat.EAN_8)
-                // PRODUCT_FORMATS.add(BarcodeFormat.RSS14);
                 val ONE_D_FORMATS = Vector<BarcodeFormat?>(PRODUCT_FORMATS.size + 4)
                 ONE_D_FORMATS.addAll(PRODUCT_FORMATS)
                 ONE_D_FORMATS.add(BarcodeFormat.CODE_39)
@@ -55,13 +55,14 @@ object RxQrBarTool {
             }
             hints[DecodeHintType.POSSIBLE_FORMATS] = decodeFormats
             // 设置继续的字符编码格式为UTF8
-            // hints.put(DecodeHintType.CHARACTER_SET, "UTF8");
+//            hints[DecodeHintType.CHARACTER_SET] = "UTF8";
             // 设置解析配置参数
             multiFormatReader.setHints(hints)
 
             // 开始对图像资源解码
             try {
                 rawResult = multiFormatReader.decodeWithState(BinaryBitmap(HybridBinarizer(BitmapLuminanceSource(smallBitmap))))
+
             } catch (e: Exception) {
                 e.printStackTrace()
             }

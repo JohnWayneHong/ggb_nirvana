@@ -9,12 +9,10 @@ import android.graphics.Paint
 import android.graphics.Shader
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
-import android.view.MotionEvent
 import android.view.View
 import androidx.core.content.res.getDimensionPixelSizeOrThrow
 import androidx.core.content.res.getDrawableOrThrow
 import com.ggb.nirvanaclub.R
-import com.ggb.nirvanaclub.utils.ScreenUtils.getStatusBarHeight
 import com.gyf.immersionbar.ImmersionBar
 
 /**

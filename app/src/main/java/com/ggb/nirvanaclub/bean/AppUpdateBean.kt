@@ -19,13 +19,3 @@ class AppUpdateListBean(
         @SerializedName("isForce")val isForce:Boolean,
         @SerializedName("message")val message:String
 ): Serializable
-
-class AppUpdateResultBean{
-        var versionId:String = ""
-        var versionName:String = ""
-        var downloadUrl:String = ""
-        var publishDate:String = ""
-        var versionCode:String = ""
-        var isForce:Boolean = false
-        var message:String = ""
-}

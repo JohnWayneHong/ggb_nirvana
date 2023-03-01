@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.lihang.ShadowLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    app:hl_cornerRadius="@dimen/dimen_22"
+    app:hl_layoutBackground="@color/transparent"
+    app:hl_shadowColor="@color/bga_pp_btn_confirm_enabled"
+    app:hl_shadowLimit="@dimen/dimen_8"
+    app:hl_shadowOffsetY="@dimen/dimen_4"
+    app:hl_shadowSymmetry="true">
+
+    <TextView
+        android:id="@+id/dialog_guide_tv_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dimen_44"
+        android:gravity="center"
+        android:paddingLeft="@dimen/dimen_50"
+        android:paddingRight="@dimen/dimen_50"
+        android:background="@color/main_color"
+        android:textColor="@color/text_main_color"
+        android:textStyle="bold"
+        android:text="知道了" />
+
+</com.lihang.ShadowLayout>

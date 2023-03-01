@@ -19,6 +19,7 @@ import com.ggb.nirvanaclub.modules.article.SearchArticleActivity
 import com.ggb.nirvanaclub.modules.login.LoginActivity
 import com.ggb.nirvanaclub.modules.message.MessageChatActivity
 import com.ggb.nirvanaclub.modules.tag.IndexTagSettingActivity
+import com.ggb.nirvanaclub.modules.user.NirvanaEarnActivity
 import com.ggb.nirvanaclub.net.GGBContract
 import com.ggb.nirvanaclub.net.GGBPresent
 import com.google.gson.JsonArray

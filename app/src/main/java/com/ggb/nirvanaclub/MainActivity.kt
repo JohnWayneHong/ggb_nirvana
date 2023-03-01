@@ -28,23 +28,25 @@ import com.ggb.nirvanaclub.constans.C
 import com.ggb.nirvanaclub.event.StepRefreshEvent
 import com.ggb.nirvanaclub.listener.BaseUiListener
 import com.ggb.nirvanaclub.modules.*
-import com.ggb.nirvanaclub.utils.APKRefreshDownload
-import com.ggb.nirvanaclub.utils.AppUtils
-import com.ggb.nirvanaclub.utils.ConfigDownloadUtils
-import com.ggb.nirvanaclub.utils.SharedPreferencesUtil
+import com.ggb.nirvanaclub.utils.*
 import com.ggb.nirvanaclub.view.RxToast
 import com.ggb.nirvanaclub.view.dialog.ApkUpdateDialog
 import com.ggb.nirvanaclub.view.dialog.OpenAuthorityDialog
+import com.google.gson.Gson
+import com.google.gson.JsonObject
+import com.google.gson.JsonParser
 import com.tencent.connect.common.Constants
 import com.tencent.tauth.Tencent
 import com.yanzhenjie.permission.AndPermission
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.home_bottom_tab_button.*
+import okhttp3.OkHttpClient
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import org.jetbrains.anko.toast
 import java.io.File
+import java.util.concurrent.TimeUnit
 
 class MainActivity: BaseActivity() ,ConfigDownloadUtils.OnConfigDownloadCompleteListener, APKRefreshDownload.OnDownLoadCompleteListener{
 
@@ -92,7 +94,8 @@ class MainActivity: BaseActivity() ,ConfigDownloadUtils.OnConfigDownloadComplete
 //            startService(intent)
 //        }
 
-        updateDialog = ApkUpdateDialog(this)
+        //挪到获取接口后，根据接口的Style设定布局
+//        updateDialog = ApkUpdateDialog(this,309)
         authorityDialog = OpenAuthorityDialog(this)
     }
 
@@ -107,18 +110,18 @@ class MainActivity: BaseActivity() ,ConfigDownloadUtils.OnConfigDownloadComplete
     }
 
     override fun initEvent() {
-        updateDialog?.setOnApkDownloadConfirmListener(object :ApkUpdateDialog.OnApkDownloadConfirmListener{
-            override fun onConfirmDownload(info: AppUpdateBean) {
-                checkUpdatePermission(info.data)
-            }
-        })
-        updateDialog?.setOnDismissListener {
-            if(isMustUpdate&&!isUpdateComplete){
-                finish()
-            }else if (!isMustUpdate){
-                initFragment()
-            }
-        }
+//        updateDialog?.setOnApkDownloadConfirmListener(object :ApkUpdateDialog.OnApkDownloadConfirmListener{
+//            override fun onConfirmDownload(info: AppUpdateBean) {
+//                checkUpdatePermission(info.data)
+//            }
+//        })
+//        updateDialog?.setOnDismissListener {
+//            if(isMustUpdate&&!isUpdateComplete){
+//                finish()
+//            }else if (!isMustUpdate){
+//                initFragment()
+//            }
+//        }
         authorityDialog?.setOnApkDownloadConfirmListener(object :OpenAuthorityDialog.OnOpenAuthorityConfirmListener{
             override fun onConfirmDownload() {
                 val intent = Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES)
@@ -429,6 +432,25 @@ class MainActivity: BaseActivity() ,ConfigDownloadUtils.OnConfigDownloadComplete
 
     override fun onConfigComplete(result: AppUpdateBean?) {
         if(result!=null&&result.data.versionCode.toInt()>0){
+
+            val ud = JsonParser.parseString(result.data.message).asJsonObject
+            //初始化更新弹窗，设定Style
+            updateDialog = ApkUpdateDialog(this,ud.get("updateStyle").asInt)
+
+            updateDialog?.setOnApkDownloadConfirmListener(object :ApkUpdateDialog.OnApkDownloadConfirmListener{
+                override fun onConfirmDownload(info: AppUpdateBean) {
+                    checkUpdatePermission(info.data)
+                }
+            })
+            updateDialog?.setOnDismissListener {
+                if(isMustUpdate&&!isUpdateComplete){
+                    finish()
+                }else if (!isMustUpdate){
+                    initFragment()
+                }
+            }
+
+
             val vn = AppUtils.getVersionName(this)
             val vc = AppUtils.getAppVersionCode(this)
             C.USER_DOWNLOAD_URL = result.data.downloadUrl

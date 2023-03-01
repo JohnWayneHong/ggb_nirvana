@@ -2,10 +2,13 @@ package com.ggb.nirvanaclub.modules.article
 
 import android.annotation.SuppressLint
 import android.graphics.Color
+import android.graphics.Rect
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
-import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
+import androidx.core.view.doOnLayout
 import androidx.core.widget.NestedScrollView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ggb.nirvanaclub.R
@@ -18,11 +21,14 @@ import com.ggb.nirvanaclub.net.GGBPresent
 import com.ggb.nirvanaclub.utils.ImageLoaderUtil
 import com.ggb.nirvanaclub.utils.MarkwonUtils
 import com.ggb.nirvanaclub.view.RxToast
-import com.tamsiree.rxui.view.dialog.RxDialog
 import com.tamsiree.rxui.view.dialog.RxDialogSureCancel
 import com.tamsiree.rxui.view.likeview.RxShineButton
 import kotlinx.android.synthetic.main.activity_article.*
 import org.litepal.LitePal
+import per.goweii.anylayer.Layer
+import per.goweii.anylayer.guide.GuideLayer
+import per.goweii.anylayer.ktx.addMapping
+import per.goweii.anylayer.ktx.setBackgroundColorInt
 
 class ArticleActivity : BaseActivity() , GGBContract.View{
 
@@ -47,6 +53,10 @@ class ArticleActivity : BaseActivity() , GGBContract.View{
     }
 
     override fun initEvent() {
+        //测试导航
+        window.decorView.doOnLayout {
+            showGuideDialogIfNeeded()
+        }
         nsv_article_scroll.apply {
             setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { _, _, scrollY, _, _ ->
                 // scrollY 为总滑动距离
@@ -140,6 +150,66 @@ class ArticleActivity : BaseActivity() , GGBContract.View{
 //            btn_article_col_subscribe.isEnabled = false
             return false
         }
+    }
+
+    private fun showGuideDialogIfNeeded() {
+//        if (GuideSPUtils.getInstance().isArticleGuideShown) {
+//            return
+//        }
+        window?.decorView?.post {
+            showGuideBackBtnDialog {
+//                showGuideDoubleTapDialog {
+//                    showGuidePreviewImageDialog {
+//                        GuideSPUtils.getInstance().setArticleGuideShown()
+//                    }
+//                }
+            }
+        }
+    }
+
+    private fun showGuideBackBtnDialog(onDismiss: () -> Unit) {
+        GuideLayer(this@ArticleActivity)
+            .backgroundColorInt(resources.getColor(R.color.colorDialogBg))
+            .mapping(GuideLayer.Mapping().apply {
+                targetView(article_col_back)
+                cornerRadius(9999F)
+                guideView(LayoutInflater.from(this@ArticleActivity)
+                    .inflate(R.layout.dialog_guide_tip, null, false).apply {
+                        findViewById<TextView>(R.id.dialog_guide_tv_tip).apply {
+                            text = "长按返回按钮有更多快捷菜单~"
+                        }
+                    })
+                marginLeft(16)
+                horizontalAlign(GuideLayer.Align.Horizontal.TO_RIGHT)
+                verticalAlign(GuideLayer.Align.Vertical.CENTER)
+            })
+            .mapping(GuideLayer.Mapping().apply {
+                val cx = window?.decorView?.width ?: 0 / 2
+                val cy = window?.decorView?.height ?: 0 / 2
+                targetRect(Rect(cx, cy, cx, cy))
+                guideView(LayoutInflater.from(this@ArticleActivity)
+                    .inflate(R.layout.dialog_guide_btn, null, false).apply {
+                        findViewById<TextView>(R.id.dialog_guide_tv_btn).apply {
+                            text = "下一个"
+                        }
+                    })
+                marginBottom(48)
+                horizontalAlign(GuideLayer.Align.Horizontal.CENTER)
+                verticalAlign(GuideLayer.Align.Vertical.CENTER)
+                onClick(Layer.OnClickListener { layer, _ ->
+                    layer.dismiss()
+                }, R.id.dialog_guide_tv_btn)
+            })
+            .onVisibleChangeListener(object : Layer.OnVisibleChangeListener {
+                override fun onShow(layer: Layer) {
+                }
+
+                override fun onDismiss(layer: Layer) {
+                    onDismiss.invoke()
+                }
+            })
+            .show()
+
     }
 
     override fun onSuccess(flag: String?, data: Any?) {
