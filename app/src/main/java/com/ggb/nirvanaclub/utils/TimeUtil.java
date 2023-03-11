@@ -95,6 +95,11 @@ public class TimeUtil {
     public static String dateFormatHM = "HH:mm";
 
     /**
+     * 分秒.
+     */
+    public static String dateFormatMS = "mm:ss";
+
+    /**
      * 上午/下午时分
      */
     public static String dateFormatAHM = "aHH:mm";

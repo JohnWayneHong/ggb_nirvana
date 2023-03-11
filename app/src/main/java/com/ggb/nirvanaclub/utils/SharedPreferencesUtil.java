@@ -21,6 +21,18 @@ public class SharedPreferencesUtil {
         return sp.getString(key,"");
     }
 
+    public static void putUserBoolean(Context mContext,String key,Boolean value){
+        SharedPreferences sp = mContext.getSharedPreferences(SP_USER_NAME,Context.MODE_PRIVATE);
+        SharedPreferences.Editor ed = sp.edit();
+        ed.putBoolean(key,value);
+        ed.commit();
+    }
+
+    public static boolean getUserBoolean(Context mContext,String key){
+        SharedPreferences sp = mContext.getSharedPreferences(SP_USER_NAME,Context.MODE_PRIVATE);
+        return sp.getBoolean(key,true);
+    }
+
     public static void clearUserData(Context mContext){
         SharedPreferences sp = mContext.getSharedPreferences(SP_USER_NAME,Context.MODE_PRIVATE);
         SharedPreferences.Editor ed = sp.edit();

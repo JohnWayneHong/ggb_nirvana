@@ -3,6 +3,7 @@ package com.ggb.nirvanaclub
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.ColorMatrix
 import android.graphics.ColorMatrixColorFilter
 import android.graphics.Paint
@@ -13,12 +14,21 @@ import android.provider.Settings
 import android.util.Log
 import android.view.Gravity
 import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.FileProvider
+import androidx.core.graphics.drawable.toBitmap
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
 import cn.jpush.im.android.api.JMessageClient
+import cn.jpush.im.android.api.callback.GetAvatarBitmapCallback
+import cn.jpush.im.android.api.enums.ConversationType
+import cn.jpush.im.android.api.model.Conversation
+import cn.jpush.im.android.api.model.GroupInfo
+import cn.jpush.im.android.api.model.UserInfo
 import cn.jpush.im.api.BasicCallback
 import com.ggb.nirvanaclub.base.BaseActivity
 import com.ggb.nirvanaclub.base.BaseFragment
@@ -28,13 +38,15 @@ import com.ggb.nirvanaclub.constans.C
 import com.ggb.nirvanaclub.event.StepRefreshEvent
 import com.ggb.nirvanaclub.listener.BaseUiListener
 import com.ggb.nirvanaclub.modules.*
+import com.ggb.nirvanaclub.modules.message.MessageChatActivity
 import com.ggb.nirvanaclub.utils.*
-import com.ggb.nirvanaclub.view.RxToast
+import com.ggb.nirvanaclub.view.CircleImageView
 import com.ggb.nirvanaclub.view.dialog.ApkUpdateDialog
 import com.ggb.nirvanaclub.view.dialog.OpenAuthorityDialog
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
+import com.tamsiree.rxkit.view.RxToast
 import com.tencent.connect.common.Constants
 import com.tencent.tauth.Tencent
 import com.yanzhenjie.permission.AndPermission
@@ -45,6 +57,8 @@ import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import org.jetbrains.anko.toast
+import per.goweii.anylayer.Layer
+import per.goweii.anylayer.notification.NotificationLayer
 import java.io.File
 import java.util.concurrent.TimeUnit
 
@@ -419,6 +433,64 @@ class MainActivity: BaseActivity() ,ConfigDownloadUtils.OnConfigDownloadComplete
         }else{
             v_new_dialog.visibility = View.INVISIBLE
         }
+    }
+
+    fun setNewNotification(message: Conversation) {
+
+        val userInfo = message.targetInfo as UserInfo
+        var avatar :Bitmap = resources.getDrawable(R.mipmap.ic_bear_question).toBitmap()
+        userInfo.getAvatarBitmap(object : GetAvatarBitmapCallback() {
+            override fun gotResult(i: Int, s: String, bitmap: Bitmap) {
+                if (i == 0) {
+                    avatar = bitmap
+                }
+            }
+        })
+
+
+        NotificationLayer(this)
+            .contentView(R.layout.dialog_message_notification)
+            .bindData {
+                val child: View = it.requireView<View>(R.id.dialog_message_notification)
+                child.setPadding(0, ScreenUtils.getStatusHeight(this), 0, 0)
+                val tvTitle: TextView =
+                    it.requireView<TextView>(R.id.dialog_read_later_notification_tv_title)
+                val tvDesc: TextView =
+                    it.requireView<TextView>(R.id.dialog_read_later_notification_tv_desc)
+                val ivAvatar: CircleImageView =
+                    it.requireView<CircleImageView>(R.id.civ_message_notification_avatar)
+
+                tvTitle.text = "${message.title}给您发送了私信！(剩余未读消息数${message.unReadMsgCnt})"
+                tvDesc.text = "${message.latestText}"
+                ivAvatar.setImageBitmap(avatar)
+            }
+            .onClickToDismiss({ layer, view ->
+                val type = message.type
+
+                val notificationIntent = Intent(this, MessageChatActivity::class.java)
+                if (type == ConversationType.single) {
+                    notificationIntent.putExtra(C.TYPE,C.SINGLE)
+                    notificationIntent.putExtra(C.DATA, (message.targetInfo as UserInfo).userName)
+                    notificationIntent.putExtra(C.DATA_TWO,  MessageChatUtils.getName(message.targetInfo as UserInfo))
+                    notificationIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                    startActivity(notificationIntent)
+                } else if(type== ConversationType.group) {
+                    notificationIntent.putExtra(C.TYPE,C.GROUP)
+                    notificationIntent.putExtra(C.DATA, (message.targetInfo as GroupInfo).groupID)
+                    notificationIntent.putExtra(C.DATA_TWO,(message.targetInfo as GroupInfo).groupName)
+                    notificationIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                    startActivity(notificationIntent)
+                }
+
+            },R.id.dialog_message_notification_ll_content)
+            .onDismissListener(object : Layer.OnDismissListener{
+                override fun onDismissing(layer: Layer) {
+                }
+
+                override fun onDismissed(layer: Layer) {
+                }
+
+            }).show()
     }
 
     override fun onComplete(isComplete: Boolean) {

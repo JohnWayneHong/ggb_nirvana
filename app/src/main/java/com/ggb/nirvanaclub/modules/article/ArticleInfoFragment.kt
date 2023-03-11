@@ -1,9 +1,13 @@
 package com.ggb.nirvanaclub.modules.article
 
 import android.annotation.SuppressLint
+import android.graphics.Rect
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.widget.TextView
+import androidx.core.view.doOnLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ggb.nirvanaclub.R
@@ -12,9 +16,12 @@ import com.ggb.nirvanaclub.base.BaseFragment
 import com.ggb.nirvanaclub.bean.IndexArticleInfoBean
 import com.ggb.nirvanaclub.net.GGBContract
 import com.ggb.nirvanaclub.net.GGBPresent
+import com.ggb.nirvanaclub.utils.SharedPreferencesUtil
 import kotlinx.android.synthetic.main.fragment_article_info.*
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
+import per.goweii.anylayer.Layer
+import per.goweii.anylayer.guide.GuideLayer
 
 
 class ArticleInfoFragment :BaseFragment(),GGBContract.View{
@@ -50,6 +57,7 @@ class ArticleInfoFragment :BaseFragment(),GGBContract.View{
     }
 
     private fun initEvent() {
+
         mAdapter?.setOnItemClickListener { adapter, view, position ->
             Log.e("TAG", "点击了: "+mAdapter?.getItem(position)?.articleId )
             activity?.startActivity<ArticleActivity>(Pair("articleId",mAdapter?.getItem(position)?.articleId))

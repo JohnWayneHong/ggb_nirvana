@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+<!--   视频下方的推荐视频布局，头信息加视频信息 -->
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_video_top_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dimen_10"
+        android:text="@{model.data.text}"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/text_16"
+        android:textStyle="bold"
+        android:visibility="gone"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_video_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_10"
+        android:layout_marginBottom="@dimen/dimen_15">
+
+        <FrameLayout
+            android:id="@+id/fl_video_cover"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/iv_video_cover"
+                android:layout_width="@dimen/dimen_130"
+                android:layout_height="@dimen/dimen_80"
+                android:scaleType="centerCrop"
+                app:shapeAppearance="@style/roundedCornerStyle" />
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_video_content_length"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="@dimen/dimen_38"
+                android:layout_height="@dimen/dimen_20"
+                android:layout_gravity="end|bottom"
+                android:layout_marginEnd="@dimen/dimen_5"
+                android:layout_marginBottom="@dimen/dimen_5"
+                android:insetTop="@dimen/dp_0"
+                android:insetBottom="@dimen/dp_0"
+                android:padding="@dimen/dp_0"
+                android:text="@{DateUtils.INSTANCE.formatDateMsByMS(model.duration * 1000)}"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/text_10"
+                app:backgroundTint="#8A000000"
+                app:cornerRadius="@dimen/dimen_5"
+                app:layout_constraintBottom_toTopOf="@id/iv_community_daily_author"
+                app:layout_constraintRight_toRightOf="parent" />
+
+        </FrameLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_video_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dimen_10"
+            android:gravity="start"
+            android:text="@{model.title}"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_14"
+            android:textStyle="bold"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toRightOf="@id/fl_video_cover"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_video_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_10"
+            android:layout_marginTop="@dimen/dimen_15"
+            android:singleLine="true"
+            android:gravity="center"
+            android:text="@{`#` + model.category +` / ` + (model.author == null ? `` : model.author.name)}"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_13"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toRightOf="@id/fl_video_cover"
+            app:layout_constraintTop_toBottomOf="@id/tv_video_title" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

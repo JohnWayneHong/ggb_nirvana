@@ -40,11 +40,25 @@
         android:background="@color/light_gray"
         android:layout_height="1dp"/>
 
-    <View
+    <TextView
         android:id="@+id/v_message_main_new"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dimen_5"
         android:layout_marginRight="@dimen/dimen_20"
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
-        style="@style/NoticeSpot"/>
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_13"
+
+        android:text="11"
+        android:background="@drawable/bg_main_full_9999"/>
+
+<!--    <View-->
+<!--        android:id="@+id/v_message_main_new"-->
+<!--        android:layout_marginRight="@dimen/dimen_20"-->
+<!--        android:layout_centerVertical="true"-->
+<!--        android:layout_alignParentRight="true"-->
+<!--        style="@style/NoticeSpot"/>-->
 
 </RelativeLayout>

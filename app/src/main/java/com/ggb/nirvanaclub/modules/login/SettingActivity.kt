@@ -1,35 +1,32 @@
 package com.ggb.nirvanaclub.modules.login
 
-import android.preference.Preference
-import android.preference.PreferenceActivity
+import android.graphics.Rect
+import android.view.LayoutInflater
 import android.view.View
+import android.widget.TextView
 import android.widget.Toast
+import androidx.core.view.doOnLayout
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.ggb.nirvanaclub.App
-import com.ggb.nirvanaclub.MainActivity
 import com.ggb.nirvanaclub.R
-import com.ggb.nirvanaclub.adapter.MeOptionAdapter
 import com.ggb.nirvanaclub.adapter.SettingAdapter
 import com.ggb.nirvanaclub.base.BaseActivity
 import com.ggb.nirvanaclub.bean.SettingBean
 import com.ggb.nirvanaclub.bean.SettingListBean
-import com.ggb.nirvanaclub.bean.UserBean
 import com.ggb.nirvanaclub.constans.C
 import com.ggb.nirvanaclub.event.UserStateChangeEvent
 import com.ggb.nirvanaclub.modules.user.NirvanaEarnActivity
 import com.ggb.nirvanaclub.net.GGBContract
 import com.ggb.nirvanaclub.net.GGBPresent
-import com.ggb.nirvanaclub.utils.CacheDataUtil
 import com.ggb.nirvanaclub.utils.NetUtils
-import com.ggb.nirvanaclub.utils.showToast
+import com.ggb.nirvanaclub.utils.SharedPreferencesUtil
 import com.ggb.nirvanaclub.view.RxToast
 import com.gyf.immersionbar.ImmersionBar
 import kotlinx.android.synthetic.main.activity_login_setting.*
 import kotlinx.android.synthetic.main.fragment_me.*
 import org.greenrobot.eventbus.EventBus
-import org.jetbrains.anko.defaultSharedPreferences
 import org.jetbrains.anko.startActivity
-import org.litepal.LitePal
+import per.goweii.anylayer.Layer
+import per.goweii.anylayer.guide.GuideLayer
 
 class SettingActivity : BaseActivity(), GGBContract.View{
 
@@ -49,6 +46,9 @@ class SettingActivity : BaseActivity(), GGBContract.View{
         me_setting_options_rv.adapter = mAdapter
 
         initSettingData()
+        window?.decorView?.doOnLayout {
+            showGuideDialogIfNeeded()
+        }
     }
 
     override fun beForSetContentView() {
@@ -111,6 +111,69 @@ class SettingActivity : BaseActivity(), GGBContract.View{
         }else{
             floating_login_out_btn.visibility = View.VISIBLE
         }
+    }
+
+    private fun showGuideDialogIfNeeded(){
+        SharedPreferencesUtil.putUserBoolean(this,"KEY_SETTING_GUIDE",true)
+
+        if (!SharedPreferencesUtil.getUserBoolean(this,"KEY_SETTING_GUIDE")){
+            return
+        }
+        window?.decorView?.post {
+            showGuideBackBtnDialog {
+                SharedPreferencesUtil.putUserBoolean(this,"KEY_SETTING_GUIDE",false)
+//                showGuideDoubleTapDialog {
+//                    showGuidePreviewImageDialog {
+//                        GuideSPUtils.getInstance().setArticleGuideShown()
+//                    }
+//                }
+            }
+        }
+    }
+
+    private fun showGuideBackBtnDialog(onDismiss: () -> Unit) {
+        GuideLayer(this@SettingActivity)
+            .backgroundColorInt(resources.getColor(R.color.colorDialogBg))
+            .mapping(GuideLayer.Mapping().apply {
+                targetView(floating_login_out_btn)
+                cornerRadius(9999F)
+                guideView(LayoutInflater.from(this@SettingActivity)
+                    .inflate(R.layout.dialog_guide_tip, null, false).apply {
+                        findViewById<TextView>(R.id.dialog_guide_tv_tip).apply {
+                            text = "退出账号请点击这里哦~"
+                        }
+                    })
+                marginLeft(16)
+                horizontalAlign(GuideLayer.Align.Horizontal.TO_LEFT)
+                verticalAlign(GuideLayer.Align.Vertical.CENTER)
+            })
+            .mapping(GuideLayer.Mapping().apply {
+                val cx = window?.decorView?.width ?: 0 / 2
+                val cy = window?.decorView?.height ?: 0 / 2
+                targetRect(Rect(cx, cy, cx, cy))
+                guideView(LayoutInflater.from(this@SettingActivity)
+                    .inflate(R.layout.dialog_guide_btn, null, false).apply {
+                        findViewById<TextView>(R.id.dialog_guide_tv_btn).apply {
+                            text = "我知道了"
+                        }
+                    })
+                marginBottom(48)
+                horizontalAlign(GuideLayer.Align.Horizontal.CENTER)
+                verticalAlign(GuideLayer.Align.Vertical.CENTER)
+                onClick(Layer.OnClickListener { layer, _ ->
+                    layer.dismiss()
+                }, R.id.dialog_guide_tv_btn)
+            })
+            .onVisibleChangeListener(object : Layer.OnVisibleChangeListener {
+                override fun onShow(layer: Layer) {
+                }
+
+                override fun onDismiss(layer: Layer) {
+                    onDismiss.invoke()
+                }
+            })
+            .show()
+
     }
 
     override fun onSuccess(flag: String?, data: Any?) {

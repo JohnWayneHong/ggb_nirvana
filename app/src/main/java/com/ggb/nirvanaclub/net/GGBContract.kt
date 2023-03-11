@@ -27,6 +27,9 @@ interface GGBContract {
         var COMMUNITYSQUARE = "communitySquare"
         var COMMUNITYKNOWLEDGE = "communityKnowledge"
         var COMMUNITYNAVIGATION = "communityNavigation"
+        var COMMUNITYDAILYBANNER = "communityDailyBanner"
+        var COMMUNITYDAILYVIDEO = "communityDailyVideo"
+        var COMMUNITYDAILYVIDEOCONTENT = "communityDailyVideoContent"
     }
 
     interface View : BaseView
@@ -51,6 +54,9 @@ interface GGBContract {
         fun communitySquare(pager: Int):Observable<PlayAndroidHttpResult<CommunityAndroidBean>>
         fun communityKnowledge():Observable<PlayAndroidHttpResult<List<CommunityKnowledgeBean>>>
         fun communityNavigation():Observable<PlayAndroidHttpResult<List<CommunityNavigationBean>>>
+        fun communityDailyBanner():Observable<CommunityDailyBean>
+        fun communityDailyVideo(nextPage:String):Observable<CommunityDailyBean>
+        fun communityDailyVideoContent(videoId: Int):Observable<CommunityDailyIssueBean>
     }
 
     interface Present{
@@ -73,6 +79,9 @@ interface GGBContract {
         fun communitySquare(pager: Int)
         fun communityKnowledge()
         fun communityNavigation()
+        fun communityDailyBanner()
+        fun communityDailyVideo(nextPage:String)
+        fun communityDailyVideoContent(videoId: Int)
 
     }
 }

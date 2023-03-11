@@ -48,7 +48,7 @@ android {
         minSdkVersion 21
 //        targetSdkVersion 28
         targetSdkVersion 30
-        versionCode 32
+        versionCode 34
         versionName "V3.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -249,6 +249,7 @@ dependencies {
     //RxTool 工具库
     implementation 'com.github.tamsiree.RxTool:RxUI:2.6.3'
     implementation 'com.github.tamsiree.RxTool:RxKit:2.6.3'
+    implementation 'com.github.tamsiree.RxTool:RxFeature:2.6.3'
 
     //九图框架
     // -------------------- 以下4个库是必须依赖的 ----------------------------

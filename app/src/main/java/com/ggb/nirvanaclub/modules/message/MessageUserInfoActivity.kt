@@ -17,7 +17,9 @@ import com.ggb.nirvanaclub.base.BaseActivity
 import com.ggb.nirvanaclub.bean.UserBean
 import com.ggb.nirvanaclub.constans.C
 import com.ggb.nirvanaclub.utils.*
+import com.ggb.nirvanaclub.utils.rxutils.RxQrBarTool
 import com.gyf.immersionbar.ImmersionBar
+import com.tamsiree.rxfeature.tool.RxQRCode
 import com.tencent.open.log.SLog
 import com.yanzhenjie.permission.AndPermission
 import kotlinx.android.synthetic.main.activity_smart_earn.*
@@ -76,7 +78,14 @@ class MessageUserInfoActivity : BaseActivity() {
         avatarThread.start()
 
         Handler().postDelayed({
-            iv_user_code.setImageBitmap(CodeUtils.addLogo(CodeUtils.createQRCodeBitmap("Nirvana:"+user.userId, Color.rgb(18,148,248)),bitmap,0.2f))
+            RxQRCode.builder("Nirvana:"+user.userId)
+                .backColor(-0x1)
+                .codeColor(-0x1000000)
+                .codeSide(600)
+                .codeLogo(bitmap)
+                .codeBorder(1)
+                .into(iv_user_code)
+//            iv_user_code.setImageBitmap(CodeUtils.addLogo(CodeUtils.createQRCodeBitmap("Nirvana:"+user.userId, Color.rgb(18,148,248)),bitmap,0.2f))
         },1000)
     }
 

@@ -1,7 +1,6 @@
 package com.ggb.nirvanaclub.modules.article
 
 import android.annotation.SuppressLint
-import android.graphics.Color
 import android.graphics.Rect
 import android.util.Log
 import android.view.LayoutInflater
@@ -20,15 +19,15 @@ import com.ggb.nirvanaclub.net.GGBContract
 import com.ggb.nirvanaclub.net.GGBPresent
 import com.ggb.nirvanaclub.utils.ImageLoaderUtil
 import com.ggb.nirvanaclub.utils.MarkwonUtils
-import com.ggb.nirvanaclub.view.RxToast
+import com.ggb.nirvanaclub.utils.ScreenUtils
+import com.tamsiree.rxkit.view.RxToast
 import com.tamsiree.rxui.view.dialog.RxDialogSureCancel
 import com.tamsiree.rxui.view.likeview.RxShineButton
 import kotlinx.android.synthetic.main.activity_article.*
 import org.litepal.LitePal
 import per.goweii.anylayer.Layer
 import per.goweii.anylayer.guide.GuideLayer
-import per.goweii.anylayer.ktx.addMapping
-import per.goweii.anylayer.ktx.setBackgroundColorInt
+import per.goweii.anylayer.notification.NotificationLayer
 
 class ArticleActivity : BaseActivity() , GGBContract.View{
 
@@ -54,9 +53,9 @@ class ArticleActivity : BaseActivity() , GGBContract.View{
 
     override fun initEvent() {
         //测试导航
-        window.decorView.doOnLayout {
-            showGuideDialogIfNeeded()
-        }
+//        window.decorView.doOnLayout {
+//            showGuideDialogIfNeeded()
+//        }
         nsv_article_scroll.apply {
             setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { _, _, scrollY, _, _ ->
                 // scrollY 为总滑动距离
@@ -125,6 +124,9 @@ class ArticleActivity : BaseActivity() , GGBContract.View{
                 rxDialog.show()
                 return@setOnClickListener
             }
+        }
+        ll_article_share.setOnClickListener {
+
         }
     }
 

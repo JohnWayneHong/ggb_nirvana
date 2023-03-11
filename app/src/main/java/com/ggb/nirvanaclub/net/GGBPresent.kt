@@ -362,4 +362,34 @@ class GGBPresent(baseView: GGBContract.View) :BasePresent<GGBContract.View>(base
             })
     }
 
+    override fun communityDailyBanner() {
+        model.communityDailyBanner()
+            .compose(RxSchedulersHelper.io_main())
+            .subscribe(object :OpenEyesBaseObserver<CommunityDailyBean>(mContext,true){
+                override fun onSuccess(t: CommunityDailyBean?) {
+                    view.onSuccess(GGBContract.COMMUNITYDAILYBANNER,t)
+                }
+            })
+    }
+
+    override fun communityDailyVideo(nextPage:String) {
+        model.communityDailyVideo(nextPage)
+            .compose(RxSchedulersHelper.io_main())
+            .subscribe(object :OpenEyesBaseObserver<CommunityDailyBean>(mContext,true){
+                override fun onSuccess(t: CommunityDailyBean?) {
+                    view.onSuccess(GGBContract.COMMUNITYDAILYVIDEO,t)
+                }
+            })
+    }
+
+    override fun communityDailyVideoContent(videoId: Int) {
+        model.communityDailyVideoContent(videoId)
+            .compose(RxSchedulersHelper.io_main())
+            .subscribe(object :OpenEyesBaseObserver<CommunityDailyIssueBean>(mContext,true){
+                override fun onSuccess(t: CommunityDailyIssueBean?) {
+                    view.onSuccess(GGBContract.COMMUNITYDAILYVIDEOCONTENT,t)
+                }
+            })
+    }
+
 }

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<per.goweii.anylayer.notification.MaxSizeFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/dialog_message_notification"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="top|center_horizontal"
+    android:maxWidth="@dimen/dimen_500"
+    android:maxHeight="@dimen/dimen_500"
+    tools:ignore="RtlHardcoded">
+
+    <com.lihang.ShadowLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:hl_cornerRadius="@dimen/dimen_12"
+        app:hl_layoutBackground="@color/transparent"
+        app:hl_shadowColor="#14000000"
+        app:hl_shadowLimit="@dimen/dimen_8"
+        app:hl_shadowSymmetry="false"
+        app:hl_shadowOffsetY="@dimen/dimen_4">
+
+        <LinearLayout
+            android:id="@+id/dialog_message_notification_ll_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_notification"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/dimen_15"
+            android:paddingTop="@dimen/dimen_15"
+            android:paddingRight="@dimen/dimen_15"
+            android:paddingBottom="@dimen/dimen_15">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginBottom="@dimen/dimen_6">
+
+                <com.ggb.nirvanaclub.view.CircleImageView
+                    android:id="@+id/civ_message_notification_avatar"
+                    android:layout_width="@dimen/dimen_50"
+                    android:layout_height="@dimen/dimen_50"
+                    android:src="@mipmap/ic_bear_question" />
+
+                <TextView
+                    android:id="@+id/dialog_read_later_notification_tv_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/dimen_10"
+                    android:maxLines="2"
+                    android:textColor="@color/text_main_color"
+                    android:textSize="@dimen/text_15"
+                    android:textStyle="bold"
+                    tools:text="@tools:sample/lorem/random"
+                    tools:ignore="RtlSymmetry" />
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/dialog_read_later_notification_tv_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="3"
+                android:textColor="#666666"
+                android:textSize="@dimen/text_13"
+                tools:text="@tools:sample/lorem/random" />
+
+        </LinearLayout>
+
+    </com.lihang.ShadowLayout>
+
+</per.goweii.anylayer.notification.MaxSizeFrameLayout>

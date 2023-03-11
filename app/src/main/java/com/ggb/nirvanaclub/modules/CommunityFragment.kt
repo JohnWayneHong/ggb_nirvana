@@ -20,7 +20,7 @@ class CommunityFragment : BaseFragment(), GGBContract.View{
     private var present:GGBPresent?=null
 
     private val mTitles = arrayOf(
-        "Android","广场", "体系","导航",
+        "Android","广场", "体系","导航","日报",
          "段子乐文", "段子乐图","推荐的人"
     )
 
@@ -47,6 +47,7 @@ class CommunityFragment : BaseFragment(), GGBContract.View{
         mFragments.add(CommunitySquareFragment.newInstance())
         mFragments.add(CommunityKnowledgeFragment.newInstance())
         mFragments.add(CommunityNavigationFragment.newInstance())
+        mFragments.add(CommunityDailyFragment.newInstance())
         mFragments.add(CommunityTextFragment.newInstance())
         mFragments.add(CommunityPictureFragment.newInstance())
         mFragments.add(CommunitySubscriptFragment.newInstance())

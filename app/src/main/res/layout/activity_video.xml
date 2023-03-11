@@ -6,63 +6,286 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:context=".modules.laboratory.video.VideoActivity">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/tb_laboratory_video"
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/mVideoBackground"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_50"
-            app:contentInsetLeft="0dp"
-            app:contentInsetStart="0dp"
-            tools:ignore="MissingConstraints">
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop" />
 
-            <LinearLayout
-                android:id="@+id/ll_laboratory"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:id="@+id/mSurfaceContainer"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_48"
-                android:background="@color/white"
-                android:orientation="horizontal">
+                android:layout_height="@dimen/dimen_250" />
 
-                <View
-                    android:id="@+id/iv_laboratory_back"
-                    android:layout_width="@dimen/dimen_40"
+            <com.scwang.smart.refresh.layout.SmartRefreshLayout
+                android:id="@+id/swipe_refresh_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone">
+
+                <com.scwang.smart.refresh.header.MaterialHeader
+                android:id="@+id/mh_community_video_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+                <androidx.core.widget.NestedScrollView
+                    android:id="@+id/nsv_community_video_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:padding="@dimen/dimen_10" />
+                    android:orientation="vertical">
 
-                <TextView
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="牛蛙呐牛逼视频"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/text_16"/>
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_community_video_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dimen_10"
+                        android:layout_marginTop="@dimen/dimen_10"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_18"
+                        android:textStyle="bold" />
 
-                <View
-                    android:id="@+id/iv_search_article"
-                    android:layout_width="@dimen/dimen_40"
-                    android:layout_height="match_parent"
-                    android:padding="@dimen/dimen_13" />
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_community_video_type"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dimen_10"
+                        android:layout_marginTop="@dimen/dimen_10"
+                        android:text="@{`#` + videoModel.category + ` / ` + DateUtils.INSTANCE.formatDateMsByYMDHM(videoModel.author.latestReleaseTime)}"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_12" />
 
-            </LinearLayout>
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_community_video_description"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dimen_10"
+                        android:layout_marginTop="@dimen/dimen_10"
+                        android:layout_marginEnd="@dimen/dimen_10"
+                        android:text="@{videoModel.description}"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_14" />
 
-        </androidx.appcompat.widget.Toolbar>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_10"
+                        android:gravity="start|center"
+                        android:paddingBottom="@dimen/dimen_10">
 
-        <FrameLayout
-            android:id="@+id/fl_video"
-            android:layout_marginTop="@dimen/dimen_10"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_200"/>
+                        <com.ggb.nirvanaclub.view.IconFontTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/dimen_10"
+                            android:text="&#xe735;"
+                            android:textColor="@android:color/white"
+                            android:textSize="@dimen/text_20" />
 
-<!--        <cn.jzvd.JzvdStd-->
-<!--            android:id="@+id/js_video"-->
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_community_video_collectionCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/dimen_3"
+                            android:text="@{String.valueOf(videoModel.consumption.collectionCount)}"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/text_13" />
+
+                        <com.ggb.nirvanaclub.view.IconFontTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/dimen_30"
+                            android:text="&#xe60c;"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/text_18" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_community_video_shareCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/dimen_3"
+                            android:text="@{String.valueOf(videoModel.consumption.shareCount)}"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/text_13" />
+
+                        <com.ggb.nirvanaclub.view.IconFontTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/dimen_30"
+                            android:text="&#xe6ec;"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/text_20" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_community_video_replyCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/dimen_3"
+                            android:text="@{String.valueOf(videoModel.consumption.replyCount)}"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/text_13" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimen_1"
+                        android:background="@android:color/white" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="@dimen/dimen_10"
+                        android:paddingBottom="@dimen/dimen_10">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/iv_community_video_author"
+                            android:layout_width="@dimen/dimen_40"
+                            android:layout_height="@dimen/dimen_40"
+                            android:layout_marginStart="@dimen/dimen_10"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:shapeAppearance="@style/circleStyle"/>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/iv_community_video_author_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/dimen_10"
+                            android:text="@{String.valueOf(videoModel.author.name)}"
+                            android:textColor="@android:color/white"
+                            android:textSize="@dimen/text_15"
+                            app:layout_constraintLeft_toRightOf="@id/iv_community_video_author"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/iv_community_video_author_description"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/dimen_10"
+                            android:layout_marginEnd="@dimen/dimen_10"
+                            android:text="@{String.valueOf(videoModel.author.description)}"
+                            android:textColor="@android:color/white"
+                            android:textSize="@dimen/text_13"
+                            app:layout_constraintHorizontal_weight="1"
+                            app:layout_constraintLeft_toRightOf="@id/iv_community_video_author"
+                            app:layout_constraintRight_toLeftOf="@id/gr_follow"
+                            app:layout_constraintTop_toBottomOf="@id/iv_community_video_author_title" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/gr_follow"
+                            style="@style/Widget.MaterialComponents.Button.TextButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/dimen_30"
+                            android:layout_marginEnd="@dimen/dimen_10"
+                            android:insetTop="@dimen/dp_0"
+                            android:insetBottom="@dimen/dp_0"
+                            android:padding="@dimen/dp_0"
+                            android:text="+ 关注"
+                            android:textColor="@color/gray_text_color"
+                            android:textSize="@dimen/text_13"
+                            android:textStyle="bold"
+                            app:backgroundTint="@android:color/white"
+                            app:cornerRadius="@dimen/dimen_5"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimen_1"
+                        android:layout_marginBottom="@dimen/dimen_5"
+                        android:background="@color/white" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rcv_community_video_recommend"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                </LinearLayout>
+
+            </androidx.core.widget.NestedScrollView>
+
+            </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+
+        </LinearLayout>
+
+
+    </FrameLayout>
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:orientation="vertical">-->
+
+<!--        <androidx.appcompat.widget.Toolbar-->
+<!--            android:id="@+id/tb_laboratory_video"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="@dimen/dimen_50"-->
+<!--            app:contentInsetLeft="0dp"-->
+<!--            app:contentInsetStart="0dp"-->
+<!--            tools:ignore="MissingConstraints">-->
+
+<!--            <LinearLayout-->
+<!--                android:id="@+id/ll_laboratory"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="@dimen/dimen_48"-->
+<!--                android:background="@color/white"-->
+<!--                android:orientation="horizontal">-->
+
+<!--                <View-->
+<!--                    android:id="@+id/iv_laboratory_back"-->
+<!--                    android:layout_width="@dimen/dimen_40"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:padding="@dimen/dimen_10" />-->
+
+<!--                <TextView-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:gravity="center"-->
+<!--                    android:text="牛蛙呐牛逼视频"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:textSize="@dimen/text_16"/>-->
+
+<!--                <View-->
+<!--                    android:id="@+id/iv_search_article"-->
+<!--                    android:layout_width="@dimen/dimen_40"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:padding="@dimen/dimen_13" />-->
+
+<!--            </LinearLayout>-->
+
+<!--        </androidx.appcompat.widget.Toolbar>-->
+
+<!--        <FrameLayout-->
+<!--            android:id="@+id/fl_video"-->
 <!--            android:layout_marginTop="@dimen/dimen_10"-->
 <!--            android:layout_width="match_parent"-->
 <!--            android:layout_height="@dimen/dimen_200"/>-->
 
-    </LinearLayout>
+<!--&lt;!&ndash;        <cn.jzvd.JzvdStd&ndash;&gt;-->
+<!--&lt;!&ndash;            android:id="@+id/js_video"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_marginTop="@dimen/dimen_10"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_width="match_parent"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_height="@dimen/dimen_200"/>&ndash;&gt;-->
+
+<!--    </LinearLayout>-->
 
 </LinearLayout>

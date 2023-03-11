@@ -6,12 +6,12 @@ import android.os.Bundle
 import android.text.method.ScrollingMovementMethod
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import com.ggb.nirvanaclub.R
 import com.ggb.nirvanaclub.bean.AppUpdateBean
 import com.ggb.nirvanaclub.utils.AppUtils
 import com.ggb.nirvanaclub.utils.ScreenUtils
 import com.google.gson.JsonParser
+import com.tamsiree.rxkit.view.RxToast
 import kotlinx.android.synthetic.main.dialog_new_apk_update.*
 
 class ApkUpdateDialog : Dialog {
@@ -80,10 +80,10 @@ class ApkUpdateDialog : Dialog {
             mOnApkDownloadConfirmListener?.onConfirmDownload(info)
         }
         tv_update_new_cancel.setOnClickListener {
-            Toast.makeText(context, context.resources.getString(R.string.update_forbiten), Toast.LENGTH_SHORT).show()
+            RxToast.warning(context.resources.getString(R.string.update_forbiten))
         }
         iv_update_new_close.setOnClickListener {
-            Toast.makeText(context, context.resources.getString(R.string.update_forbiten_1), Toast.LENGTH_SHORT).show()
+            RxToast.success(context.resources.getString(R.string.update_forbiten_1))
             dismiss()
         }
     }

@@ -5,19 +5,23 @@ import android.graphics.ColorMatrix
 import android.graphics.ColorMatrixColorFilter
 import android.graphics.Paint
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import cn.jpush.im.android.api.JMessageClient
 import cn.jpush.im.android.api.event.ContactNotifyEvent
+import cn.jpush.im.android.api.model.Conversation
 import com.ggb.nirvanaclub.App
 import com.ggb.nirvanaclub.GuideActivity
 import com.ggb.nirvanaclub.R
 import com.ggb.nirvanaclub.constans.C
 import com.ggb.nirvanaclub.utils.AppStatus
 import com.ggb.nirvanaclub.utils.AppStatusManager
-import com.ggb.nirvanaclub.view.RxToast
+import com.ggb.nirvanaclub.utils.ScreenUtils
 import com.gyf.immersionbar.ImmersionBar
+import com.tamsiree.rxkit.view.RxToast
 import kotlinx.android.synthetic.main.title_public_view.*
 
 abstract class BaseActivity: MyBaseActivity() {

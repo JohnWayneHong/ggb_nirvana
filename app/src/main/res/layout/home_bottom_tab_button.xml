@@ -107,10 +107,10 @@
                 android:text="@string/activity_main_message_string" />
 
             <View
-                android:visibility="invisible"
                 android:id="@+id/v_new_dialog"
+                style="@style/NoticeSpot"
                 android:layout_toEndOf="@+id/img_shop"
-                style="@style/NoticeSpot"/>
+                android:visibility="invisible" />
 
         </RelativeLayout>
 

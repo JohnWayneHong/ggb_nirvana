@@ -488,7 +488,9 @@ class MessageChatActivity : MessageChatInputActivity(), GGBContract.View{
 
 
     override fun initEvent() {
-
+        iv_message_chat_back.setOnClickListener {
+            finish()
+        }
     }
 
     /**
@@ -513,18 +515,23 @@ class MessageChatActivity : MessageChatInputActivity(), GGBContract.View{
         super.onResume()
         JMessageClient.enterSingleConversation(userName)
 
-        if(type == C.SINGLE){
-            JMessageClient.enterSingleConversation(userName)
-        }
+//        if(type == C.SINGLE){
+//            JMessageClient.enterSingleConversation(userName)
+//        }
     }
 
     override fun onPause() {
         super.onPause()
+        //清空未读消息,防止MessageFragment里的Event事件还在监听新消息
+        conversation?.updateConversationExtra("")
+
+        JMessageClient.enterSingleConversation(userName)
         JMessageClient.exitConversation()
     }
 
     override fun onDestroy() {
         super.onDestroy()
+
         handler.removeCallbacksAndMessages(null)
     }
 

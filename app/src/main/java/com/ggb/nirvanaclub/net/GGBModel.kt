@@ -113,4 +113,16 @@ class GGBModel :GGBContract.Model{
         return Api.getDefault(4,4).communityNavigation()
     }
 
+    override fun communityDailyBanner(): Observable<CommunityDailyBean> {
+        return Api.getDefault(5,5).communityDailyBanner()
+    }
+
+    override fun communityDailyVideo(nextPage:String): Observable<CommunityDailyBean> {
+        return Api.getDefault(5,5).communityDailyVideo(nextPage)
+    }
+
+    override fun communityDailyVideoContent(videoId:Int): Observable<CommunityDailyIssueBean> {
+        return Api.getDefault(5,5).communityDailyVideoContent(videoId)
+    }
+
 }

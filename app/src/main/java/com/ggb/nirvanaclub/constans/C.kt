@@ -35,6 +35,7 @@ object C {
     const val THIRD_BASE_ADDRESS = "https://www.mxnzp.com/api/"
     const val JOKES_BASE_ADDRESS = "http://tools.cretinzp.com/jokes/"
     const val PLAY_ANDROID_ADDRESS = "https://www.wanandroid.com/"
+    const val OPEN_EYES_ADDRESS = "http://baobab.kaiyanapp.com/api/"
 
     const val ANDROID_UPDATE_CONFIG_ADDRESS = "https://nirvana1234.xyz/apk/latest"
     const val ANDROID_UPDATE_TIMES_ADDRESS = "https://f.m.suning.com/api/ct.do"

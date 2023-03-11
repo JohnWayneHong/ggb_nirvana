@@ -76,7 +76,7 @@
                 android:layout_marginTop="@dimen/dimen_15"
                 android:layout_marginBottom="@dimen/dimen_40"
                 android:layout_weight="1"
-                android:background="@drawable/shape_btn_border_9919a7f0"
+                android:background="@drawable/shape_border_round_7ec059"
                 android:gravity="center"
                 android:paddingBottom="@dimen/dimen_10"
                 android:layout_marginRight="@dimen/dimen_7"

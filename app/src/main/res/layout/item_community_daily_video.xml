@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+<!--  三合一，开眼视频的banner，textHeader，videoList  -->
+
+    <com.youth.banner.Banner
+        android:id="@+id/ban_community_daily"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_200"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/dimen_15"
+        android:layout_marginRight="@dimen/dimen_15"
+        android:layout_marginTop="@dimen/dimen_15"
+        app:indicator_width="@dimen/dimen_30"
+        app:indicator_height="@dimen/dimen_2"
+        app:indicator_drawable_selected="@drawable/bg_shade_full"
+        app:indicator_drawable_unselected="@drawable/bg_white_full"
+        app:banner_default_image="@mipmap/logo"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/tv_community_daily_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingTop="@dimen/dimen_5"
+        android:paddingBottom="@dimen/dimen_10"
+        android:textColor="@color/text_main_color"
+        android:textStyle="bold"
+        android:textSize="@dimen/text_18"
+        android:visibility="gone"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:bind="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dimen_15"
+        android:layout_marginTop="@dimen/dimen_5"
+        android:layout_marginRight="@dimen/dimen_15"
+        android:layout_marginBottom="@dimen/dimen_10"
+        android:id="@+id/cl_community_daily_header"
+        android:orientation="vertical">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_cover"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_200"
+            android:scaleType="centerCrop"
+            android:transitionName="share_image"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearance="@style/roundedCornerStyle"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/mb_community_daily_type"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="@dimen/dimen_44"
+            android:layout_height="@dimen/dimen_44"
+            android:layout_marginStart="@dimen/dimen_10"
+            android:layout_marginTop="@dimen/dimen_10"
+            android:insetTop="@dimen/dp_0"
+            android:insetBottom="@dimen/dp_0"
+            android:padding="@dimen/dp_0"
+            android:text="@{model.item.data.category}"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_14"
+            app:backgroundTint="#8AFFFFFF"
+            app:cornerRadius="@dimen/dimen_22"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/mb_community_daily_time"
+
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="@dimen/dimen_50"
+            android:layout_height="@dimen/dimen_25"
+            android:layout_marginEnd="@dimen/dimen_15"
+            android:layout_marginBottom="@dimen/dimen_18"
+            android:insetTop="@dimen/dp_0"
+            android:insetBottom="@dimen/dp_0"
+            android:padding="@dimen/dp_0"
+            android:text="@{DateUtils.INSTANCE.formatDateMsByMS(model.item.data.duration * 1000)}"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_12"
+            app:backgroundTint="#8AFFFFFF"
+            app:cornerRadius="@dimen/dimen_5"
+            app:layout_constraintBottom_toTopOf="@id/iv_community_daily_author"
+            app:layout_constraintRight_toRightOf="parent" />
+
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_community_daily_author"
+            android:layout_width="@dimen/dimen_40"
+            android:layout_height="@dimen/dimen_40"
+            android:layout_marginTop="@dimen/dimen_10"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_cover"
+            app:shapeAppearance="@style/circleStyle"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_community_daily_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_10"
+            android:layout_marginTop="@dimen/dimen_10"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@{model.item.data.title}"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/text_14"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toRightOf="@id/iv_community_daily_author"
+            app:layout_constraintTop_toBottomOf="@id/iv_cover" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_community_daily_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_10"
+            android:layout_marginTop="@dimen/dimen_2"
+            android:text="@{model.item.data.author == null ? model.item.data.tags[0].name : model.item.data.author.name}"
+            android:textColor="#9A9A9A"
+            android:textSize="@dimen/text_12"
+            app:layout_constraintLeft_toRightOf="@id/iv_community_daily_author"
+            app:layout_constraintTop_toBottomOf="@id/tv_community_daily_title" />
+
+        <com.ggb.nirvanaclub.view.IconFontTextView
+            android:id="@+id/tv_share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dimen_5"
+            android:text="&#xe6c0;"
+            android:textColor="#61000000"
+            android:textSize="@dimen/text_20"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_cover" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="@dimen/dimen_10"
+            android:background="#E6E6E6"
+            app:layout_constraintBottom_toBottomOf="parent"
+            bind:layout_constraintTop_toBottomOf="@id/iv_community_daily_author" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</LinearLayout>

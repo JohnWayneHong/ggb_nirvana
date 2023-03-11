@@ -4,6 +4,7 @@ import android.graphics.Bitmap
 import android.text.TextUtils
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import cn.jpush.im.android.api.callback.GetAvatarBitmapCallback
 import cn.jpush.im.android.api.content.CustomContent
 import cn.jpush.im.android.api.content.PromptContent
@@ -87,9 +88,12 @@ class MessageFriendAdapter(data: List<Conversation>): BaseQuickAdapter<Conversat
 
 
         if (item.extra == C.NEW_MESSAGE) {
-            helper.getView<View>(R.id.v_message_main_new).visibility = View.VISIBLE
+//            helper.getView<View>(R.id.v_message_main_new).visibility = View.VISIBLE
+            helper.getView<TextView>(R.id.v_message_main_new).visibility = View.VISIBLE
+            helper.getView<TextView>(R.id.v_message_main_new).text = item.unReadMsgCnt.toString()
         } else {
-            helper.getView<View>(R.id.v_message_main_new).visibility = View.GONE
+            helper.getView<TextView>(R.id.v_message_main_new).visibility = View.GONE
+//            helper.getView<View>(R.id.v_message_main_new).visibility = View.GONE
         }
     }
 

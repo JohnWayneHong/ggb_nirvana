@@ -2,14 +2,17 @@ package com.ggb.nirvanaclub.modules
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import cn.jpush.im.android.api.ContactManager
 import cn.jpush.im.android.api.JMessageClient
+import cn.jpush.im.android.api.callback.GetAvatarBitmapCallback
 import cn.jpush.im.android.api.callback.GetUserInfoCallback
 import cn.jpush.im.android.api.enums.ConversationType
 import cn.jpush.im.android.api.event.MessageEvent
@@ -20,6 +23,7 @@ import cn.jpush.im.api.BasicCallback
 import com.ggb.nirvanaclub.MainActivity
 import com.ggb.nirvanaclub.R
 import com.ggb.nirvanaclub.adapter.MessageFriendAdapter
+import com.ggb.nirvanaclub.base.BaseActivity
 import com.ggb.nirvanaclub.base.BaseFragment
 import com.ggb.nirvanaclub.constans.C
 import com.ggb.nirvanaclub.modules.message.MessageAddFriendActivity
@@ -33,6 +37,9 @@ import kotlinx.android.synthetic.main.fragment_message.*
 import org.jetbrains.anko.startActivity
 
 class MessageFragment :BaseFragment(){
+
+    //判断是否进入消息页面，进入则不弹出对话提示
+    private var isInChatActivity = false
 
     private var mAdapter: MessageFriendAdapter?=null
 
@@ -133,6 +140,8 @@ class MessageFragment :BaseFragment(){
                 myIntent.putExtra(C.DATA,userInfo.userName)
                 myIntent.putExtra(C.DATA_TWO, MessageChatUtils.getName(userInfo))
                 startActivity(myIntent)
+
+                isInChatActivity = true
             }else{
                 val groupInfo = list[position].targetInfo as GroupInfo
                 val myIntent = Intent(activity, MessageChatActivity::class.java)
@@ -161,7 +170,14 @@ class MessageFragment :BaseFragment(){
 
     override fun onResume() {
         super.onResume()
+        isInChatActivity = false
         refresh()
+    }
+
+
+    override fun onPause() {
+        super.onPause()
+        isInChatActivity = true
     }
 
 
@@ -237,7 +253,11 @@ class MessageFragment :BaseFragment(){
             if (bean.extra.equals(C.NEW_MESSAGE)) {
                 setNew(true)
                 hasNew = true
+                if (!isInChatActivity){
+                    setNewNotification(bean)
+                }
             }
+
         }
         if (!hasNew) {
             setNew(false)
@@ -249,6 +269,13 @@ class MessageFragment :BaseFragment(){
             return
         }
         (activity as MainActivity).setNew(news)
+    }
+
+    private fun setNewNotification(message: Conversation) {
+        if(activity==null){
+            return
+        }
+        (activity as MainActivity).setNewNotification(message)
     }
 
     companion object {

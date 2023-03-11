@@ -94,4 +94,26 @@ interface ApiService {
      */
     @GET("navi/json")
     fun communityNavigation(): Observable<PlayAndroidHttpResult<List<CommunityNavigationBean>>>
+
+    /**
+     * 开眼视频Banner数据
+     * http://www.wanandroid.com/navi/json
+     */
+    @GET("v2/feed?num=1")
+    fun communityDailyBanner(): Observable<CommunityDailyBean>
+
+    /**
+     * 开眼视频往期视频列表数据
+     * http://www.wanandroid.com/navi/json
+     */
+    @GET
+    fun communityDailyVideo(@Url url: String): Observable<CommunityDailyBean>
+
+    /**
+     * 开眼视频视频详情数据
+     * http://www.wanandroid.com/navi/json
+     */
+    @GET("v4/video/related")
+    fun communityDailyVideoContent(@Query("id") id: Int): Observable<CommunityDailyIssueBean>
+
 }

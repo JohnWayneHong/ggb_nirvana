@@ -40,6 +40,7 @@ public class ChatBean implements MultiItemEntity {
     public boolean upload=true;
 
 
+
 /*
     public ChatBean(ChatImgBean chatImgBean,int type){
         this.chatImgBean=chatImgBean;
