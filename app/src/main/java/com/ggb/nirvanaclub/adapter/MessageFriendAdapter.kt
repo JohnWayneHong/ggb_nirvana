@@ -88,12 +88,10 @@ class MessageFriendAdapter(data: List<Conversation>): BaseQuickAdapter<Conversat
 
 
         if (item.extra == C.NEW_MESSAGE) {
-//            helper.getView<View>(R.id.v_message_main_new).visibility = View.VISIBLE
             helper.getView<TextView>(R.id.v_message_main_new).visibility = View.VISIBLE
             helper.getView<TextView>(R.id.v_message_main_new).text = item.unReadMsgCnt.toString()
         } else {
             helper.getView<TextView>(R.id.v_message_main_new).visibility = View.GONE
-//            helper.getView<View>(R.id.v_message_main_new).visibility = View.GONE
         }
     }
 
