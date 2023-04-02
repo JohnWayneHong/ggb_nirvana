@@ -7,7 +7,7 @@
 
         <ImageView style="@style/titleBackStyle" />
 
-        
+
         <TextView
             style="@style/titleTextStyle"
             android:maxLength="8"

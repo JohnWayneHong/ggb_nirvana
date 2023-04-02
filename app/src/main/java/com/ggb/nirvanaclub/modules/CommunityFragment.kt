@@ -21,7 +21,7 @@ class CommunityFragment : BaseFragment(), GGBContract.View{
 
     private val mTitles = arrayOf(
         "Android","广场", "体系","导航","日报",
-         "段子乐文", "段子乐图","推荐的人"
+         "段子乐文", "段子乐图","推荐的人","WebRtc"
     )
 
     private val mFragments = ArrayList<Fragment>()
@@ -43,6 +43,7 @@ class CommunityFragment : BaseFragment(), GGBContract.View{
     private fun initFragment(){
 
         mFragments.clear()
+
         mFragments.add(CommunityAndroidFragment.newInstance())
         mFragments.add(CommunitySquareFragment.newInstance())
         mFragments.add(CommunityKnowledgeFragment.newInstance())
@@ -51,7 +52,7 @@ class CommunityFragment : BaseFragment(), GGBContract.View{
         mFragments.add(CommunityTextFragment.newInstance())
         mFragments.add(CommunityPictureFragment.newInstance())
         mFragments.add(CommunitySubscriptFragment.newInstance())
-
+        mFragments.add(CommunityWebRtcFragment.newInstance())
         mAdapter = MyPagerAdapter(childFragmentManager)
         vp_community.adapter = mAdapter
 

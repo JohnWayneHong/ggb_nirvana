@@ -29,6 +29,7 @@ import com.ggb.nirvanaclub.constans.C
 import com.ggb.nirvanaclub.modules.message.MessageAddFriendActivity
 import com.ggb.nirvanaclub.modules.message.MessageChatActivity
 import com.ggb.nirvanaclub.modules.message.MessageFriendListActivity
+import com.ggb.nirvanaclub.utils.AppUtils
 import com.ggb.nirvanaclub.utils.MessageChatUtils
 import com.ggb.nirvanaclub.view.RxToast
 import com.gyf.immersionbar.ImmersionBar
@@ -40,6 +41,8 @@ class MessageFragment :BaseFragment(){
 
     //判断是否进入消息页面，进入则不弹出对话提示
     private var isInChatActivity = false
+
+    private var isUserLogin = false
 
     private var mAdapter: MessageFriendAdapter?=null
 
@@ -63,68 +66,87 @@ class MessageFragment :BaseFragment(){
 
         mh_message_header.setColorSchemeResources(R.color.main_color)
         initEvent()
+        isUserLoginCheck()
+    }
+
+    private fun isUserLoginCheck(){
+        isUserLogin = AppUtils.isLoginCheck()
     }
 
     private fun initEvent(){
         tv_message_add.setOnClickListener {
+            if (isUserLogin){
 
-            val rxDialog = RxDialogEditSureCancel(context)
-            rxDialog.setTitle("请输入对方的能能号")
+                val rxDialog = RxDialogEditSureCancel(context)
+                rxDialog.setTitle("请输入对方的能能号")
 
-            rxDialog.sureView.setOnClickListener {
-                if (!TextUtils.isEmpty(rxDialog.editText.text)){
-                    val s = rxDialog.editText.text
-                    JMessageClient.getUserInfo(s.toString(), object : GetUserInfoCallback() {
-                        override fun gotResult(
-                            responseCode: Int,
-                            responseMessage: String,
-                            info: UserInfo
-                        ) {
-                            if (responseCode == 0) {
-                                if (info.isFriend) {
-                                    RxToast.info(requireContext(), "已经是好友！", Toast.LENGTH_SHORT)?.show()
-                                }else{
-                                    val rxDialog2 = RxDialogEditSureCancel(requireContext())
-                                    rxDialog2.setTitle("是否添加好友"+info.userName)
-                                    rxDialog2.editText.setText("请输入验证信息")
-                                    rxDialog2.sureView.setOnClickListener {
-                                        ContactManager.sendInvitationRequest(info.userName,
-                                            "b0935a121eb9326d4cafaad3",
-                                            rxDialog.editText.text.toString(), object : BasicCallback() {
-                                                override fun gotResult(
-                                                    p0: Int,
-                                                    p1: String?
-                                                ) {
-                                                    if (p0 == 0) {
-                                                        RxToast.success(requireContext(), "申请发送成功！", Toast.LENGTH_SHORT)?.show()
+                rxDialog.sureView.setOnClickListener {
+                    if (!TextUtils.isEmpty(rxDialog.editText.text)){
+                        val s = rxDialog.editText.text
+                        JMessageClient.getUserInfo(s.toString(), object : GetUserInfoCallback() {
+                            override fun gotResult(
+                                responseCode: Int,
+                                responseMessage: String,
+                                info: UserInfo
+                            ) {
+                                if (responseCode == 0) {
+                                    if (info.isFriend) {
+                                        RxToast.info(requireContext(), "已经是好友！", Toast.LENGTH_SHORT)?.show()
+                                    }else{
+                                        val rxDialog2 = RxDialogEditSureCancel(requireContext())
+                                        rxDialog2.setTitle("是否添加好友"+info.userName)
+                                        rxDialog2.editText.setText("请输入验证信息")
+                                        rxDialog2.sureView.setOnClickListener {
+                                            ContactManager.sendInvitationRequest(info.userName,
+                                                "b0935a121eb9326d4cafaad3",
+                                                rxDialog.editText.text.toString(), object : BasicCallback() {
+                                                    override fun gotResult(
+                                                        p0: Int,
+                                                        p1: String?
+                                                    ) {
+                                                        if (p0 == 0) {
+                                                            RxToast.success(requireContext(), "申请发送成功！", Toast.LENGTH_SHORT)?.show()
+                                                        }
+                                                        Log.v("zzw", p0.toString() + p1)
+
                                                     }
-                                                    Log.v("zzw", p0.toString() + p1)
 
-                                                }
+                                                })
+                                            RxToast.info(requireContext(),"请等待对方同意！", Toast.LENGTH_SHORT, true)?.show()
+                                            rxDialog2.cancel()
+                                        }
+                                        rxDialog2.cancelView.setOnClickListener { rxDialog2.cancel() }
+                                        rxDialog2.show()
 
-                                            })
-                                        RxToast.info(requireContext(),"请等待对方同意！", Toast.LENGTH_SHORT, true)?.show()
-                                        rxDialog2.cancel()
                                     }
-                                    rxDialog2.cancelView.setOnClickListener { rxDialog2.cancel() }
-                                    rxDialog2.show()
-
                                 }
                             }
-                        }
-                    })
+                        })
+                    }
+                    rxDialog.cancel()
                 }
-                rxDialog.cancel()
+                rxDialog.cancelView.setOnClickListener { rxDialog.cancel() }
+                rxDialog.show()
+            }else{
+                RxToast.info(requireContext(),"未登录无法使用聊天功能！", Toast.LENGTH_SHORT, true)?.show()
             }
-            rxDialog.cancelView.setOnClickListener { rxDialog.cancel() }
-            rxDialog.show()
+
         }
 
         ll_message_main_friend.setOnClickListener {
-            activity?.startActivity<MessageAddFriendActivity>()
+            if (isUserLogin){
+                activity?.startActivity<MessageAddFriendActivity>()
+
+            }else{
+                RxToast.info(requireContext(),"未登录无法使用聊天功能！", Toast.LENGTH_SHORT, true)?.show()
+            }
         }
         ll_message_main_friend_list.setOnClickListener {
-            activity?.startActivity<MessageFriendListActivity>()
+            if (isUserLogin){
+                activity?.startActivity<MessageFriendListActivity>()
+            }else{
+                RxToast.info(requireContext(),"未登录无法使用聊天功能！", Toast.LENGTH_SHORT, true)?.show()
+            }
         }
         mAdapter?.setOnItemClickListener { adapter, view, position ->
 
@@ -172,6 +194,8 @@ class MessageFragment :BaseFragment(){
         super.onResume()
         isInChatActivity = false
         refresh()
+        isUserLoginCheck()
+
     }
 
 

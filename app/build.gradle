@@ -48,7 +48,7 @@ android {
         minSdkVersion 21
 //        targetSdkVersion 28
         targetSdkVersion 30
-        versionCode 34
+        versionCode 35
         versionName "V3.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -279,4 +279,7 @@ dependencies {
 
     //浮层框架
     implementation "com.github.goweii:AnyLayer:4.1.7-support"
+
+    //腾讯X5
+    api 'com.tencent.tbs.tbssdk:sdk:43903'
 }

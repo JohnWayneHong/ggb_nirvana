@@ -6,6 +6,10 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Build;
 
+import com.ggb.nirvanaclub.bean.UserBean;
+
+import org.litepal.LitePal;
+
 /** 
  * 跟App相关的辅助类 
  *  
@@ -78,5 +82,19 @@ public class AppUtils
             return 0;
         }
         return appVersionCode;
+    }
+
+    public static Boolean isLoginCheck(){
+        UserBean user = LitePal.findLast(UserBean.class);
+
+        if (user!=null){
+            //第三方登录 账号虚假 后期可改
+            if (user.getUserLoginType() != 1){
+                return true;
+            }
+        }else{
+            return false;
+        }
+        return false;
     }
 } 

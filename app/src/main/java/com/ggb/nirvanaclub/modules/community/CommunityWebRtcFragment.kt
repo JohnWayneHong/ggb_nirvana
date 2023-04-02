@@ -1,33 +1,42 @@
-package com.ggb.nirvanaclub.modules.login
+package com.ggb.nirvanaclub.modules.community
 
 import android.graphics.Bitmap
 import android.os.Build
+import android.os.Bundle
 import android.util.Log
-import android.webkit.WebSettings
-import com.ggb.nirvanaclub.App
+import android.webkit.WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
 import com.ggb.nirvanaclub.R
-import com.ggb.nirvanaclub.base.BaseActivity
-import com.ggb.nirvanaclub.constans.C
+import com.ggb.nirvanaclub.base.BaseFragment
+import com.ggb.nirvanaclub.bean.DevelopJokesListBean
+import com.ggb.nirvanaclub.net.GGBContract
+import com.ggb.nirvanaclub.net.GGBPresent
+import com.luck.picture.lib.thread.PictureThreadUtils.runOnUiThread
 import com.tencent.smtt.export.external.interfaces.PermissionRequest
 import com.tencent.smtt.export.external.interfaces.SslError
 import com.tencent.smtt.export.external.interfaces.SslErrorHandler
 import com.tencent.smtt.sdk.WebChromeClient
+import com.tencent.smtt.sdk.WebSettings
 import com.tencent.smtt.sdk.WebView
 import com.tencent.smtt.sdk.WebViewClient
 import kotlinx.android.synthetic.main.fragment_community_webrtc.*
-import org.jetbrains.anko.runOnUiThread
 
-/**
- * 腾讯X5测试
- */
-class AvatarActivity : BaseActivity() {
+class CommunityWebRtcFragment : BaseFragment(), GGBContract.View{
 
-    override fun getTitleType() =  PublicTitleData(C.TITLE_NORMAL)
+    private var present:GGBPresent?=null
 
-    override fun getLayoutResource(): Int = R.layout.activity_login_avatar
+    override fun getLayoutResource() = R.layout.fragment_community_webrtc
+
+    override fun beForInitView() {
+        present = GGBPresent(this)
+    }
 
     override fun initView() {
         initWebView()
+        initEvent()
+    }
+
+    private fun initEvent(){
+//        wv_community_webrtc.loadUrl("https://nirvana1234.xyz/v2/")
     }
 
     private fun initWebView(){
@@ -37,7 +46,7 @@ class AvatarActivity : BaseActivity() {
 
         //5.0以上开启混合模式加载
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            wv_community_webrtc.settings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
+            wv_community_webrtc.settings.setMixedContentMode(MIXED_CONTENT_ALWAYS_ALLOW);
         }
 
         wv_community_webrtc.settings.setSupportMultipleWindows(true);
@@ -66,7 +75,7 @@ class AvatarActivity : BaseActivity() {
 
     }
 
-    class MyWebViewClient : WebViewClient() {
+    internal class MyWebViewClient : WebViewClient() {
         //WebView代表是当前的WebView
         override fun shouldOverrideUrlLoading(view: WebView, url: String?): Boolean {
             view.loadUrl(url!!)
@@ -93,7 +102,7 @@ class AvatarActivity : BaseActivity() {
         }
     }
 
-    class MyWebChromeClient : WebChromeClient() {
+    internal class MyWebChromeClient : WebChromeClient() {
         //监听加载进度
         override fun onProgressChanged(view: WebView, newProgress: Int) {
             super.onProgressChanged(view, newProgress)
@@ -107,12 +116,51 @@ class AvatarActivity : BaseActivity() {
         }
 
         override fun onPermissionRequest(request: PermissionRequest) {
-
-            App.instance.runOnUiThread { request.grant(request.resources) }
+            runOnUiThread(Runnable { request.grant(request.resources) })
         }
     }
 
-    override fun initEvent() {
+
+    override fun onResume() {
+        super.onResume()
+    }
+
+    override fun onStop() {
+        super.onStop()
+    }
+
+    companion object {
+        fun newInstance(): CommunityWebRtcFragment {
+            val fragment = CommunityWebRtcFragment()
+            val bundle = Bundle()
+            fragment.arguments = bundle
+            return fragment
+        }
+    }
+
+    override fun onSuccess(flag: String?, data: Any?) {
+        flag?.let {
+            when(flag) {
+                GGBContract.GETJOKESTEXT -> {
+                    data?.let {
+                        data as List<DevelopJokesListBean>
+
+                    }
+                }
+                else -> {
+
+                }
+
+            }
+        }
+    }
+
+    override fun onFailed(string: String?, isRefreshList: Boolean) {
 
     }
+
+    override fun onNetError(boolean: Boolean, isRefreshList: Boolean) {
+
+    }
+
 }

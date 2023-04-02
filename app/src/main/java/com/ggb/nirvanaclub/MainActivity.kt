@@ -43,6 +43,7 @@ import com.ggb.nirvanaclub.utils.*
 import com.ggb.nirvanaclub.view.CircleImageView
 import com.ggb.nirvanaclub.view.dialog.ApkUpdateDialog
 import com.ggb.nirvanaclub.view.dialog.OpenAuthorityDialog
+import com.ggb.nirvanaclub.view.dialog.PrivacyPolicyDialog
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
@@ -76,6 +77,7 @@ class MainActivity: BaseActivity() ,ConfigDownloadUtils.OnConfigDownloadComplete
 
     private var updateDialog : ApkUpdateDialog? = null
     private var authorityDialog : OpenAuthorityDialog? = null
+    private var policyDialog : PrivacyPolicyDialog? = null
 
     override fun getTitleType() =  PublicTitleData(C.TITLE_CUSTOM)
 
@@ -86,6 +88,7 @@ class MainActivity: BaseActivity() ,ConfigDownloadUtils.OnConfigDownloadComplete
     }
 
     override fun initView() {
+        checkPrivacyPolicy()
         checkUpdate()
 //        initWriteStorage()
 //        initFragment()
@@ -315,6 +318,14 @@ class MainActivity: BaseActivity() ,ConfigDownloadUtils.OnConfigDownloadComplete
         if (!isUpdateChecked){
             ConfigDownloadUtils.configDownload(C.ANDROID_UPDATE_CONFIG_ADDRESS,this,this)
         }
+    }
+
+    /**
+     * 隐私权限弹窗
+     */
+    private fun checkPrivacyPolicy(){
+        policyDialog = PrivacyPolicyDialog(this)
+        policyDialog?.showIfFirst(this)
     }
 
     private fun initWriteStorage(){

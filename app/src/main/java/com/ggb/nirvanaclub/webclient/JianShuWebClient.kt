@@ -1,9 +1,8 @@
-package com.cxz.wanandroid.webclient
+package com.ggb.nirvanaclub.webclient
 
 import android.content.Context
 import android.webkit.WebResourceResponse
 import android.webkit.WebView
-import com.ggb.nirvanaclub.webclient.Wget
 import java.io.BufferedReader
 import java.io.ByteArrayInputStream
 import java.io.InputStream

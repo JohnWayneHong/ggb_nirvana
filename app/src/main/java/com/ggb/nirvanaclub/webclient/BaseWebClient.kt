@@ -1,4 +1,4 @@
-package com.cxz.wanandroid.webclient
+package com.ggb.nirvanaclub.webclient
 
 import android.graphics.Bitmap
 import android.net.Uri

@@ -1,4 +1,4 @@
-package com.cxz.wanandroid.webclient
+package com.ggb.nirvanaclub.webclient
 
 import android.webkit.WebViewClient
 

@@ -9,25 +9,24 @@ import android.view.KeyEvent
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.webkit.PermissionRequest
 import android.webkit.WebChromeClient
 import android.webkit.WebSettings
 import android.webkit.WebView
 import androidx.coordinatorlayout.widget.CoordinatorLayout
-import com.cxz.wanandroid.webclient.WebClientFactory
 import com.ggb.nirvanaclub.R
 import com.ggb.nirvanaclub.base.BaseActivity
 import com.ggb.nirvanaclub.bean.ArticleContentBean
 import com.ggb.nirvanaclub.constans.C
 import com.ggb.nirvanaclub.net.GGBContract
 import com.ggb.nirvanaclub.net.GGBPresent
+import com.ggb.nirvanaclub.webclient.WebClientFactory
 import com.google.android.material.appbar.AppBarLayout
-import com.gyf.immersionbar.ImmersionBar
 import com.just.agentweb.AgentWeb
 import com.just.agentweb.NestedScrollAgentWebView
 import com.tamsiree.rxkit.view.RxToast
 import kotlinx.android.synthetic.main.activity_web_content.*
 import kotlinx.android.synthetic.main.community_toolbar.*
-import kotlinx.android.synthetic.main.title_public_view.*
 
 class CommunityWebContentActivity : BaseActivity() , GGBContract.View{
 
@@ -125,6 +124,16 @@ class CommunityWebContentActivity : BaseActivity() , GGBContract.View{
             super.onReceivedTitle(view, title)
             tv_community_bar_title?.text = title
         }
+
+//        override fun onPermissionRequest(request: PermissionRequest) {
+//            request.grant(request.resources)
+//        }
+
+//        override fun onPermissionRequest(request: PermissionRequest) {
+//            runOnUiThread { request.grant(request.resources) } // run
+//            // MainActivity
+//        } // onPermissionRequest
+
     }
 
     override fun initEvent() {

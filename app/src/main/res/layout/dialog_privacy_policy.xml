@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:gravity="center_horizontal"
+    android:layout_margin="@dimen/dimen_48"
+    android:padding="@dimen/dimen_16"
+    android:background="@drawable/bg_black_color_radius_12"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/text_main_color"
+        android:textSize="@dimen/text_18"
+        android:text="隐私政策" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_16"
+        android:overScrollMode="never"
+        android:scrollbarSize="@dimen/dimen_3"
+        android:scrollbarStyle="insideOverlay"
+        android:scrollbarThumbVertical="@drawable/scrollbar">
+
+        <TextView
+            android:id="@+id/dialog_privacy_policy_tv_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_main_color"
+            android:textSize="@dimen/text_15"
+            android:text="@string/privacy_policy_content" />
+
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/dialog_privacy_policy_tv_yes"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_44"
+        android:textSize="@dimen/text_15"
+        android:textColor="@color/main_color"
+        android:gravity="center"
+        android:background="@drawable/lace_blue"
+        android:layout_marginTop="@dimen/dimen_32"
+        android:text="同意" />
+
+    <TextView
+        android:id="@+id/dialog_privacy_policy_tv_no"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_16"
+        android:gravity="center"
+        android:textSize="@dimen/text_15"
+        android:textColor="@color/text_second_color"
+        android:text="退出应用" />
+
+</LinearLayout>

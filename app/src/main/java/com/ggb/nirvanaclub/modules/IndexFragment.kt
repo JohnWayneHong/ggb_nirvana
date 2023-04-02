@@ -16,6 +16,7 @@ import com.ggb.nirvanaclub.constans.C
 import com.ggb.nirvanaclub.event.TagChangeEvent
 import com.ggb.nirvanaclub.modules.article.ArticleInfoFragment
 import com.ggb.nirvanaclub.modules.article.SearchArticleActivity
+import com.ggb.nirvanaclub.modules.login.AvatarActivity
 import com.ggb.nirvanaclub.modules.login.LoginActivity
 import com.ggb.nirvanaclub.modules.message.MessageChatActivity
 import com.ggb.nirvanaclub.modules.tag.IndexTagSettingActivity
@@ -77,6 +78,10 @@ class IndexFragment :BaseFragment(),GGBContract.View{
             Log.e("TAG", "RegistrationID=============>: "+JPushInterface.getRegistrationID(context) )
             activity?.startActivity<SearchArticleActivity>()
         }
+        iv_test.setOnClickListener {
+//            activity?.startActivity<AvatarActivity>()
+        }
+
     }
 
     private fun initTag(){

@@ -1,12 +1,15 @@
 package com.ggb.nirvanaclub.modules.message;
 
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.view.View;
+import android.webkit.PermissionRequest;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings.PluginState;
 import android.webkit.WebSettings.ZoomDensity;
@@ -53,6 +56,7 @@ public class MessageWebViewActivity extends BaseActivity {
 	@Override
 	protected void initView() {
 		url = this.getIntent().getStringExtra("url");
+		title = this.getIntent().getStringExtra("title");
 
 		progressBar = (ProgressBar) findViewById(R.id.progressBar);
 		initWebView();
@@ -78,6 +82,7 @@ public class MessageWebViewActivity extends BaseActivity {
 				finish();
 			}
 		});
+
 	}
 
 
@@ -124,6 +129,7 @@ public class MessageWebViewActivity extends BaseActivity {
 		mWebView.getSettings().setLoadWithOverviewMode(true);
 
 		mWebView.getSettings().setUseWideViewPort(false);
+
 		return mWebView;
 	}
 
@@ -138,11 +144,16 @@ public class MessageWebViewActivity extends BaseActivity {
 		
 		 @Override  
          public void onReceivedTitle(WebView view, String title) {  
-             super.onReceivedTitle(view, title);  
-             MessageWebViewActivity.this.title = title;
-			 TextView tt = (TextView) findViewById(R.id.title);
-			 tt.setText(title);
-//             setTitleName("" +title);
+             super.onReceivedTitle(view, title);
+			 if (MessageWebViewActivity.this.title ==null){
+				 MessageWebViewActivity.this.title = title;
+				 TextView tt = (TextView) findViewById(R.id.title);
+				 tt.setText(title);
+				 //             setTitleName("" +title);
+			 }else {
+				 TextView tt = (TextView) findViewById(R.id.title);
+				 tt.setText(MessageWebViewActivity.this.title);
+			 }
          }
 	};
 	
