@@ -49,7 +49,7 @@ ext {
 //            "PhotoView"                    : "com.github.chrisbanes:PhotoView:2.0.0",
 //            "ReadMoreTextView"             : "kr.co.prnd:readmore-textview:1.0.0",
 //            "LiveDataBus"                  : "com.github.fmtjava:LiveDataBus:1.0.1",
-            "jiaozivideoplayer"            : "cn.jzvd:jiaozivideoplayer:7.5.0",
+            "jiaozivideoplayer"            : "cn.jzvd:jiaozivideoplayer:7.7.0",
 //            "arouter-api"                  : "com.alibaba:arouter-api:1.5.0",
 //            "arouter-compiler"             : "com.alibaba:arouter-compiler:1.2.2",
 //            "hilt-android"                 : "com.google.dagger:hilt-android:2.38.1",

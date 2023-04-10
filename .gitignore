@@ -18,3 +18,4 @@ bearBuild.jks
 .idea/
 /nineLibrary/build/
 *.apk
+bakApk/

@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.pm.ApplicationInfo
 import android.os.Process
 import android.util.Log
+import androidx.multidex.MultiDex
 import cn.jpush.android.api.JPushInterface
 import cn.jpush.im.android.api.JMessageClient
 import com.didichuxing.doraemonkit.DoraemonKit
@@ -18,6 +19,9 @@ import com.ggb.nirvanaclub.receiver.NotificationClickEventReceiver
 import com.ggb.nirvanaclub.utils.CrashHandler
 import com.ggb.nirvanaclub.utils.SharedPreferencesUtil
 import com.ggb.nirvanaclub.utils.rxutils.RxTool
+import com.tencent.bugly.Bugly
+import com.tencent.bugly.beta.Beta
+import com.tencent.bugly.crashreport.CrashReport
 import com.tencent.mmkv.MMKV
 import com.tencent.smtt.export.external.TbsCoreSettings
 import com.tencent.smtt.sdk.QbSdk
@@ -38,6 +42,7 @@ class App: BaseApplication(){
         MMKV.initialize(context)
         mTencent = Tencent.createInstance(C.QQ_LOGIN_APPLY_ID, context, "com.tencent.login.fileprovider")
 
+        //暂时注掉，启用Bugly
         CrashHandler.getInstance().init(context)
         RxTool.init(this)
         com.tamsiree.rxkit.RxTool.init(this)
@@ -46,6 +51,9 @@ class App: BaseApplication(){
 
         //腾讯X5接入WebRtc暂时闪退无解
 //        initTBS()
+        // 这里实现SDK初始化，appId替换成你的在Bugly平台申请的appId
+        // 调试时，将第三个参数改为true,可以显示Bugly的日志
+        Bugly.init(this, "64360a1177", true)
     }
 
     companion object {
@@ -77,10 +85,7 @@ class App: BaseApplication(){
         //注册Notification点击的接收器
         val notificationClickEventReceiver = NotificationClickEventReceiver(this)
 
-
         LogConfigData.ISDEBUG = isApkInDebug()
-
-
     }
 
     private fun initTBS(){
@@ -144,6 +149,15 @@ class App: BaseApplication(){
         } catch (e: Exception) {
             false
         }
+    }
+
+    override fun attachBaseContext(base: Context?) {
+        super.attachBaseContext(base)
+        // you must install multiDex whatever tinker is installed!
+        MultiDex.install(base)
+
+        // 安装tinker
+        Beta.installTinker()
     }
 
 }

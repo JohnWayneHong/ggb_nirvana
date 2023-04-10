@@ -68,7 +68,7 @@ class SubscriptionFragment :BaseFragment(){
                 activity?.startActivity<CaptchaActivity>()
             }
             if (mAdapter?.data?.get(position)?.name=="牛蛙呐视频"){
-                activity?.startActivity<VideoActivity>()
+//                activity?.startActivity<VideoActivity>()
             }
         }
 

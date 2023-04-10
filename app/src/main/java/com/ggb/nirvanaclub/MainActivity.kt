@@ -48,6 +48,7 @@ import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
 import com.tamsiree.rxkit.view.RxToast
+import com.tencent.bugly.crashreport.CrashReport
 import com.tencent.connect.common.Constants
 import com.tencent.tauth.Tencent
 import com.yanzhenjie.permission.AndPermission

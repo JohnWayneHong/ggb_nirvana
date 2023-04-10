@@ -69,23 +69,35 @@ class VideoActivity : BaseActivity() , GGBContract.View{
     }
 
     private fun addNormalVideoView() {
-        mSurfaceContainer.viewTreeObserver
-            .addOnPreDrawListener(object : ViewTreeObserver.OnPreDrawListener {
-                override fun onPreDraw(): Boolean {
-                    mSurfaceContainer.viewTreeObserver.removeOnPreDrawListener(this)
-                    val jzvdStd = JzvdStd(this@VideoActivity).apply {
-                        setUp(playUrl,playTitle)
-                        startVideo()
-                    }
-                    mSurfaceContainer.addView(
-                        jzvdStd, FrameLayout.LayoutParams(
-                            ViewGroup.LayoutParams.MATCH_PARENT,
-                            ViewGroup.LayoutParams.MATCH_PARENT
-                        )
-                    )
-                    return true
-                }
-            })
+
+        val jzvdStd = JzvdStd(this@VideoActivity).apply {
+            setUp(playUrl,playTitle)
+            startVideo()
+        }
+        mSurfaceContainer.addView(
+            jzvdStd, FrameLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT
+            )
+        )
+
+//        mSurfaceContainer.viewTreeObserver
+//            .addOnPreDrawListener(object : ViewTreeObserver.OnPreDrawListener {
+//                override fun onPreDraw(): Boolean {
+//                    mSurfaceContainer.viewTreeObserver.removeOnPreDrawListener(this)
+//                    val jzvdStd = JzvdStd(this@VideoActivity).apply {
+//                        setUp(playUrl,playTitle)
+//                        startVideo()
+//                    }
+//                    mSurfaceContainer.addView(
+//                        jzvdStd, FrameLayout.LayoutParams(
+//                            ViewGroup.LayoutParams.MATCH_PARENT,
+//                            ViewGroup.LayoutParams.MATCH_PARENT
+//                        )
+//                    )
+//                    return true
+//                }
+//            })
     }
 
     @SuppressLint("SetTextI18n")

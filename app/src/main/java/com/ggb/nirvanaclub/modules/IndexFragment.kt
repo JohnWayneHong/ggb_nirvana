@@ -1,6 +1,5 @@
 package com.ggb.nirvanaclub.modules
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -16,14 +15,12 @@ import com.ggb.nirvanaclub.constans.C
 import com.ggb.nirvanaclub.event.TagChangeEvent
 import com.ggb.nirvanaclub.modules.article.ArticleInfoFragment
 import com.ggb.nirvanaclub.modules.article.SearchArticleActivity
-import com.ggb.nirvanaclub.modules.login.AvatarActivity
 import com.ggb.nirvanaclub.modules.login.LoginActivity
-import com.ggb.nirvanaclub.modules.message.MessageChatActivity
 import com.ggb.nirvanaclub.modules.tag.IndexTagSettingActivity
-import com.ggb.nirvanaclub.modules.user.NirvanaEarnActivity
 import com.ggb.nirvanaclub.net.GGBContract
 import com.ggb.nirvanaclub.net.GGBPresent
 import com.google.gson.JsonArray
+import com.tencent.tinker.lib.tinker.TinkerInstaller
 import kotlinx.android.synthetic.main.fragment_index.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -79,6 +76,9 @@ class IndexFragment :BaseFragment(),GGBContract.View{
             activity?.startActivity<SearchArticleActivity>()
         }
         iv_test.setOnClickListener {
+            context?.toast("我是更新过后的补丁包哦!!!")
+//            TinkerInstaller.onReceiveUpgradePatch(getApplicationContext(), patch)
+//            CrashReport.testJavaCrash()
 //            activity?.startActivity<AvatarActivity>()
         }
 

@@ -5,6 +5,9 @@ plugins {
     id 'com.didi.dokit'
 }
 
+// 依赖插件脚本
+apply from: 'tinker-support.gradle'
+
 static def releaseTime() {
     return new Date().format("yyyyMMdd", TimeZone.getTimeZone("UTC"))
 }
@@ -61,6 +64,9 @@ android {
                 JPUSH_APPKEY : "b0935a121eb9326d4cafaad3", //JPush 上注册的包名对应的 Appkey.
                 JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
         ]
+
+        //开启拆分包
+        multiDexEnabled true
     }
 
     buildTypes {
@@ -263,7 +269,7 @@ dependencies {
     debugImplementation rootProject.ext.dependencies["doraemonkit-leakcanary"]
 
     //高度自定义的安卓视频框架
-    implementation 'cn.jzvd:jiaozivideoplayer:7.5.0'
+    implementation 'cn.jzvd:jiaozivideoplayer:7.7.0'
 
     //ImageView预览，用于聊天消息发送图片的预览
     implementation 'com.github.bumptech.glide:glide:4.11.0'
@@ -282,4 +288,15 @@ dependencies {
 
     //腾讯X5
     api 'com.tencent.tbs.tbssdk:sdk:43903'
+
+    //腾讯Bugly
+    implementation "com.android.support:multidex:2.0.1" // 多dex配置
+    //注释掉原有bugly的仓库
+    //compile 'com.tencent.bugly:crashreport:latest.release'//其中latest.release指代最新版本号，也可以指定明确的版本号，例如1.3.4
+    // 远程仓库集成方式（推荐）
+    implementation 'com.tencent.bugly:crashreport_upgrade:1.5.23'
+    //1. 指定tinker依赖版本（注：应用升级1.3.5版本起，不再内置tinker）
+    //2.为了便于解答问题，这里的tinker版本建议跟随此处demo设置，如果微信更新了tinker版本，bugly会定期同步更新
+    implementation 'com.tencent.tinker:tinker-android-lib:1.9.14.16'
+
 }
