@@ -160,7 +160,12 @@ class MeFragment :BaseFragment(){
                         activity?.startActivity<DevelopSettingActivity>()
                     }
                     if (aAdapter?.data?.get(position)?.title == "浏览历史"){
-                        activity?.startActivity<HistoryArticleActivity>()
+                        if(C.USER_ID.isEmpty()){
+                            RxToast.error("您还尚未登录，请登录后查看~")
+                            activity?.startActivity<LoginActivity>()
+                        }else{
+                            activity?.startActivity<HistoryArticleActivity>()
+                        }
                     }
                     if (position==7){
                         val cacheSize = CacheDataUtil.getTotalCacheSize(requireContext())
