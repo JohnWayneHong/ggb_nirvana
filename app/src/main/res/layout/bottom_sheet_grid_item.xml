@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.ggb.nirvanaclub.view.bottomsheet.BottomSheetItemView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/dimen_85"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingTop="0dp"
+    android:paddingBottom="@dimen/dimen_8">
+
+    <RelativeLayout
+        android:layout_width="@dimen/dimen_55"
+        android:layout_height="@dimen/dimen_55"
+        android:layout_marginTop="@dimen/dimen_12"
+        android:layout_marginBottom="@dimen/dimen_10" >
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/grid_item_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:scaleType="centerInside"/>
+
+        <ViewStub
+            android:id="@+id/grid_item_subscript"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout="@layout/bottom_sheet_grid_item_subscript"
+            android:visibility="gone"/>
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/grid_item_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:maxLines="2"
+        android:textSize="@dimen/text_13"
+        android:textColor="@color/text_second_color"/>
+
+</com.ggb.nirvanaclub.view.bottomsheet.BottomSheetItemView>

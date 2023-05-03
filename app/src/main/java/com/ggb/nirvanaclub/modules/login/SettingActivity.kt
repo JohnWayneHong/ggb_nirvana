@@ -14,6 +14,7 @@ import com.ggb.nirvanaclub.bean.SettingBean
 import com.ggb.nirvanaclub.bean.SettingListBean
 import com.ggb.nirvanaclub.constans.C
 import com.ggb.nirvanaclub.event.UserStateChangeEvent
+import com.ggb.nirvanaclub.modules.tag.IndexTagSettingActivity
 import com.ggb.nirvanaclub.modules.user.NirvanaEarnActivity
 import com.ggb.nirvanaclub.net.GGBContract
 import com.ggb.nirvanaclub.net.GGBPresent
@@ -25,6 +26,7 @@ import kotlinx.android.synthetic.main.activity_login_setting.*
 import kotlinx.android.synthetic.main.fragment_me.*
 import org.greenrobot.eventbus.EventBus
 import org.jetbrains.anko.startActivity
+import org.jetbrains.anko.toast
 import per.goweii.anylayer.Layer
 import per.goweii.anylayer.guide.GuideLayer
 
@@ -47,7 +49,12 @@ class SettingActivity : BaseActivity(), GGBContract.View{
 
         initSettingData()
         window?.decorView?.doOnLayout {
-            showGuideDialogIfNeeded()
+            if (!C.IS_LOGIN){
+                return@doOnLayout
+            }else{
+                showGuideDialogIfNeeded()
+            }
+//            showGuideDialogIfNeeded()
         }
     }
 
@@ -114,19 +121,18 @@ class SettingActivity : BaseActivity(), GGBContract.View{
     }
 
     private fun showGuideDialogIfNeeded(){
-        SharedPreferencesUtil.putUserBoolean(this,"KEY_SETTING_GUIDE",true)
-
-        if (!SharedPreferencesUtil.getUserBoolean(this,"KEY_SETTING_GUIDE")){
+        if (SharedPreferencesUtil.getUserBoolean(this,"KEY_SETTING_GUIDE")){
             return
-        }
-        window?.decorView?.post {
-            showGuideBackBtnDialog {
-                SharedPreferencesUtil.putUserBoolean(this,"KEY_SETTING_GUIDE",false)
+        }else{
+            window?.decorView?.post {
+                showGuideBackBtnDialog {
+                    SharedPreferencesUtil.putUserBoolean(this,"KEY_SETTING_GUIDE",true)
 //                showGuideDoubleTapDialog {
 //                    showGuidePreviewImageDialog {
 //                        GuideSPUtils.getInstance().setArticleGuideShown()
 //                    }
 //                }
+                }
             }
         }
     }

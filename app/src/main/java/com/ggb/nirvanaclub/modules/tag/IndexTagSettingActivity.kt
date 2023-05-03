@@ -15,6 +15,7 @@ import com.ggb.nirvanaclub.net.GGBContract
 import com.ggb.nirvanaclub.net.GGBPresent
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.gyf.immersionbar.ImmersionBar
+import com.tamsiree.rxkit.view.RxToast
 import kotlinx.android.synthetic.main.activity_index_tag_setting.*
 import kotlinx.android.synthetic.main.title_public_view.*
 import org.greenrobot.eventbus.EventBus
@@ -55,7 +56,8 @@ class IndexTagSettingActivity : BaseActivity(),GGBContract.View {
 
 
         initTagAdapter()
-        present?.getTagAll()
+//        present?.getTagAll()
+        present?.getTag()
 
     }
 
@@ -84,22 +86,24 @@ class IndexTagSettingActivity : BaseActivity(),GGBContract.View {
             }
         }
         index_tag_setting_edit_btn.setOnClickListener {
-            if (mAdapter?.getEnableChange() == true){
-                mAdapter?.isEnableChange(false)
-                index_tag_setting_edit_btn.text = "编辑"
-                tagList.clear()
-                mAdapter?.data?.forEach {
-                    tagList.add(it)
-                }
-                C.setUserTag(tagList)
-
-                present?.saveUserTags(tagList.joinToString(separator = ",") { it.tagId })
-                EventBus.getDefault().post(TagChangeEvent(1))
-            }else{
-                mAdapter?.isEnableChange(true)
-                index_tag_setting_edit_btn.text = "完成"
-
-            }
+            RxToast.error("系统维护升级中，标签管理无法使用")
+            //暂时关闭标签管理
+//            if (mAdapter?.getEnableChange() == true){
+//                mAdapter?.isEnableChange(false)
+//                index_tag_setting_edit_btn.text = "编辑"
+//                tagList.clear()
+//                mAdapter?.data?.forEach {
+//                    tagList.add(it)
+//                }
+//                C.setUserTag(tagList)
+//
+//                present?.saveUserTags(tagList.joinToString(separator = ",") { it.tagId })
+//                EventBus.getDefault().post(TagChangeEvent(1))
+//            }else{
+//                mAdapter?.isEnableChange(true)
+//                index_tag_setting_edit_btn.text = "完成"
+//
+//            }
         }
     }
 
@@ -110,7 +114,7 @@ class IndexTagSettingActivity : BaseActivity(),GGBContract.View {
     override fun onSuccess(flag: String?, data: Any?) {
         flag?.let {
             when(flag) {
-                GGBContract.GETTAGALL -> {
+                GGBContract.GETTAG -> {
                     data?.let {
                         data as List<IndexTagBean>
                         tagAllList.clear()

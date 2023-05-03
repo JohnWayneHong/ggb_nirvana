@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/dimen_20">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_10"
+                android:text="@string/me_user_get_code_string"
+                android:textColor="@color/black_text_color"
+                android:textSize="@dimen/text_18"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_register_get_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_10"
+                android:layout_marginStart="@dimen/dimen_40"
+                android:text="@string/me_user_login_get_code_string"
+                android:textColor="@color/gray_text_color"
+                android:textSize="@dimen/text_16" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_30"
+            android:layout_gravity="center"
+            android:text="请输入验证码"
+            android:textColor="@color/black_text_color"
+            android:textSize="@dimen/text_18"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.ggb.nirvanaclub.view.PayPwdInputView
+                android:id="@+id/ppi_register_verify_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dimen_10"
+                android:layout_marginTop="@dimen/dimen_20"
+                android:inputType="number"
+                app:quick_divideLineWidth="@dimen/dimen_1"
+                app:quick_isPwd="true"
+                app:quick_maxCount="4"
+                app:quick_psdType="bottomLine"
+                app:quick_rectAngle="0dp" />
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dimen_10"
+            android:layout_marginTop="@dimen/dimen_20">
+
+            <Button
+                android:id="@+id/btn_register_third_pre"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_40"
+                android:background="@drawable/user_login_btn"
+                android:text="@string/previous"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_18" />
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

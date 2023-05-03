@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dimen_55"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:paddingStart="@dimen/dimen_12"
+    android:paddingEnd="@dimen/dimen_12">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/bottom_dialog_list_item_img"
+        android:layout_width="@dimen/dimen_22"
+        android:layout_height="@dimen/dimen_22"
+        android:layout_marginEnd="@dimen/dimen_12"
+        android:contentDescription="Item icon"
+        android:scaleType="centerInside"/>
+
+    <TextView
+        android:id="@+id/bottom_dialog_list_item_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="middle"
+        android:singleLine="true"
+        android:textSize="@dimen/text_13"
+        android:textColor="@color/text_second_color"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/bottom_dialog_list_item_point"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="Tips dot"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="@dimen/dimen_4"
+        android:visibility="gone"/>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"/>
+
+    <ViewStub
+        android:id="@+id/bottom_dialog_list_item_mark_view_stub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout="@layout/bottom_sheet_list_item_mark"/>
+</LinearLayout>

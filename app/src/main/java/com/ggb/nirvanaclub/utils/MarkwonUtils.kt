@@ -21,6 +21,7 @@ import io.noties.prism4j.Prism4j
 import io.noties.prism4j.annotations.PrismBundle
 import org.commonmark.node.*
 import com.ggb.nirvanaclub.R
+import com.ggb.nirvanaclub.constans.C
 import com.ggb.nirvanaclub.modules.article.AricleMKEntry
 
 
@@ -30,18 +31,31 @@ object MarkwonUtils {
     fun basicMarkwon(context: Context): Markwon {
         return Markwon.builder(context)
             // 图片加载方式，使用 Glide 加载，还需导入 GlideImagesPlugin 的依赖
+            .usePlugin(GlideImagesPlugin.create(context))
+            .usePlugin(GlideImagesPlugin.create(Glide.with(context)))
             .usePlugin(GlideImagesPlugin.create(object : GlideImagesPlugin.GlideStore {
                 override fun load(drawable: AsyncDrawable): RequestBuilder<Drawable> {
-                    return Glide.with(context)
-                        .load(drawable.destination)
-                        .placeholder(R.drawable.ic_loading_img)
-                        .error(R.drawable.ic_loading_img_fail)
+                    C.localArticleImage.add(drawable.destination)
+                    return Glide.with(context).load(drawable.destination)
                 }
 
                 override fun cancel(target: Target<*>) {
                     Glide.with(context).clear(target)
                 }
+
             }))
+//            .usePlugin(GlideImagesPlugin.create(object : GlideImagesPlugin.GlideStore {
+//                override fun load(drawable: AsyncDrawable): RequestBuilder<Drawable> {
+//                    return Glide.with(context)
+//                        .load(drawable.destination)
+//                        .placeholder(R.drawable.ic_loading_img)
+//                        .error(R.drawable.ic_loading_img_fail)
+//                }
+//
+//                override fun cancel(target: Target<*>) {
+//                    Glide.with(context).clear(target)
+//                }
+//            }))
             // 代码的高亮
 //            .usePlugin(
 //                SyntaxHighlightPlugin.create(

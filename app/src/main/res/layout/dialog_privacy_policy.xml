@@ -6,7 +6,7 @@
     android:gravity="center_horizontal"
     android:layout_margin="@dimen/dimen_48"
     android:padding="@dimen/dimen_16"
-    android:background="@drawable/bg_black_color_radius_12"
+    android:background="@drawable/bg_white_color_radius_12"
     android:orientation="vertical">
 
     <TextView

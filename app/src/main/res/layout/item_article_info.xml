@@ -19,7 +19,8 @@
             <com.ggb.nirvanaclub.view.RoundCornerImageView
                 android:id="@+id/rci_article_author"
                 android:layout_width="@dimen/dimen_20"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent"
+                android:src="@mipmap/logo"/>
 
             <Space
                 android:layout_width="@dimen/dimen_5"

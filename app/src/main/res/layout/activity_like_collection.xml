@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background"
+    tools:context=".modules.user.UserLikeAndCollectionActivity">
+
+    <include layout="@layout/title_public_view"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_1"
+        android:background="@color/background"/>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tl_like_collection_type"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_40"
+        android:background="@color/white"
+        app:tabIndicatorColor="@color/main_color"
+        app:tabIndicatorHeight="@dimen/dimen_2"
+        app:tabIndicatorFullWidth="false"
+        app:tabSelectedTextColor="@color/title_main_color"
+        app:tabTextColor="@color/title_second_color"
+        app:tabIndicator="@drawable/bg_indicator_line"
+        app:tabMode="fixed"
+        app:tabRippleColor="@android:color/transparent"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_1"
+        android:background="@color/background"/>
+
+    <com.ggb.nirvanaclub.view.NoScrollViewPager
+        android:id="@+id/vp_like_and_collection"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+
+</LinearLayout>

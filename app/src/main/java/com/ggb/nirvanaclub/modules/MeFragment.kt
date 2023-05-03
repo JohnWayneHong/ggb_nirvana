@@ -35,8 +35,10 @@ import com.ggb.nirvanaclub.modules.login.LoginActivity
 import com.ggb.nirvanaclub.modules.login.SettingActivity
 import com.ggb.nirvanaclub.modules.scanner.ActivityScannerCode
 import com.ggb.nirvanaclub.modules.user.HealthyActivity
+import com.ggb.nirvanaclub.modules.user.HistoryArticleActivity
 import com.ggb.nirvanaclub.modules.user.ShopCartActivity
 import com.ggb.nirvanaclub.modules.user.UserInfoActivity
+import com.ggb.nirvanaclub.modules.user.UserLikeAndCollectionActivity
 import com.ggb.nirvanaclub.utils.*
 import com.ggb.nirvanaclub.view.RxToast
 import com.gyf.immersionbar.ImmersionBar
@@ -130,6 +132,15 @@ class MeFragment :BaseFragment(){
 //                "用户已登录".showToast()
             }
         }
+        ll_fragment_me_collection.setOnClickListener {
+            if(C.USER_ID.isEmpty()){
+                RxToast.error("您还尚未登录，请登录后查看~")
+                activity?.startActivity<LoginActivity>()
+            }else{
+                activity?.startActivity<UserLikeAndCollectionActivity>()
+//                "用户已登录".showToast()
+            }
+        }
         aAdapter?.setOnItemChildClickListener { adapter, view, position ->
             when(view.id){
                 R.id.ll_me_option ->{
@@ -147,6 +158,9 @@ class MeFragment :BaseFragment(){
                     }
                     if (aAdapter?.data?.get(position)?.title == "开发者模式"){
                         activity?.startActivity<DevelopSettingActivity>()
+                    }
+                    if (aAdapter?.data?.get(position)?.title == "浏览历史"){
+                        activity?.startActivity<HistoryArticleActivity>()
                     }
                     if (position==7){
                         val cacheSize = CacheDataUtil.getTotalCacheSize(requireContext())

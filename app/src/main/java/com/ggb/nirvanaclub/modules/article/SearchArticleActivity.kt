@@ -23,7 +23,7 @@ class SearchArticleActivity : BaseActivity(),GGBContract.View {
 
     private var mAdapter: SearchArticleListAdapter?= null
 
-    private var pager = 1
+    private var pager = 0
 
     override fun getTitleType() =  PublicTitleData(C.TITLE_CUSTOM)
 
@@ -36,7 +36,7 @@ class SearchArticleActivity : BaseActivity(),GGBContract.View {
     override fun initView() {
         ImmersionBar.with(this).transparentStatusBar().statusBarDarkFont(true).navigationBarColor(R.color.white).titleBar(tb_search_article).init()
 
-        present?.searchArticleByTime(pager,et_search_content.text.toString(),"time")
+        present?.searchArticle(pager,et_search_content.text.toString(),7)
 
         mAdapter = SearchArticleListAdapter()
         rcy_search_article.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false)
@@ -46,24 +46,24 @@ class SearchArticleActivity : BaseActivity(),GGBContract.View {
 
     override fun initEvent() {
         mAdapter?.setOnItemClickListener { adapter, view, position ->
-            startActivity<ArticleActivity>(Pair("articleId",mAdapter?.getItem(position)?.blogId))
+            startActivity<ArticleActivity>(Pair("articleId",mAdapter?.getItem(position)?.id))
         }
         iv_article_col_back.setOnClickListener {
             finish()
         }
         iv_search_article.setOnClickListener {
-            pager = 1
-            present?.searchArticleByTime(pager,et_search_content.text.toString(),"time")
+            pager = 0
+            present?.searchArticle(pager,et_search_content.text.toString(),7)
         }
         tv_search_type_time.setOnClickListener {
-            pager = 1
-            present?.searchArticleByTime(pager,et_search_content.text.toString(),"time")
+            pager = 0
+            present?.searchArticle(pager,et_search_content.text.toString(),7)
             tv_search_type_time.setTextColor(resources.getColor(R.color.main_color))
             tv_search_type_hot.setTextColor(resources.getColor(R.color.text_main_color))
         }
         tv_search_type_hot.setOnClickListener {
-            pager = 1
-            present?.searchArticleByTime(pager,et_search_content.text.toString(),"hot")
+            pager = 0
+            present?.searchArticle(pager,et_search_content.text.toString(),7)
             tv_search_type_hot.setTextColor(resources.getColor(R.color.main_color))
             tv_search_type_time.setTextColor(resources.getColor(R.color.text_main_color))
 
@@ -72,8 +72,8 @@ class SearchArticleActivity : BaseActivity(),GGBContract.View {
             override fun onEditorAction(v: TextView, actionId: Int, event: KeyEvent?): Boolean {
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                     val keyword: String = v.text.toString().trim()
-                    pager = 1
-                    present?.searchArticleByTime(pager,keyword,"time")
+                    pager = 0
+                    present?.searchArticle(pager,keyword,7)
                     return true
                 }
                 return false
@@ -89,14 +89,14 @@ class SearchArticleActivity : BaseActivity(),GGBContract.View {
 
     private fun getSearchList(isRefreshList: Boolean,isShow:Boolean){
         if(isRefreshList){
-            pager = 1
+            pager = 0
             mAdapter?.loadMoreComplete()
             mAdapter?.setEnableLoadMore(false)
         }else{
             pager++
             swipe_refresh_layout.finishRefresh()
         }
-        present?.searchArticleByTime(pager,et_search_content.text.toString(),"time")
+        present?.searchArticle(pager,et_search_content.text.toString(),7)
     }
 
 
@@ -105,18 +105,16 @@ class SearchArticleActivity : BaseActivity(),GGBContract.View {
             when(flag) {
                 GGBContract.SEARCHARTICLEBYTIME -> {
                     data?.let {
-                        data as SearchArticleBean
-                        if (pager<=1){
+                        data as List<SearchArticleBean>
+                        if (pager<=0){
                             swipe_refresh_layout.finishRefresh()
                             mAdapter?.setEnableLoadMore(true)
-                            mAdapter?.setNewData(data.blogs)
+                            mAdapter?.setNewData(data)
                         }else{
-                            if (data.blogs.isNullOrEmpty()){
-                                mAdapter?.loadMoreEnd()
-                            }else if (data.pages==pager||data.pages<pager){
+                            if (data.isNullOrEmpty()){
                                 mAdapter?.loadMoreEnd()
                             }else{
-                                mAdapter?.addData(data.blogs)
+                                mAdapter?.addData(data)
                                 mAdapter?.loadMoreComplete()
                             }
                         }

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/dimen_20">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_10"
+            android:layout_gravity="left"
+            android:text="注册方式"
+            android:textColor="@color/black_text_color"
+            android:textSize="@dimen/text_18"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/ll_register_type"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_30"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/tv_register_type"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:hint="请选择注册方式"
+                android:gravity="fill_vertical"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:textSize="@dimen/text_16"
+                android:textColor="@color/text_main_color"/>
+
+            <ImageView
+                android:id="@+id/iv_register_type"
+                android:layout_width="@dimen/dimen_10"
+                android:layout_height="@dimen/dimen_10"
+                android:src="@mipmap/ic_down_arrow_black"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_user_register_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_10"
+            android:layout_gravity="left"
+            android:text="邮箱地址"
+            android:textColor="@color/black_text_color"
+            android:textSize="@dimen/text_18"
+            android:textStyle="bold" />
+
+        <RelativeLayout
+            android:id="@+id/rl_user_register_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/user_register_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_10"
+                android:background="@drawable/edit_text_bg"
+                android:hint="@string/me_user_login_account_pwd_hint_2_string"
+                android:maxLines="1"
+                android:textColorHighlight="@color/text_highlight_color"
+                android:textColorHint="@color/gray_text_color"
+                android:textCursorDrawable="@drawable/edit_text_cursor"
+                android:textSelectHandle="@drawable/ic_text_select_handle"
+                android:textSelectHandleLeft="@drawable/ic_text_select_handle_left"
+                android:textSelectHandleRight="@drawable/ic_text_select_handle_right"
+                android:textSize="@dimen/text_16" />
+
+        </RelativeLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dimen_10"
+            android:layout_marginTop="@dimen/dimen_20">
+
+            <Button
+                android:id="@+id/btn_register_second_next"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_40"
+                android:background="@drawable/user_login_btn"
+                android:text="@string/next"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_18" />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dimen_10"
+            android:layout_marginTop="@dimen/dimen_20">
+
+            <Button
+                android:id="@+id/btn_register_second_pre"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_40"
+                android:background="@drawable/user_login_btn"
+                android:text="@string/previous"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_18" />
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

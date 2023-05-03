@@ -141,6 +141,11 @@
             android:theme="@style/Theme.Blog"
             tools:ignore="LockedOrientationActivity" />
         <activity
+            android:name=".modules.login.RegisterActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Blog"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
             android:name=".modules.login.AvatarActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Blog"
@@ -152,6 +157,11 @@
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".modules.user.PrivacyProtocolActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Blog"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".modules.user.UserLikeAndCollectionActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Blog"
             tools:ignore="LockedOrientationActivity" />
@@ -265,6 +275,12 @@
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".modules.community.CommunityWebContentActivity"
+            android:screenOrientation="portrait"
+            android:requestLegacyExternalStorage="true"
+            android:theme="@style/Theme.Blog"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".modules.user.HistoryArticleActivity"
             android:screenOrientation="portrait"
             android:requestLegacyExternalStorage="true"
             android:theme="@style/Theme.Blog"

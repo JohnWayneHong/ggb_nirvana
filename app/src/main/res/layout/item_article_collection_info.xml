@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.daimajia.swipe.SwipeLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/sl_collection"
+    app:drag_edge="right"
+    app:show_mode="lay_down">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="right"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_collection_copy"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="#999999"
+            android:gravity="center"
+            android:paddingLeft="@dimen/dimen_16"
+            android:paddingRight="@dimen/dimen_16"
+            android:text="复制链接"
+            android:textColor="#FFFFFF"
+            android:textSize="@dimen/text_15" />
+
+        <TextView
+            android:id="@+id/tv_collection_open"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="#3CDC86"
+            android:gravity="center"
+            android:paddingLeft="@dimen/dimen_16"
+            android:paddingRight="@dimen/dimen_16"
+            android:text="浏览器打开"
+            android:textColor="#FFFFFF"
+            android:textSize="@dimen/text_15" />
+
+        <TextView
+            android:id="@+id/tv_collection_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@color/main_color"
+            android:gravity="center"
+            android:paddingLeft="@dimen/dimen_16"
+            android:paddingRight="@dimen/dimen_16"
+            android:text="取消收藏"
+            android:textColor="#FFFFFF"
+            android:textSize="@dimen/text_15" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_collection_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/dimen_15"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_20"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_community_like"/>
+
+            <TextView
+                android:id="@+id/tv_article_authorName"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginStart="@dimen/dimen_5"
+                android:gravity="center_vertical"
+                android:textSize="@dimen/text_12"
+                android:textColor="@color/main_color"
+                android:textAllCaps="false"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_article_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_5"
+            android:textAllCaps="false"
+            android:textSize="@dimen/text_17"
+            android:textColor="@color/index_article_info_title"
+            android:maxLines="2"
+            android:ellipsize="end"/>
+
+        <LinearLayout
+            android:id="@+id/ll_article_1_img"
+            android:layout_marginTop="@dimen/dimen_5"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_100">
+
+            <TextView
+                android:id="@+id/tv_article_one_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:textAllCaps="false"
+                android:textSize="@dimen/text_14"
+                android:textColor="@color/index_article_info_content"
+                android:maxLines="3"
+                android:lineSpacingExtra="@dimen/dimen_5"
+                android:ellipsize="end"/>
+
+            <com.ggb.nirvanaclub.view.RoundCornerImageView
+                android:id="@+id/rci_article_one_img"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginStart="@dimen/dimen_10"
+                android:scaleType="centerCrop"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/dimen_10"
+            android:gravity="center_vertical">
+
+            <com.ggb.nirvanaclub.view.RoundCornerImageView
+                android:id="@+id/rci_article_author"
+                android:layout_width="@dimen/dimen_20"
+                android:layout_height="match_parent"
+                android:src="@mipmap/logo"/>
+
+            <!-- 作者名 -->
+            <TextView
+                android:id="@+id/tv_article_authorName_down"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:textAllCaps="false"
+                android:textColor="@color/index_article_info_pop"
+                android:textSize="@dimen/text_11"/>
+
+            <!-- 阅读 -->
+            <TextView
+                android:id="@+id/tv_article_readCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_10"
+                android:gravity="center_vertical"
+                android:textAllCaps="false"
+                android:textColor="@color/index_article_info_pop"
+                android:textSize="@dimen/text_11"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_5"
+                android:gravity="center_vertical"
+                android:text="@string/index_article_info_readcount_string"
+                android:textAllCaps="false"
+                android:textColor="@color/index_article_info_pop"
+                android:textSize="@dimen/text_11"/>
+
+            <!-- 评论 -->
+            <TextView
+                android:id="@+id/tv_article_commentCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_10"
+                android:gravity="center_vertical"
+                android:textAllCaps="false"
+                android:textColor="@color/index_article_info_pop"
+                android:textSize="@dimen/text_11"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_5"
+                android:gravity="center_vertical"
+                android:text="@string/index_article_info_commentcount_string"
+                android:textAllCaps="false"
+                android:textColor="@color/index_article_info_pop"
+                android:textSize="@dimen/text_11"/>
+
+            <!-- 赞 -->
+            <TextView
+                android:id="@+id/tv_article_likeCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_10"
+                android:gravity="center_vertical"
+                android:textAllCaps="false"
+                android:textColor="@color/index_article_info_pop"
+                android:textSize="@dimen/text_11"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_5"
+                android:gravity="center_vertical"
+                android:text="@string/index_article_info_likecount_string"
+                android:textAllCaps="false"
+                android:textColor="@color/index_article_info_pop"
+                android:textSize="@dimen/text_11"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</com.daimajia.swipe.SwipeLayout>

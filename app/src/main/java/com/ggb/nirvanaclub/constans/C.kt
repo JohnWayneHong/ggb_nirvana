@@ -11,6 +11,9 @@ object C {
     var IS_SIGN_REQUEST = false
     var userTag: ArrayList<IndexTagBean> = arrayListOf<IndexTagBean>()
 
+    //用于存放打开的文章的图片地址
+    var localArticleImage: ArrayList<String> = arrayListOf()
+
     //好友申请列表
     var friendApply : ArrayList<ContactNotifyEvent> = arrayListOf<ContactNotifyEvent>()
 
@@ -36,6 +39,7 @@ object C {
     const val JOKES_BASE_ADDRESS = "http://tools.cretinzp.com/jokes/"
     const val PLAY_ANDROID_ADDRESS = "https://www.wanandroid.com/"
     const val OPEN_EYES_ADDRESS = "http://baobab.kaiyanapp.com/api/"
+    const val NIRVANA_WEB_ADDRESS = "https://nirvana1234.xyz/v2/"
 
     const val ANDROID_UPDATE_CONFIG_ADDRESS = "https://nirvana1234.xyz/apk/latest"
     const val ANDROID_UPDATE_TIMES_ADDRESS = "https://f.m.suning.com/api/ct.do"

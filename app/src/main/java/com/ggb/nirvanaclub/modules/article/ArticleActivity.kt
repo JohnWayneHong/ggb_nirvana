@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
-import androidx.core.view.doOnLayout
 import androidx.core.widget.NestedScrollView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ggb.nirvanaclub.R
@@ -19,7 +18,8 @@ import com.ggb.nirvanaclub.net.GGBContract
 import com.ggb.nirvanaclub.net.GGBPresent
 import com.ggb.nirvanaclub.utils.ImageLoaderUtil
 import com.ggb.nirvanaclub.utils.MarkwonUtils
-import com.ggb.nirvanaclub.utils.ScreenUtils
+import com.ggb.nirvanaclub.view.bottomsheet.BottomSheet
+import com.ggb.nirvanaclub.view.dialog.ArticleShareDialog
 import com.tamsiree.rxkit.view.RxToast
 import com.tamsiree.rxui.view.dialog.RxDialogSureCancel
 import com.tamsiree.rxui.view.likeview.RxShineButton
@@ -27,11 +27,11 @@ import kotlinx.android.synthetic.main.activity_article.*
 import org.litepal.LitePal
 import per.goweii.anylayer.Layer
 import per.goweii.anylayer.guide.GuideLayer
-import per.goweii.anylayer.notification.NotificationLayer
 
 class ArticleActivity : BaseActivity() , GGBContract.View{
 
     private var articleId = ""
+    private var authorId = ""
 
     private lateinit var present: GGBPresent
 
@@ -76,25 +76,34 @@ class ArticleActivity : BaseActivity() , GGBContract.View{
     }
 
     private fun initArticle(data: ArticleContentBean) {
+
+        authorId = data.authId
+
         tv_article_title.text = data.title
-        tv_article_authName.text = data.authName
+        tv_article_introduction.text = data.introduction
+        tv_article_authName.text = data.authInfo.nickName
         tv_article_all_Count.text = "阅读 ${data.readCount} 点赞 ${data.likeCount} 评论 ${data.commentCount}"
         tv_article_createTime.text = data.createTime
 
         tv_article_bottom_commentCount.text = data.commentCount.toString()
         tv_article_like_count.text = data.likeCount.toString()
 
-        ImageLoaderUtil().displayHeadImage(this,data.authAvatar,iv_article_avatar)
-        ImageLoaderUtil().displayHeadImage(this,data.authAvatar,iv_article_col_avatar)
-        tv_article_col_auth.text = data.authName
+        ImageLoaderUtil().displayHeadImage(this,data.authInfo.photo,iv_article_avatar)
+        ImageLoaderUtil().displayHeadImage(this,data.authInfo.photo,iv_article_col_avatar)
+        tv_article_col_auth.text = data.authInfo.nickName
 
-        rsb_article_like.setChecked(data.amILike)
+        rsb_article_like.setChecked(data.hasLiked)
         rsb_article_like.setOnCheckStateChangeListener(object :RxShineButton.OnCheckedChangeListener{
             @SuppressLint("SetTextI18n")
             override fun onCheckedChanged(view: View?, checked: Boolean) {
                 if (isLoginCheck()){
-                    present.likeOrCancelArticle(articleId,checked)
+                    //接口文档显示chain暂时传博客ID
+                    val chain = articleId
+
                     if (checked){
+                        //发送点赞请求
+                        present.likeArticle(1,articleId,authorId,chain)
+
                         val count = tv_article_like_count.text.toString().toLong()
 
                         tv_article_like_count.text = (count+1).toString()
@@ -106,6 +115,9 @@ class ArticleActivity : BaseActivity() , GGBContract.View{
                         rxDialog.cancelView.setOnClickListener { rxDialog.cancel() }
                         rxDialog.show()
                     }else{
+                        //发送取消点赞请求
+                        present.dislikeArticle(1,articleId,authorId)
+
                         val count = tv_article_like_count.text.toString().toLong()
                         tv_article_like_count.text = (count-1).toString()
                     }
@@ -114,7 +126,7 @@ class ArticleActivity : BaseActivity() , GGBContract.View{
         })
         rsb_article_like.setOnClickListener {
             if (!isLoginCheck()){
-                rsb_article_like.setChecked(data.amILike)
+                rsb_article_like.setChecked(data.hasLiked)
                 val rxDialog = RxDialogSureCancel(this@ArticleActivity)
                 rxDialog.setContent("你还没有登录，无法进行点赞哦")
                 rxDialog.sureView.setOnClickListener {
@@ -126,7 +138,7 @@ class ArticleActivity : BaseActivity() , GGBContract.View{
             }
         }
         ll_article_share.setOnClickListener {
-
+            showSimpleBottomSheetGrid()
         }
     }
 
@@ -214,6 +226,72 @@ class ArticleActivity : BaseActivity() , GGBContract.View{
 
     }
 
+    private fun showSimpleBottomSheetGrid() {
+        val TAG_SHARE_WECHAT_FRIEND = 0
+        val TAG_SHARE_WECHAT_MOMENT = 1
+        val TAG_SHARE_WEIBO = 2
+        val TAG_SHARE_CHAT = 3
+        val TAG_SHARE_LOCAL = 4
+        val TAG_ADD_LOCAL = 5
+        val builder = BottomSheet.BottomGridSheetBuilder(this)
+        builder
+            .addItem(
+                R.drawable.icon_more_operation_share_friend,
+                "分享到微信",
+                TAG_SHARE_WECHAT_FRIEND,
+                BottomSheet.BottomGridSheetBuilder.FIRST_LINE
+            )
+            .addItem(
+                R.drawable.icon_more_operation_share_moment,
+                "分享到朋友圈",
+                TAG_SHARE_WECHAT_MOMENT,
+                BottomSheet.BottomGridSheetBuilder.FIRST_LINE
+            )
+            .addItem(
+                R.drawable.icon_more_operation_share_weibo,
+                "分享到微博",
+                TAG_SHARE_WEIBO,
+                BottomSheet.BottomGridSheetBuilder.FIRST_LINE
+            )
+            .addItem(
+                R.drawable.icon_more_operation_share_chat,
+                "分享到私信",
+                TAG_SHARE_CHAT,
+                BottomSheet.BottomGridSheetBuilder.FIRST_LINE
+            )
+            .addItem(
+                R.drawable.icon_more_operation_save,
+                "保存到本地",
+                TAG_SHARE_LOCAL,
+                BottomSheet.BottomGridSheetBuilder.SECOND_LINE
+            )
+            .addItem(
+                R.drawable.icon_more_operation_add,
+                "添加到收藏",
+                TAG_ADD_LOCAL,
+                BottomSheet.BottomGridSheetBuilder.SECOND_LINE
+            )
+            .setOnSheetItemClickListener { dialog, itemView ->
+                dialog.dismiss()
+                val tag = itemView.tag as Int
+                when(tag){
+                    5->{
+                        present.addArticleToCollection(articleId)
+                    }
+                    4 ->{
+                        ArticleShareDialog(this,C.localArticleImage,tv_article_title.text.toString(),
+                            tv_article_introduction.text.toString(),"https://nirvana1234.xyz/v2/blog/$articleId",1).show()
+                    }
+                    else ->{
+                        ArticleShareDialog(this,C.localArticleImage,tv_article_title.text.toString(),
+                            tv_article_introduction.text.toString(),"https://nirvana1234.xyz/v2/blog/$articleId",0).show()
+                    }
+                }
+//                RxToast.info("tag:" + tag + ", content:" + itemView.toString())
+            }.build().show()
+    }
+
+
     override fun onSuccess(flag: String?, data: Any?) {
         flag?.let {
             when (flag) {
@@ -230,8 +308,14 @@ class ArticleActivity : BaseActivity() , GGBContract.View{
                     markwonAdapter.setMarkdown(markwon,data.contentMd)
                     markwonAdapter.notifyDataSetChanged()
                 }
-                GGBContract.LIKEORCANCEL -> {
-                    RxToast.info(this@ArticleActivity,"操作成功！", Toast.LENGTH_SHORT, true)?.show()
+                GGBContract.LIKEARTICLE -> {
+                    RxToast.info(this@ArticleActivity,"成功点赞！", Toast.LENGTH_SHORT, true)?.show()
+                }
+                GGBContract.DISLIKEARTICLE -> {
+                    RxToast.info(this@ArticleActivity,"已取消点赞！", Toast.LENGTH_SHORT, true)?.show()
+                }
+                GGBContract.ADDARTICLETOCOLLECTION ->{
+                    RxToast.info(this@ArticleActivity,"收藏成功！", Toast.LENGTH_SHORT, true)?.show()
                 }
                 else -> {
 
@@ -246,5 +330,10 @@ class ArticleActivity : BaseActivity() , GGBContract.View{
 
     override fun onNetError(boolean: Boolean, isRefreshList: Boolean) {
 
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        C.localArticleImage.clear()
     }
 }

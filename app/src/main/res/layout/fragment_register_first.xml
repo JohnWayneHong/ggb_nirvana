@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/dimen_20">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_10"
+            android:layout_gravity="left"
+            android:text="昵称"
+            android:textColor="@color/black_text_color"
+            android:textSize="@dimen/text_18"
+            android:textStyle="bold" />
+
+        <RelativeLayout
+            android:id="@+id/rl_register_account"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.ggb.nirvanaclub.view.ClearEditText
+                android:id="@+id/et_user_register_account"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_10"
+                android:background="@drawable/edit_text_bg"
+                android:hint="@string/me_user_register_name"
+                android:inputType="text"
+                android:maxLines="1"
+                android:textColorHighlight="@color/text_highlight_color"
+                android:textColorHint="@color/gray_text_color"
+                android:textCursorDrawable="@drawable/edit_text_cursor"
+                android:textSelectHandle="@drawable/ic_text_select_handle"
+                android:textSelectHandleLeft="@drawable/ic_text_select_handle_left"
+                android:textSelectHandleRight="@drawable/ic_text_select_handle_right"
+                android:textSize="@dimen/text_16" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_10"
+            android:layout_gravity="left"
+            android:text="密码"
+            android:textColor="@color/black_text_color"
+            android:textSize="@dimen/text_18"
+            android:textStyle="bold" />
+
+        <RelativeLayout
+            android:id="@+id/rl_user_register_pwd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/user_register_pwd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_10"
+                android:background="@drawable/edit_text_bg"
+                android:hint="@string/me_user_login_pwd_hint_string"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:textColorHighlight="@color/text_highlight_color"
+                android:textColorHint="@color/gray_text_color"
+                android:textCursorDrawable="@drawable/edit_text_cursor"
+                android:textSelectHandle="@drawable/ic_text_select_handle"
+                android:textSelectHandleLeft="@drawable/ic_text_select_handle_left"
+                android:textSelectHandleRight="@drawable/ic_text_select_handle_right"
+                android:textSize="@dimen/text_16" />
+
+            <LinearLayout
+                android:id="@+id/ll_old_password_status"
+                android:layout_marginTop="@dimen/dimen_10"
+                android:layout_width="@dimen/dimen_40"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentEnd="true">
+
+                <ImageView
+                    android:id="@+id/iv_old_password_status"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@mipmap/ic_eye_close" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_10"
+            android:layout_gravity="left"
+            android:text="再次确认密码"
+            android:textColor="@color/black_text_color"
+            android:textSize="@dimen/text_18"
+            android:textStyle="bold" />
+
+        <RelativeLayout
+            android:id="@+id/rl_user_register_pwd_check"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/user_register_pwd_check"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_10"
+                android:background="@drawable/edit_text_bg"
+                android:hint="@string/me_user_login_pwd_check_hint_string"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:textColorHighlight="@color/text_highlight_color"
+                android:textColorHint="@color/gray_text_color"
+                android:textCursorDrawable="@drawable/edit_text_cursor"
+                android:textSelectHandle="@drawable/ic_text_select_handle"
+                android:textSelectHandleLeft="@drawable/ic_text_select_handle_left"
+                android:textSelectHandleRight="@drawable/ic_text_select_handle_right"
+                android:textSize="@dimen/text_16" />
+
+            <LinearLayout
+                android:id="@+id/ll_check_password_status"
+                android:layout_marginTop="@dimen/dimen_10"
+                android:layout_width="@dimen/dimen_40"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentEnd="true">
+
+                <ImageView
+                    android:id="@+id/iv_check_password_status"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@mipmap/ic_eye_close" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_40"
+            android:layout_marginHorizontal="@dimen/dimen_10"
+            android:layout_marginTop="@dimen/dimen_20">
+
+            <Button
+                android:id="@+id/btn_user_register_next"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/user_login_btn"
+                android:text="@string/next"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_18" />
+
+            <!--                    <View-->
+            <!--                        android:id="@+id/user_login_btn_shadow"-->
+            <!--                        android:layout_width="match_parent"-->
+            <!--                        android:layout_height="match_parent"-->
+            <!--                        android:background="@color/translucent" />-->
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

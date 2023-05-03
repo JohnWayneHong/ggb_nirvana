@@ -12,11 +12,35 @@ import org.json.JSONObject
 class GGBModel :GGBContract.Model{
 
     override fun getTag(): Observable<HttpResult<List<IndexTagBean>>> {
-        return Api.getDefault().getTag()
+        return Api.getDefault(0,0).getTag()
     }
 
-    override fun sendCode(phone: String): Observable<HttpResult<SimpleUserInfo>> {
-        return Api.getDefault().sendCode(phone)
+    override fun sendCode(account: String,type: String,nickname:String,password: String): Observable<HttpResult<Any>> {
+        val jsonObject = JSONObject()
+        try {
+            jsonObject.put("account", account)
+            jsonObject.put("type", type)
+            jsonObject.put("nickName", nickname)
+            jsonObject.put("password", password)
+        } catch (e: JSONException) {
+            e.printStackTrace()
+        }
+        val json = jsonObject.toString()
+        val body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json)
+        return Api.getDefault(0,0).sendCode(body)
+    }
+
+    override fun verifyCode(account: String,code: String): Observable<HttpResult<Any>> {
+        val jsonObject = JSONObject()
+        try {
+            jsonObject.put("account", account)
+            jsonObject.put("code", code)
+        } catch (e: JSONException) {
+            e.printStackTrace()
+        }
+        val json = jsonObject.toString()
+        val body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json)
+        return Api.getDefault(0,0).verifyCode(body)
     }
 
     override fun login(account:String,password:String): Observable<HttpResult<Any>> {
@@ -57,28 +81,119 @@ class GGBModel :GGBContract.Model{
         return Api.getDefault().getTagAll()
     }
 
-    override fun pageArticleByTag(tagId: String, page: Int, pageSize: Int): Observable<HttpResult<IndexArticleInfoBean>> {
-        return Api.getDefault().pageArticleByTag(tagId,page,pageSize)
+    override fun pageArticleByTag(tagId: String, page: Int, pageSize: Int): Observable<HttpResult<List<IndexArticleInfoBean>>> {
+        return Api.getDefault(0,0).pageArticleByTag(tagId,page,pageSize)
+    }
+
+    override fun pageArticleByLike(page: Int, pageSize: Int): Observable<HttpResult<List<ArticleLikeInfoBean>>> {
+        return Api.getDefault(0,0).pageArticleByLike(page,pageSize)
+    }
+
+    override fun pageArticleByCollection(page: Int, pageSize: Int): Observable<HttpResult<List<ArticleCollectionInfoBean>>> {
+        return Api.getDefault(0,0).pageArticleByCollection(page,pageSize)
     }
 
     override fun getArticle(articleId: String): Observable<HttpResult<ArticleContentBean>> {
-        return Api.getDefault().getArticle(articleId)
+        return Api.getDefault(0,0).getArticle(articleId)
     }
 
     override fun saveUserTags(tagId: String): Observable<HttpResult<Any>> {
         return Api.getDefault().saveUserTags(tagId)
     }
 
-    override fun searchArticleByTime(pager:Int,query:String,other:String): Observable<HttpResult<SearchArticleBean>> {
-        return Api.getDefault(2,1).searchArticleByTime(pager,query,other)
+    override fun searchArticle(pager:Int,query:String,size:Int): Observable<HttpResult<List<SearchArticleBean>>> {
+        return Api.getDefault(0,0).searchArticle(pager,query,size)
     }
 
-    override fun likeOrCancelArticle(articleId: String,amILike:Boolean): Observable<HttpResult<Any>> {
-        return Api.getDefault().likeOrCancel(articleId, mapOf(
-            C.ARTICLE_LIKE_ORDER_KEY to
-                    if (amILike) C.ARTICLE_LIKE_ON
-                    else C.ARTICLE_LIKE_OFF
-        ))
+    override fun likeArticle(type:Int,targetId: String,receiver: String,chain: String): Observable<HttpResult<Any>> {
+        val jsonObject = JSONObject()
+        try {
+            jsonObject.put("type", type)
+            jsonObject.put("targetId", targetId)
+            jsonObject.put("receiver", receiver)
+            jsonObject.put("chain", chain)
+        } catch (e: JSONException) {
+            e.printStackTrace()
+        }
+
+        val json = jsonObject.toString()
+        val body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json)
+        return Api.getDefault(0,0).likeArticle(body)
+    }
+
+    override fun dislikeArticle(type:Int,targetId: String,receiver: String): Observable<HttpResult<Any>> {
+        val jsonObject = JSONObject()
+        try {
+            jsonObject.put("type", type)
+            jsonObject.put("targetId", targetId)
+            jsonObject.put("receiver", receiver)
+        } catch (e: JSONException) {
+            e.printStackTrace()
+        }
+
+        val json = jsonObject.toString()
+        val body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json)
+        return Api.getDefault(0,0).dislikeArticle(body)
+    }
+
+    override fun addArticleToCollection(blogId:String): Observable<HttpResult<Any>> {
+        val jsonObject = JSONObject()
+        try {
+            jsonObject.put("id", blogId)
+        } catch (e: JSONException) {
+            e.printStackTrace()
+        }
+
+        val json = jsonObject.toString()
+        val body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json)
+        return Api.getDefault(0,0).addArticleToCollection(body)
+    }
+
+    override fun deleteArticleToCollection(blogId:String): Observable<HttpResult<Any>> {
+        val jsonObject = JSONObject()
+        try {
+            jsonObject.put("id", blogId)
+        } catch (e: JSONException) {
+            e.printStackTrace()
+        }
+
+        val json = jsonObject.toString()
+        val body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json)
+        return Api.getDefault(0,0).deleteArticleToCollection(body)
+    }
+
+    override fun getArticleHistory(page:Int,size: Int): Observable<HttpResult<List<ArticleHistoryBean>>> {
+        return Api.getDefault(0,0).getArticleHistory(page, size)
+    }
+
+    override fun deleteSingleArticleHistory(blogId:String): Observable<HttpResult<Any>> {
+        val jsonObject = JSONObject()
+        try {
+            jsonObject.put("id", blogId)
+        } catch (e: JSONException) {
+            e.printStackTrace()
+        }
+
+        val json = jsonObject.toString()
+        val body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json)
+        return Api.getDefault(0,0).deleteSingleArticleHistory(body)
+    }
+
+    override fun deleteAllArticleHistory(): Observable<HttpResult<Any>> {
+        return Api.getDefault(0,0).deleteAllArticleHistory()
+    }
+
+    override fun checkAccountIsRegister(account:String): Observable<HttpResult<RegisterCheckBean>> {
+        val jsonObject = JSONObject()
+        try {
+            jsonObject.put("account", account)
+        } catch (e: JSONException) {
+            e.printStackTrace()
+        }
+
+        val json = jsonObject.toString()
+        val body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json)
+        return Api.getDefault(0,0).checkAccountIsRegister(body)
     }
 
     override fun developGetRandomGirl(): Observable<ThirdHttpResult<List<DevelopRandomGirlListBean>>> {

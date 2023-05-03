@@ -7,13 +7,21 @@ import retrofit2.http.*
 
 interface ApiService {
 
-    //获取用户标签
-    @GET("main/tag/user")
+    //注释的均为老版接口地址
+
+    //获取用户标签,已改为获取前20热度标签列表
+//    @GET("main/tag/user")
+    @GET("/v2/api/tag/recommand/list")
     fun getTag():Observable<HttpResult<List<IndexTagBean>>>
 
-    //用户登录发送验证码
-    @POST("sys/phoneCode")
-    fun sendCode(@Body phone : String):Observable<HttpResult<SimpleUserInfo>>
+    //用户注册发送验证码
+//    @POST("sys/phoneCode")
+    @POST("/v2/api/user/register/sendVerify")
+    fun sendCode(@Body body: RequestBody):Observable<HttpResult<Any>>
+
+    //验证验证码
+    @POST("/v2/api/user/register/verifyCode")
+    fun verifyCode(@Body body: RequestBody):Observable<HttpResult<Any>>
 
     //用户登出
     @POST("/v2/api/user/login")
@@ -41,21 +49,69 @@ interface ApiService {
      * @param page 查询第几页
      * @param pageSize 查几条数据
      */
-    @GET("main/article/info/{tagId}/{page}")
-    fun pageArticleByTag(@Path("tagId") tagId: String, @Path("page") page: Int, @Query("pageSize") pageSize: Int): Observable<HttpResult<IndexArticleInfoBean>>
+//    @GET("main/article/info/{tagId}/{page}")
+    @GET("/v2/api/tag/blog/list")
+    fun pageArticleByTag(@Query("tagId") tagId: String, @Query("page") page: Int, @Query("size") pageSize: Int): Observable<HttpResult<List<IndexArticleInfoBean>>>
+
+    /**
+     * 分页查询用户点赞的文章
+     * @param page 查询第几页
+     * @param pageSize 查几条数据
+     */
+    @GET("/v2/api/like/list")
+    fun pageArticleByLike(@Query("page") page: Int, @Query("size") pageSize: Int): Observable<HttpResult<List<ArticleLikeInfoBean>>>
+
+    /**
+     * 分页查询用户收藏的文章
+     * @param page 查询第几页
+     * @param pageSize 查几条数据
+     */
+    @GET("/v2/api/favorite/blog/list")
+    fun pageArticleByCollection(@Query("page") page: Int, @Query("size") pageSize: Int): Observable<HttpResult<List<ArticleCollectionInfoBean>>>
+
 
     //获取文章的内容
-    @GET("main/article/{articleId}")
-    fun getArticle(@Path("articleId") articleId: String): Observable<HttpResult<ArticleContentBean>>
+    //@GET("main/article/{articleId}")
+    @GET("/v2/api/blog/details/{id}")
+    fun getArticle(@Path("id") articleId: String): Observable<HttpResult<ArticleContentBean>>
 
     //获取文章的内容
 //    @GET("main/getBlogByPage/{currentPage}/{query}/{order}")
-    @GET("main/getBlogByPage")
-    fun searchArticleByTime(@Query("currentPage") currentPage: Int,@Query("query") query: String,@Query("order") order: String): Observable<HttpResult<SearchArticleBean>>
+//    @GET("main/getBlogByPage")
+    @GET("/v2/api/blog/list")
+    fun searchArticle(@Query("page") page: Int,@Query("query") query: String,@Query("size") size: Int): Observable<HttpResult<List<SearchArticleBean>>>
 
-    //点赞或取消点赞文章
-    @PUT("main/article/like/{articleId}")
-    fun likeOrCancel(@Path("articleId") articleId: String, @Body order: Map<String, String>): Observable<HttpResult<Any>>
+    //点赞文章
+    @POST("/v2/api/like/add")
+    fun likeArticle(@Body body: RequestBody): Observable<HttpResult<Any>>
+
+    //取消点赞文章
+    @POST("/v2/api/like/reduce")
+    fun dislikeArticle(@Body body: RequestBody): Observable<HttpResult<Any>>
+
+    //收藏文章
+    @POST("/v2/api/favorite/blog/add")
+    fun addArticleToCollection(@Body body: RequestBody): Observable<HttpResult<Any>>
+
+    //取消点赞文章
+    @POST("/v2/api/favorite/blog/cancel")
+    fun deleteArticleToCollection(@Body body: RequestBody): Observable<HttpResult<Any>>
+
+    //获取浏览博客历史
+    @GET("/v2/api/history/blog")
+    fun getArticleHistory(@Query("page") page: Int,@Query("size") size: Int): Observable<HttpResult<List<ArticleHistoryBean>>>
+
+    //取消单个文章的浏览历史
+    @POST("/v2/api/history/blog/del")
+    fun deleteSingleArticleHistory(@Body body: RequestBody): Observable<HttpResult<Any>>
+
+    //取消所有文章的浏览历史
+    @POST("/v2/api/history/blog/delAll")
+    fun deleteAllArticleHistory(): Observable<HttpResult<Any>>
+
+    //验证账户是否被注册
+    @POST("/v2/api/user/register/checkAccount")
+    fun checkAccountIsRegister(@Body body: RequestBody): Observable<HttpResult<RegisterCheckBean>>
 
     //获取随机美女图片
     @GET("image/girl/list/random")
@@ -115,5 +171,4 @@ interface ApiService {
      */
     @GET("v4/video/related")
     fun communityDailyVideoContent(@Query("id") id: Int): Observable<CommunityDailyIssueBean>
-
 }

@@ -357,6 +357,7 @@
                                 </LinearLayout>
 
                                 <LinearLayout
+                                    android:id="@+id/ll_fragment_me_collection"
                                     android:layout_width="0dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
@@ -371,7 +372,7 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="@dimen/dimen_20"
                                         android:layout_marginTop="@dimen/dimen_3"
-                                        android:text="@string/me_like_string"
+                                        android:text="@string/me_like_and_collection"
                                         android:textColor="@color/black_text_color"
                                         android:textSize="@dimen/text_13"
                                         android:gravity="center" />
@@ -380,6 +381,7 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:orientation="horizontal"
+                                        android:visibility="gone"
                                         android:gravity="center">
                                         <TextView
                                             android:layout_width="wrap_content"
@@ -396,7 +398,7 @@
                                             android:layout_height="wrap_content"
                                             android:layout_marginTop="@dimen/dimen_3"
                                             android:paddingBottom="@dimen/dimen_3"
-                                            android:text="@string/me_user_like_count_string"
+                                            android:text="@string/me_user_collection_count"
                                             android:textColor="@color/gray_text_color"
                                             android:textSize="@dimen/text_11"
                                             android:gravity="center" />

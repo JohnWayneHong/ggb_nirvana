@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/dimen_20">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_30"
+            android:layout_gravity="center"
+            android:text="注册成功！快去登录叭！"
+            android:textColor="@color/black_text_color"
+            android:textSize="@dimen/text_18"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_200"
+            android:src="@mipmap/ic_register_success_2"/>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dimen_10"
+            android:layout_marginTop="@dimen/dimen_20">
+
+            <Button
+                android:id="@+id/btn_register_fourth_login"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_40"
+                android:background="@drawable/user_login_btn"
+                android:text="@string/go_login"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_18" />
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

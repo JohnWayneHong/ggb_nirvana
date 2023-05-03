@@ -113,6 +113,17 @@
                     android:textSize="@dimen/text_25"
                     android:textStyle="bold" />
 
+                <TextView
+                    android:id="@+id/tv_article_introduction"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textIsSelectable="true"
+                    android:visibility="gone"
+                    android:text="隐藏布局，无作用，用于取文章的介绍值"
+                    android:textColor="@color/black_text_color"
+                    android:textSize="@dimen/text_25"
+                    android:textStyle="bold" />
+
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

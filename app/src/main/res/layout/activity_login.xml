@@ -272,6 +272,35 @@
 
                 </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/dimen_20"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/user_no_have_count"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_main_color" />
+
+                    <View
+                        android:layout_width="@dimen/dimen_1"
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="@dimen/dimen_10"
+                        android:background="@color/light_gray" />
+
+                    <TextView
+                        android:id="@+id/user_login_register"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/user_register_string"
+                        android:textColor="@color/main_color" />
+
+                </LinearLayout>
+
             </LinearLayout>
 
             <LinearLayout

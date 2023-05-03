@@ -27,14 +27,30 @@ class GGBPresent(baseView: GGBContract.View) :BasePresent<GGBContract.View>(base
             })
     }
 
-    override fun sendCode(phone:String) {
-        model.sendCode(phone)
+    override fun sendCode(account: String,type: String,nickname:String,password: String) {
+        model.sendCode(account,type,nickname,password)
             .compose(RxSchedulersHelper.io_main())
-            .subscribe(object : BaseObserver<SimpleUserInfo>(mContext,true){
-                override fun onSuccess(t: HttpResult<SimpleUserInfo>?) {
+            .subscribe(object : BaseObserver<Any>(mContext,true){
+                override fun onSuccess(t: HttpResult<Any>?) {
                     view.onSuccess(GGBContract.SENDCODE,t?.data)
                 }
-                override fun onCodeError(t: HttpResult<SimpleUserInfo>) {
+                override fun onCodeError(t: HttpResult<Any>) {
+                    view.onFailed(t.message,false)
+                }
+                override fun onFailure(e: Throwable?, isNetWorkError: Boolean) {
+                    view.onNetError(isNetWorkError,false)
+                }
+            })
+    }
+
+    override fun verifyCode(account: String,code: String) {
+        model.verifyCode(account,code)
+            .compose(RxSchedulersHelper.io_main())
+            .subscribe(object : BaseObserver<Any>(mContext,true){
+                override fun onSuccess(t: HttpResult<Any>?) {
+                    view.onSuccess(GGBContract.VERIFYCODE,t?.data)
+                }
+                override fun onCodeError(t: HttpResult<Any>) {
                     view.onFailed(t.message,false)
                 }
                 override fun onFailure(e: Throwable?, isNetWorkError: Boolean) {
@@ -131,12 +147,51 @@ class GGBPresent(baseView: GGBContract.View) :BasePresent<GGBContract.View>(base
     override fun pageArticleByTag(tagId: String, page: Int, pageSize: Int) {
         model.pageArticleByTag(tagId, page, pageSize)
             .compose(RxSchedulersHelper.io_main())
-            .subscribe(object :BaseObserver<IndexArticleInfoBean>(mContext,true){
-                override fun onSuccess(t: HttpResult<IndexArticleInfoBean>?) {
+            .subscribe(object :BaseObserver<List<IndexArticleInfoBean>>(mContext,true){
+                override fun onSuccess(t: HttpResult<List<IndexArticleInfoBean>>?) {
                     view.onSuccess(GGBContract.ARTICLEINFO,t?.data)
                 }
 
-                override fun onCodeError(t: HttpResult<IndexArticleInfoBean>) {
+                override fun onCodeError(t: HttpResult<List<IndexArticleInfoBean>>) {
+                    view.onFailed(t.message,false)
+                }
+
+                override fun onFailure(e: Throwable?, isNetWorkError: Boolean) {
+                    view.onNetError(isNetWorkError,false)
+                }
+            })
+    }
+
+    /**
+     * 点赞的列表
+     */
+    override fun pageArticleByLike(page: Int, pageSize: Int) {
+        model.pageArticleByLike(page, pageSize)
+            .compose(RxSchedulersHelper.io_main())
+            .subscribe(object :BaseObserver<List<ArticleLikeInfoBean>>(mContext,true){
+                override fun onSuccess(t: HttpResult<List<ArticleLikeInfoBean>>?) {
+                    view.onSuccess(GGBContract.ARTICLELIKEINFO,t?.data)
+                }
+
+                override fun onCodeError(t: HttpResult<List<ArticleLikeInfoBean>>) {
+                    view.onFailed(t.message,false)
+                }
+
+                override fun onFailure(e: Throwable?, isNetWorkError: Boolean) {
+                    view.onNetError(isNetWorkError,false)
+                }
+            })
+    }
+
+    override fun pageArticleByCollection(page: Int, pageSize: Int) {
+        model.pageArticleByCollection(page, pageSize)
+            .compose(RxSchedulersHelper.io_main())
+            .subscribe(object :BaseObserver<List<ArticleCollectionInfoBean>>(mContext,true){
+                override fun onSuccess(t: HttpResult<List<ArticleCollectionInfoBean>>?) {
+                    view.onSuccess(GGBContract.ARTICLECOLLECTIONINFO,t?.data)
+                }
+
+                override fun onCodeError(t: HttpResult<List<ArticleCollectionInfoBean>>) {
                     view.onFailed(t.message,false)
                 }
 
@@ -182,15 +237,15 @@ class GGBPresent(baseView: GGBContract.View) :BasePresent<GGBContract.View>(base
             })
     }
 
-    override fun searchArticleByTime(pager:Int,query:String,other:String) {
-        model.searchArticleByTime(pager, query, other)
+    override fun searchArticle(pager:Int,query:String,size:Int) {
+        model.searchArticle(pager, query, size)
             .compose(RxSchedulersHelper.io_main())
-            .subscribe(object :BaseObserver<SearchArticleBean>(mContext,true){
-                override fun onSuccess(t: HttpResult<SearchArticleBean>?) {
+            .subscribe(object :BaseObserver<List<SearchArticleBean>>(mContext,true){
+                override fun onSuccess(t: HttpResult<List<SearchArticleBean>>?) {
                     view.onSuccess(GGBContract.SEARCHARTICLEBYTIME,t?.data)
                 }
 
-                override fun onCodeError(t: HttpResult<SearchArticleBean>) {
+                override fun onCodeError(t: HttpResult<List<SearchArticleBean>>) {
                     view.onFailed(t.message,false)
                 }
 
@@ -200,15 +255,141 @@ class GGBPresent(baseView: GGBContract.View) :BasePresent<GGBContract.View>(base
             })
     }
 
-    override fun likeOrCancelArticle(articleId: String,amILike:Boolean) {
-        model.likeOrCancelArticle(articleId,amILike)
+    override fun likeArticle(type:Int,targetId: String,receiver: String,chain: String) {
+        model.likeArticle(type,targetId,receiver,chain)
             .compose(RxSchedulersHelper.io_main())
             .subscribe(object :BaseObserver<Any>(mContext,true){
                 override fun onSuccess(t: HttpResult<Any>?) {
-                    view.onSuccess(GGBContract.LIKEORCANCEL,t?.data)
+                    view.onSuccess(GGBContract.LIKEARTICLE,t?.data)
                 }
 
                 override fun onCodeError(t: HttpResult<Any>) {
+                    view.onFailed(t.message,false)
+                }
+
+                override fun onFailure(e: Throwable?, isNetWorkError: Boolean) {
+                    view.onNetError(isNetWorkError,false)
+                }
+            })
+    }
+
+    override fun dislikeArticle(type:Int,targetId: String,receiver: String) {
+        model.dislikeArticle(type,targetId,receiver)
+            .compose(RxSchedulersHelper.io_main())
+            .subscribe(object :BaseObserver<Any>(mContext,true){
+                override fun onSuccess(t: HttpResult<Any>?) {
+                    view.onSuccess(GGBContract.DISLIKEARTICLE,t?.data)
+                }
+
+                override fun onCodeError(t: HttpResult<Any>) {
+                    view.onFailed(t.message,false)
+                }
+
+                override fun onFailure(e: Throwable?, isNetWorkError: Boolean) {
+                    view.onNetError(isNetWorkError,false)
+                }
+            })
+    }
+
+    override fun addArticleToCollection(blogId:String) {
+        model.addArticleToCollection(blogId)
+            .compose(RxSchedulersHelper.io_main())
+            .subscribe(object :BaseObserver<Any>(mContext,true){
+                override fun onSuccess(t: HttpResult<Any>?) {
+                    view.onSuccess(GGBContract.ADDARTICLETOCOLLECTION,t?.data)
+                }
+
+                override fun onCodeError(t: HttpResult<Any>) {
+                    view.onFailed(t.message,false)
+                }
+
+                override fun onFailure(e: Throwable?, isNetWorkError: Boolean) {
+                    view.onNetError(isNetWorkError,false)
+                }
+            })
+    }
+
+    override fun deleteArticleToCollection(blogId:String) {
+        model.deleteArticleToCollection(blogId)
+            .compose(RxSchedulersHelper.io_main())
+            .subscribe(object :BaseObserver<Any>(mContext,true){
+                override fun onSuccess(t: HttpResult<Any>?) {
+                    view.onSuccess(GGBContract.DELETEARTICLETOCOLLECTION,t?.data)
+                }
+
+                override fun onCodeError(t: HttpResult<Any>) {
+                    view.onFailed(t.message,false)
+                }
+
+                override fun onFailure(e: Throwable?, isNetWorkError: Boolean) {
+                    view.onNetError(isNetWorkError,false)
+                }
+            })
+    }
+
+    override fun getArticleHistory(page:Int,size:Int) {
+        model.getArticleHistory(page,size)
+            .compose(RxSchedulersHelper.io_main())
+            .subscribe(object :BaseObserver<List<ArticleHistoryBean>>(mContext,true){
+                override fun onSuccess(t: HttpResult<List<ArticleHistoryBean>>?) {
+                    view.onSuccess(GGBContract.ARTICLEHISTORY,t?.data)
+                }
+
+                override fun onCodeError(t: HttpResult<List<ArticleHistoryBean>>) {
+                    view.onFailed(t.message,false)
+                }
+
+                override fun onFailure(e: Throwable?, isNetWorkError: Boolean) {
+                    view.onNetError(isNetWorkError,false)
+                }
+            })
+    }
+
+    override fun deleteSingleArticleHistory(blogId:String) {
+        model.deleteSingleArticleHistory(blogId)
+            .compose(RxSchedulersHelper.io_main())
+            .subscribe(object :BaseObserver<Any>(mContext,true){
+                override fun onSuccess(t: HttpResult<Any>) {
+                    view.onSuccess(GGBContract.DELETESINGLEARTICLEHISTORY,t.data)
+                }
+
+                override fun onCodeError(t: HttpResult<Any>) {
+                    view.onFailed(t.message,false)
+                }
+
+                override fun onFailure(e: Throwable?, isNetWorkError: Boolean) {
+                    view.onNetError(isNetWorkError,false)
+                }
+            })
+    }
+
+    override fun deleteAllArticleHistory() {
+        model.deleteAllArticleHistory()
+            .compose(RxSchedulersHelper.io_main())
+            .subscribe(object :BaseObserver<Any>(mContext,true){
+                override fun onSuccess(t: HttpResult<Any>) {
+                    view.onSuccess(GGBContract.DELETEALLARTICLEHISTORY,t.data)
+                }
+
+                override fun onCodeError(t: HttpResult<Any>) {
+                    view.onFailed(t.message,false)
+                }
+
+                override fun onFailure(e: Throwable?, isNetWorkError: Boolean) {
+                    view.onNetError(isNetWorkError,false)
+                }
+            })
+    }
+
+    override fun checkAccountIsRegister(account: String) {
+        model.checkAccountIsRegister(account)
+            .compose(RxSchedulersHelper.io_main())
+            .subscribe(object :BaseObserver<RegisterCheckBean>(mContext,true){
+                override fun onSuccess(t: HttpResult<RegisterCheckBean>) {
+                    view.onSuccess(GGBContract.CHECKACCOUNTISREGISTER,t.data)
+                }
+
+                override fun onCodeError(t: HttpResult<RegisterCheckBean>) {
                     view.onFailed(t.message,false)
                 }
 

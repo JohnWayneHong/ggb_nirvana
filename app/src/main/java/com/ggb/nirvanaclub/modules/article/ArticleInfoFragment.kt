@@ -31,7 +31,7 @@ class ArticleInfoFragment :BaseFragment(),GGBContract.View{
     private var tagId:String = ""
     private var mAdapter :IndexArticleInfoPagingAdapter?=null
 
-    private var pager = 1
+    private var pager = 0
 
     override fun getLayoutResource() = R.layout.fragment_article_info
 
@@ -42,7 +42,7 @@ class ArticleInfoFragment :BaseFragment(),GGBContract.View{
     @SuppressLint("ResourceType")
     override fun initView() {
         tagId = arguments?.getString("tagId","").toString()
-        Log.e("TAG", "当前标签页的tagId为-------》$tagId: " )
+        Log.e("TAG", "当前标签页的tagId为-------》$tagId " )
         mAdapter = IndexArticleInfoPagingAdapter()
         rcy_article_info_rv.layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
         rcy_article_info_rv.adapter = mAdapter
@@ -59,8 +59,8 @@ class ArticleInfoFragment :BaseFragment(),GGBContract.View{
     private fun initEvent() {
 
         mAdapter?.setOnItemClickListener { adapter, view, position ->
-            Log.e("TAG", "点击了: "+mAdapter?.getItem(position)?.articleId )
-            activity?.startActivity<ArticleActivity>(Pair("articleId",mAdapter?.getItem(position)?.articleId))
+            Log.e("TAG", "点击了: "+mAdapter?.getItem(position)?.id )
+            activity?.startActivity<ArticleActivity>(Pair("articleId",mAdapter?.getItem(position)?.id))
         }
         mAdapter?.setOnLoadMoreListener {
             getNewsList(false)
@@ -105,7 +105,7 @@ class ArticleInfoFragment :BaseFragment(),GGBContract.View{
 
     private fun getNewsList(isRefreshList: Boolean){
         if(isRefreshList){
-            pager = 1
+            pager = 0
             mAdapter?.loadMoreComplete()
             mAdapter?.setEnableLoadMore(false)
         }else{
@@ -120,16 +120,16 @@ class ArticleInfoFragment :BaseFragment(),GGBContract.View{
             when(flag) {
                 GGBContract.ARTICLEINFO -> {
                     data?.let {
-                        data as IndexArticleInfoBean
-                        if (pager<=1){
+                        data as List<IndexArticleInfoBean>
+                        if (pager<=0){
                             swipe_refresh_layout.finishRefresh()
                             mAdapter?.setEnableLoadMore(true)
-                            mAdapter?.setNewData(data.list)
+                            mAdapter?.setNewData(data)
                         }else{
-                            if (data.list.isNullOrEmpty()){
+                            if (data.isNullOrEmpty()){
                                 mAdapter?.loadMoreEnd()
                             }else{
-                                mAdapter?.addData(data.list)
+                                mAdapter?.addData(data)
                                 mAdapter?.loadMoreComplete()
                             }
                         }
@@ -146,7 +146,7 @@ class ArticleInfoFragment :BaseFragment(),GGBContract.View{
     override fun onFailed(string: String?,isRefreshList:Boolean) {
         activity?.toast(string!!)
         if(isRefreshList){
-            if(pager<=1){
+            if(pager<=0){
                 swipe_refresh_layout.finishRefresh()
                 mAdapter?.setEnableLoadMore(true)
             }else{
@@ -157,7 +157,7 @@ class ArticleInfoFragment :BaseFragment(),GGBContract.View{
 
     override fun onNetError(boolean: Boolean,isRefreshList:Boolean) {
         if(isRefreshList){
-            if(pager<=1){
+            if(pager<=0){
                 mAdapter?.data?.clear()
                 mAdapter?.notifyDataSetChanged()
                 swipe_refresh_layout.finishRefresh()

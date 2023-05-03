@@ -207,6 +207,7 @@ dependencies {
     implementation "com.google.android.flexbox:flexbox:$flexbox_version"
     // md 解析
     implementation "io.noties.markwon:core:$markwon_version"
+    implementation "io.noties.markwon:image:$markwon_version"
     implementation "io.noties.markwon:image-glide:$markwon_version"
     implementation "io.noties.markwon:recycler:$markwon_version"
     implementation("io.noties.markwon:syntax-highlight:$markwon_version") {
@@ -298,5 +299,10 @@ dependencies {
     //1. 指定tinker依赖版本（注：应用升级1.3.5版本起，不再内置tinker）
     //2.为了便于解答问题，这里的tinker版本建议跟随此处demo设置，如果微信更新了tinker版本，bugly会定期同步更新
     implementation 'com.tencent.tinker:tinker-android-lib:1.9.14.16'
+
+    //圆角ImageView
+    implementation 'com.makeramen:roundedimageview:2.3.0'
+
+    implementation 'com.daimajia.swipelayout:library:1.2.0@aar'
 
 }

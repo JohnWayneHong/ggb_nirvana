@@ -28,11 +28,11 @@ import com.ggb.nirvanaclub.modules.user.PrivacyProtocolActivity
 import com.ggb.nirvanaclub.net.GGBContract
 import com.ggb.nirvanaclub.net.GGBPresent
 import com.ggb.nirvanaclub.utils.*
-import com.ggb.nirvanaclub.view.RxToast
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.google.gson.reflect.TypeToken
 import com.gyf.immersionbar.ImmersionBar
+import com.tamsiree.rxkit.view.RxToast
 import com.tencent.connect.common.Constants
 import com.tencent.tauth.Tencent
 import kotlinx.android.synthetic.main.activity_login.*
@@ -110,6 +110,8 @@ class LoginActivity : BaseActivity() ,GGBContract.View,TimeCountUtil.OnCountDown
             setMustReadText()
         }
         iv_user_login_qq.setOnClickListener {
+            RxToast.warning("系统维护升级中，暂时无法使用QQ登录")
+            return@setOnClickListener
             if (!isSelectPrivacy){
                 resources.getString(R.string.user_login_mustread_popup_string).showToast()
                 return@setOnClickListener
@@ -151,7 +153,8 @@ class LoginActivity : BaseActivity() ,GGBContract.View,TimeCountUtil.OnCountDown
                     resources.getString(R.string.mobile_error).showToast()
                     return@setOnClickListener
                 }
-                present.sendCode(et_user_login_mobile.text.toString())
+                //老版本发送已失效
+//                present.sendCode(et_user_login_mobile.text.toString())
             }
         }
         user_login_btn.setOnClickListener {
@@ -194,6 +197,15 @@ class LoginActivity : BaseActivity() ,GGBContract.View,TimeCountUtil.OnCountDown
                 return@setOnClickListener
             }
 
+        }
+
+        user_login_problem.setOnClickListener {
+            RxToast.success("我没有问题")
+        }
+
+        user_login_register.setOnClickListener {
+            startActivity<RegisterActivity>()
+            finish()
         }
 
     }

@@ -1,6 +1,8 @@
 package com.ggb.nirvanaclub.modules
 
+import android.os.Build
 import android.os.Bundle
+import android.os.Environment
 import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentPagerAdapter
@@ -20,6 +22,8 @@ import com.ggb.nirvanaclub.modules.tag.IndexTagSettingActivity
 import com.ggb.nirvanaclub.net.GGBContract
 import com.ggb.nirvanaclub.net.GGBPresent
 import com.google.gson.JsonArray
+import com.tamsiree.rxkit.view.RxToast
+import com.tencent.tinker.lib.tinker.Tinker
 import com.tencent.tinker.lib.tinker.TinkerInstaller
 import kotlinx.android.synthetic.main.fragment_index.*
 import org.greenrobot.eventbus.EventBus
@@ -27,6 +31,7 @@ import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
+import java.io.File
 
 class IndexFragment :BaseFragment(),GGBContract.View{
 
@@ -72,12 +77,25 @@ class IndexFragment :BaseFragment(),GGBContract.View{
             }
         }
         ll_index_search.setOnClickListener {
+//            RxToast.success("成功修复Bug！！！恭喜")
             Log.e("TAG", "RegistrationID=============>: "+JPushInterface.getRegistrationID(context) )
             activity?.startActivity<SearchArticleActivity>()
         }
         iv_test.setOnClickListener {
-            context?.toast("我是更新过后的补丁包哦!!!")
-//            TinkerInstaller.onReceiveUpgradePatch(getApplicationContext(), patch)
+            val path =  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                Environment.DIRECTORY_PICTURES + File.separator + "GGBScreen"
+            } else {
+                Environment.getExternalStorageDirectory().path + "/GGBScreen/"
+            }
+
+            val patch: String = path + "patch_signed.apk"
+            if (Tinker.isTinkerInstalled()) {
+
+                TinkerInstaller.onReceiveUpgradePatch(context, patch)
+                context?.toast("补丁加载成功！！！")
+            }else{
+                context?.toast("补丁包更新失败!!!")
+            }
 //            CrashReport.testJavaCrash()
 //            activity?.startActivity<AvatarActivity>()
         }
@@ -92,8 +110,9 @@ class IndexFragment :BaseFragment(),GGBContract.View{
 
     private fun initVariable(){
         tagList.clear()
-        tagList.add(IndexTagBean("-1", "综合", "", 0, JsonArray(),false))
-        tagList.add(IndexTagBean("-2", "最新", "", 0, JsonArray(),false))
+        //新版本暂无内置推荐标签
+//        tagList.add(IndexTagBean("-1", "综合", "", 0, JsonArray(),false))
+//        tagList.add(IndexTagBean("-2", "最新", "", 0, JsonArray(),false))
     }
 
     private fun initTagFragment(){

@@ -37,6 +37,7 @@ class MessageUserInfoActivity : BaseActivity() {
     override fun initView() {
         ImmersionBar.with(this).statusBarDarkFont(true).titleBar(tb_earn_title).init()
 
+        tv_public_title.text = "扫一扫,添加我为好友"
         initAvatar()
         ll_public_back.setOnClickListener {
             finish()

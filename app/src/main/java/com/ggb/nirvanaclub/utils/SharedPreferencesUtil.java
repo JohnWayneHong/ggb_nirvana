@@ -7,6 +7,8 @@ import android.content.SharedPreferences;
 public class SharedPreferencesUtil {
 
     public static final String SP_COMMON_NAME = "sp_common";
+
+    public static final String SP_REGISTER = "sp_register";
     public static final String SP_USER_NAME = "sp_user";
 
     public static void putUserString(Context mContext,String key,String value){
@@ -75,6 +77,18 @@ public class SharedPreferencesUtil {
     public static int getCommonInt(Context mContext,String key){
         SharedPreferences sp = mContext.getSharedPreferences(SP_COMMON_NAME,Context.MODE_PRIVATE);
         return sp.getInt(key,0);
+    }
+
+    public static void putRegisterString(Context mContext,String key,String value){
+        SharedPreferences sp = mContext.getSharedPreferences(SP_REGISTER,Context.MODE_PRIVATE);
+        SharedPreferences.Editor ed = sp.edit();
+        ed.putString(key,value);
+        ed.commit();
+    }
+
+    public static String getRegisterString(Context mContext,String key){
+        SharedPreferences sp = mContext.getSharedPreferences(SP_REGISTER,Context.MODE_PRIVATE);
+        return sp.getString(key,"");
     }
 
 }

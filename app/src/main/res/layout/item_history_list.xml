@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.daimajia.swipe.SwipeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/sl_history"
+    app:drag_edge="right"
+    app:show_mode="lay_down">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_history_copy"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="#999999"
+            android:gravity="center"
+            android:paddingLeft="@dimen/dimen_16"
+            android:paddingRight="@dimen/dimen_16"
+            android:text="复制链接"
+            android:textColor="#FFFFFF"
+            android:textSize="@dimen/text_15" />
+
+        <TextView
+            android:id="@+id/tv_history_open"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="#3CDC86"
+            android:gravity="center"
+            android:paddingLeft="@dimen/dimen_16"
+            android:paddingRight="@dimen/dimen_16"
+            android:text="浏览器打开"
+            android:textColor="#FFFFFF"
+            android:textSize="@dimen/text_15" />
+
+        <TextView
+            android:id="@+id/tv_history_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@color/main_color"
+            android:gravity="center"
+            android:paddingLeft="@dimen/dimen_16"
+            android:paddingRight="@dimen/dimen_16"
+            android:text="删除记录"
+            android:textColor="#FFFFFF"
+            android:textSize="@dimen/text_15" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_history_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dimen_15"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginRight="@dimen/dimen_15">
+
+            <TextView
+                android:id="@+id/tv_article_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:textSize="@dimen/text_15"
+                android:textColor="@color/title_main_color"
+                android:text="好友累计阶段你需要知道的"/>
+
+            <TextView
+                android:id="@+id/tv_article_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_15"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:textSize="@dimen/text_13"
+                android:textColor="@color/title_second_color"
+                android:text="好友累计阶段你需要知道的好友累计阶段你需要知道的好友累计阶段你需要知道的"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</com.daimajia.swipe.SwipeLayout>

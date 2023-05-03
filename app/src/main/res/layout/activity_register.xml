@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background"
+    tools:context=".modules.login.RegisterActivity">
+
+    <include layout="@layout/title_public_view"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_1"
+        android:background="@color/background"/>
+
+    <com.tamsiree.rxui.view.indicator.TStepperIndicator
+        android:id="@+id/stepper_indicator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dimen_10"
+        android:layout_marginTop="@dimen/dimen_30"
+        android:layout_marginRight="@dimen/dimen_10"
+        app:stpi_labels="@array/stepLabels" />
+
+    <com.ggb.nirvanaclub.view.NoScrollViewPager
+        android:id="@+id/vp_register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+</LinearLayout>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".modules.tag.IndexTagSettingActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/tb_history_article"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_50"
+            app:contentInsetLeft="0dp"
+            app:contentInsetStart="0dp"
+            tools:ignore="MissingConstraints">
+
+            <LinearLayout
+                android:id="@+id/rl_history_article"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_48"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/iv_article_col_back"
+                    android:layout_width="@dimen/dimen_40"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/dimen_10"
+                    android:src="@drawable/ic_nirvana_back" />
+
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="阅读历史"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:textSize="@dimen/text_15"/>
+
+                <TextView
+                    android:id="@+id/iv_history_clear"
+                    android:layout_width="@dimen/dimen_40"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/text_13"
+                    android:text="清空"/>
+
+            </LinearLayout>
+
+        </androidx.appcompat.widget.Toolbar>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <com.scwang.smart.refresh.layout.SmartRefreshLayout
+                    android:id="@+id/swipe_refresh_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:srlPrimaryColor="@color/white"
+                    app:srlAccentColor="@color/text_main_color"
+                    app:srlEnablePreviewInEditMode="true"
+                    android:paddingBottom="@dimen/dimen_15">
+
+                    <com.scwang.smart.refresh.header.ClassicsHeader
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:srlAccentColor="@color/text_main_color"
+                        app:srlPrimaryColor="@color/transparent"/>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rcy_history_article"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+
+            </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
