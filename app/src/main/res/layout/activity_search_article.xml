@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".modules.tag.IndexTagSettingActivity">
 
     <LinearLayout
@@ -58,89 +59,186 @@
 
         </androidx.appcompat.widget.Toolbar>
 
-        <LinearLayout
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nsv_search_view"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_30"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="@dimen/dimen_30"
-                android:layout_height="match_parent"
-                android:padding="@dimen/dimen_5"
-                android:src="@drawable/ic_search_fire"/>
-
-            <TextView
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:textColor="@color/text_main_color"
-                android:textSize="@dimen/text_14"
-                android:text="@string/search_article_2"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_50"
-            android:padding="@dimen/dimen_10"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/tv_search_type_time"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:textColor="@color/main_color"
-                android:textSize="@dimen/text_14"
-                android:text="@string/search_article_type"/>
-
-            <TextView
-                android:id="@+id/tv_search_type_hot"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:textColor="@color/text_main_color"
-                android:textSize="@dimen/text_14"
-                android:text="@string/search_article_type_2"/>
-
-            <View
-                android:layout_weight="2"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"/>
-
-        </LinearLayout>
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:overScrollMode="never">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <com.scwang.smart.refresh.layout.SmartRefreshLayout
-                    android:id="@+id/swipe_refresh_layout"
+                <LinearLayout
+                    android:id="@+id/ll_search_history"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:srlPrimaryColor="@color/white"
-                    app:srlAccentColor="@color/text_main_color"
-                    app:srlEnablePreviewInEditMode="true"
-                    android:paddingBottom="@dimen/dimen_15">
+                    android:layout_height="@dimen/dimen_40"
+                    android:padding="@dimen/dimen_10"
+                    android:orientation="horizontal">
 
-                    <com.scwang.smart.refresh.header.ClassicsHeader
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:srlAccentColor="@color/text_main_color"
-                        app:srlPrimaryColor="@color/transparent"/>
+                    <TextView
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:textColor="@color/text_main_color"
+                        android:textSize="@dimen/text_14"
+                        android:textStyle="bold"
+                        android:text="@string/search_history"/>
+
+                    <ImageView
+                        android:id="@+id/iv_search_history_del"
+                        android:layout_width="@dimen/dimen_40"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/picture_icon_black_delete"/>
+
+                    <TextView
+                        android:id="@+id/tv_search_history_del_all"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="@dimen/dimen_10"
+                        android:gravity="center_vertical"
+                        android:textColor="@color/text_main_color"
+                        android:textSize="@dimen/text_14"
+                        android:text="@string/search_history_delete"
+                        android:visibility="gone"/>
+
+                    <TextView
+                        android:id="@+id/tv_search_history_del_ok"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="@dimen/dimen_10"
+                        android:gravity="center_vertical"
+                        android:textColor="@color/text_main_color"
+                        android:textSize="@dimen/text_14"
+                        android:text="@string/index_tag_setting_finish_btn_string"
+                        android:visibility="gone"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_search_history_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
                     <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rcy_search_article"
+                        android:id="@+id/rcy_search_history"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:layout_height="match_parent"
+                        android:overScrollMode="never"/>
 
-                </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_40"
+                    android:padding="@dimen/dimen_10"
+                    android:orientation="horizontal">
+
+                    <com.flyjingfish.gradienttextviewlib.GradientTextView
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="@string/search_article_3"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_14"
+                        app:gradient_angle="0"
+                        app:gradient_endColor="@color/main_color"
+                        app:gradient_startColor="@color/main_color_1" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:src="@mipmap/bear_bunny"/>
+
+                    <TextView
+                        android:id="@+id/tv_search_change"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="@dimen/dimen_10"
+                        android:gravity="center"
+                        android:textColor="@color/text_second_color"
+                        android:textSize="@dimen/text_14"
+                        android:text="@string/search_guess_change"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_guess_search"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rcy_guess_search"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:overScrollMode="never"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimen_40"
+                        android:padding="@dimen/dimen_10"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/dimen_30"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/ic_search_fire"/>
+
+                        <com.flyjingfish.gradienttextviewlib.GradientTextView
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:text="@string/search_article_4"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/text_14"
+                            app:gradient_angle="0"
+                            app:gradient_endColor="@color/search_color"
+                            app:gradient_startColor="@color/search_color_1" />
+
+                    </LinearLayout>
+
+                    <com.scwang.smart.refresh.layout.SmartRefreshLayout
+                        android:id="@+id/swipe_refresh_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:srlPrimaryColor="@color/white"
+                        app:srlAccentColor="@color/text_main_color"
+                        app:srlEnablePreviewInEditMode="true"
+                        android:paddingBottom="@dimen/dimen_15">
+
+                        <com.scwang.smart.refresh.header.ClassicsHeader
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:srlAccentColor="@color/text_main_color"
+                            app:srlPrimaryColor="@color/transparent"/>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rcy_search_article"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:overScrollMode="never"/>
+
+                    </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+
+                </LinearLayout>
 
             </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
 
     </LinearLayout>
 

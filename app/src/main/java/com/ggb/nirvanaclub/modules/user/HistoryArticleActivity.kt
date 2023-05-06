@@ -9,19 +9,15 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ggb.nirvanaclub.R
 import com.ggb.nirvanaclub.adapter.ArticleHistoryListAdapter
-import com.ggb.nirvanaclub.adapter.SearchArticleListAdapter
 import com.ggb.nirvanaclub.base.BaseActivity
 import com.ggb.nirvanaclub.bean.ArticleHistoryBean
-import com.ggb.nirvanaclub.bean.SearchArticleBean
 import com.ggb.nirvanaclub.constans.C
 import com.ggb.nirvanaclub.modules.article.ArticleActivity
-import com.ggb.nirvanaclub.modules.login.LoginActivity
 import com.ggb.nirvanaclub.net.GGBContract
 import com.ggb.nirvanaclub.net.GGBPresent
 import com.ggb.nirvanaclub.utils.CopyUtils
 import com.gyf.immersionbar.ImmersionBar
 import com.tamsiree.rxkit.view.RxToast
-import com.tamsiree.rxui.view.dialog.RxDialog
 import com.tamsiree.rxui.view.dialog.RxDialogSureCancel
 import kotlinx.android.synthetic.main.activity_history_article.*
 import org.jetbrains.anko.startActivity
@@ -77,7 +73,7 @@ class HistoryArticleActivity : BaseActivity(),GGBContract.View {
                     mAdapter?.getItem(position)?.id?.let { present?.deleteSingleArticleHistory(it) }
                 }
                 R.id.ll_history_content->{
-                    RxToast.info(mAdapter?.getItem(position)?.id.toString())
+                    startActivity<ArticleActivity>(Pair("articleId",mAdapter?.getItem(position)?.blog?.id))
                 }
 
             }

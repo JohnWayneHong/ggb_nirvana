@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/rl_search_tag"
+    android:layout_margin="@dimen/dimen_10">
+
+    <Button
+        android:id="@+id/btn_search_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minHeight="0dp"
+        android:minWidth="0dp"
+        android:paddingHorizontal="@dimen/dimen_20"
+        android:paddingVertical="@dimen/dimen_10"
+        android:text="Java"
+        android:textColor="@color/text_main_color"
+        android:textSize="@dimen/text_13"
+        android:textAllCaps="false"
+        style="?android:attr/borderlessButtonStyle"
+        android:background="@drawable/index_tag_setting_item_btn" />
+
+    <ImageView
+        android:id="@+id/iv_search_remove"
+        android:layout_width="@dimen/dimen_13"
+        android:layout_height="@dimen/dimen_13"
+        android:layout_alignEnd="@id/btn_search_item"
+        android:src="@drawable/ic_index_tag_setting_edit_remove"
+        android:visibility="gone" />
+
+</RelativeLayout>

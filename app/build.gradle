@@ -51,7 +51,7 @@ android {
         minSdkVersion 21
 //        targetSdkVersion 28
         targetSdkVersion 30
-        versionCode 36
+        versionCode 37
         versionName "V3.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -304,5 +304,8 @@ dependencies {
     implementation 'com.makeramen:roundedimageview:2.3.0'
 
     implementation 'com.daimajia.swipelayout:library:1.2.0@aar'
+
+    //渐变色的TextView
+    implementation 'com.github.FlyJingFish:GradientTextView:1.1.0'
 
 }

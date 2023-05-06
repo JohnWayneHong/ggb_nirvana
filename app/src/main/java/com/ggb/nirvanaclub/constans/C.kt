@@ -113,4 +113,10 @@ object C {
      * 取消点赞发送请求的 value
      */
     const val ARTICLE_LIKE_OFF = "off"
+
+
+    /**
+     * 搜索历史的浏览历史限制最大的存储数量
+     */
+    const val SEARCH_HISTORY_SIZE = 10
 }

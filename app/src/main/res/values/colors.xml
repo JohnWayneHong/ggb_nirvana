@@ -108,4 +108,8 @@
     <color name="color_E1E3E9">#E1E3E9</color>
     <color name="main_color">#FFEC6F5A</color>
     <color name="main_color_1">#F8B9A6</color>
+
+    <!-- 搜索文字的渐变色   -->
+    <color name="search_color">#5B91F1</color>
+    <color name="search_color_1">#2BED15</color>
 </resources>

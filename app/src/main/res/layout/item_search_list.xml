@@ -2,46 +2,82 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/background"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <LinearLayout
+        android:id="@+id/ll_search_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/dimen_15"
-        android:layout_marginRight="@dimen/dimen_15"
-        android:padding="@dimen/dimen_15"
-        android:background="@color/white">
+        android:orientation="vertical"
+        android:padding="@dimen/dimen_15">
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
+        <TextView
+            android:id="@+id/tv_article_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:textSize="@dimen/text_15"
+            android:textColor="@color/title_main_color"
+            android:text="好友累计阶段你需要知道的"/>
+
+        <TextView
+            android:id="@+id/tv_article_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_15"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:textSize="@dimen/text_13"
+            android:textColor="@color/title_second_color"
+            android:text="好友累计阶段你需要知道的好友累计阶段你需要知道的好友累计阶段你需要知道的"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_search_discover"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:padding="@dimen/dimen_15">
+
+        <ImageView
+            android:id="@+id/iv_search_discover"
+            android:layout_width="@dimen/dimen_20"
+            android:layout_height="@dimen/dimen_20"
+            android:src="@mipmap/point_4"/>
+
+        <TextView
+            android:id="@+id/tv_article_title_discover"
             android:layout_weight="1"
-            android:orientation="vertical"
-            android:layout_marginRight="@dimen/dimen_15">
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_5"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:textSize="@dimen/text_15"
+            android:textColor="@color/title_main_color"
+            android:text="好友累计阶段你需要知道的"/>
 
-            <TextView
-                android:id="@+id/tv_article_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:maxLines="2"
-                android:ellipsize="end"
-                android:textSize="@dimen/text_15"
-                android:textColor="@color/title_main_color"
-                android:text="好友累计阶段你需要知道的"/>
+        <TextView
+            android:id="@+id/tv_article_title_hot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginStart="@dimen/dimen_5"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:textSize="@dimen/text_15"
+            android:textColor="@color/title_main_color"
+            android:text="1110.2w"/>
 
-            <TextView
-                android:id="@+id/tv_article_count"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimen_15"
-                android:maxLines="2"
-                android:ellipsize="end"
-                android:textSize="@dimen/text_13"
-                android:textColor="@color/title_second_color"
-                android:text="好友累计阶段你需要知道的好友累计阶段你需要知道的好友累计阶段你需要知道的"/>
-
-        </LinearLayout>
+        <ImageView
+            android:id="@+id/iv_article_title_status"
+            android:layout_width="@dimen/dimen_20"
+            android:layout_height="@dimen/dimen_20"
+            android:padding="@dimen/dimen_5"
+            android:src="@mipmap/ic_search_up"/>
 
     </LinearLayout>
 

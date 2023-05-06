@@ -30,6 +30,7 @@ import cn.jpush.im.android.api.model.Conversation
 import cn.jpush.im.android.api.model.GroupInfo
 import cn.jpush.im.android.api.model.UserInfo
 import cn.jpush.im.api.BasicCallback
+import com.ggb.nirvanaclub.app.BaseApplication
 import com.ggb.nirvanaclub.base.BaseActivity
 import com.ggb.nirvanaclub.base.BaseFragment
 import com.ggb.nirvanaclub.bean.AppUpdateBean
@@ -515,7 +516,7 @@ class MainActivity: BaseActivity() ,ConfigDownloadUtils.OnConfigDownloadComplete
     }
 
     override fun onConfigComplete(result: AppUpdateBean?) {
-        if(result!=null&&result.data.versionCode.toInt()>0){
+        if(result!=null&&result.data.versionCode.isNotEmpty()&&result.data.versionCode.toInt()>0){
 
             val ud = JsonParser.parseString(result.data.message).asJsonObject
             //初始化更新弹窗，设定Style
@@ -557,8 +558,31 @@ class MainActivity: BaseActivity() ,ConfigDownloadUtils.OnConfigDownloadComplete
                 checkPermission()
             }
             isUpdateChecked = true
+        }else{
+            RxToast.error("网络出差了,请检查网络后重启牛蛙呐")
+            initEmptyNet()
         }
     }
+
+    private fun initEmptyNet(){
+        rl_home_empty.visibility = View.VISIBLE
+        vp_home.visibility = View.GONE
+    }
+
+    private fun cancelEmptyNet(){
+        rl_home_empty.visibility = View.GONE
+        vp_home.visibility = View.VISIBLE
+        initFragment()
+    }
+
+//    override fun onResume() {
+//        super.onResume()
+//        if (NetUtils.isNetConnected(BaseApplication.instance)){
+//            cancelEmptyNet()
+//        }else{
+//            initEmptyNet()
+//        }
+//    }
 
     override fun onDestroy() {
         super.onDestroy()

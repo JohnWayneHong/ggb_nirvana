@@ -97,7 +97,10 @@ class MeFragment :BaseFragment(){
 
     override fun initView() {
         ImmersionBar.with(this).transparentStatusBar().statusBarDarkFont(true).navigationBarColor(R.color.white).titleBar(me_toolbar).init()
-        EventBus.getDefault().register(this)
+
+        if (!EventBus.getDefault().isRegistered(this)){
+            EventBus.getDefault().register(this)
+        }
 
         aAdapter = MeOptionAdapter()
         me_user_options_rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false)
@@ -463,7 +466,9 @@ class MeFragment :BaseFragment(){
 
     override fun onDestroy() {
         super.onDestroy()
-        EventBus.getDefault().unregister(this)
+        if (EventBus.getDefault().isRegistered(this)){
+            EventBus.getDefault().unregister(this)
+        }
     }
 
     companion object {

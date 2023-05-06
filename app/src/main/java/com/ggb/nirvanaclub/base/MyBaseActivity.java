@@ -87,28 +87,28 @@ public abstract class MyBaseActivity extends RxAppCompatActivity {
         }
     }
 
-//    @Override
-//    public boolean dispatchTouchEvent(MotionEvent ev) {
-//        // 拦截ACTION_DOWN事件，判断是否需要隐藏输入法
-//        if (ev.getAction() == MotionEvent.ACTION_DOWN) {
-//            View view = getCurrentFocus();
-//            if (isShouldHideInput(view, ev)) {
-//                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-//                if (imm != null) {
-//                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-//                }
-//            }
-//            return super.dispatchTouchEvent(ev);
-//        }
-//
-//        // 交由DecorView去做Touch事件的分发
-//        if (getWindow().superDispatchTouchEvent(ev)) {
-//            return true;
-//        }
-//
-//        // Activity内没有View对这个Touch事件做处理，那么有Activity来处理
-//        return onTouchEvent(ev);
-//    }
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        // 拦截ACTION_DOWN事件，判断是否需要隐藏输入法
+        if (ev.getAction() == MotionEvent.ACTION_DOWN) {
+            View view = getCurrentFocus();
+            if (isShouldHideInput(view, ev)) {
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                if (imm != null) {
+                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                }
+            }
+            return super.dispatchTouchEvent(ev);
+        }
+
+        // 交由DecorView去做Touch事件的分发
+        if (getWindow().superDispatchTouchEvent(ev)) {
+            return true;
+        }
+
+        // Activity内没有View对这个Touch事件做处理，那么有Activity来处理
+        return onTouchEvent(ev);
+    }
 
     private boolean isShouldHideInput(View view, MotionEvent ev) {
         // 1、判断是否是EditText，如果不是，直接返回false

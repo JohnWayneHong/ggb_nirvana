@@ -52,7 +52,9 @@ class IndexFragment :BaseFragment(),GGBContract.View{
     }
 
     override fun initView() {
-        EventBus.getDefault().register(this)
+        if (!EventBus.getDefault().isRegistered(this)){
+            EventBus.getDefault().register(this)
+        }
         initVariable()
 
         tAdapter = IndexTagAdapter()
@@ -191,6 +193,7 @@ class IndexFragment :BaseFragment(),GGBContract.View{
     }
 
     override fun onNetError(boolean: Boolean, isRefreshList: Boolean) {
+        RxToast.error("网络出差了")
     }
 
     companion object {
@@ -204,7 +207,9 @@ class IndexFragment :BaseFragment(),GGBContract.View{
 
     override fun onDestroy() {
         super.onDestroy()
-        EventBus.getDefault().unregister(this)
+        if (EventBus.getDefault().isRegistered(this)){
+            EventBus.getDefault().unregister(this)
+        }
     }
 
 }

@@ -240,7 +240,7 @@ class GGBPresent(baseView: GGBContract.View) :BasePresent<GGBContract.View>(base
     override fun searchArticle(pager:Int,query:String,size:Int) {
         model.searchArticle(pager, query, size)
             .compose(RxSchedulersHelper.io_main())
-            .subscribe(object :BaseObserver<List<SearchArticleBean>>(mContext,true){
+            .subscribe(object :BaseObserver<List<SearchArticleBean>>(mContext,false){
                 override fun onSuccess(t: HttpResult<List<SearchArticleBean>>?) {
                     view.onSuccess(GGBContract.SEARCHARTICLEBYTIME,t?.data)
                 }

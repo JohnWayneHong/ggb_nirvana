@@ -5,7 +5,10 @@ apply plugin: 'com.tencent.bugly.tinker-support'
  * 形式如.../main/app/bakApk
  */
 //def bakPath = file("${rootDir}/bakApk/")
-def bakPath = file("${buildDir}/bakApk/")
+//放在这便于clean，一起将编译的很多基准包一起删除
+def bakPath = file("${rootDir}/app/build/bakApk/")
+//要发包可以放在外面
+//def bakPath = file("${buildDir}/bakApk/")
 
 /**
  * 此处填写每次构建生成的基准包目录

@@ -100,11 +100,18 @@
     <string name="account_error">"账号格式错误"</string>
     <string name="empty_data">"牛蛙呐暂无该分类数据，等你填充~"</string>
     <string name="empty_data_2">"熊市荣耀，您的账户数据惨遭平仓！"</string>
+    <string name="empty_data_3">"野熊丢失，小熊子努力填充这类数据"</string>
+    <string name="empty_data_4">"网络出错！熊的疑惑"</string>
     <string name="login_toast">"登录解锁更多姿势哟~"</string>
     <string name="search_article">"搜索文章、专题、用户"</string>
     <string name="search_article_2">"搜索趋势"</string>
+    <string name="search_article_3">猜你想搜</string>
+    <string name="search_article_4">搜索发现</string>
     <string name="search_article_type">"按时间"</string>
-    <string name="search_article_type_2">"按热度"</string>
+    <string name="search_article_type_2">按热度</string>
+    <string name="search_history">历史记录</string>
+    <string name="search_history_delete">全部删除</string>
+    <string name="search_guess_change">换一批</string>
 
     <string name="crash_error_occurred_explanation">发生意外错误.\n造成不便深感抱歉</string>
     <string name="crash_error_restart_app">重新启动应用</string>

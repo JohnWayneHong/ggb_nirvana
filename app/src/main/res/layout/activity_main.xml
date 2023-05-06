@@ -13,6 +13,35 @@
         android:layout_height="0dp"
         android:layout_weight="1"/>
 
+    <RelativeLayout
+        android:id="@+id/rl_home_empty"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/iv_home_empty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@mipmap/ic_bear_question_empty"
+            android:layout_centerInParent="true"/>
+
+        <TextView
+            android:id="@+id/tv_empty_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dimen_10"
+            android:layout_alignParentBottom="true"
+            android:singleLine="true"
+            android:gravity="center"
+            android:textColor="@color/main_color"
+            android:textSize="@dimen/text_20"
+            android:textStyle="bold"
+            android:text="@string/empty_data_4"/>
+
+    </RelativeLayout>
+
     <include layout="@layout/home_bottom_tab_button"/>
 
 </LinearLayout>
