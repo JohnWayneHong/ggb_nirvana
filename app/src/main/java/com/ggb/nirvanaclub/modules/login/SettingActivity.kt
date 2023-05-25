@@ -7,6 +7,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.doOnLayout
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.ggb.nirvanaclub.BuildConfig
 import com.ggb.nirvanaclub.R
 import com.ggb.nirvanaclub.adapter.SettingAdapter
 import com.ggb.nirvanaclub.base.BaseActivity
@@ -14,7 +15,6 @@ import com.ggb.nirvanaclub.bean.SettingBean
 import com.ggb.nirvanaclub.bean.SettingListBean
 import com.ggb.nirvanaclub.constans.C
 import com.ggb.nirvanaclub.event.UserStateChangeEvent
-import com.ggb.nirvanaclub.modules.tag.IndexTagSettingActivity
 import com.ggb.nirvanaclub.modules.user.NirvanaEarnActivity
 import com.ggb.nirvanaclub.net.GGBContract
 import com.ggb.nirvanaclub.net.GGBPresent
@@ -23,12 +23,12 @@ import com.ggb.nirvanaclub.utils.SharedPreferencesUtil
 import com.ggb.nirvanaclub.view.RxToast
 import com.gyf.immersionbar.ImmersionBar
 import kotlinx.android.synthetic.main.activity_login_setting.*
-import kotlinx.android.synthetic.main.fragment_me.*
+import kotlinx.android.synthetic.main.fragment_me.me_toolbar
 import org.greenrobot.eventbus.EventBus
 import org.jetbrains.anko.startActivity
-import org.jetbrains.anko.toast
 import per.goweii.anylayer.Layer
 import per.goweii.anylayer.guide.GuideLayer
+import java.io.File
 
 class SettingActivity : BaseActivity(), GGBContract.View{
 
@@ -84,7 +84,6 @@ class SettingActivity : BaseActivity(), GGBContract.View{
             }
         })
     }
-
     private fun initSettingData(){
         val options = mutableListOf(
             SettingBean("消息推送", mutableListOf(

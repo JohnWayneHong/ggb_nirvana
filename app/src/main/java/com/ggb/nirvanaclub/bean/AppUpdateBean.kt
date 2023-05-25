@@ -11,11 +11,12 @@ class AppUpdateBean (
 ): Serializable
 
 class AppUpdateListBean(
-        @SerializedName("versionId")val versionId:String,
+//        @SerializedName("versionId")val versionId:String,
+        @SerializedName("id")val id:String,
         @SerializedName("versionName")val versionName:String,
         @SerializedName("downloadUrl")val downloadUrl:String,
         @SerializedName("publishDate")val publishDate:String,
         @SerializedName("versionCode")val versionCode:String,
-        @SerializedName("isForce")val isForce:Boolean,
+        @SerializedName("isForce")val isForce:String,
         @SerializedName("message")val message:String
 ): Serializable

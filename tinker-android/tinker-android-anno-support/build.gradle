@@ -1,0 +1,16 @@
+apply plugin: 'java-library'
+
+//version rootProject.ext.VERSION_NAME
+//group rootProject.ext.GROUP
+
+version = '1.9.14.16'
+//group rootProject.ext.GROUP
+group = 'com.tencent.tinker'
+
+[compileJava, compileTestJava, javadoc]*.options*.encoding = 'UTF-8'
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+}
+
+//apply from: rootProject.file('gradle/PublishArtifact.gradle')

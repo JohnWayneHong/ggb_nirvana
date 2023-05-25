@@ -240,4 +240,8 @@ class GGBModel :GGBContract.Model{
         return Api.getDefault(5,5).communityDailyVideoContent(videoId)
     }
 
+    override fun getIsHavePatch(versionName: String,versionCode: String): Observable<HttpResult<AppUpdateListBean>> {
+        return Api.getDefault(0,0).getIsHavePatch(versionName,versionCode)
+    }
+
 }

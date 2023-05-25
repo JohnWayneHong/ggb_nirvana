@@ -9,6 +9,8 @@ import com.ggb.nirvanaclub.bean.AppUpdateListBean;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.util.ArrayList;
+
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -33,7 +35,7 @@ public class ConfigDownloadUtils {
         @Override
         protected AppUpdateBean doInBackground(Void... voids) {
             try {
-                AppUpdateListBean configList = new AppUpdateListBean("","","","","",false,"");
+                AppUpdateListBean configList = new AppUpdateListBean("","","","","","0","");
                 AppUpdateBean config = new AppUpdateBean(false,0,"",configList);
                 OkHttpClient client = new OkHttpClient();//创建OkHttpClient对象
                 Request request = new Request.Builder()

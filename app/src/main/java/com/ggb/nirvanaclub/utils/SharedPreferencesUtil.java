@@ -11,6 +11,7 @@ public class SharedPreferencesUtil {
     public static final String SP_REGISTER = "sp_register";
 
     public static final String SP_SEARCH_HISTORY = "sp_search_history";
+    public static final String SP_LAST_TIME_READ = "sp_last_time_read";
     public static final String SP_USER_NAME = "sp_user";
 
     public static void putUserString(Context mContext,String key,String value){
@@ -110,6 +111,18 @@ public class SharedPreferencesUtil {
         SharedPreferences.Editor ed = sp.edit();
         ed.clear();
         ed.commit();
+    }
+
+    public static void putLastTimeReadString(Context mContext,String key,String value){
+        SharedPreferences sp = mContext.getSharedPreferences(SP_LAST_TIME_READ,Context.MODE_PRIVATE);
+        SharedPreferences.Editor ed = sp.edit();
+        ed.putString(key,value);
+        ed.commit();
+    }
+
+    public static String getLastTimeReadString(Context mContext,String key){
+        SharedPreferences sp = mContext.getSharedPreferences(SP_LAST_TIME_READ,Context.MODE_PRIVATE);
+        return sp.getString(key,"");
     }
 
 }

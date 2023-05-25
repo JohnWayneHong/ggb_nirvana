@@ -350,7 +350,6 @@
                 <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
             </intent-filter>
         </service>
-
         <!--        JPush-->
         <activity
             android:name="cn.jpush.android.ui.PopWinActivity"

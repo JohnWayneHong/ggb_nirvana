@@ -59,6 +59,7 @@
                                 android:src="@mipmap/search" />
 
                             <TextView
+                                android:id="@+id/tv_index_search"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:singleLine="true"
@@ -76,6 +77,16 @@
                             android:layout_marginStart="@dimen/dimen_5"
                             android:layout_weight="1"
                             android:src="@mipmap/red_packet" />
+
+                        <ImageView
+                            android:id="@+id/iv_test_2"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="@dimen/dimen_5"
+                            android:layout_weight="1"
+                            android:visibility="gone"
+                            android:src="@mipmap/logo" />
+
 
                     </LinearLayout>
 

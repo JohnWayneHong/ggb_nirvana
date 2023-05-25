@@ -13,15 +13,19 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ggb.nirvanaclub.R
 import com.ggb.nirvanaclub.adapter.IndexArticleInfoPagingAdapter
 import com.ggb.nirvanaclub.base.BaseFragment
+import com.ggb.nirvanaclub.bean.ArticleContentBean
 import com.ggb.nirvanaclub.bean.IndexArticleInfoBean
 import com.ggb.nirvanaclub.net.GGBContract
 import com.ggb.nirvanaclub.net.GGBPresent
+import com.ggb.nirvanaclub.utils.ScreenUtils
 import com.ggb.nirvanaclub.utils.SharedPreferencesUtil
+import com.ggb.nirvanaclub.view.CircleImageView
 import kotlinx.android.synthetic.main.fragment_article_info.*
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 import per.goweii.anylayer.Layer
 import per.goweii.anylayer.guide.GuideLayer
+import per.goweii.anylayer.notification.NotificationLayer
 
 
 class ArticleInfoFragment :BaseFragment(),GGBContract.View{
@@ -57,9 +61,7 @@ class ArticleInfoFragment :BaseFragment(),GGBContract.View{
     }
 
     private fun initEvent() {
-
         mAdapter?.setOnItemClickListener { adapter, view, position ->
-            Log.e("TAG", "点击了: "+mAdapter?.getItem(position)?.id )
             activity?.startActivity<ArticleActivity>(Pair("articleId",mAdapter?.getItem(position)?.id))
         }
         mAdapter?.setOnLoadMoreListener {
@@ -135,6 +137,7 @@ class ArticleInfoFragment :BaseFragment(),GGBContract.View{
                         }
                     }
                 }
+
                 else -> {
 
                 }

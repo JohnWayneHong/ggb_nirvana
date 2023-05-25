@@ -41,7 +41,8 @@ object C {
     const val OPEN_EYES_ADDRESS = "http://baobab.kaiyanapp.com/api/"
     const val NIRVANA_WEB_ADDRESS = "https://nirvana1234.xyz/v2/"
 
-    const val ANDROID_UPDATE_CONFIG_ADDRESS = "https://nirvana1234.xyz/apk/latest"
+//    const val ANDROID_UPDATE_CONFIG_ADDRESS = "https://nirvana1234.xyz/apk/latest"
+    const val ANDROID_UPDATE_CONFIG_ADDRESS = "https://nirvana1234.xyz/v2/api/android/apk/latest"
     const val ANDROID_UPDATE_TIMES_ADDRESS = "https://f.m.suning.com/api/ct.do"
     //const val HX_BASE_ADDRESS = "http://app.suxiang986.com/"
 

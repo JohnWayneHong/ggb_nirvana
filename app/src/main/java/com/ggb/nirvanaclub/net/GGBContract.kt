@@ -40,6 +40,7 @@ interface GGBContract {
         var COMMUNITYDAILYBANNER = "communityDailyBanner"
         var COMMUNITYDAILYVIDEO = "communityDailyVideo"
         var COMMUNITYDAILYVIDEOCONTENT = "communityDailyVideoContent"
+        var GETPATCH = "getPatch"
     }
 
     interface View : BaseView
@@ -77,6 +78,7 @@ interface GGBContract {
         fun communityDailyBanner():Observable<CommunityDailyBean>
         fun communityDailyVideo(nextPage:String):Observable<CommunityDailyBean>
         fun communityDailyVideoContent(videoId: Int):Observable<CommunityDailyIssueBean>
+        fun getIsHavePatch(versionName: String,versionCode: String):Observable<HttpResult<AppUpdateListBean>>
     }
 
     interface Present{
@@ -112,6 +114,7 @@ interface GGBContract {
         fun communityDailyBanner()
         fun communityDailyVideo(nextPage:String)
         fun communityDailyVideoContent(videoId: Int)
+        fun getIsHavePatch(versionName: String,versionCode: String)
 
     }
 }

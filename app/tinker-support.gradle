@@ -4,9 +4,9 @@ apply plugin: 'com.tencent.bugly.tinker-support'
  * 配置打包生成的apk的路径，定位在APP模块下的build/bakApk目录下
  * 形式如.../main/app/bakApk
  */
-//def bakPath = file("${rootDir}/bakApk/")
+def bakPath = file("${rootDir}/bakApk/")
 //放在这便于clean，一起将编译的很多基准包一起删除
-def bakPath = file("${rootDir}/app/build/bakApk/")
+//def bakPath = file("${rootDir}/app/build/bakApk/")
 //要发包可以放在外面
 //def bakPath = file("${buildDir}/bakApk/")
 
@@ -14,7 +14,8 @@ def bakPath = file("${rootDir}/app/build/bakApk/")
  * 此处填写每次构建生成的基准包目录
  * 每次打包都会在上面的bakApk目录下生成一个以当前打包时间命名的文件件，文件件中存放着本次打包生成的apk,mapping.txt,R.txt.
  */
-def baseApkDir = "app-0411-23-30-56"
+//def baseApkDir = "app-0522-13-59-09"
+def baseApkDir = "app-0523-23-13-41"
 
 /**
  * 对于插件各参数的详细解析请参考
@@ -44,12 +45,12 @@ tinkerSupport {
 
 //    baseApk = "${bakPath}/${baseApkDir}/app-release.apk"
 //    baseApk = "${bakPath}/${baseApkDir}/app-debug.apk"
-    baseApk = "${bakPath}/${baseApkDir}/nirvana-V3.0.35-20230411.apk"
+    baseApk = "${bakPath}/${baseApkDir}/nirvana-V3.0.41-20230523.apk"
 
     // 对应tinker插件applyMapping 混淆规则
-//    baseApkProguardMapping = "${bakPath}/${baseApkDir}/app-release-mapping.txt"
+    baseApkProguardMapping = "${bakPath}/${baseApkDir}/app-release-mapping.txt"
 //    baseApkProguardMapping = "${bakPath}/${baseApkDir}/app-debug-mapping.txt"
-    baseApkProguardMapping = "${bakPath}/${baseApkDir}/"
+//    baseApkProguardMapping = "${bakPath}/${baseApkDir}/"
 
     // 对应tinker插件applyResourceMapping 资源id映射
     baseApkResourceMapping = "${bakPath}/${baseApkDir}/app-release-R.txt"
@@ -60,8 +61,8 @@ tinkerSupport {
 //    autoGenerateTinkerId = true
 
     //tinkerId必须保证唯一性，如果两个base包的tinkerid是一样的，并且都联网激活了，那么后续补丁上传到后台的时候会出现匹配错误
-    tinkerId = "base-3.0-patch"
-//    tinkerId = "base-3.0"
+    tinkerId = "base-3.0.41-patch"
+//    tinkerId = "base-3.0.41"
 
     // 构建多渠道补丁时使用
     // buildAllFlavorsDir = "${bakPath}/${baseApkDir}"

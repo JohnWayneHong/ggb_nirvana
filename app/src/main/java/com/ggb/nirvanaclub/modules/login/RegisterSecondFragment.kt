@@ -90,9 +90,7 @@ class RegisterSecondFragment :BaseFragment(),GGBContract.View{
             if (message != ""){
                 RxToast.warning(message)
             }else{
-                if (registerType == 1){
-                    present?.checkAccountIsRegister(user_register_address.text.toString())
-                }
+                present?.checkAccountIsRegister(user_register_address.text.toString())
             }
         }
         btn_register_second_pre.setOnClickListener {

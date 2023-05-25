@@ -1,0 +1,48 @@
+apply plugin: 'com.android.library'
+
+//version rootProject.ext.VERSION_NAME
+//group rootProject.ext.GROUP
+version = '1.9.14.16'
+//group rootProject.ext.GROUP
+group = 'com.tencent.tinker'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion '28.0.3'
+
+    defaultConfig {
+        minSdkVersion 10
+        targetSdkVersion 23
+
+        buildConfigField "String", "TINKER_VERSION", "\"${rootProject.ext.VERSION_NAME}\""
+
+        manifestPlaceholders = [TINKER_VERSION: "${rootProject.ext.VERSION_NAME}"]
+
+        consumerProguardFiles file('../consumer-proguard.txt')
+    }
+
+    lintOptions {
+        disable 'LongLogTag'
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    compileOnly fileTree(dir: 'stubs', include: ['*.jar'])
+    testImplementation 'junit:junit:4.12'
+    implementation project(':tinker-android:tinker-android-anno-support')
+}
+
+task buildTinkerSdk(type: Copy, dependsOn: [build]) {
+    group = "tinker"
+    from("$buildDir/outputs/aar/") {
+        include "${project.getName()}-release.aar"
+    }
+
+    into(rootProject.file("buildSdk/android/"))
+    rename { String fileName ->
+        fileName.replace("release", "${version}")
+    }
+}
+
+//apply from: rootProject.file('gradle/PublishArtifact.gradle')

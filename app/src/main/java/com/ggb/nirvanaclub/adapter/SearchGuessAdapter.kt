@@ -11,6 +11,5 @@ class SearchGuessAdapter:BaseQuickAdapter<IndexTagBean,BaseViewHolder>(R.layout.
     override fun convert(helper: BaseViewHolder?, item: IndexTagBean) {
         helper?.setText(R.id.tv_search_guess_name,item.tagName)
         helper?.getView<TextView>(R.id.tv_search_guess_name)?.setTextColor(DensityUtils.randomColor())
-        helper?.addOnClickListener(R.id.tv_search_guess_name)
     }
 }

@@ -171,4 +171,10 @@ interface ApiService {
      */
     @GET("v4/video/related")
     fun communityDailyVideoContent(@Query("id") id: Int): Observable<CommunityDailyIssueBean>
+
+    /**
+     *获取某个版本最新补丁
+     */
+    @GET("/v2/api/android/patch/latest")
+    fun getIsHavePatch(@Query("versionName") versionName: String,@Query("versionCode") versionCode: String): Observable<HttpResult<AppUpdateListBean>>
 }

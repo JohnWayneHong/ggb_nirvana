@@ -18,6 +18,7 @@ import com.ggb.nirvanaclub.net.GGBContract
 import com.ggb.nirvanaclub.net.GGBPresent
 import com.ggb.nirvanaclub.utils.ImageLoaderUtil
 import com.ggb.nirvanaclub.utils.MarkwonUtils
+import com.ggb.nirvanaclub.utils.SharedPreferencesUtil
 import com.ggb.nirvanaclub.view.bottomsheet.BottomSheet
 import com.ggb.nirvanaclub.view.dialog.ArticleShareDialog
 import com.tamsiree.rxkit.view.RxToast
@@ -335,5 +336,6 @@ class ArticleActivity : BaseActivity() , GGBContract.View{
     override fun onDestroy() {
         super.onDestroy()
         C.localArticleImage.clear()
+        SharedPreferencesUtil.putLastTimeReadString(this,"last_time_read",articleId)
     }
 }

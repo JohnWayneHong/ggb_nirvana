@@ -48,12 +48,21 @@
                     android:textSize="@dimen/text_16"
                     android:hint="@string/search_article"/>
 
-                <ImageView
-                    android:id="@+id/iv_search_article"
+                <TextView
+                    android:id="@+id/tv_search_cancel"
                     android:layout_width="@dimen/dimen_40"
                     android:layout_height="match_parent"
-                    android:padding="@dimen/dimen_13"
-                    android:src="@mipmap/search" />
+                    android:gravity="center"
+                    android:textColor="@color/text_second_color"
+                    android:textSize="@dimen/text_14"
+                    android:text="@string/cancel"/>
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/iv_search_article"-->
+<!--                    android:layout_width="@dimen/dimen_40"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:padding="@dimen/dimen_13"-->
+<!--                    android:src="@mipmap/search" />-->
 
             </LinearLayout>
 

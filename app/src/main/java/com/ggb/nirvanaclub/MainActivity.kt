@@ -10,14 +10,13 @@ import android.graphics.Paint
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
+import android.os.Handler
 import android.provider.Settings
 import android.util.Log
 import android.view.Gravity
 import android.view.View
-import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.FileProvider
 import androidx.core.graphics.drawable.toBitmap
 import androidx.fragment.app.Fragment
@@ -30,7 +29,6 @@ import cn.jpush.im.android.api.model.Conversation
 import cn.jpush.im.android.api.model.GroupInfo
 import cn.jpush.im.android.api.model.UserInfo
 import cn.jpush.im.api.BasicCallback
-import com.ggb.nirvanaclub.app.BaseApplication
 import com.ggb.nirvanaclub.base.BaseActivity
 import com.ggb.nirvanaclub.base.BaseFragment
 import com.ggb.nirvanaclub.bean.AppUpdateBean
@@ -40,30 +38,31 @@ import com.ggb.nirvanaclub.event.StepRefreshEvent
 import com.ggb.nirvanaclub.listener.BaseUiListener
 import com.ggb.nirvanaclub.modules.*
 import com.ggb.nirvanaclub.modules.message.MessageChatActivity
+import com.ggb.nirvanaclub.service.StepCalculationService
 import com.ggb.nirvanaclub.utils.*
 import com.ggb.nirvanaclub.view.CircleImageView
 import com.ggb.nirvanaclub.view.dialog.ApkUpdateDialog
+import com.ggb.nirvanaclub.view.dialog.DownloadProgressDialog
 import com.ggb.nirvanaclub.view.dialog.OpenAuthorityDialog
 import com.ggb.nirvanaclub.view.dialog.PrivacyPolicyDialog
-import com.google.gson.Gson
-import com.google.gson.JsonObject
 import com.google.gson.JsonParser
+import com.king.app.updater.AppUpdater
+import com.king.app.updater.callback.UpdateCallback
 import com.tamsiree.rxkit.view.RxToast
-import com.tencent.bugly.crashreport.CrashReport
 import com.tencent.connect.common.Constants
 import com.tencent.tauth.Tencent
 import com.yanzhenjie.permission.AndPermission
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.home_bottom_tab_button.*
-import okhttp3.OkHttpClient
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
+import org.jetbrains.anko.internals.AnkoInternals.createAnkoContext
 import org.jetbrains.anko.toast
 import per.goweii.anylayer.Layer
 import per.goweii.anylayer.notification.NotificationLayer
 import java.io.File
-import java.util.concurrent.TimeUnit
+
 
 class MainActivity: BaseActivity() ,ConfigDownloadUtils.OnConfigDownloadCompleteListener, APKRefreshDownload.OnDownLoadCompleteListener{
 
@@ -81,6 +80,7 @@ class MainActivity: BaseActivity() ,ConfigDownloadUtils.OnConfigDownloadComplete
     private var authorityDialog : OpenAuthorityDialog? = null
     private var policyDialog : PrivacyPolicyDialog? = null
 
+    private var processDialog: DownloadProgressDialog? = null
     override fun getTitleType() =  PublicTitleData(C.TITLE_CUSTOM)
 
     override fun getLayoutResource() = R.layout.activity_main
@@ -116,6 +116,7 @@ class MainActivity: BaseActivity() ,ConfigDownloadUtils.OnConfigDownloadComplete
         //挪到获取接口后，根据接口的Style设定布局
 //        updateDialog = ApkUpdateDialog(this,309)
         authorityDialog = OpenAuthorityDialog(this)
+        processDialog = DownloadProgressDialog(this)
     }
 
     private fun initBlack(){
@@ -396,12 +397,14 @@ class MainActivity: BaseActivity() ,ConfigDownloadUtils.OnConfigDownloadComplete
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     val haveInstallPermission = packageManager.canRequestPackageInstalls()
                     if(haveInstallPermission){
-                        APKRefreshDownload(this).startDownload(updateUrl,this)
+//                        APKRefreshDownload(this).startDownload(updateUrl,this)
+                        startApkDownload(apkBean)
                     }else{
                         authorityDialog?.showOpenAuthority()
                     }
                 }else{
-                    APKRefreshDownload(this).startDownload(updateUrl,this)
+//                    APKRefreshDownload(this).startDownload(updateUrl,this)
+                    startApkDownload(apkBean)
                 }
             }
             .onDenied { permissions ->
@@ -438,6 +441,49 @@ class MainActivity: BaseActivity() ,ConfigDownloadUtils.OnConfigDownloadComplete
         intent.setDataAndType(data, "application/vnd.android.package-archive")
         startActivity(intent)
         finish()
+    }
+
+    private fun startApkDownload(apkBean: AppUpdateListBean){
+        processDialog?.setCanceledOnTouchOutside(false)
+        val mAppupdater = AppUpdater.Builder(this)
+            .setUrl(apkBean.downloadUrl)
+            .setVersionCode(apkBean.versionCode.toLong())
+            .setFilename("nirvana-${apkBean.versionName}.${apkBean.versionCode}.apk")
+            .setVibrate(true)
+            .setSound(true)
+            .setInstallApk(true)
+            .setSupportCancelDownload(true)
+
+            .build()
+
+        mAppupdater.setUpdateCallback(object : UpdateCallback {
+            override fun onDownloading(isDownloading: Boolean) {
+                processDialog?.show()
+            }
+
+            override fun onStart(url: String?) {
+
+            }
+
+            override fun onProgress(progress: Long, total: Long, isChanged: Boolean) {
+                processDialog?.setCurrentValue(total.toInt(),progress.toInt())
+            }
+
+            override fun onFinish(file: File?) {
+                processDialog?.dismiss()
+                isUpdateComplete = true
+            }
+
+            override fun onError(e: Exception?) {
+                e?.message?.let { RxToast.error(it) }
+                isUpdateComplete = false
+            }
+
+            override fun onCancel() {
+
+            }
+
+        }).start()
     }
 
     fun setNew(isNew: Boolean){
@@ -535,11 +581,10 @@ class MainActivity: BaseActivity() ,ConfigDownloadUtils.OnConfigDownloadComplete
                 }
             }
 
-
             val vn = AppUtils.getVersionName(this)
             val vc = AppUtils.getAppVersionCode(this)
             C.USER_DOWNLOAD_URL = result.data.downloadUrl
-            C.IS_MUST_UPDATE = result.data.isForce
+            C.IS_MUST_UPDATE = result.data.isForce.toInt() == 1
             if (C.IS_MUST_UPDATE){
                 initBlack()
             }
@@ -547,7 +592,7 @@ class MainActivity: BaseActivity() ,ConfigDownloadUtils.OnConfigDownloadComplete
             Log.e("Update", "当前版本-----------》: "+vc)
             Log.e("Update", "当前服务器最新版本-----------》: "+result.data.versionCode)
             if(vc!=0L&&result.data.versionCode.toInt()>vc){
-                isMustUpdate = result.data.isForce == true
+                isMustUpdate = result.data.isForce.toInt() == 1 == true
                 isUpdateComplete = false
                 updateDialog?.showUpdate(result)
                 return

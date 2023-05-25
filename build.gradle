@@ -25,6 +25,10 @@ buildscript {
         classpath "com.tencent.bugly:tinker-support:1.2.3"
     }
 }
+ext{
+    GROUP = 'com.tencent.tinker'
+    VERSION_NAME = '1.9.14.16'
+}
 
 allprojects {
     repositories {

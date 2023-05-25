@@ -2,6 +2,7 @@ package com.ggb.nirvanaclub.modules.article
 
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Handler
 import android.os.Message
 import android.text.Editable
@@ -9,8 +10,10 @@ import android.text.TextUtils
 import android.text.TextWatcher
 import android.util.Log
 import android.view.KeyEvent
+import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import androidx.core.widget.NestedScrollView
 import androidx.recyclerview.widget.GridLayoutManager
@@ -26,12 +29,14 @@ import com.ggb.nirvanaclub.constans.C
 import com.ggb.nirvanaclub.net.GGBContract
 import com.ggb.nirvanaclub.net.GGBPresent
 import com.ggb.nirvanaclub.utils.SharedPreferencesUtil
+import com.ggb.nirvanaclub.view.RxToast
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.gyf.immersionbar.ImmersionBar
 import kotlinx.android.synthetic.main.activity_search_article.*
 import org.jetbrains.anko.startActivity
 import org.json.JSONArray
 import org.json.JSONObject
+import java.util.Random
 
 
 class SearchArticleActivity : BaseActivity(),GGBContract.View {
@@ -116,6 +121,8 @@ class SearchArticleActivity : BaseActivity(),GGBContract.View {
     override fun initEvent() {
         mAdapter?.setOnItemClickListener { adapter, view, position ->
             startActivity<ArticleActivity>(Pair("articleId",mAdapter?.getItem(position)?.id))
+            mAdapter?.getItem(position)?.title?.let { initBaseAddHistory(it) }
+            initSearchHistory()
         }
         hAdapter?.setOnItemChildClickListener { adapter, view, position ->
             when(view.id){
@@ -133,13 +140,20 @@ class SearchArticleActivity : BaseActivity(),GGBContract.View {
                 }
             }
         }
+        gAdapter?.setOnItemClickListener { adapter, view, position ->
+            pager = 0
+            val tagName = gAdapter?.getItem(position)?.tagName
+            if (tagName != null) {
+                present?.searchArticle(pager, tagName,7)
+                initBaseAddHistory(tagName)
+                initSearchHistory()
+            }
+        }
         iv_article_col_back.setOnClickListener {
             finish()
         }
-        iv_search_article.setOnClickListener {
-//            pager = 0
-//            present?.searchArticle(pager,et_search_content.text.toString(),7)
-            getSearchList(true)
+        tv_search_cancel.setOnClickListener {
+            finish()
         }
 
         iv_search_history_del.setOnClickListener {
@@ -169,32 +183,34 @@ class SearchArticleActivity : BaseActivity(),GGBContract.View {
                         pager = 0
                         present?.searchArticle(pager,keyword,7)
 
-                        val json = JSONObject()
-                        json.put("content",keyword)
+                        initBaseAddHistory(keyword)
 
-                        //如果出现一样的，删除后加到第一个历史列表
-                        var isEqual = false
-                        var equalPosition = 0
-                        for (i in 0 until jsonArray.length()){
-                            val item = jsonArray.getJSONObject(i)
-                            val content = item.getString("content")
-                            if (keyword == content){
-                                isEqual = true
-                                equalPosition = i
-                                break
-                            }
-                        }
-                        if (isEqual){
-                            jsonArray.remove(equalPosition)
-                        }else{
-                            if (jsonArray.length() >= C.SEARCH_HISTORY_SIZE){
-                                jsonArray.remove(0)
-                            }
-                        }
-
-                        jsonArray.put(json)
-
-                        SharedPreferencesUtil.putSearchHistoryString(this@SearchArticleActivity,"history_search",jsonArray.toString())
+//                        val json = JSONObject()
+//                        json.put("content",keyword)
+//
+//                        //如果出现一样的，删除后加到第一个历史列表
+//                        var isEqual = false
+//                        var equalPosition = 0
+//                        for (i in 0 until jsonArray.length()){
+//                            val item = jsonArray.getJSONObject(i)
+//                            val content = item.getString("content")
+//                            if (keyword == content){
+//                                isEqual = true
+//                                equalPosition = i
+//                                break
+//                            }
+//                        }
+//                        if (isEqual){
+//                            jsonArray.remove(equalPosition)
+//                        }else{
+//                            if (jsonArray.length() >= C.SEARCH_HISTORY_SIZE){
+//                                jsonArray.remove(0)
+//                            }
+//                        }
+//
+//                        jsonArray.put(json)
+//
+//                        SharedPreferencesUtil.putSearchHistoryString(this@SearchArticleActivity,"history_search",jsonArray.toString())
 
                         initSearchHistory()
                     }else{
@@ -251,6 +267,36 @@ class SearchArticleActivity : BaseActivity(),GGBContract.View {
 
         mAdapter?.initDiscoverOrSearch(if (isInitDiscover) 2 else 1)
         present?.searchArticle(pager,et_search_content.text.toString(),10)
+    }
+
+    private fun initBaseAddHistory(keyword:String){
+        val json = JSONObject()
+        json.put("content",keyword)
+
+        //如果出现一样的，删除后加到第一个历史列表
+        var isEqual = false
+        var equalPosition = 0
+        for (i in 0 until jsonArray.length()){
+            val item = jsonArray.getJSONObject(i)
+            val content = item.getString("content")
+            if (keyword == content){
+                isEqual = true
+                equalPosition = i
+                break
+            }
+        }
+        if (isEqual){
+            jsonArray.remove(equalPosition)
+        }else{
+            if (jsonArray.length() >= C.SEARCH_HISTORY_SIZE){
+                jsonArray.remove(0)
+            }
+        }
+
+        jsonArray.put(json)
+
+        SharedPreferencesUtil.putSearchHistoryString(this@SearchArticleActivity,"history_search",jsonArray.toString())
+
     }
 
     private fun initSearchHistory(){
@@ -315,6 +361,40 @@ class SearchArticleActivity : BaseActivity(),GGBContract.View {
         }
     }
 
+    //拦截ACTION_DOWN,设置隐藏输入法
+    override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
+        // 拦截ACTION_DOWN事件，判断是否需要隐藏输入法
+        if (ev.action == MotionEvent.ACTION_DOWN) {
+            val view = currentFocus
+            if (isShouldHideInput(view, ev)) {
+                val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.hideSoftInputFromWindow(view!!.windowToken, 0)
+            }
+            return super.dispatchTouchEvent(ev)
+        }
+
+        // 交由DecorView去做Touch事件的分发
+        return if (window.superDispatchTouchEvent(ev)) {
+            true
+        } else onTouchEvent(ev)
+
+        // Activity内没有View对这个Touch事件做处理，那么有Activity来处理
+    }
+
+    // 生成指定范围的随机数字【不重复】
+    fun randomNum(scope: Int, total: Int): ArrayList<Int> {
+        val mylist: ArrayList<Int> = ArrayList() // 用于储存不重复的随机数
+        val rd = Random()
+        while (mylist.size < scope) {
+            var myNum: Int = rd.nextInt(total)
+            if (!mylist.contains(0.let { myNum += it; myNum })) { // 判断容器中是否包含指定的数字
+                mylist.add(myNum) // 往集合里面添加数据。
+            }
+        }
+        return mylist
+    }
+
+
     override fun onSuccess(flag: String?, data: Any?) {
         flag?.let {
             when(flag) {
@@ -362,8 +442,8 @@ class SearchArticleActivity : BaseActivity(),GGBContract.View {
                     data?.let {
                         data as List<IndexTagBean>
                         val guess = arrayListOf<IndexTagBean>()
-                        for (i in 0 until 6){
-                            guess.add(data.random())
+                        randomNum(6,data.size).forEach {
+                            guess.add(data[it])
                         }
                         gAdapter?.setNewData(guess)
                     }

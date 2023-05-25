@@ -5,3 +5,6 @@ rootProject.name = "nirvanaClub"
 
 include ':nineLibrary'
 include ':lib_multiple_view'
+include ':app_updater'
+include ':tinker-android:tinker-android-loader-fix'
+include ':tinker-android:tinker-android-anno-support'

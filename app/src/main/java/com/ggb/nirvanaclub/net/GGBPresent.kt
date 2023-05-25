@@ -573,4 +573,22 @@ class GGBPresent(baseView: GGBContract.View) :BasePresent<GGBContract.View>(base
             })
     }
 
+    override fun getIsHavePatch(versionName: String,versionCode: String) {
+        model.getIsHavePatch(versionName,versionCode)
+            .compose(RxSchedulersHelper.io_main())
+            .subscribe(object :BaseObserver<AppUpdateListBean>(mContext,true){
+                override fun onSuccess(t: HttpResult<AppUpdateListBean>?) {
+                    view.onSuccess(GGBContract.GETPATCH,t?.data)
+                }
+
+                override fun onCodeError(t: HttpResult<AppUpdateListBean>) {
+                    view.onFailed(t.message,false)
+                }
+
+                override fun onFailure(e: Throwable?, isNetWorkError: Boolean) {
+                    view.onNetError(isNetWorkError,false)
+                }
+            })
+    }
+
 }

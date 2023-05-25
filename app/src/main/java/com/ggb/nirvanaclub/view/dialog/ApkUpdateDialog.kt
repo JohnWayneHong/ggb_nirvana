@@ -71,8 +71,8 @@ class ApkUpdateDialog : Dialog {
         tv_update_new_version.text = AppUtils.getVersionName(context)+".${info.data.versionCode}"
         tv_update_new_content.text = JsonParser.parseString(info.data.message).asJsonObject.get("message").asString
         tv_update_new_content.movementMethod = ScrollingMovementMethod.getInstance()
-        iv_update_new_close.visibility = if(!info.data.isForce) View.VISIBLE else View.GONE
-        setCanceledOnTouchOutside(!info.data.isForce)
+        iv_update_new_close.visibility = if(info.data.isForce.toInt() != 1) View.VISIBLE else View.GONE
+        setCanceledOnTouchOutside(info.data.isForce.toInt() != 1)
     }
 
     private fun initEvent(){
