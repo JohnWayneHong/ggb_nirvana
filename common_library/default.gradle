@@ -1,0 +1,30 @@
+apply from: "config.gradle"
+
+android {
+    compileSdkVersion android.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion android.minSdkVersion
+        targetSdkVersion android.targetSdkVersion
+        proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        ndk {
+            ndk {
+                abiFilters 'armeabi-v7a'
+                abiFilters 'arm64-v8a'
+            }
+        }
+    }
+
+    compileOptions {
+        targetCompatibility = '1.8'
+        sourceCompatibility = '1.8'
+    }
+    buildFeatures{
+        dataBinding = true
+    }
+    lintOptions {
+        checkReleaseBuilds true
+        abortOnError true
+        checkOnly 'NewApi', 'InlinedApi'
+    }
+}

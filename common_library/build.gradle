@@ -1,0 +1,67 @@
+apply plugin: 'com.android.library'
+apply plugin: 'maven-publish'
+group ='com.github.acer-xhy'
+apply from: "default.gradle"
+android {
+    resourcePrefix "app_common"
+    defaultConfig {
+        consumerProguardFiles 'proguard-rules.pro'
+    }
+}
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+                groupId = 'com.github.acer-xhy'
+                artifactId = 'common-library'
+                version = '1.5.0'
+            }
+        }
+        repositories {
+            maven {
+                //指定要上传的maven私服仓库
+                allowInsecureProtocol = true
+                url = "http://192.168.2.222:8081/nexus/content/repositories/releases/"
+                //认证用户名和密码
+                credentials {
+                    username 'admin'
+                    password 'admin123'
+                }
+            }
+        }
+    }
+}
+dependencies {
+    api fileTree(dir: 'libs', include: ['*.jar'])
+    api dep.andoridx
+    api dep.andoridx_recycler_view
+
+    api dep.okhttp
+    api dep.okio
+
+    api dep.retrofit
+    api dep.rxandroid
+    api dep.rxjava
+    api dep.retrofit_adapter_rxjava2
+    implementation dep.fastjson
+    implementation dep.converter_fastjson_android
+
+    api dep.glide
+    annotationProcessor dep.glide_compiler
+
+    api dep.lifecycle_extensions
+
+    api dep.eventbus
+
+    api dep.picker_view
+
+    api dep.umsdk_asms
+    api dep.umeng_common
+    api dep.umeng_apm
+
+    api dep.mmkv
+    api dep.xxpermissions
+    api dep.toast
+}
+

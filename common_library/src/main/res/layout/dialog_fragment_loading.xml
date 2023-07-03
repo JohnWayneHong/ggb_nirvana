@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="270dp"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:ignore="dpUsage">
+
+    <FrameLayout
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="44dp">
+
+        <com.jgw.common_library.widget.loadingDialog.CircularProgressView
+            android:id="@+id/progress_circular"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:backColor="#e4e4e4"
+            app:backWidth="5dp"
+            app:progColor="@color/main_color"
+            app:progWidth="5dp"
+            app:progress="0"/>
+
+        <TextView
+            android:id="@+id/tv_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="#a5a5a5"
+            android:textSize="15sp"
+            tools:text="99%" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tv_progress_tip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:layout_marginBottom="48dp"
+        tools:text="正在上传,请耐心等候哦~"
+        android:textColor="@color/gray_32"
+        android:textSize="14sp" />
+</LinearLayout>

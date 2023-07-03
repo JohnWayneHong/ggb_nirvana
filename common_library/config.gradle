@@ -1,0 +1,61 @@
+ext {
+    android = [
+            compileSdkVersion: 30,
+            minSdkVersion    : 21,
+            targetSdkVersion : 26,
+    ]
+
+    libsVersion = [
+            andoridx = "1.1.0",
+            lifecycle_extensions = "2.2.0",
+            okhttp = "4.10.0",
+            okio = "3.0.0",
+            retrofit = "2.9.0",
+            rxandroid = "2.1.1",
+            rxjava = "2.2.21",
+            retrofit_adapter_rxjava2 = "2.8.1",
+            fastjson = "1.1.71.android",
+            converter_fastjson_android = "2.2.0",
+            glide = "4.15.1",
+            eventbus = "3.3.1",
+            picker_view = "3.2.5",
+            umeng_common = "9.5.8",
+            umsdk_asms = "1.6.3",
+            umeng_apm = "1.9.1",
+            mmkv = "1.2.16",
+            xxpermissions = "18.1",
+            toast = "12.3"
+    ]
+
+    //noinspection GroovyConstructorNamedArguments
+    dep = [
+            andoridx                  : "androidx.appcompat:appcompat:$andoridx",
+            andoridx_recycler_view    : "androidx.recyclerview:recyclerview:$andoridx",
+            lifecycle_extensions      : "androidx.lifecycle:lifecycle-extensions:$lifecycle_extensions",
+
+            okhttp                    : "com.squareup.okhttp3:okhttp:$okhttp",
+            okio                      : "com.squareup.okio:okio:$okio",
+
+            retrofit                  : "com.squareup.retrofit2:retrofit:$retrofit",
+            rxandroid                 : "io.reactivex.rxjava2:rxandroid:$rxandroid",
+            rxjava                    : "io.reactivex.rxjava2:rxjava:$rxjava",
+            retrofit_adapter_rxjava2  : "com.squareup.retrofit2:adapter-rxjava2:$retrofit_adapter_rxjava2",
+            fastjson                  : "com.alibaba:fastjson:$fastjson",
+            converter_fastjson_android: "org.ligboy.retrofit2:converter-fastjson-android:$converter_fastjson_android",
+
+            glide                     : "com.github.bumptech.glide:glide:$glide",
+            glide_compiler            : "com.github.bumptech.glide:compiler:$glide",
+
+            eventbus                  : "org.greenrobot:eventbus:$eventbus",
+
+            picker_view               : "com.contrarywind:Android-PickerView:$picker_view",
+
+            umeng_common              : "com.umeng.umsdk:common:$umeng_common",
+            umsdk_asms                : "com.umeng.umsdk:asms:$umsdk_asms",
+            umeng_apm                 : "com.umeng.umsdk:apm:$umeng_apm",
+
+            mmkv                      : "com.tencent:mmkv-static:$mmkv",
+            xxpermissions             : "com.github.acer-xhy:XXPermissions:$xxpermissions",
+            toast                     : "com.github.acer-xhy:toaster:$toast"
+    ]
+}

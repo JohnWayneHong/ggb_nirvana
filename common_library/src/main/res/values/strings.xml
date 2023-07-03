@@ -1,0 +1,9 @@
+<resources>
+    <string name="key_tag">0x0728</string>
+    <string name="bottom_dialog_cancel_text">取消</string>
+    <string name="search">搜索</string>
+
+    <!-- Circular Progress Dialog -->
+    <string name="circular_progress_dialog_progress">%1$d%2$s</string>
+
+</resources>

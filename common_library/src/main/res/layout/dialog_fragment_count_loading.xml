@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="270dp"
+            android:layout_height="154dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/radius4_white">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="40dp"
+                android:gravity="bottom"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_dialog_fragment_count_loading_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/main_color"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    tools:text="123" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" /"
+                    android:textColor="@color/gray_aa"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tv_dialog_fragment_count_loading_total"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/gray_aa"
+                    android:textSize="12sp"
+                    tools:text="456" />
+
+            </LinearLayout>
+
+            <ProgressBar
+                android:id="@+id/pb_dialog_fragment_count_loading"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="220dp"
+                android:layout_height="10dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="65dp"
+                android:progressDrawable="@drawable/drawable_count_loading" />
+
+            <TextView
+                android:id="@+id/tv_dialog_fragment_count_loading_tips"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="40dp"
+                android:includeFontPadding="false"
+                android:textColor="@color/gray_66"
+                android:textSize="14sp"
+                tools:text="正在上传,请耐心等候哦~" />
+        </RelativeLayout>
+    </RelativeLayout>
+</layout>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/gray_ee"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
+
+        <com.jgw.common_library.base.view.CustomBaseRecyclerView
+            android:id="@+id/rv_dialog_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tv_cancel"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/selector_dialog_ll_background"
+            android:gravity="center"
+            android:text="@string/bottom_dialog_cancel_text"
+            android:textColor="@color/gray_33"
+            android:textSize="16sp" />
+    </LinearLayout>
+</RelativeLayout>
