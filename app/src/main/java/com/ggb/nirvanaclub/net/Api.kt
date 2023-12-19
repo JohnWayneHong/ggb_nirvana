@@ -96,7 +96,7 @@ class Api private constructor(hostType: Int,isAddress: Int) {
                 //这里是第三方接口，暂时不用框架请求 用AsyncTask异步任务类去请求
 //                build.addHeader("APP_ID", C.MXNZP_APP_ID)
 //                build.addHeader("APP_SECRET", C.MXNZP_APP_SECRET)
-                build.addHeader("project_token", "A9E915F9F9CF4D06B0C661D1B2E25997")
+                build.addHeader("project_token", "806664062DCE4891B4C9650093DE5361")
                 build.addHeader("channel", "cretin_open_api")
                 build.addHeader("token", "cretin_open_api")
                 build.addHeader("uk", "cretin_open_api")
